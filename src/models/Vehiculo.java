@@ -1,5 +1,6 @@
 package models;
 
+
 public class Vehiculo {
 	
 	private Integer idVehiculos;
