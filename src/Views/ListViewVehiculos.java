@@ -106,7 +106,7 @@ public class ListViewVehiculos extends JFrame {
 			this.vehiculo = this.services.getAllVehiculos(Conexion.obtener());
 			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-			}, new String[] { "Nombre", "Contraseña" }));
+			}, new String[] { "ID", "Modelo", "Marca", "Anyo", "Color", "Precio" }));
 			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 			dtm.setRowCount(0);
 			for (int i = 0; i < this.vehiculo.size(); i++) {
