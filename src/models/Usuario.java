@@ -2,7 +2,7 @@ package models;
 
 public class Usuario {
 	private Integer id;
-	private String nombre,contraseña;
+	private String nombre,contrasena;
 	
 	public Usuario() {
 		super();
@@ -12,7 +12,7 @@ public class Usuario {
 		super();
 		this.id = id;
 		this.nombre = nombreUsuario;
-		this.contraseña = contraseña;
+		this.contrasena = contraseña;
 	}
 
 	public Integer getId() {
@@ -32,16 +32,16 @@ public class Usuario {
 	}
 
 	public String getContraseña() {
-		return contraseña;
+		return contrasena;
 	}
 
 	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+		this.contrasena = contraseña;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombreUsuario=" + nombre + ", contraseña=" + contraseña + "]";
+		return "Usuario [id=" + id + ", nombreUsuario=" + nombre + ", contraseña=" + contrasena + "]";
 	}
 	
 	
