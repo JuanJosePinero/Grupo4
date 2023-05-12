@@ -23,7 +23,7 @@ public class FabricantesService {
 	            consulta.setString(1, fabricante.getNombre());
 	            consulta.setString(2, fabricante.getPais());
 	         }else{
-	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET nombre = ?, pais = ? WHERE id = ?");
+	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET nombre = ?, pais = ? WHERE idFabricante = ?");
 	            consulta.setString(1, fabricante.getNombre());
 	            consulta.setString(2, fabricante.getPais());
 	            consulta.setInt(3, fabricante.getIdFabricante());
@@ -38,7 +38,7 @@ public class FabricantesService {
 	      Fabricante fabricante = null;
 	      try{
 	         PreparedStatement consulta = conexion.prepareStatement("SELECT nombre,pais "
-	                 + " FROM " + this.tabla + " WHERE id = ?" );
+	                 + " FROM " + this.tabla + " WHERE idFabricante = ?" );
 	         consulta.setInt(1, id);
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
@@ -54,7 +54,7 @@ public class FabricantesService {
 	   public void remove(Connection conexion, Fabricante fabricante) throws SQLException{
 	      try{
 	         PreparedStatement consulta = conexion.prepareStatement("DELETE FROM " 
-	      + this.tabla + " WHERE id = ?");
+	      + this.tabla + " WHERE idFabricante = ?");
 	         consulta.setInt(1, fabricante.getIdFabricante());
 	         consulta.executeUpdate();
 	      }catch(SQLException ex){
@@ -65,11 +65,11 @@ public class FabricantesService {
 	   public List<Fabricante> getAllProducts(Connection conexion) throws SQLException{
 	      List<Fabricante> products = new ArrayList<>();
 	      try{
-	         PreparedStatement consulta = conexion.prepareStatement("SELECT id,nombre,precio "
+	         PreparedStatement consulta = conexion.prepareStatement("SELECT idFabricante,nombre,precio "
 	                 + " FROM " + this.tabla);
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
-	            products.add(new Fabricante(resultado.getInt("id"), resultado.getString("nombre"), 
+	            products.add(new Fabricante(resultado.getInt("idFabricante"), resultado.getString("nombre"), 
 	                    resultado.getString("pais")));
 	         }
 	      }catch(SQLException ex){

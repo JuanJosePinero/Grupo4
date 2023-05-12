@@ -106,7 +106,7 @@ public class ListViewFabricante extends JFrame {
 			this.fabricante = this.services.getAllProducts(Conexion.obtener());
 			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-			}, new String[] { "Nombre", "Pais" }));
+			}, new String[] { "idFabricante","Nombre", "Pais" }));
 			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 			dtm.setRowCount(0);
 			for (int i = 0; i < this.fabricante.size(); i++) {

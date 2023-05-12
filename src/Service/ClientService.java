@@ -64,7 +64,7 @@ public class ClientService {
 	      }
 	   }
 	 
-	 public List<Cliente> getCliente(Connection conexion) throws SQLException{
+	 public List<Cliente> getAllCliente(Connection conexion) throws SQLException{
 	      List<Cliente> cliente = new ArrayList<>();
 	      try{
 	         PreparedStatement consulta = conexion.prepareStatement("SELECT id,nombre,direccion ,rol,usuario,contrasenya"
