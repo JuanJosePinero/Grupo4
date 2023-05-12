@@ -1,6 +1,5 @@
 package models;
 
-import java.util.Arrays;
 
 public class Cliente {
 
@@ -44,10 +43,9 @@ public class Cliente {
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
-	public Cliente(Integer idClientes, String nombre, String direccion, String rol, String nombreUsuario,
+	public Cliente(String nombre, String direccion, String rol, String nombreUsuario,
 			String contrasena) {
 		super();
-		this.idClientes = idClientes;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.rol = rol;

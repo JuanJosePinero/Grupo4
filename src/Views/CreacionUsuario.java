@@ -3,6 +3,7 @@ package Views;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Service.ClientService;
+import Service.Conexion;
 import models.Cliente;
 
 
@@ -158,12 +160,8 @@ public class CreacionUsuario extends JFrame {
 				confrimarContraseña();
 			}else if(o.equals(ConfrimarB)) {
 		
+	
 				
-					String usuario = UsuarioT.getText();
-					char[] contraseña = ContraseñaP.getPassword();
-					String contraseñaS = new String(contraseña);
-					
-					
 				
 				
 				
