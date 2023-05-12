@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.OptionPaneUI;
 
 import Service.ClientService;
 import Service.Conexion;
@@ -34,9 +35,9 @@ public class CreacionUsuario extends JFrame {
 	private JTextField txtDebil;
 	private JTextField txtFuerte;
 	private JTextField txtModerado;
-	private JButton ConfrimarB;
+	private JButton ConfrimarB,CancelarB;
 	private final ClientService services = new ClientService();
-	private List<Cliente> cliente = new ArrayList<>();
+
 
 	
 
@@ -106,33 +107,10 @@ public class CreacionUsuario extends JFrame {
 		contentPane.add(CContraseñaP);
 		
 		ConfrimarB = new JButton("Guardar");
-		ConfrimarB.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String nombre = NombreT.getText();
-				String direccion = DireccionT.getText();
-				String rol = "Cliente";
-				String usuario = UsuarioT.getText();
-				char[] contra = ContraseñaP.getPassword();
-				String contrasenya = new String (contra);
-				
-				Cliente c =new Cliente(nombre,direccion,rol,usuario,contrasenya);
-				
-				try {
-					services.save(Conexion.obtener(), c);
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				
-			}
-		});
 		
 		
-		ConfrimarB.setBounds(167, 227, 113, 23);
+		
+		ConfrimarB.setBounds(102, 227, 113, 23);
 		contentPane.add(ConfrimarB);
 		
 		txtDebil = new JTextField();
@@ -162,10 +140,16 @@ public class CreacionUsuario extends JFrame {
 		contentPane.add(txtModerado);
 		txtModerado.setColumns(10);
 		
+		CancelarB = new JButton("Cancelar");
+		CancelarB.setBounds(272, 227, 89, 23);
+		contentPane.add(CancelarB);
+		
 		manejadorAction ma= new manejadorAction();
 		ContraseñaP.addActionListener(ma);
 		CContraseñaP.addActionListener(ma);
-
+		manejadorActionBoton mab= new manejadorActionBoton();
+		CancelarB.addActionListener(mab);
+		ConfrimarB.addActionListener(mab);
 		
 		
 		
@@ -176,22 +160,62 @@ public class CreacionUsuario extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JTextField o= (JTextField) e.getSource();
-			
-			if(o.equals(ContraseñaP)) {
+			JTextField j= (JTextField) e.getSource();
+			if(j.equals(ContraseñaP)) {
 				Contraseña();
-			}else if(o.equals(CContraseñaP)) {
+			}else if(j.equals(CContraseñaP)) {
 				confrimarContraseña();
 			}
+		}
+}
+	private class manejadorActionBoton implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton b= (JButton) e.getSource();
+			if(b.equals(CancelarB)) {
+				Login l= new Login();
+				dispose();
+		}else if(b.equals(ConfrimarB)) {
 			
-	
-				
-		
+			
+			
+			String nombre = NombreT.getText() ;
+			String apellido =ApellidoT.getText();
+			String nombreC = nombre +" "+ apellido;
+			String direccion = DireccionT.getText();
+			String rol = "Cliente";
+			String usuario = UsuarioT.getText();
+			char[] contra = ContraseñaP.getPassword();
+			String contrasenya = new String (contra);
+			char[] ccontra = CContraseñaP.getPassword();
+			String ccontrasenya = new String (ccontra);
+			
+			if(NombreT.getText().isEmpty() || ApellidoT.getText().isEmpty() || DireccionT.getText().isEmpty() || UsuarioT.getText().isEmpty())
+				JOptionPane.showMessageDialog(CreacionUsuario.this, "Formulario erroneo");
+			
+			else if(!contrasenya.matches("[A-Z].*[0-9].*")) 
+				JOptionPane.showMessageDialog(CreacionUsuario.this, "La contraseña debe empezar por Mayuscula y contener un numero");
+			else if( !contrasenya.equals(ccontrasenya))
+				JOptionPane.showMessageDialog(CreacionUsuario.this, "Las contraseñas no coinciden");
+			else {
+			Cliente c =new Cliente(nombreC,direccion,rol,usuario,contrasenya);
+				try {
+					services.save(Conexion.obtener(), c);
+					JOptionPane.showMessageDialog(CreacionUsuario.this, "Usuario creado");
+					Login l = new Login();
+					dispose();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 			
 			
 			
 		}
-		
+		}
+	}
 	//}
 	
 	public void Contraseña() {
@@ -222,7 +246,7 @@ public class CreacionUsuario extends JFrame {
 			JOptionPane.showMessageDialog(CreacionUsuario.this, "La contraseña debe empezar por Mayuscula y contener un numero");
 		
 	}
-	}
+	
 	
 	public void confrimarContraseña() {
 		char[] user = ContraseñaP.getPassword();
