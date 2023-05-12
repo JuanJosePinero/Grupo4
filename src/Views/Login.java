@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,12 +14,17 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Service.ClientService;
+import Service.Conexion;
+import models.Cliente;
+
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField UsuarioT;
 	private JButton btnIniciarSesion,btnCrearUsuario;
 	private JPasswordField ContraseñaP;
+	private final ClientService services = new ClientService();
 
 	/**
 	 * Launch the application.
@@ -106,6 +112,32 @@ public class Login extends JFrame {
 			JButton o = (JButton) e.getSource();
 		
 			if(o.equals(btnIniciarSesion)) {
+			try {
+				Cliente datos = services.getCliente(Conexion.obtener(),UsuarioT.getText());
+				if(datos!=null) {
+					String userB = datos.getNombreUsuario();
+					String contB =datos.getContrasena();
+					String user = UsuarioT.getText();
+					char[] contrasenaC = ContraseñaP.getPassword();
+					String cont = new String(contrasenaC);
+					
+					if(userB.equals(user) && contB.equals(cont)) {
+						if(user.equals("Admin") && cont.equals("Admin"))
+							System.out.println("Admin");
+						else
+							System.out.println("Cliente");
+					}
+					else
+						System.out.println("Usuario o Contraseña Incorrecta");
+					
+				
+				}else
+					System.out.println("Adios");
+				
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 				
 			}else if(o.equals(btnCrearUsuario)) {
 				CreacionUsuario cu = new CreacionUsuario();
@@ -117,4 +149,6 @@ public class Login extends JFrame {
 		}
 		
 	}
+	
+	
 }
