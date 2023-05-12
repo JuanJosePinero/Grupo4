@@ -25,7 +25,7 @@ public class ListViewClientes extends JFrame{
 	private List<Cliente> Clientes;
 
 	public ListViewClientes() {
-		setTitle("Cliente");
+		setTitle("Clientes");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -53,11 +53,11 @@ public class ListViewClientes extends JFrame{
 			this.Clientes = this.services.getAllCliente(Conexion.obtener());
 			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-			}, new String[] { "idCliente","Nombre", "Direccion","Rol","Usuario","Contasenya" }));
+			}, new String[] {"Nombre", "Direccion","Rol","Usuario","Contasenya" }));
 			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 			dtm.setRowCount(0);
 			for (int i = 0; i < this.Clientes.size(); i++) {
-				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
+				dtm.addRow(new Object[] {this.Clientes.get(i).getNombre(),
 						this.Clientes.get(i).getDireccion(),this.Clientes.get(i).getRol(),
 						this.Clientes.get(i).getNombreUsuario(),this.Clientes.get(i).getContrasena()});
 			}

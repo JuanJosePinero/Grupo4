@@ -3,7 +3,7 @@ package Views;
 public class TestClientes {
 
 	public static void main(String[] args) {
-		ListViewFabricante listViewAntiguo = new ListViewFabricante();
+		ListViewClientes listViewAntiguo = new ListViewClientes();
 		listViewAntiguo.setLocationRelativeTo(null);
 		listViewAntiguo.setVisible(true);
 
