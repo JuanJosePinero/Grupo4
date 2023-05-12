@@ -2,7 +2,7 @@ package models;
 
 public class Vehiculo {
 	
-	private Integer idVehiculo;
+	private Integer idVehiculos;
 	private String modelo, marca;
 	private int anyo;
 	private String color;
@@ -14,7 +14,7 @@ public class Vehiculo {
 
 	public Vehiculo(int idVehiculo, String modelo, String marca, int anyo, String color, float precio) {
 		super();
-		this.idVehiculo = idVehiculo;
+		this.idVehiculos = idVehiculo;
 		this.modelo = modelo;
 		this.marca = marca;
 		this.anyo = anyo;
@@ -22,12 +22,12 @@ public class Vehiculo {
 		this.precio = precio;
 	}
 
-	public Integer getIdVehiculo() {
-		return idVehiculo;
+	public Integer getIdVehiculos() {
+		return idVehiculos;
 	}
 
-	public void setIdVehiculo(Integer idVehiculo) {
-		this.idVehiculo = idVehiculo;
+	public void setIdVehiculos(Integer idVehiculo) {
+		this.idVehiculos = idVehiculo;
 	}
 
 	public String getModelo() {
@@ -72,7 +72,7 @@ public class Vehiculo {
 
 	@Override
 	public String toString() {
-		return "Vehiculo [id=" + idVehiculo + ", modelo=" + modelo + ", marca=" + marca + ", anyo=" + anyo + ", color=" + color
+		return "Vehiculo [id=" + idVehiculos + ", modelo=" + modelo + ", marca=" + marca + ", anyo=" + anyo + ", color=" + color
 				+ ", precio=" + precio + "]";
 	}
 	

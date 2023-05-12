@@ -12,7 +12,7 @@ public class VehiculoService {
 	   public void save(Connection conexion, Vehiculo vehiculo) throws SQLException{
 	      try{
 	         PreparedStatement consulta;
-	         if(vehiculo.getIdVehiculo() == 0){
+	         if(vehiculo.getIdVehiculos() == 0){
 	            consulta = conexion.prepareStatement("INSERT INTO " + this.tabla + "(modelo, marca, anyo, color, precio) VALUES(?, ?, ?, ?, ?)");
 	            consulta.setString(1, vehiculo.getModelo());
 	            consulta.setString(2, vehiculo.getMarca());
@@ -54,26 +54,27 @@ public class VehiculoService {
 	      try{
 	         PreparedStatement consulta = conexion.prepareStatement("DELETE FROM " 
 	      + this.tabla + " WHERE id = ?");
-	         consulta.setInt(1, vehiculo.getIdVehiculo());
+	         consulta.setInt(1, vehiculo.getIdVehiculos());
 	         consulta.executeUpdate();
 	      }catch(SQLException ex){
 	         throw new SQLException(ex);
 	      }
 	   }
 	   
-	   public List<Vehiculo> getAllVehiculos(Connection conexion) throws SQLException{
-	      List<Vehiculo> listaVehiculos = new ArrayList<>();
-	      try{
-	         PreparedStatement consulta = conexion.prepareStatement("SELECT id,modelo,marca,anyo,color,precio "
-	                 + " FROM " + this.tabla);
-	         ResultSet resultado = consulta.executeQuery();
-	         while(resultado.next()){
-	            listaVehiculos.add(new Vehiculo(resultado.getInt("id"), resultado.getString("modelo"), resultado.getString("marca"), 
-	                    resultado.getInt("anyo"), resultado.getString("color"), resultado.getFloat("precio")));
-	         }
-	      }catch(SQLException ex){
-	         throw new SQLException(ex);
-	      }
-	      return listaVehiculos;
-	   }
+	   public List<Vehiculo> getAllVehiculos(Connection conexion) throws SQLException {
+		    List<Vehiculo> listaVehiculos = new ArrayList<>();
+		    try {
+		        PreparedStatement consulta = conexion.prepareStatement("SELECT idVehiculos, modelo, marca, anyo, color, precio "
+		                + " FROM " + this.tabla);
+		        ResultSet resultado = consulta.executeQuery();
+		        while (resultado.next()) {
+		            listaVehiculos.add(new Vehiculo(resultado.getInt("idVehiculos"), resultado.getString("modelo"), resultado.getString("marca"),
+		                    resultado.getInt("anyo"), resultado.getString("color"), resultado.getFloat("precio")));
+		        }
+		    } catch (SQLException ex) {
+		        throw new SQLException(ex);
+		    }
+		    return listaVehiculos;
+		}
+
 	}
