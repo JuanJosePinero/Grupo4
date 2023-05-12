@@ -106,6 +106,30 @@ public class CreacionUsuario extends JFrame {
 		contentPane.add(CContraseñaP);
 		
 		ConfrimarB = new JButton("Guardar");
+		ConfrimarB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nombre = NombreT.getText();
+				String direccion = DireccionT.getText();
+				String rol = "Cliente";
+				String usuario = UsuarioT.getText();
+				char[] contra = ContraseñaP.getPassword();
+				String contrasenya = new String (contra);
+				
+				Cliente c =new Cliente(nombre,direccion,rol,usuario,contrasenya);
+				
+				try {
+					services.save(Conexion.obtener(), c);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+			}
+		});
 		
 		
 		ConfrimarB.setBounds(167, 227, 113, 23);
@@ -141,7 +165,7 @@ public class CreacionUsuario extends JFrame {
 		manejadorAction ma= new manejadorAction();
 		ContraseñaP.addActionListener(ma);
 		CContraseñaP.addActionListener(ma);
-		ConfrimarB.addActionListener(ma);
+
 		
 		
 		
@@ -158,14 +182,6 @@ public class CreacionUsuario extends JFrame {
 				Contraseña();
 			}else if(o.equals(CContraseñaP)) {
 				confrimarContraseña();
-			}else if(o.equals(ConfrimarB)) {
-		
-	
-				
-				
-				
-				
-				
 			}
 			
 	
