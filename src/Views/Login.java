@@ -106,7 +106,6 @@ public class Login extends JFrame {
 			JButton o = (JButton) e.getSource();
 		
 			if(o.equals(btnIniciarSesion)) {
-				if(UsuarioT.)
 				
 			}else if(o.equals(btnCrearUsuario)) {
 				CreacionUsuario cu = new CreacionUsuario();
