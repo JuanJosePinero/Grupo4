@@ -16,19 +16,21 @@ public class ClientService {
 	      try{
 	         PreparedStatement consulta;
 	         if(cliente.getIdClientes() == null){
-	            consulta = conexion.prepareStatement("INSERT INTO " + this.tabla + "(nombre, direccion,rol,usuario,Contasenya) VALUES(?, ?, ?, ?, ?)");
+	            consulta = conexion.prepareStatement("INSERT INTO " + this.tabla + "(nombre, direccion,rol,usuario,Contasenya,Activar) VALUES(?, ?, ?, ?, ?,?)");
 	            consulta.setString(1,cliente.getNombre());
 	            consulta.setString(2, cliente.getDireccion());
 	            consulta.setString(3, cliente.getRol());
 	            consulta.setString(4, cliente.getNombreUsuario());
 	            consulta.setString(5, cliente.getContrasena());
+	            consulta.setInt(6, cliente.getActivar());
 	         }else{
-	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET nombre = ?, direccion = ?,rol = ?, usuario = ?, Contasenya = ? WHERE id = ?");
+	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET nombre = ?, direccion = ?,rol = ?, usuario = ?, Contasenya = ? Activar = ? WHERE id = ?");
 	            consulta.setString(1,cliente.getNombre());
 	            consulta.setString(2, cliente.getDireccion());
 	            consulta.setString(3, cliente.getRol());
 	            consulta.setString(4, cliente.getNombreUsuario());
 	            consulta.setString(5, cliente.getContrasena());
+	            consulta.setInt(6, cliente.getActivar());
 	         }
 	         consulta.executeUpdate();
 	      }catch(SQLException ex){
@@ -39,7 +41,7 @@ public class ClientService {
 	 public Cliente getCliente(Connection conexion, String nombreUsuario) throws SQLException {
 		   Cliente cliente = null;
 	      try{
-	         PreparedStatement consulta = conexion.prepareStatement("SELECT nombre, direccion,rol,usuario,Contasenya "
+	         PreparedStatement consulta = conexion.prepareStatement("SELECT nombre, direccion,rol,usuario,Contasenya,Activar "
 	                 + " FROM " + this.tabla + " WHERE usuario = ?" );
 	         consulta.setString(1, nombreUsuario);
 	         ResultSet resultado = consulta.executeQuery();
@@ -67,7 +69,7 @@ public class ClientService {
 	 public List<Cliente> getAllCliente(Connection conexion) throws SQLException{
 	      List<Cliente> cliente = new ArrayList<>();
 	      try{
-	         PreparedStatement consulta = conexion.prepareStatement("SELECT nombre,direccion ,rol,usuario,contasenya"
+	         PreparedStatement consulta = conexion.prepareStatement("SELECT nombre,direccion ,rol,usuario,contasenya,Activar"
 	                 + " FROM " + this.tabla);
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){

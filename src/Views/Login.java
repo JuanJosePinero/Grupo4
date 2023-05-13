@@ -116,6 +116,7 @@ public class Login extends JFrame {
 			try {
 				Cliente datos = services.getCliente(Conexion.obtener(),UsuarioT.getText());
 				if(datos!=null) {
+					int activar = datos.getActivar();
 					
 					String userB = datos.getNombreUsuario();
 					String contB =datos.getContrasena();
@@ -129,11 +130,15 @@ public class Login extends JFrame {
 							dispose();
 						}
 						else
-							System.out.println("Cliente");
+							if(activar == 1) {
+								System.out.println("Hola");
+								
+							}else
+								JOptionPane.showMessageDialog(Login.this, datos.getNombre()+" ha sido baneado por peruano");
 					}
 					else
 						System.out.println("Usuario o Contraseña Incorrecta");
-					
+				
 				
 				}else
 					JOptionPane.showMessageDialog(Login.this, "Introduce Usuario y Contraseña");

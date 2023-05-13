@@ -7,7 +7,7 @@ public class Cliente {
     private String nombre,direccion;
     private String rol;
     private String nombreUsuario,contrasena;
-	public boolean activar =true;
+	public int activar;
 	
 	public Integer getIdClientes() {
 		return idClientes;
@@ -47,14 +47,15 @@ public class Cliente {
 		this.contrasena = contrasena;
 	}
 	
-	public boolean isActivar() {
+	
+	public int getActivar() {
 		return activar;
 	}
 
-	public void setActivar(boolean activar) {
+	public void setActivar(int activar) {
 		this.activar = activar;
 	}
-	
+
 	public Cliente(String nombre, String direccion, String rol, String nombreUsuario,
 			String contrasena) {
 		super();
@@ -63,6 +64,7 @@ public class Cliente {
 		this.rol = rol;
 		this.nombreUsuario = nombreUsuario;
 		this.contrasena = contrasena;
+		activar = 1;
 	}
 	
 

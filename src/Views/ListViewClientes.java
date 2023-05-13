@@ -23,7 +23,7 @@ public class ListViewClientes extends JFrame{
 	private JTable jtableP;
 	private final ClientService services = new ClientService();
 	private List<Cliente> Clientes;
-	private JButton ActivarB,BajaB;
+	private JButton ActivarB,BajaB,btnVolver;
 
 	public ListViewClientes() {
 		setTitle("Clientes");
@@ -43,8 +43,9 @@ public class ListViewClientes extends JFrame{
 		jtableP = new JTable();
 		showCliente();
 		scrollPane.setViewportView(jtableP);
+
 		
-		JButton btnVolver = new JButton("Volver");
+		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(167, 236, 97, 25);
 		contentPane.add(btnVolver);
 		
@@ -59,6 +60,7 @@ public class ListViewClientes extends JFrame{
 		setVisible(true);
 		ManejadorActionB mab= new ManejadorActionB();
 		ActivarB.addActionListener(mab);
+		btnVolver.addActionListener(mab);
 		
 	}
 	private class ManejadorActionB implements ActionListener{
@@ -69,18 +71,26 @@ public class ListViewClientes extends JFrame{
 			int filaS = jtableP.getSelectedRow();
 			String nombreCliente = (String) jtableP.getValueAt(filaS, 0);
 	
-			Cliente c = (Cliente) jtableP.getValueAt(filaS, 0);
+			Cliente c = Clientes.get(filaS);
 			
 			if(b.equals(ActivarB)) {
-				if(c.isActivar()){
-					c.setActivar(false);
-					System.out.println("Desactivado");
-					System.out.println(c.isActivar());
+				if(c.getActivar() == 1){
+					try {
+						services.
+						c.setActivar(0);
+						System.out.println(c.getActivar());
+					} catch (ClassNotFoundException | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				
 				}
 				else {
-					c.setActivar(true);
-					System.out.println("Activado");
+					c.setActivar(1);
 				}
+			}else if(b.equals(btnVolver)) {
+				Login l = new Login();
+				dispose();
 			}
 			
 		}
