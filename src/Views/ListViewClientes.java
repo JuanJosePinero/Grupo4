@@ -23,19 +23,21 @@ public class ListViewClientes extends JFrame{
 	private JTable jtableP;
 	private final ClientService services = new ClientService();
 	private List<Cliente> Clientes;
+	private JButton ActivarB,BajaB;
 
 	public ListViewClientes() {
 		setTitle("Clientes");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 13, 410, 183);
+		scrollPane.setBounds(10, 46, 410, 183);
 		contentPane.add(scrollPane);
 		
 		jtableP = new JTable();
@@ -43,8 +45,46 @@ public class ListViewClientes extends JFrame{
 		scrollPane.setViewportView(jtableP);
 		
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(165, 209, 97, 25);
+		btnVolver.setBounds(167, 236, 97, 25);
 		contentPane.add(btnVolver);
+		
+		ActivarB = new JButton("Activar/Desactivar");
+		ActivarB.setBounds(26, 12, 144, 23);
+		contentPane.add(ActivarB);
+		
+		BajaB = new JButton("Dar de baja");
+		BajaB.setBounds(190, 12, 97, 23);
+		contentPane.add(BajaB);
+		
+		setVisible(true);
+		ManejadorActionB mab= new ManejadorActionB();
+		ActivarB.addActionListener(mab);
+		
+	}
+	private class ManejadorActionB implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton b = (JButton) e.getSource();
+			int filaS = jtableP.getSelectedRow();
+			String nombreCliente = (String) jtableP.getValueAt(filaS, 0);
+	
+			Cliente c = (Cliente) jtableP.getValueAt(filaS, 0);
+			
+			if(b.equals(ActivarB)) {
+				if(c.isActivar()){
+					c.setActivar(false);
+					System.out.println("Desactivado");
+					System.out.println(c.isActivar());
+				}
+				else {
+					c.setActivar(true);
+					System.out.println("Activado");
+				}
+			}
+			
+		}
+		
 		
 	}
 	

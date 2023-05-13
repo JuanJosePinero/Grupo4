@@ -7,9 +7,12 @@ public class Cliente {
     private String nombre,direccion;
     private String rol;
     private String nombreUsuario,contrasena;
+	public boolean activar =true;
+	
 	public Integer getIdClientes() {
 		return idClientes;
 	}
+
 	public void setIdClientes(Integer idClientes) {
 		this.idClientes = idClientes;
 	}
@@ -43,6 +46,15 @@ public class Cliente {
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
+	
+	public boolean isActivar() {
+		return activar;
+	}
+
+	public void setActivar(boolean activar) {
+		this.activar = activar;
+	}
+	
 	public Cliente(String nombre, String direccion, String rol, String nombreUsuario,
 			String contrasena) {
 		super();
@@ -52,6 +64,8 @@ public class Cliente {
 		this.nombreUsuario = nombreUsuario;
 		this.contrasena = contrasena;
 	}
+	
+
 	public Cliente() {
 		super();
 	}

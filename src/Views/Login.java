@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -115,6 +116,7 @@ public class Login extends JFrame {
 			try {
 				Cliente datos = services.getCliente(Conexion.obtener(),UsuarioT.getText());
 				if(datos!=null) {
+					
 					String userB = datos.getNombreUsuario();
 					String contB =datos.getContrasena();
 					String user = UsuarioT.getText();
@@ -122,8 +124,10 @@ public class Login extends JFrame {
 					String cont = new String(contrasenaC);
 					
 					if(userB.equals(user) && contB.equals(cont)) {
-						if(user.equals("Admin") && cont.equals("Admin"))
-							System.out.println("Admin");
+						if(user.equals("Admin") && cont.equals("Admin")) {
+							ListViewClientes lvc = new ListViewClientes();
+							dispose();
+						}
 						else
 							System.out.println("Cliente");
 					}
@@ -132,7 +136,7 @@ public class Login extends JFrame {
 					
 				
 				}else
-					System.out.println("Adios");
+					JOptionPane.showMessageDialog(Login.this, "Introduce Usuario y Contraseña");
 				
 			} catch (ClassNotFoundException | SQLException e1) {
 				// TODO Auto-generated catch block
