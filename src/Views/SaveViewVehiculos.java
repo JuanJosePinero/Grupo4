@@ -71,7 +71,6 @@ public class SaveViewVehiculos extends JFrame {
 		lblPrecio.setBounds(30, 170, 61, 16);
 		contentPane.add(lblPrecio);
 		
-		
 		txtModelo = new JTextField();
 		txtModelo.setBounds(103, 26, 190, 26);
 		contentPane.add(txtModelo);
