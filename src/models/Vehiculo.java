@@ -14,7 +14,8 @@ public class Vehiculo {
 		super();
 	}
 
-	public Vehiculo(Integer idVehiculo, String modelo, String marca, int anyo, String color, float precio, Integer idFabricante) {
+	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
+			Integer idFabricante) {
 		super();
 		this.idVehiculos = idVehiculos;
 		this.modelo = modelo;
@@ -25,15 +26,9 @@ public class Vehiculo {
 		this.idFabricante = idFabricante;
 	}
 
-	public Vehiculo(String modelo, String marca, int anyo, String color, float precio, Integer idFabricante) {
-		super();
-		this.modelo = modelo;
-		this.marca = marca;
-		this.anyo = anyo;
-		this.color = color;
-		this.precio = precio;
-		this.idFabricante = idFabricante;
-	}
+
+
+
 
 	public Integer getIdVehiculos() {
 		return idVehiculos;

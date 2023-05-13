@@ -36,15 +36,14 @@ public class VehiculoService {
 	      }
 	   }
 	   
-	   public Vehiculo getVehiculo(Connection conexion, int id) throws SQLException {
+	   public Vehiculo getVehiculo(Connection conexion) throws SQLException {
 		   Vehiculo vehiculo = null;
 	      try{
 	         PreparedStatement consulta = conexion.prepareStatement("SELECT idVehiculos, modelo, marca, anyo, color, precio, idFabricante"
 	                 + " FROM " + this.tabla + " WHERE id = ?" );
-	         consulta.setInt(1, id);
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
-	        	 vehiculo = new Vehiculo(id, resultado.getString("modelo"), resultado.getString("marca"), 
+	        	 vehiculo = new Vehiculo(resultado.getInt("idVehiculos"), resultado.getString("modelo"), resultado.getString("marca"), 
 	                    resultado.getInt("anyo"), resultado.getString("color"), resultado.getFloat("precio"), resultado.getInt("idFabricante"));
 	         }
 	      }catch(SQLException ex){
@@ -56,7 +55,7 @@ public class VehiculoService {
 	   public void remove(Connection conexion, Vehiculo vehiculo) throws SQLException{
 	      try{
 	         PreparedStatement consulta = conexion.prepareStatement("DELETE FROM " 
-	      + this.tabla + " WHERE id = ?");
+	      + this.tabla + " WHERE idVehiculos = ?");
 	         consulta.setInt(1, vehiculo.getIdVehiculos());
 	         consulta.executeUpdate();
 	      }catch(SQLException ex){

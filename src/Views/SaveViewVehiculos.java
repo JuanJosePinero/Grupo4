@@ -45,7 +45,7 @@ public class SaveViewVehiculos extends JFrame {
 		setTitle("Vehiculos");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 372, 290);
+		setBounds(100, 130, 372, 340);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -71,38 +71,37 @@ public class SaveViewVehiculos extends JFrame {
 		lblPrecio.setBounds(30, 170, 61, 16);
 		contentPane.add(lblPrecio);
 		
-		JLabel lblidFabricante = new JLabel("ID del Fabricante:");
-		lblPrecio.setBounds(30, 206, 61, 16);
-		contentPane.add(lblPrecio);
+		JLabel lblidFabricante = new JLabel("IdFabricante:");
+		lblidFabricante.setBounds(30, 206, 80, 16);
+		contentPane.add(lblidFabricante);
 		
 		txtModelo = new JTextField();
-		txtModelo.setBounds(103, 26, 190, 26);
+		txtModelo.setBounds(130, 26, 190, 26);
 		contentPane.add(txtModelo);
 		txtModelo.setColumns(10);
 		
 		txtMarca = new JTextField();
-		txtMarca.setBounds(103, 62, 190, 26);
+		txtMarca.setBounds(130, 62, 190, 26);
 		contentPane.add(txtMarca);
 		txtMarca.setColumns(10);
 		
 		txtAnyo = new JTextField();
-		txtAnyo.setBounds(103, 98, 190, 26);
+		txtAnyo.setBounds(130, 98, 190, 26);
 		contentPane.add(txtAnyo);
 		txtAnyo.setColumns(10);
 		
 		txtColor = new JTextField();
-		txtColor.setBounds(103, 134, 190, 26);
+		txtColor.setBounds(130, 134, 190, 26);
 		contentPane.add(txtColor);
 		txtColor.setColumns(10);
 		
 		txtPrecio = new JTextField();
-		txtPrecio.setBounds(103, 170, 190, 26);
+		txtPrecio.setBounds(130, 170, 190, 26);
 		contentPane.add(txtPrecio);
 		txtPrecio.setColumns(10);
 		
-		
 		txtIdFabricante = new JTextField();
-		txtIdFabricante.setBounds(103, 206, 190, 26);
+		txtIdFabricante.setBounds(130, 206, 190, 26);
 		contentPane.add(txtIdFabricante);
 		txtIdFabricante.setColumns(10);
 		
@@ -139,7 +138,7 @@ public class SaveViewVehiculos extends JFrame {
 				}
 			}
 		});
-		btnGuardar.setBounds(46, 220, 117, 29);
+		btnGuardar.setBounds(46, 250, 117, 29);
 		contentPane.add(btnGuardar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -152,7 +151,7 @@ public class SaveViewVehiculos extends JFrame {
 				vista.setLocationRelativeTo(null);
 			}
 		});
-		btnCancelar.setBounds(208, 220, 117, 29);
+		btnCancelar.setBounds(208, 250, 117, 29);
 		contentPane.add(btnCancelar);
 	}
 }
