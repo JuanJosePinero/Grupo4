@@ -190,6 +190,7 @@ public class CreacionUsuario extends JFrame {
 			String contrasenya = new String (contra);
 			char[] ccontra = CContraseñaP.getPassword();
 			String ccontrasenya = new String (ccontra);
+		
 			
 			if(NombreT.getText().isEmpty() || ApellidoT.getText().isEmpty() || DireccionT.getText().isEmpty() || UsuarioT.getText().isEmpty())
 				JOptionPane.showMessageDialog(CreacionUsuario.this, "Formulario erroneo");
