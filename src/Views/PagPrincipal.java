@@ -1,8 +1,10 @@
 package Views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,7 +13,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 public class PagPrincipal {
 
@@ -58,15 +62,7 @@ public class PagPrincipal {
 		txtConcesionariosFelix.setHorizontalAlignment(JTextField.CENTER);
 		txtConcesionariosFelix.setText("CONCESIONARIOS FELIX");
 		frame.getContentPane().add(txtConcesionariosFelix, BorderLayout.NORTH);
-		txtConcesionariosFelix.setColumns(10);
-		
-//		 // Crea un JLabel con la imagen de fondo
-//	    ImageIcon imagen = new ImageIcon(getClass().getResource("/fotos/mi_imagen.jpg"));
-//	    JLabel labelImagen = new JLabel(imagen);
-//	    
-//	 // Agrega el JLabel al centro del BorderLayout del JFrame
-//	    frame.add(labelImagen, BorderLayout.CENTER);
-	    
+		txtConcesionariosFelix.setColumns(10);	    
 	    
 	    JLabel imagenLabel = new JLabel();
         ImageIcon imagen = new ImageIcon("images/fotoPagPrincipal.jpg"); // Reemplaza con la ruta a tu imagen
@@ -80,7 +76,7 @@ public class PagPrincipal {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Entrando a la página login...");
+				JOptionPane.showMessageDialog(null, "Entrando a la página login...", "Cambio pagina", JOptionPane.INFORMATION_MESSAGE);
 				Login login = new Login();
 				login.setVisible(true);
 				
