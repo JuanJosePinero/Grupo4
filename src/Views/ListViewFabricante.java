@@ -110,7 +110,7 @@ public class ListViewFabricante extends JFrame {
 			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 			dtm.setRowCount(0);
 			for (int i = 0; i < this.fabricante.size(); i++) {
-				dtm.addRow(new Object[] { this.fabricante.get(i).getNombre(), this.fabricante.get(i).getPais()});
+				dtm.addRow(new Object[] { this.fabricante.get(i).getIdFabricante(), this.fabricante.get(i).getNombre(), this.fabricante.get(i).getPais()});
 			}
 	
 

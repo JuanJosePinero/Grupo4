@@ -19,7 +19,7 @@ import models.Vehiculo;
 public class SaveViewVehiculos extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtModelo, txtMarca, txtAnyo, txtColor, txtPrecio;
+	private JTextField txtModelo, txtMarca, txtAnyo, txtColor, txtPrecio, txtIdFabricante;
 	private final VehiculoService services = new VehiculoService();
 	private final Vehiculo vehiculo;
 
@@ -71,6 +71,10 @@ public class SaveViewVehiculos extends JFrame {
 		lblPrecio.setBounds(30, 170, 61, 16);
 		contentPane.add(lblPrecio);
 		
+		JLabel lblidFabricante = new JLabel("ID del Fabricante:");
+		lblPrecio.setBounds(30, 206, 61, 16);
+		contentPane.add(lblPrecio);
+		
 		txtModelo = new JTextField();
 		txtModelo.setBounds(103, 26, 190, 26);
 		contentPane.add(txtModelo);
@@ -96,6 +100,12 @@ public class SaveViewVehiculos extends JFrame {
 		contentPane.add(txtPrecio);
 		txtPrecio.setColumns(10);
 		
+		
+		txtIdFabricante = new JTextField();
+		txtIdFabricante.setBounds(103, 206, 190, 26);
+		contentPane.add(txtIdFabricante);
+		txtIdFabricante.setColumns(10);
+		
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -104,12 +114,15 @@ public class SaveViewVehiculos extends JFrame {
 				int anyo = Integer.parseInt(txtAnyo.getText());
 				String color = txtColor.getText();
 				float precio = Float.parseFloat(txtPrecio.getText());
+				int idFabricante = Integer.parseInt(txtIdFabricante.getText());
 				
 				vehiculo.setModelo(modelo);
 				vehiculo.setMarca(marca);
 				vehiculo.setAnyo(anyo);
 				vehiculo.setColor(color);
 				vehiculo.setPrecio(precio);
+				vehiculo.setIdFabricante(idFabricante);
+				
 				
 				try {
 					services.save(Conexion.obtener(), vehiculo);

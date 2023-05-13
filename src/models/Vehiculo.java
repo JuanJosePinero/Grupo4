@@ -8,19 +8,31 @@ public class Vehiculo {
 	private int anyo;
 	private String color;
 	private float precio;
+	private Integer idFabricante;
 	
 	public Vehiculo() {
 		super();
 	}
 
-	public Vehiculo(int idVehiculo, String modelo, String marca, int anyo, String color, float precio) {
+	public Vehiculo(Integer idVehiculo, String modelo, String marca, int anyo, String color, float precio, Integer idFabricante) {
 		super();
-		this.idVehiculos = idVehiculo;
+		this.idVehiculos = idVehiculos;
 		this.modelo = modelo;
 		this.marca = marca;
 		this.anyo = anyo;
 		this.color = color;
 		this.precio = precio;
+		this.idFabricante = idFabricante;
+	}
+
+	public Vehiculo(String modelo, String marca, int anyo, String color, float precio, Integer idFabricante) {
+		super();
+		this.modelo = modelo;
+		this.marca = marca;
+		this.anyo = anyo;
+		this.color = color;
+		this.precio = precio;
+		this.idFabricante = idFabricante;
 	}
 
 	public Integer getIdVehiculos() {
@@ -71,10 +83,18 @@ public class Vehiculo {
 		this.precio = precio;
 	}
 
+	public Integer getIdFabricante() {
+		return idFabricante;
+	}
+
+	public void setIdFabricante(Integer idFabricante) {
+		this.idFabricante = idFabricante;
+	}
+
 	@Override
 	public String toString() {
-		return "Vehiculo [id=" + idVehiculos + ", modelo=" + modelo + ", marca=" + marca + ", anyo=" + anyo + ", color=" + color
-				+ ", precio=" + precio + "]";
+		return "Vehiculo [idVehiculos=" + idVehiculos + ", modelo=" + modelo + ", marca=" + marca + ", anyo=" + anyo
+				+ ", color=" + color + ", precio=" + precio + ", idFabricante=" + idFabricante + "]";
 	}
 	
 }
