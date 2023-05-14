@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -88,6 +89,13 @@ public class Login extends JFrame {
 		Center.add(UsuarioT);
 		UsuarioT.setColumns(10);
 		
+		 JLabel imagenLabel = new JLabel();
+	     ImageIcon imagen = new ImageIcon("images/Usuario.png");
+	     imagenLabel.setIcon(imagen);
+	     Center.add(imagenLabel);
+	     imagenLabel.setBounds(130, 33, 30, 30);
+		
+		
 		JLabel ContraseñaL = new JLabel("Contraseña");
 		ContraseñaL.setBounds(160, 117, 73, 14);
 		Center.add(ContraseñaL);
@@ -95,6 +103,12 @@ public class Login extends JFrame {
 		ContraseñaP = new JPasswordField();
 		ContraseñaP.setBounds(131, 144, 129, 20);
 		Center.add(ContraseñaP);
+		
+		JLabel imagenLabel1 = new JLabel();
+	     ImageIcon imagen1 = new ImageIcon("images/contrasenya.jpg");
+	     imagenLabel1.setIcon(imagen1);
+	     Center.add(imagenLabel1);
+	     imagenLabel1.setBounds(131, 117, 30, 30);
 		
 		setVisible(true);
 		
