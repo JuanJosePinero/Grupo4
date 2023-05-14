@@ -65,7 +65,7 @@ public class PagPrincipal {
 		txtConcesionariosFelix.setColumns(10);	    
 	    
 	    JLabel imagenLabel = new JLabel();
-        ImageIcon imagen = new ImageIcon("images/fotoPagPrincipal.jpg"); // Reemplaza con la ruta a tu imagen
+        ImageIcon imagen = new ImageIcon("images/fotoPagPrincipal.jpg"); 
         imagenLabel.setIcon(imagen);
 
         frame.getContentPane().add(imagenLabel, BorderLayout.CENTER);
