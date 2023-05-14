@@ -75,14 +75,8 @@ public class ListViewClientes extends JFrame{
 			
 			if(b.equals(ActivarB)) {
 				if(c.getActivar() == 1){
-					try {
-						services.
-						c.setActivar(0);
-						System.out.println(c.getActivar());
-					} catch (ClassNotFoundException | SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					c.setActivar(0);
+					System.out.println(c.getActivar());
 				
 				}
 				else {

@@ -22,13 +22,14 @@ public class VehiculoService {
 	            consulta.setFloat(5, vehiculo.getPrecio());
 	            consulta.setInt(6, vehiculo.getIdFabricante());
 	         }else{
-	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET modelo = ?, marca = ?, anyo = ?, color = ?, precio = ?, idFabricante = ? WHERE id = ?");
+	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET modelo = ?, marca = ?, anyo = ?, color = ?, precio = ?, idFabricante = ? WHERE idVehiculos = ?");
 	            consulta.setString(1, vehiculo.getModelo());
 	            consulta.setString(2, vehiculo.getMarca());
 	            consulta.setInt(3, vehiculo.getAnyo());     
 	            consulta.setString(4, vehiculo.getColor());
 	            consulta.setFloat(5, vehiculo.getPrecio());
 	            consulta.setInt(6, vehiculo.getIdFabricante());
+	            consulta.setInt(7, vehiculo.getIdVehiculos());
 	         }
 	         consulta.executeUpdate();
 	      }catch(SQLException ex){
