@@ -64,10 +64,13 @@ public class ControlAdmin extends JFrame {
 			}else if(j.equals(Fabricante)) {
 				ListViewFabricante lvf = new ListViewFabricante();
 				lvf.setVisible(true);
+				lvf.setLocationRelativeTo(null);
 				dispose();
 			}else if(j.equals(Vehiculos)) {
 				ListViewVehiculos lvv = new ListViewVehiculos();
+				lvv.setLocationRelativeTo(null);
 				lvv.setVisible(true);
+				dispose();
 			}
 			
 			

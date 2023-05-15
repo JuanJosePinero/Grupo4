@@ -93,12 +93,22 @@ public class ListViewFabricante extends JFrame {
 		contentPane.add(btnDelete);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(88, 97, 287, 146);
+		scrollPane.setBounds(85, 86, 287, 146);
 		contentPane.add(scrollPane);
 		
 		jtableP = new JTable();
 		showFabricante();
 		scrollPane.setViewportView(jtableP);
+		
+		JButton VolverB = new JButton("Volver");
+		VolverB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControlAdmin ca = new ControlAdmin();
+				dispose();
+			}
+		});
+		VolverB.setBounds(181, 238, 89, 23);
+		contentPane.add(VolverB);
 		
 	}
 	

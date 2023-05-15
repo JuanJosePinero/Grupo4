@@ -47,6 +47,12 @@ public class ListViewClientes extends JFrame{
 
 		
 		btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControlAdmin ca = new ControlAdmin();
+				dispose();
+			}
+		});
 		btnVolver.setBounds(167, 236, 97, 25);
 		contentPane.add(btnVolver);
 		
@@ -61,7 +67,7 @@ public class ListViewClientes extends JFrame{
 		setVisible(true);
 		ManejadorActionB mab= new ManejadorActionB();
 		ActivarB.addActionListener(mab);
-		btnVolver.addActionListener(mab);
+
 		
 	}
 	private class ManejadorActionB implements ActionListener{
@@ -105,9 +111,6 @@ public class ListViewClientes extends JFrame{
 				else {
 					c.setActivar(1);
 				}
-			}else if(b.equals(btnVolver)) {
-				Login l = new Login();
-				dispose();
 			}
 			
 		}
