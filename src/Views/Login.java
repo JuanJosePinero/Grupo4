@@ -140,11 +140,11 @@ public class Login extends JFrame {
 					String cont = new String(contrasenaC);
 					
 					if(userB.equals(user) && contB.equals(cont)) {
-						if(user.equals("Admin") && cont.equals("Admin")) {
+						if(datos.getRol().equals("Administrador")) {
 							ControlAdmin ca = new ControlAdmin();
 							dispose();
 						}
-						else
+						else if(datos.getRol().equals("Cliente")) {
 							if(activar == 1) {
 								System.out.println("Hola");
 								VentanaCatalogo vc = new VentanaCatalogo();
@@ -153,6 +153,9 @@ public class Login extends JFrame {
 								
 							}else
 								JOptionPane.showMessageDialog(Login.this, datos.getNombre()+" ha sido baneado por peruano");
+						}else if(datos.getRol().equals("Fabricante")) {
+							VisualizarVehiculos vv = new VisualizarVehiculos();
+						}
 					}
 					else
 						System.out.println("Usuario o Contraseña Incorrecta");

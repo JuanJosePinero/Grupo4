@@ -45,7 +45,7 @@ public class ListViewFabricante extends JFrame {
 				vista.setLocationRelativeTo(null);
 			}
 		});
-		btnCreate.setBounds(33, 24, 117, 29);
+		btnCreate.setBounds(26, 24, 89, 29);
 		contentPane.add(btnCreate);
 		
 		JButton btnUpdate = new JButton("Update");
@@ -62,7 +62,7 @@ public class ListViewFabricante extends JFrame {
 				}
 			}
 		});
-		btnUpdate.setBounds(169, 24, 117, 29);
+		btnUpdate.setBounds(149, 24, 67, 29);
 		contentPane.add(btnUpdate);
 		
 		JButton btnDelete = new JButton("Delete");
@@ -89,7 +89,7 @@ public class ListViewFabricante extends JFrame {
 				}
 			}
 		});
-		btnDelete.setBounds(308, 24, 117, 29);
+		btnDelete.setBounds(244, 24, 74, 29);
 		contentPane.add(btnDelete);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -109,6 +109,16 @@ public class ListViewFabricante extends JFrame {
 		});
 		VolverB.setBounds(181, 238, 89, 23);
 		contentPane.add(VolverB);
+		
+		JButton btnNewButton = new JButton("Visualizar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VisualizarVehiculos vv = new VisualizarVehiculos();
+				
+			}
+		});
+		btnNewButton.setBounds(335, 27, 89, 23);
+		contentPane.add(btnNewButton);
 		
 	}
 	

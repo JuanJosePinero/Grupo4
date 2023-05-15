@@ -13,6 +13,7 @@ public class ControlAdmin extends JFrame {
 
 	private JPanel contentPane;
 	private JButton Cliente,Fabricante,Vehiculos;
+	private JButton VolverB;
 
 
 	public ControlAdmin() {
@@ -44,6 +45,16 @@ public class ControlAdmin extends JFrame {
 		Vehiculos.setIcon(new ImageIcon("images/iconcoche.png"));
 		Vehiculos.setBounds(312, 76, 100, 89);
 		contentPane.add(Vehiculos);
+		
+		VolverB = new JButton("Volver");
+		VolverB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login l = new Login();
+				dispose();
+			}
+		});
+		VolverB.setBounds(10, 227, 414, 23);
+		contentPane.add(VolverB);
 		setVisible(true);
 		manejadorAction ma = new manejadorAction();
 		Cliente.addActionListener(ma);
