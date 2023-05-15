@@ -110,6 +110,14 @@ public class ListViewVehiculos extends JFrame {
 	        }, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" }));
 	        DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 	        dtm.setRowCount(0);
+	        
+	        jtableP = new JTable(dtm) {
+	          @Override
+	          public boolean isCellEditable(int row, int column) {
+	            return false;
+	          }
+	        };
+	        
 	        for (int i = 0; i < this.vehiculo.size(); i++) {
 	            dtm.addRow(new Object[] {this.vehiculo.get(i).getIdVehiculos(), this.vehiculo.get(i).getModelo(), this.vehiculo.get(i).getMarca(), this.vehiculo.get(i).getAnyo(),
 	                    this.vehiculo.get(i).getColor(), this.vehiculo.get(i).getPrecio(), this.vehiculo.get(i).getIdFabricante() });

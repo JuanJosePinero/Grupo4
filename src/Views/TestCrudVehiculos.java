@@ -3,6 +3,8 @@ package Views;
 import javax.swing.JFrame;
 
 public class TestCrudVehiculos extends JFrame{
+	public TestCrudVehiculos() {
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

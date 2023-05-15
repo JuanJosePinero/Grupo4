@@ -109,6 +109,14 @@ public class ListViewFabricante extends JFrame {
 			}, new String[] { "idFabricante","Nombre", "Pais" }));
 			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 			dtm.setRowCount(0);
+			
+			jtableP = new JTable(dtm) {
+		          @Override
+		          public boolean isCellEditable(int row, int column) {
+		            return false;
+		          }
+		        };
+		        
 			for (int i = 0; i < this.fabricante.size(); i++) {
 				dtm.addRow(new Object[] { this.fabricante.get(i).getIdFabricante(), this.fabricante.get(i).getNombre(), this.fabricante.get(i).getPais()});
 			}

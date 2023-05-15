@@ -13,30 +13,33 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
+import Service.Conexion;
 import models.Vehiculo;
-import javax.swing.JComboBox;
 
 public class VentanaCatalogo extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnComprar, btnAlquilar, btnSiguiente, btnMostrar;
 	private JTextArea textArea;
-	private JTextField textModelo, textMarca, textAnyo, textColor, textPrecioSinIVA, textPrecioIVA;
 	private JScrollPane scrollPane;
 	private JLabel lblCoche;
+	private List<Vehiculo> listaVehiculos = new ArrayList<>();
 	private List<String> listaComentarios = new ArrayList<>();
 	private final String tabla = "vehiculo";
 	private Vehiculo vehiculo;
 	private JButton btnVerCompras;
+	private JTable jtableP;
 	
 	/**
 	 * Launch the application.
@@ -109,67 +112,6 @@ public class VentanaCatalogo extends JFrame {
 	    btnSiguiente.setBounds(831, 240, 45, 48);
 	    contentPane.add(btnSiguiente);
 	     
-	    JLabel lblModelo = new JLabel("Modelo");
-	    lblModelo.setBounds(88, 289, 45, 13);
-	    contentPane.add(lblModelo);
-	     
-	    textModelo = new JTextField();
-	    textModelo.setEditable(false);
-	    textModelo.setBounds(146, 286, 96, 19);
-	    contentPane.add(textModelo);
-	    textModelo.setColumns(10);
-	     
-	    JLabel lblMarca = new JLabel("Marca");
-	    lblMarca.setBounds(329, 289, 45, 13);
-	    contentPane.add(lblMarca);
-	     
-	    textMarca = new JTextField();
-	    textMarca.setEditable(false);
-	    textMarca.setBounds(392, 286, 96, 19);
-	    contentPane.add(textMarca);
-	    textMarca.setColumns(10);
-	     
-	    JLabel lblAnyo = new JLabel("Año del Modelo");
-	    lblAnyo.setBounds(557, 289, 96, 13);
-	    contentPane.add(lblAnyo);
-	     
-	    textAnyo = new JTextField();
-	    textAnyo.setEditable(false);
-	    textAnyo.setBounds(663, 286, 96, 19);
-	    contentPane.add(textAnyo);
-	    textAnyo.setColumns(10);
-	     
-	    JLabel lblColor = new JLabel("Color");
-	    lblColor.setBounds(88, 339, 45, 13);
-	    contentPane.add(lblColor);
-	     
-	    textColor = new JTextField();
-	    textColor.setEnabled(true);
-	    textColor.setEditable(false);
-	    textColor.setBounds(146, 336, 96, 19);
-     	contentPane.add(textColor);
-	    textColor.setColumns(10);
-	     
-	    JLabel lblPrecioSinIVA = new JLabel("Precio sin IVA");
-	    lblPrecioSinIVA.setBounds(306, 339, 83, 13);
-	    contentPane.add(lblPrecioSinIVA);
-	    
-	    textPrecioSinIVA = new JTextField();
-	    textPrecioSinIVA.setEditable(false);
-	    textPrecioSinIVA.setBounds(392, 336, 96, 19);
-	    contentPane.add(textPrecioSinIVA);
-	    textPrecioSinIVA.setColumns(10);
-	     
-	    JLabel lblPrecioIVA = new JLabel("Precio con IVA");
-	    lblPrecioIVA.setBounds(557, 339, 83, 13);
-	    contentPane.add(lblPrecioIVA);
-	     
-	    textPrecioIVA = new JTextField();
-	    textPrecioIVA.setEditable(false);
-	    textPrecioIVA.setBounds(663, 336, 96, 19);
-	    contentPane.add(textPrecioIVA);
-	    textPrecioIVA.setColumns(10);
-	     
 	    lblCoche = new JLabel("COCHE");
 	    lblCoche.setFont(new Font("Arial Black", Font.BOLD, 10));
 	    lblCoche.setBounds(392, 10, 96, 22);
@@ -180,7 +122,7 @@ public class VentanaCatalogo extends JFrame {
 	    contentPane.add(lblComentarios);
 	     
 	    scrollPane = new JScrollPane();
-	    scrollPane.setBounds(103, 412, 730, 65);
+	    scrollPane.setBounds(103, 412, 695, 65);
 	    contentPane.add(scrollPane);
 	     
 	    listaComentarios.add("Comentario 1");
@@ -200,6 +142,8 @@ public class VentanaCatalogo extends JFrame {
 	    lblFiltrosBusqueda.setBounds(31, 23, 135, 19);
 	    contentPane.add(lblFiltrosBusqueda);
 	    
+//	    panel_1
+	    
 	   
 	    String nombre = "";
 	    for (String s : listaComentarios) {
@@ -207,6 +151,14 @@ public class VentanaCatalogo extends JFrame {
 	    	textArea.setText(nombre);
 	    	 
 			}
+	    
+	    JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(272, 272, 338, 102);
+		contentPane.add(scrollPane);
+		
+		jtableP = new JTable();
+		showVehiculos();
+		scrollPane.setViewportView(jtableP);
 			
 		}
 	
@@ -214,7 +166,7 @@ public class VentanaCatalogo extends JFrame {
 		   Vehiculo vehiculo = null;
 	      try{
 	         PreparedStatement consulta = conexion.prepareStatement("SELECT idVehiculos, modelo, marca, anyo, color, precio, idFabricante"
-	                 + " FROM " + this.tabla + " WHERE id = ?" );
+	                 + " FROM " + this.tabla + " WHERE idVehiculos = ?" );
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
 	        	 vehiculo = new Vehiculo(resultado.getInt("idVehiculos"), resultado.getString("modelo"), resultado.getString("marca"), 
@@ -225,7 +177,52 @@ public class VentanaCatalogo extends JFrame {
 	      }
 	      return vehiculo;
 	   }
-		
+	
+	public List<Vehiculo> getAllVehiculos(Connection conexion) throws SQLException {
+	    List<Vehiculo> listaVehiculos = new ArrayList<>();
+	    try {
+	        PreparedStatement consulta = conexion.prepareStatement("SELECT idVehiculos, modelo, marca, anyo, color, precio, idFabricante "
+	                + " FROM " + this.tabla);
+	        ResultSet resultado = consulta.executeQuery();
+	        while (resultado.next()) {
+	            listaVehiculos.add(new Vehiculo(resultado.getInt("idVehiculos"), resultado.getString("modelo"), resultado.getString("marca"), 
+	                    resultado.getInt("anyo"), resultado.getString("color"), resultado.getFloat("precio"), resultado.getInt("idFabricante")));
+	        }
+	    } catch (SQLException ex) {
+	        throw new SQLException(ex);
+	    }
+	    return listaVehiculos;
+	}
+
+private void showVehiculos() {
+    try {
+        this.vehiculo = (Vehiculo) this.getAllVehiculos(Conexion.obtener());
+        jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+        }, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" }));
+        DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
+        dtm.setRowCount(0);
+        
+        jtableP = new JTable(dtm) {
+          @Override
+          public boolean isCellEditable(int row, int column) {
+            return false;
+          }
+        };
+        
+        for (int i = 0; i < this.listaVehiculos.size(); i++) {
+            dtm.addRow(new Object[] {this.listaVehiculos.get(i).getIdVehiculos(), this.listaVehiculos.get(i).getModelo(), this.listaVehiculos.get(i).getMarca(), this.listaVehiculos.get(i).getAnyo(),
+                    this.listaVehiculos.get(i).getColor(), this.listaVehiculos.get(i).getPrecio(), this.listaVehiculos.get(i).getIdFabricante() });
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+    } catch (ClassNotFoundException ex) {
+        System.out.println(ex);
+        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+    }
+}
+	
 	public class ManejadorJButton implements ActionListener {
 
 		@Override
@@ -251,7 +248,7 @@ public class VentanaCatalogo extends JFrame {
 				float precioSinIVA = vehiculo.getPrecio();
 				float precioConIVA = (float) (vehiculo.getPrecio()*0.21);
 
-				textModelo.setText(modelo);
+//				textModelo.setText(modelo);
 //				vehiculo.setModelo(modelo);
 //				vehiculo.setMarca(marca);
 //				vehiculo.setAnyo(anyo);

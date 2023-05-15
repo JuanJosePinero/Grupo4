@@ -41,7 +41,7 @@ public class VehiculoService {
 		   Vehiculo vehiculo = null;
 	      try{
 	         PreparedStatement consulta = conexion.prepareStatement("SELECT idVehiculos, modelo, marca, anyo, color, precio, idFabricante"
-	                 + " FROM " + this.tabla + " WHERE id = ?" );
+	                 + " FROM " + this.tabla + " WHERE idVehiculos = ?" );
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
 	        	 vehiculo = new Vehiculo(resultado.getInt("idVehiculos"), resultado.getString("modelo"), resultado.getString("marca"), 

@@ -35,7 +35,7 @@ public class ComprasRealizadas extends JFrame {
 	public ComprasRealizadas() {
 		super("Compras Realizadas por el Cliente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 437, 175);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
