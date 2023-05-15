@@ -4,11 +4,14 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -43,6 +46,8 @@ public class VentanaCatalogo extends JFrame {
 	private JButton btnVerCompras;
 	private JTable jtableP;
 	private int contador=0;
+	private JComboBox filtro;
+	private DefaultTableModel dtm;
 	
 	/**
 	 * Launch the application.
@@ -136,16 +141,17 @@ public class VentanaCatalogo extends JFrame {
 	    textArea = new JTextArea();
 	    textArea.setEditable(false);
 	    scrollPane.setViewportView(textArea);
+	    String[] filtros= {"--","Marca","Modelo","Anyo","Color","Precio","idFabricante"};
 	    
-	    JComboBox comboBox = new JComboBox();
-	    comboBox.setBounds(31, 42, 124, 22);
-	    contentPane.add(comboBox);
+	    filtro = new JComboBox(filtros);
+	    filtro.setBounds(31, 42, 124, 22);
+	    contentPane.add(filtro);
+	    manejadorcombo mancombo=new manejadorcombo();
+	    filtro.addItemListener(mancombo);
 	    
 	    JLabel lblFiltrosBusqueda = new JLabel("Filtros de Busqueda");
 	    lblFiltrosBusqueda.setBounds(31, 23, 135, 19);
 	    contentPane.add(lblFiltrosBusqueda);
-	    
-//	    panel_1
 	    
 	   
 	    String nombre = "";
@@ -159,9 +165,15 @@ public class VentanaCatalogo extends JFrame {
 		scrollPane.setBounds(282, 272, 338, 102);
 		contentPane.add(scrollPane);
 		
-		jtableP = new JTable();
-		showVehiculos();
+		dtm = new DefaultTableModel(new Object[][] {}, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" });
+		jtableP = new JTable(dtm) {
+		    @Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
 		scrollPane.setViewportView(jtableP);
+		
 			
 		}
 	
@@ -181,34 +193,7 @@ public class VentanaCatalogo extends JFrame {
 	      return vehiculo;
 	   }
 
-private void showVehiculos() {
-    try {
-        this.vehiculo =this.services.getAllVehiculos(Conexion.obtener());
-        jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-        }, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" }));
-        DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
-        dtm.setRowCount(0);
-        
-        jtableP = new JTable(dtm) {
-          @Override
-          public boolean isCellEditable(int row, int column) {
-            return false;
-          }
-        };
-        
-        for (int i = 0; i < this.vehiculo.size(); i++) {
-            dtm.addRow(new Object[] {this.vehiculo.get(i).getIdVehiculos(), this.vehiculo.get(i).getModelo(), this.vehiculo.get(i).getMarca(), this.vehiculo.get(i).getAnyo(),
-                    this.vehiculo.get(i).getColor(), this.vehiculo.get(i).getPrecio(), this.vehiculo.get(i).getIdFabricante() });
-        }
-    } catch (SQLException ex) {
-        System.out.println(ex.getMessage());
-        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-    } catch (ClassNotFoundException ex) {
-        System.out.println(ex);
-        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-    }
-}
 	
 	public class ManejadorJButton implements ActionListener {
 
@@ -242,6 +227,175 @@ private void showVehiculos() {
 			}
 			
 		}	
+		
+	}
+	private void refrescarTabla(String fil){
+		    try {
+		        if (fil.equalsIgnoreCase("--")) {
+		            showVehiculos();  
+		        } else if (fil.equalsIgnoreCase("Marca")) {
+		            showVehiculosMarca();  
+		        } else if (fil.equalsIgnoreCase("Modelo")) {
+		        	showVehiculosModelo();
+		        } else if (fil.equalsIgnoreCase("Anyo")) {
+		        	showVehiculosAnyo();
+		        } else if (fil.equalsIgnoreCase("Color")) {
+		        	showVehiculosColor();
+		        } else if (fil.equalsIgnoreCase("Precio")) {
+		        	showVehiculosPrecio();
+		        } else if (fil.equalsIgnoreCase("idFabricante")) {
+		        	showVehiculosidFabricante();
+		        }
+		    } catch (Exception ex) {
+		        ex.printStackTrace();
+		        JOptionPane.showMessageDialog(this, "Error al actualizar la tabla");
+		    }
+		
+	}
+	private void showVehiculosidFabricante() {
+		try {
+	        vehiculo = services.getAllVehiculosidFabricante(Conexion.obtener());
+	        dtm.setRowCount(0);  
+
+	        for (int i = 0; i < vehiculo.size(); i++) {
+	            dtm.addRow(new Object[] { vehiculo.get(i).getIdVehiculos(), vehiculo.get(i).getModelo(), vehiculo.get(i).getMarca(),
+	                    vehiculo.get(i).getAnyo(), vehiculo.get(i).getColor(), vehiculo.get(i).getPrecio(),
+	                    vehiculo.get(i).getIdFabricante() });
+	        }
+	    } catch (SQLException ex) {
+	        System.out.println(ex.getMessage());
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    } catch (ClassNotFoundException ex) {
+	        System.out.println(ex);
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    }
+		
+	}
+
+	private void showVehiculosPrecio() {
+		try {
+	        vehiculo = services.getAllVehiculosPrecio(Conexion.obtener());
+	        dtm.setRowCount(0);  
+
+	        for (int i = 0; i < vehiculo.size(); i++) {
+	            dtm.addRow(new Object[] { vehiculo.get(i).getIdVehiculos(), vehiculo.get(i).getModelo(), vehiculo.get(i).getMarca(),
+	                    vehiculo.get(i).getAnyo(), vehiculo.get(i).getColor(), vehiculo.get(i).getPrecio(),
+	                    vehiculo.get(i).getIdFabricante() });
+	        }
+	    } catch (SQLException ex) {
+	        System.out.println(ex.getMessage());
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    } catch (ClassNotFoundException ex) {
+	        System.out.println(ex);
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    }
+		
+	}
+
+	private void showVehiculosColor() {
+		try {
+	        vehiculo = services.getAllVehiculosColor(Conexion.obtener());
+	        dtm.setRowCount(0);  
+
+	        for (int i = 0; i < vehiculo.size(); i++) {
+	            dtm.addRow(new Object[] { vehiculo.get(i).getIdVehiculos(), vehiculo.get(i).getModelo(), vehiculo.get(i).getMarca(),
+	                    vehiculo.get(i).getAnyo(), vehiculo.get(i).getColor(), vehiculo.get(i).getPrecio(),
+	                    vehiculo.get(i).getIdFabricante() });
+	        }
+	    } catch (SQLException ex) {
+	        System.out.println(ex.getMessage());
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    } catch (ClassNotFoundException ex) {
+	        System.out.println(ex);
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    }
+		
+	}
+
+	private void showVehiculosAnyo() {
+		try {
+	        vehiculo = services.getAllVehiculosAnyo(Conexion.obtener());
+	        dtm.setRowCount(0);  
+
+	        for (int i = 0; i < vehiculo.size(); i++) {
+	            dtm.addRow(new Object[] { vehiculo.get(i).getIdVehiculos(), vehiculo.get(i).getModelo(), vehiculo.get(i).getMarca(),
+	                    vehiculo.get(i).getAnyo(), vehiculo.get(i).getColor(), vehiculo.get(i).getPrecio(),
+	                    vehiculo.get(i).getIdFabricante() });
+	        }
+	    } catch (SQLException ex) {
+	        System.out.println(ex.getMessage());
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    } catch (ClassNotFoundException ex) {
+	        System.out.println(ex);
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    }
+		
+	}
+
+	private void showVehiculosModelo() {
+		try {
+	        vehiculo = services.getAllVehiculosModelo(Conexion.obtener());
+	        dtm.setRowCount(0);
+
+	        for (int i = 0; i < vehiculo.size(); i++) {
+	            dtm.addRow(new Object[] { vehiculo.get(i).getIdVehiculos(), vehiculo.get(i).getModelo(), vehiculo.get(i).getMarca(),
+	                    vehiculo.get(i).getAnyo(), vehiculo.get(i).getColor(), vehiculo.get(i).getPrecio(),
+	                    vehiculo.get(i).getIdFabricante() });
+	        }
+	    } catch (SQLException ex) {
+	        System.out.println(ex.getMessage());
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    } catch (ClassNotFoundException ex) {
+	        System.out.println(ex);
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    }
+		
+	}
+	private void showVehiculos() {
+		try {
+	        vehiculo = services.getAllVehiculos(Conexion.obtener());
+	        dtm.setRowCount(0);  
+
+	        for (int i = 0; i < vehiculo.size(); i++) {
+	            dtm.addRow(new Object[] { vehiculo.get(i).getIdVehiculos(), vehiculo.get(i).getModelo(), vehiculo.get(i).getMarca(),
+	                    vehiculo.get(i).getAnyo(), vehiculo.get(i).getColor(), vehiculo.get(i).getPrecio(),
+	                    vehiculo.get(i).getIdFabricante() });
+	        }
+	    } catch (SQLException ex) {
+	        System.out.println(ex.getMessage());
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    } catch (ClassNotFoundException ex) {
+	        System.out.println(ex);
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    }
+	}
+	private void showVehiculosMarca() {
+		try {
+	        vehiculo = services.getAllVehiculosMarca(Conexion.obtener());
+	        dtm.setRowCount(0);  
+
+	        for (int i = 0; i < vehiculo.size(); i++) {
+	            dtm.addRow(new Object[] { vehiculo.get(i).getIdVehiculos(), vehiculo.get(i).getModelo(), vehiculo.get(i).getMarca(),
+	                    vehiculo.get(i).getAnyo(), vehiculo.get(i).getColor(), vehiculo.get(i).getPrecio(),
+	                    vehiculo.get(i).getIdFabricante() });
+	        }
+	    } catch (SQLException ex) {
+	        System.out.println(ex.getMessage());
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    } catch (ClassNotFoundException ex) {
+	        System.out.println(ex);
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    }
+	}
+	private class manejadorcombo implements ItemListener{
+
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			JComboBox combo = (JComboBox) e.getSource();
+	        String filtroSeleccionado = String.valueOf(combo.getSelectedItem());
+	        refrescarTabla(filtroSeleccionado);
+		}
+			
 		
 	}
 }

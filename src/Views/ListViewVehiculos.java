@@ -45,7 +45,6 @@ public class ListViewVehiculos extends JFrame {
 				vista.setLocationRelativeTo(null);
 			}
 		});
-		
 		btnCreate.setBounds(33, 24, 117, 29);
 		contentPane.add(btnCreate);
 		
@@ -94,31 +93,21 @@ public class ListViewVehiculos extends JFrame {
 		contentPane.add(btnDelete);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(88, 77, 287, 146);
+		scrollPane.setBounds(88, 97, 287, 146);
 		contentPane.add(scrollPane);
 		
 		jtableP = new JTable();
 		showVehiculos();
 		scrollPane.setViewportView(jtableP);
 		
-		JButton VolverB = new JButton("Volver");
-		VolverB.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ControlAdmin ca = new ControlAdmin();
-				dispose();
-			}
-		});
-		VolverB.setBounds(179, 234, 89, 23);
-		contentPane.add(VolverB);
-		
 	}
 	
-	private void showVehiculos() {
+	public void showVehiculos() {
 	    try {
 	        this.vehiculo = this.services.getAllVehiculos(Conexion.obtener());
 	        jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-	        }, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante", "ruta" }));
+	        }, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" }));
 	        DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 	        dtm.setRowCount(0);
 	        
@@ -131,7 +120,7 @@ public class ListViewVehiculos extends JFrame {
 	        
 	        for (int i = 0; i < this.vehiculo.size(); i++) {
 	            dtm.addRow(new Object[] {this.vehiculo.get(i).getIdVehiculos(), this.vehiculo.get(i).getModelo(), this.vehiculo.get(i).getMarca(), this.vehiculo.get(i).getAnyo(),
-	                    this.vehiculo.get(i).getColor(), this.vehiculo.get(i).getPrecio(), this.vehiculo.get(i).getIdFabricante(), this.vehiculo.get(i).getRuta() });
+	                    this.vehiculo.get(i).getColor(), this.vehiculo.get(i).getPrecio(), this.vehiculo.get(i).getIdFabricante() });
 	        }
 	    } catch (SQLException ex) {
 	        System.out.println(ex.getMessage());
