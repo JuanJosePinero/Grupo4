@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 public class ControlAdmin extends JFrame {
 
 	private JPanel contentPane;
+	private JButton Cliente,Fabricante,Vehiculos;
 
 
 	public ControlAdmin() {
@@ -24,7 +25,7 @@ public class ControlAdmin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton Cliente = new JButton("New button");
+		 Cliente = new JButton("New button");
 		Cliente.setIcon(new ImageIcon("images/iconcliente.png"));
 		Cliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -34,16 +35,22 @@ public class ControlAdmin extends JFrame {
 		Cliente.setBounds(37, 76, 100, 100);
 		contentPane.add(Cliente);
 		
-		JButton Fabricante = new JButton("New button");
+		 Fabricante = new JButton("New button");
 		Fabricante.setIcon(new ImageIcon("images/iconllave.png"));
 		Fabricante.setBounds(177, 76, 100, 89);
 		contentPane.add(Fabricante);
 		
-		JButton Vehiculos = new JButton("New button");
+		 Vehiculos = new JButton("New button");
 		Vehiculos.setIcon(new ImageIcon("images/iconcoche.png"));
 		Vehiculos.setBounds(312, 76, 100, 89);
 		contentPane.add(Vehiculos);
 		setVisible(true);
+		manejadorAction ma = new manejadorAction();
+		Cliente.addActionListener(ma);
+		Fabricante.addActionListener(ma);
+		Vehiculos.addActionListener(ma);
+			
+		
 	}
 	
 	private class manejadorAction implements ActionListener {
@@ -51,6 +58,17 @@ public class ControlAdmin extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton j = (JButton) e.getSource();
+			if(j.equals(Cliente)) {
+				ListViewClientes lvc = new ListViewClientes();
+				dispose();
+			}else if(j.equals(Fabricante)) {
+				ListViewFabricante lvf = new ListViewFabricante();
+				lvf.setVisible(true);
+				dispose();
+			}else if(j.equals(Vehiculos)) {
+				ListViewVehiculos lvv = new ListViewVehiculos();
+				lvv.setVisible(true);
+			}
 			
 			
 			
