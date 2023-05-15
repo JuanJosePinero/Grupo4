@@ -64,7 +64,7 @@ public class VehiculoService {
 	      }
 	   }
 	   
-	   public List<Vehiculo> getAllVehiculos(Connection conexion) throws SQLException {
+	   public  List<Vehiculo> getAllVehiculos(Connection conexion) throws SQLException {
 		    List<Vehiculo> listaVehiculos = new ArrayList<>();
 		    try {
 		        PreparedStatement consulta = conexion.prepareStatement("SELECT idVehiculos, modelo, marca, anyo, color, precio, idFabricante "

@@ -25,6 +25,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Service.Conexion;
+import Service.VehiculoService;
 import models.Vehiculo;
 
 public class VentanaCatalogo extends JFrame {
@@ -37,9 +38,11 @@ public class VentanaCatalogo extends JFrame {
 	private List<Vehiculo> listaVehiculos = new ArrayList<>();
 	private List<String> listaComentarios = new ArrayList<>();
 	private final String tabla = "vehiculo";
-	private Vehiculo vehiculo;
+	private final VehiculoService services = new VehiculoService();
+	private List<Vehiculo> vehiculo;
 	private JButton btnVerCompras;
 	private JTable jtableP;
+	private int contador=0;
 	
 	/**
 	 * Launch the application.
@@ -153,7 +156,7 @@ public class VentanaCatalogo extends JFrame {
 			}
 	    
 	    JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(272, 272, 338, 102);
+		scrollPane.setBounds(282, 272, 338, 102);
 		contentPane.add(scrollPane);
 		
 		jtableP = new JTable();
@@ -177,26 +180,10 @@ public class VentanaCatalogo extends JFrame {
 	      }
 	      return vehiculo;
 	   }
-	
-	public List<Vehiculo> getAllVehiculos(Connection conexion) throws SQLException {
-	    List<Vehiculo> listaVehiculos = new ArrayList<>();
-	    try {
-	        PreparedStatement consulta = conexion.prepareStatement("SELECT idVehiculos, modelo, marca, anyo, color, precio, idFabricante "
-	                + " FROM " + this.tabla);
-	        ResultSet resultado = consulta.executeQuery();
-	        while (resultado.next()) {
-	            listaVehiculos.add(new Vehiculo(resultado.getInt("idVehiculos"), resultado.getString("modelo"), resultado.getString("marca"), 
-	                    resultado.getInt("anyo"), resultado.getString("color"), resultado.getFloat("precio"), resultado.getInt("idFabricante")));
-	        }
-	    } catch (SQLException ex) {
-	        throw new SQLException(ex);
-	    }
-	    return listaVehiculos;
-	}
 
 private void showVehiculos() {
     try {
-        this.vehiculo = (Vehiculo) this.getAllVehiculos(Conexion.obtener());
+        this.vehiculo =this.services.getAllVehiculos(Conexion.obtener());
         jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
         }, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" }));
@@ -210,9 +197,9 @@ private void showVehiculos() {
           }
         };
         
-        for (int i = 0; i < this.listaVehiculos.size(); i++) {
-            dtm.addRow(new Object[] {this.listaVehiculos.get(i).getIdVehiculos(), this.listaVehiculos.get(i).getModelo(), this.listaVehiculos.get(i).getMarca(), this.listaVehiculos.get(i).getAnyo(),
-                    this.listaVehiculos.get(i).getColor(), this.listaVehiculos.get(i).getPrecio(), this.listaVehiculos.get(i).getIdFabricante() });
+        for (int i = 0; i < this.vehiculo.size(); i++) {
+            dtm.addRow(new Object[] {this.vehiculo.get(i).getIdVehiculos(), this.vehiculo.get(i).getModelo(), this.vehiculo.get(i).getMarca(), this.vehiculo.get(i).getAnyo(),
+                    this.vehiculo.get(i).getColor(), this.vehiculo.get(i).getPrecio(), this.vehiculo.get(i).getIdFabricante() });
         }
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());
@@ -240,13 +227,6 @@ private void showVehiculos() {
 			}else if(o == btnSiguiente) {
 				
 			}else if(o == btnMostrar) {
-				lblCoche.setText("Coche 1");
-				String modelo = vehiculo.getModelo();
-				String marca = vehiculo.getMarca();
-				int anyo = vehiculo.getAnyo();
-				String color = vehiculo.getColor();
-				float precioSinIVA = vehiculo.getPrecio();
-				float precioConIVA = (float) (vehiculo.getPrecio()*0.21);
 
 //				textModelo.setText(modelo);
 //				vehiculo.setModelo(modelo);
