@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import models.Vehiculo;
+import javax.swing.JComboBox;
 
 public class VentanaCatalogo extends JFrame {
 
@@ -34,7 +35,9 @@ public class VentanaCatalogo extends JFrame {
 	private JLabel lblCoche;
 	private List<String> listaComentarios = new ArrayList<>();
 	private final String tabla = "vehiculo";
-
+	private Vehiculo vehiculo;
+	private JButton btnVerCompras;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -69,20 +72,26 @@ public class VentanaCatalogo extends JFrame {
 		
 		btnComprar = new JButton("Comprar Vehiculo");
 		btnComprar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
-		btnComprar.setBounds(146, 510, 143, 31);
+		btnComprar.setBounds(100, 510, 143, 31);
 		btnComprar.addActionListener(manejador);
 		contentPane.add(btnComprar);
 
 		
 		btnAlquilar = new JButton("Alquilar Vehiculo");
 		btnAlquilar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
-		btnAlquilar.setBounds(538, 510, 143, 31);
+		btnAlquilar.setBounds(378, 510, 143, 31);
 		btnAlquilar.addActionListener(manejador);
 		contentPane.add(btnAlquilar);
 		
+		btnVerCompras = new JButton("Ver Compras Realizadas");
+		btnVerCompras.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
+		btnVerCompras.setBounds(624, 510, 183, 31);
+		btnVerCompras.addActionListener(manejador);
+		contentPane.add(btnVerCompras);
+		
 		btnMostrar = new JButton("Mostrar Vehiculos");
 		btnMostrar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
-		btnMostrar.setBounds(100, 130, 143, 31);
+		btnMostrar.setBounds(663, 123, 143, 31);
 		btnMostrar.addActionListener(manejador);
 		contentPane.add(btnMostrar);
 		
@@ -137,7 +146,6 @@ public class VentanaCatalogo extends JFrame {
 	    textColor = new JTextField();
 	    textColor.setEnabled(true);
 	    textColor.setEditable(false);
-	    textColor.setText("");
 	    textColor.setBounds(146, 336, 96, 19);
      	contentPane.add(textColor);
 	    textColor.setColumns(10);
@@ -183,6 +191,16 @@ public class VentanaCatalogo extends JFrame {
 	    textArea = new JTextArea();
 	    textArea.setEditable(false);
 	    scrollPane.setViewportView(textArea);
+	    
+	    JComboBox comboBox = new JComboBox();
+	    comboBox.setBounds(31, 42, 124, 22);
+	    contentPane.add(comboBox);
+	    
+	    JLabel lblFiltrosBusqueda = new JLabel("Filtros de Busqueda");
+	    lblFiltrosBusqueda.setBounds(31, 23, 135, 19);
+	    contentPane.add(lblFiltrosBusqueda);
+	    
+	   
 	    String nombre = "";
 	    for (String s : listaComentarios) {
 	    	nombre += s+"\n";
@@ -226,20 +244,24 @@ public class VentanaCatalogo extends JFrame {
 				
 			}else if(o == btnMostrar) {
 				lblCoche.setText("Coche 1");
-//				String modelo = textModelo.getText();
-//				String marca = textMarca.getText();
-//				int anyo = Integer.parseInt(textAnyo.getText());
-//				String color = textColor.getText();
-//				float precioSinIVA = Float.parseFloat(textPrecioSinIVA.getText());
-//				float precioConIVA = Float.parseFloat(textPrecioIVA.getText());
+				String modelo = vehiculo.getModelo();
+				String marca = vehiculo.getMarca();
+				int anyo = vehiculo.getAnyo();
+				String color = vehiculo.getColor();
+				float precioSinIVA = vehiculo.getPrecio();
+				float precioConIVA = (float) (vehiculo.getPrecio()*0.21);
 
-				
+				textModelo.setText(modelo);
 //				vehiculo.setModelo(modelo);
 //				vehiculo.setMarca(marca);
 //				vehiculo.setAnyo(anyo);
 //				vehiculo.setColor(color);
 //				vehiculo.setPrecio(precioSinIVA);
 //				vehiculo.setPrecio(precioConIVA);
+			}else if(o == btnVerCompras) {
+				ComprasRealizadas cr = new ComprasRealizadas();
+				cr.setVisible(true);
+				dispose();
 			}
 			
 		}	
