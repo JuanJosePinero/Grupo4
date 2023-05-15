@@ -16,7 +16,7 @@ public class ClientService {
 	      try{
 	         PreparedStatement consulta;
 	         if(cliente.getIdClientes() == null){
-	            consulta = conexion.prepareStatement("INSERT INTO " + this.tabla + "(nombre, direccion,rol,usuario,Contasenya,Activar) VALUES(?, ?, ?, ?, ?,?)");
+	            consulta = conexion.prepareStatement("INSERT INTO " + this.tabla + "(nombre, direccion,rol,usuario,Contasenya,Activar) VALUES(?, ?, ?, ?, ?, ?)");
 	            consulta.setString(1,cliente.getNombre());
 	            consulta.setString(2, cliente.getDireccion());
 	            consulta.setString(3, cliente.getRol());
@@ -24,19 +24,21 @@ public class ClientService {
 	            consulta.setString(5, cliente.getContrasena());
 	            consulta.setInt(6, cliente.getActivar());
 	         }else{
-	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET nombre = ?, direccion = ?,rol = ?, usuario = ?, Contasenya = ? Activar = ? WHERE id = ?");
+	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET nombre = ?, direccion = ?,rol = ?, usuario = ?, Contasenya = ? Activar = ? WHERE idCliente = ?");
 	            consulta.setString(1,cliente.getNombre());
 	            consulta.setString(2, cliente.getDireccion());
 	            consulta.setString(3, cliente.getRol());
 	            consulta.setString(4, cliente.getNombreUsuario());
 	            consulta.setString(5, cliente.getContrasena());
 	            consulta.setInt(6, cliente.getActivar());
+	            consulta.setInt(7, cliente.getIdClientes());
 	         }
 	         consulta.executeUpdate();
 	      }catch(SQLException ex){
 	         throw new SQLException(ex);
 	      }
 	   }
+	
 	 
 	 public Cliente getCliente(Connection conexion, String nombreUsuario) throws SQLException {
 		   Cliente cliente = null;
@@ -54,6 +56,24 @@ public class ClientService {
 	      }
 	      return cliente;
 	   }
+	 public Cliente getClienteId(Connection conexion,int id) throws SQLException {
+		   Cliente cliente = null;
+	      try{
+	         PreparedStatement consulta = conexion.prepareStatement("SELECT idCliente, nombre, direccion,rol,usuario,Contasenya,Activar "
+	                 + " FROM " + this.tabla + " WHERE idCliente = ?" );
+	         ResultSet resultado = consulta.executeQuery();
+	         consulta.setInt(1, id);
+	         while(resultado.next()){
+	        	 cliente = new Cliente(resultado.getInt("idCliente"),resultado.getString("nombre"), 
+	                    resultado.getString("direccion"),resultado.getString("rol"),resultado.getString("usuario"),resultado.getString("Contasenya"));
+	         }
+	      }catch(SQLException ex){
+	         throw new SQLException(ex);
+	      }
+	      return cliente;
+	   }
+	 
+	
 	 
 	 public void remove(Connection conexion, Cliente cliente) throws SQLException{
 	      try{

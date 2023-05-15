@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import Service.ClientService;
 import Service.Conexion;
 import models.Cliente;
+import models.Fabricante;
 
 public class ListViewClientes extends JFrame{
 	private JPanel contentPane;
@@ -75,6 +76,28 @@ public class ListViewClientes extends JFrame{
 			
 			if(b.equals(ActivarB)) {
 				if(c.getActivar() == 1){
+					String nombre = c.getNombreUsuario();
+					try {
+						Cliente datos = services.getClienteId(Conexion.obtener(),1);
+						String nom = "Hola";
+						String dir = datos.getDireccion();
+						String rol = datos.getRol();
+						String user = datos.getNombreUsuario();
+						String cont = datos.getContrasena();
+						Integer id =datos.getIdClientes();
+						
+						c = new Cliente(nom,dir,rol,user,cont);
+						System.out.println(id);
+						Cliente cli = Clientes.get(filaS);
+						System.out.println("El id es"+cli.getIdClientes());
+						cli.setActivar(0);
+						
+						services.save(Conexion.obtener(), cli);
+						
+					} catch (ClassNotFoundException | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					c.setActivar(0);
 					System.out.println(c.getActivar());
 				
@@ -91,6 +114,7 @@ public class ListViewClientes extends JFrame{
 		
 		
 	}
+
 	
 	private void showCliente() {
 		try {

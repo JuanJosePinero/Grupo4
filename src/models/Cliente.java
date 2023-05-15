@@ -67,6 +67,21 @@ public class Cliente {
 		activar = 1;
 	}
 	
+	
+	
+	
+
+	public Cliente(Integer idClientes, String nombre, String direccion, String rol, String nombreUsuario,
+			String contrasena) {
+		super();
+		this.idClientes = idClientes;
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.rol = rol;
+		this.nombreUsuario = nombreUsuario;
+		this.contrasena = contrasena;
+		activar = 1;
+	}
 
 	public Cliente() {
 		super();

@@ -130,6 +130,7 @@ public class Login extends JFrame {
 			try {
 				Cliente datos = services.getCliente(Conexion.obtener(),UsuarioT.getText());
 				if(datos!=null) {
+					
 					int activar = datos.getActivar();
 					
 					String userB = datos.getNombreUsuario();
