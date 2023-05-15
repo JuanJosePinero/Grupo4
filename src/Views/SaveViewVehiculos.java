@@ -44,6 +44,7 @@ public class SaveViewVehiculos extends JFrame {
 		txtAnyo.setText(String.valueOf(this.vehiculo.getAnyo()));
 		txtColor.setText(this.vehiculo.getColor());
 		txtPrecio.setText(String.valueOf(this.vehiculo.getPrecio()));
+		
 	}
 	public SaveViewVehiculos() {
 		this.vehiculo=new Vehiculo();
@@ -137,6 +138,19 @@ public class SaveViewVehiculos extends JFrame {
 		contentPane.add(btnImagen);
 		
 	}
+	
+	private void seleccionarImagen() {
+        JFileChooser fileChooser = new JFileChooser();
+        int resultado = fileChooser.showOpenDialog(this);
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+            File archivo = fileChooser.getSelectedFile();
+            String rutaImagen = archivo.getAbsolutePath();
+            ImageIcon imagenIcon = new ImageIcon(rutaImagen);
+            Image imagen = imagenIcon.getImage().getScaledInstance(btnImagen.getWidth(), btnImagen.getHeight(), Image.SCALE_SMOOTH);
+            imagenIcon.setImage(imagen);
+            btnImagen.setIcon(imagenIcon);
+        }
+    }
 	
 	private class ManejadorJButton implements ActionListener {
 
