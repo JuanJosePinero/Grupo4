@@ -27,6 +27,7 @@ public class Login extends JFrame {
 	private JButton btnIniciarSesion,btnCrearUsuario;
 	private JPasswordField ContraseñaP;
 	private final ClientService services = new ClientService();
+	public static int idClienteLogin;
 
 	/**
 	 * Launch the application.
@@ -119,6 +120,7 @@ public class Login extends JFrame {
 		
 	}
 	
+	
 	private class manejadorAction implements ActionListener{
 
 		@Override
@@ -139,9 +141,12 @@ public class Login extends JFrame {
 					char[] contrasenaC = ContraseñaP.getPassword();
 					String cont = new String(contrasenaC);
 					
+					idClienteLogin = datos.getIdClientes();					
+					
 					if(userB.equals(user) && contB.equals(cont)) {
 						if(datos.getRol().equals("Administrador")) {
 							ControlAdmin ca = new ControlAdmin();
+							ca.setVisible(true);
 							dispose();
 						}
 						else if(datos.getRol().equals("Cliente")) {
@@ -155,6 +160,8 @@ public class Login extends JFrame {
 								JOptionPane.showMessageDialog(Login.this, datos.getNombre()+" ha sido baneado por peruano");
 						}else if(datos.getRol().equals("Fabricante")) {
 							VisualizarVehiculos vv = new VisualizarVehiculos();
+							vv.setVisible(true);
+							dispose();
 						}
 					}
 					else

@@ -3,6 +3,7 @@ package Views;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -12,9 +13,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
 import Service.Conexion;
 import Service.VehiculoService;
+import models.Cliente;
 import models.Vehiculo;
+import models.Venta;
 
 public class ComprarVehiculo extends JFrame {
 
@@ -22,9 +26,13 @@ public class ComprarVehiculo extends JFrame {
 	private JTextField txtModelo, txtMarca, txtAnyo, txtColor, txtPrecio, txtIdFabricante;
 	private final VehiculoService services = new VehiculoService();
 	private final Vehiculo vehiculo;
+	private final Venta venta;
+	private final Cliente cliente;
+//	private final Login login;
 	private JButton btnComprar, btnCancelar;
 	private JLabel lblImagen;
 	private String ruta;
+	private JLabel lblFechaHora;
 
 	/**
 	 * Create the frame.
@@ -40,10 +48,14 @@ public class ComprarVehiculo extends JFrame {
 		txtPrecio.setText(String.valueOf(this.vehiculo.getPrecio()));
 		txtIdFabricante.setText(String.valueOf(this.vehiculo.getIdFabricante()));
 		ruta = this.vehiculo.getRuta();
+		this.venta = new Venta();
+		this.cliente = new Cliente();
 		
 	}
 	public ComprarVehiculo() {
 		this.vehiculo=new Vehiculo();
+		this.venta = new Venta();
+		this.cliente = new Cliente();
 		initComponents();
 	}
 	
@@ -51,7 +63,7 @@ public class ComprarVehiculo extends JFrame {
 		setTitle("Coche seleccionado Para la Compra");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 130, 380, 430);
+		setBounds(150, 240, 402, 480);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -120,12 +132,12 @@ public class ComprarVehiculo extends JFrame {
 		ManejadorJButton manejador = new ManejadorJButton();
 		
 		btnComprar = new JButton("Comprar");
-		btnComprar.setBounds(46, 354, 117, 29);
+		btnComprar.setBounds(48, 404, 117, 29);
 		btnComprar.addActionListener(manejador);
 		contentPane.add(btnComprar);
 		
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(203, 354, 117, 29);
+		btnCancelar.setBounds(240, 404, 117, 29);
 		btnCancelar.addActionListener(manejador);
 		contentPane.add(btnCancelar);
 		
@@ -141,6 +153,13 @@ public class ComprarVehiculo extends JFrame {
 	    ImageIcon imagen = new ImageIcon(ruta); 
 	    imagenLabel.setIcon(imagen);
 	    panel.add(imagenLabel);
+	    
+	    lblFechaHora = new JLabel("Fecha y Hora:");
+	    lblFechaHora.setBounds(30, 354, 80, 16);
+	    contentPane.add(lblFechaHora);
+	    
+	    
+	   
 		
 	}
 	
@@ -151,22 +170,21 @@ public class ComprarVehiculo extends JFrame {
 			Object o = e.getSource();
 			
 			if(o == btnComprar) {
-				String modelo = txtModelo.getText();
-				String marca = txtMarca.getText();
-				int anyo = Integer.parseInt(txtAnyo.getText());
-				String color = txtColor.getText();
-				float precio = Float.parseFloat(txtPrecio.getText());
-				int idFabricante = Integer.parseInt(txtIdFabricante.getText());
-				String ruta = "";
 				
-				vehiculo.setModelo(modelo);
-				vehiculo.setMarca(marca);
-				vehiculo.setAnyo(anyo);
-				vehiculo.setColor(color);
-				vehiculo.setPrecio(precio);
-				vehiculo.setIdFabricante(idFabricante);
-				vehiculo.setRuta(ruta);
+//				int idVenta = venta.getIdVenta();
+				int idVehiculo = vehiculo.getIdVehiculos();
+//				int idCliente = login.idClienteLogin;
+				LocalDate fechaHora = venta.getFechaHora().now();				
 				
+//				venta.setIdVenta(idVenta);
+				venta.setIdVehiculo(idVehiculo);
+//				venta.setIdCliente(idCliente);
+				venta.setFechaHora(fechaHora);
+				
+				System.out.println(venta.getIdVenta());
+				System.out.println(venta.getIdVehiculo());
+				System.out.println(venta.getIdCliente());
+				System.out.println(venta.getFechaHora());
 				
 				try {
 					services.save(Conexion.obtener(), vehiculo);
