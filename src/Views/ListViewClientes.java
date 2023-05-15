@@ -121,11 +121,11 @@ public class ListViewClientes extends JFrame{
 			this.Clientes = this.services.getAllCliente(Conexion.obtener());
 			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-			}, new String[] {"Nombre", "Direccion","Rol","Usuario","Contasenya" }));
+			}, new String[] {"id","Nombre", "Direccion","Rol","Usuario","Contasenya" }));
 			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 			dtm.setRowCount(0);
 			for (int i = 0; i < this.Clientes.size(); i++) {
-				dtm.addRow(new Object[] {this.Clientes.get(i).getNombre(),
+				dtm.addRow(new Object[] {this.Clientes.get(i).getIdClientes(),this.Clientes.get(i).getNombre(),
 						this.Clientes.get(i).getDireccion(),this.Clientes.get(i).getRol(),
 						this.Clientes.get(i).getNombreUsuario(),this.Clientes.get(i).getContrasena()});
 			}
