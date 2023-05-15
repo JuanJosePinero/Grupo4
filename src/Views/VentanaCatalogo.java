@@ -35,7 +35,7 @@ public class VentanaCatalogo extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnComprar, btnAlquilar, btnVerCompras, btnSalir;
-	private JTextArea textArea;
+	private JTextArea textAreaComentarios;
 	private JScrollPane scrollPane;
 	private JLabel lblCoche;
 	private List<String> listaComentarios = new ArrayList<>();
@@ -111,12 +111,12 @@ public class VentanaCatalogo extends JFrame {
 	    lblCoche.setBounds(300, 16, 334, 32);
 	    contentPane.add(lblCoche);
 	     
-	    JLabel lblComentarios = new JLabel("-----Comentarios y Valoraciones sobre nuestros coches y nuestras Ventas-----");
-	    lblComentarios.setBounds(49, 340, 560, 19);
+	    JLabel lblComentarios = new JLabel("Comentarios sobre nuestros coches y nuestras Ventas");
+	    lblComentarios.setBounds(49, 340, 376, 22);
 	    contentPane.add(lblComentarios);
 	     
 	    scrollPane = new JScrollPane();
-	    scrollPane.setBounds(49, 369, 758, 108);
+	    scrollPane.setBounds(49, 369, 376, 109);
 	    contentPane.add(scrollPane);
 	     
 	    listaComentarios.add("Comentario 1");
@@ -124,9 +124,9 @@ public class VentanaCatalogo extends JFrame {
 	    listaComentarios.add("Comentario 3");
 	    listaComentarios.add("Comentario 4");
 	    
-	    textArea = new JTextArea();
-	    textArea.setEditable(false);
-	    scrollPane.setViewportView(textArea);
+	    textAreaComentarios = new JTextArea();
+	    textAreaComentarios.setEditable(false);
+	    scrollPane.setViewportView(textAreaComentarios);
 	    String[] filtros= {"--","Marca","Modelo","Anyo","Color","Precio","idFabricante"};
 	    
 	    filtro = new JComboBox(filtros);
@@ -143,7 +143,7 @@ public class VentanaCatalogo extends JFrame {
 	    String nombre = "";
 	    for (String s : listaComentarios) {
 	    	nombre += s+"\n";
-	    	textArea.setText(nombre);
+	    	textAreaComentarios.setText(nombre);
 	    	 
 			}
 	    
@@ -165,6 +165,18 @@ public class VentanaCatalogo extends JFrame {
 		btnSalir.setBounds(795, 19, 50, 50);
 		btnSalir.addActionListener(manejador);
 		contentPane.add(btnSalir);
+		
+		JLabel lblValoraciones = new JLabel("Valoraciones sobre nuestros coches y nuestras Ventas");
+		lblValoraciones.setBounds(486, 340, 376, 22);
+		contentPane.add(lblValoraciones);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(486, 375, 370, 107);
+		contentPane.add(scrollPane_1);
+		
+		JTextArea textAreaValoraciones = new JTextArea();
+		scrollPane_1.setViewportView(textAreaValoraciones);
+		textAreaValoraciones.setEditable(false);
 		
 			
 		}
