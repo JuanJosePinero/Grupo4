@@ -37,6 +37,7 @@ public class CreacionUsuario extends JFrame {
 	private JTextField txtModerado;
 	private JButton ConfrimarB,CancelarB;
 	private final ClientService services = new ClientService();
+	private 	List<Cliente> user;
 
 
 	
@@ -177,9 +178,6 @@ public class CreacionUsuario extends JFrame {
 				Login l= new Login();
 				dispose();
 		}else if(b.equals(ConfrimarB)) {
-			
-			
-			
 			String nombre = NombreT.getText() ;
 			String apellido =ApellidoT.getText();
 			String nombreC = nombre +" "+ apellido;
@@ -190,27 +188,35 @@ public class CreacionUsuario extends JFrame {
 			String contrasenya = new String (contra);
 			char[] ccontra = CContraseñaP.getPassword();
 			String ccontrasenya = new String (ccontra);
+			
+			
 		
-			
-			if(NombreT.getText().isEmpty() || ApellidoT.getText().isEmpty() || DireccionT.getText().isEmpty() || UsuarioT.getText().isEmpty())
-				JOptionPane.showMessageDialog(CreacionUsuario.this, "Formulario erroneo");
-			
-			else if(!contrasenya.matches("[A-Z].*[0-9].*")) 
-				JOptionPane.showMessageDialog(CreacionUsuario.this, "La contraseña debe empezar por Mayuscula y contener un numero");
-			else if( !contrasenya.equals(ccontrasenya))
-				JOptionPane.showMessageDialog(CreacionUsuario.this, "Las contraseñas no coinciden");
-			else {
-			Cliente c =new Cliente(nombreC,direccion,rol,usuario,contrasenya);
-				try {
-					services.save(Conexion.obtener(), c);
-					JOptionPane.showMessageDialog(CreacionUsuario.this, "Usuario creado");
-					Login l = new Login();
-					dispose();
-				} catch (ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if(NombreT.getText().isEmpty() || ApellidoT.getText().isEmpty() || DireccionT.getText().isEmpty() || UsuarioT.getText().isEmpty())
+					JOptionPane.showMessageDialog(CreacionUsuario.this, "Formulario erroneo");
+				if(!comprabarCliente()) {
+					JOptionPane.showMessageDialog(CreacionUsuario.this, "El usuario ya existe");
 				}
-			}
+				else if(!contrasenya.matches("[A-Z].*[0-9].*")) 
+					JOptionPane.showMessageDialog(CreacionUsuario.this, "La contraseña debe empezar por Mayuscula y contener un numero");
+				else if( !contrasenya.equals(ccontrasenya))
+					JOptionPane.showMessageDialog(CreacionUsuario.this, "Las contraseñas no coinciden");
+				else {
+				Cliente c =new Cliente(nombreC,direccion,rol,usuario,contrasenya);
+					
+						try {
+							services.save(Conexion.obtener(), c);
+						} catch (ClassNotFoundException | SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						JOptionPane.showMessageDialog(CreacionUsuario.this, "Usuario creado");
+						Login l = new Login();
+					
+				}
+				
+			
+				
+			
 			
 			
 			
@@ -262,5 +268,26 @@ public class CreacionUsuario extends JFrame {
 			JOptionPane.showMessageDialog(CreacionUsuario.this, "Las contraseñas no coinciden",contS, JOptionPane.ERROR_MESSAGE, null);
 			
 		
+	}
+	
+	public boolean comprabarCliente() {
+	
+		
+			try {
+				user = services.getAllCliente(Conexion.obtener());
+				String usuario = UsuarioT.getText();
+				for (Cliente c : user) {
+					if(c.getNombreUsuario().equals(usuario)) {
+						return false;
+					}
+					
+				}
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		
+		return true;
 	}
 }

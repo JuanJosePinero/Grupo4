@@ -141,12 +141,15 @@ public class Login extends JFrame {
 					
 					if(userB.equals(user) && contB.equals(cont)) {
 						if(user.equals("Admin") && cont.equals("Admin")) {
-							ListViewClientes lvc = new ListViewClientes();
+							ControlAdmin ca = new ControlAdmin();
 							dispose();
 						}
 						else
 							if(activar == 1) {
 								System.out.println("Hola");
+								VentanaCatalogo vc = new VentanaCatalogo();
+								vc.setVisible(true);
+								dispose();
 								
 							}else
 								JOptionPane.showMessageDialog(Login.this, datos.getNombre()+" ha sido baneado por peruano");

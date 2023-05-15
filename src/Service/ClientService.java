@@ -89,7 +89,7 @@ public class ClientService {
 	 public List<Cliente> getAllCliente(Connection conexion) throws SQLException{
 	      List<Cliente> cliente = new ArrayList<>();
 	      try{
-	         PreparedStatement consulta = conexion.prepareStatement("SELECT nombre,direccion ,rol,usuario,contasenya,Activar"
+	         PreparedStatement consulta = conexion.prepareStatement("SELECT idCliente,nombre,direccion ,rol,usuario,contasenya,Activar"
 	                 + " FROM " + this.tabla);
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){

@@ -55,7 +55,7 @@ public class ListViewClientes extends JFrame{
 		contentPane.add(ActivarB);
 		
 		BajaB = new JButton("Dar de baja");
-		BajaB.setBounds(190, 12, 97, 23);
+		BajaB.setBounds(180, 12, 124, 23);
 		contentPane.add(BajaB);
 		
 		setVisible(true);

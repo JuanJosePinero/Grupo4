@@ -8,7 +8,7 @@ public class Cliente {
     private String rol;
     private String nombreUsuario,contrasena;
 	public int activar;
-	
+
 	public Integer getIdClientes() {
 		return idClientes;
 	}
@@ -59,6 +59,7 @@ public class Cliente {
 	public Cliente(String nombre, String direccion, String rol, String nombreUsuario,
 			String contrasena) {
 		super();
+		this.idClientes = idClientes;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.rol = rol;
