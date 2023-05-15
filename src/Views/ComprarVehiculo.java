@@ -2,6 +2,7 @@ package Views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
@@ -174,7 +175,7 @@ public class ComprarVehiculo extends JFrame {
 //				int idVenta = venta.getIdVenta();
 				int idVehiculo = vehiculo.getIdVehiculos();
 //				int idCliente = login.idClienteLogin;
-				LocalDate fechaHora = venta.getFechaHora().now();				
+				Date fechaHora = venta.getFechaHora();				
 				
 //				venta.setIdVenta(idVenta);
 				venta.setIdVehiculo(idVehiculo);

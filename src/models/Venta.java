@@ -1,17 +1,17 @@
 package models;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Venta {
 	
 	private Integer idVenta,idCliente,idVehiculo;
-	private LocalDate fechaHora;
+	private Date fechaHora;
 	
 	public Venta() {
 		super();
 	}
 
-	public Venta(Integer idVenta, Integer idCliente, Integer idVehiculo, LocalDate fechaHora) {
+	public Venta(Integer idVenta, Integer idCliente, Integer idVehiculo, Date fechaHora) {
 		super();
 		this.idVenta = idVenta;
 		this.idCliente = idCliente;
@@ -43,11 +43,11 @@ public class Venta {
 		this.idVehiculo = idVehiculo;
 	}
 
-	public LocalDate getFechaHora() {
+	public Date getFechaHora() {
 		return fechaHora;
 	}
 
-	public void setFechaHora(LocalDate fechaHora) {
+	public void setFechaHora(Date fechaHora) {
 		this.fechaHora = fechaHora;
 	}
 

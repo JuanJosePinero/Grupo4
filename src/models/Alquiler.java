@@ -4,27 +4,28 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Alquiler {
-	private Integer idVenta,idCliente,idVehiculo;
-	private LocalDate fechaInic,fechFin;
+	private Integer idAlquiler,idCliente,idVehiculo;
+	private Date fechaInic,fechFin;
 	
 	public Alquiler() {
 		super();
 	}
 
-	public Alquiler(Integer idVenta, Integer idCliente, Integer idVehiculo, LocalDate fechaInic) {
+	public Alquiler(Integer idVenta, Integer idCliente, Integer idVehiculo, Date fechaInic, Date fechaFin) {
 		super();
-		this.idVenta = idVenta;
+		this.idAlquiler = idVenta;
 		this.idCliente = idCliente;
 		this.idVehiculo = idVehiculo;
 		this.fechaInic = fechaInic;
+		this.fechFin = fechaFin;
 	}
 
-	public Integer getIdVenta() {
-		return idVenta;
+	public Integer getIdAlquiler() {
+		return idAlquiler;
 	}
 
-	public void setIdVenta(Integer idVenta) {
-		this.idVenta = idVenta;
+	public void setIdAlquiler(Integer idVenta) {
+		this.idAlquiler = idVenta;
 	}
 
 	public Integer getIdCliente() {
@@ -43,25 +44,25 @@ public class Alquiler {
 		this.idVehiculo = idVehiculo;
 	}
 
-	public LocalDate getFechaInic() {
+	public Date getFechaInic() {
 		return fechaInic;
 	}
 
-	public void setFechaInic(LocalDate fechaInic) {
+	public void setFechaInic(Date fechaInic) {
 		this.fechaInic = fechaInic;
 	}
 
-	public LocalDate getFechFin() {
+	public Date getFechFin() {
 		return fechFin;
 	}
 
-	public void setFechFin(LocalDate fechFin) {
+	public void setFechFin(Date fechFin) {
 		this.fechFin = fechFin;
 	}
 
 	@Override
 	public String toString() {
-		return "Alquiler [idVenta=" + idVenta + ", idCliente=" + idCliente + ", idVehiculo=" + idVehiculo
+		return "Alquiler [idVenta=" + idAlquiler + ", idCliente=" + idCliente + ", idVehiculo=" + idVehiculo
 				+ ", fechaInic=" + fechaInic + ", fechFin=" + fechFin + "]";
 	}
 	
