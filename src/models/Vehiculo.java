@@ -9,10 +9,26 @@ public class Vehiculo {
 	private String color;
 	private float precio;
 	private Integer idFabricante;
+	private String ruta;
 	
 	public Vehiculo() {
 		super();
 	}
+
+	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
+			Integer idFabricante, String ruta) {
+		super();
+		this.idVehiculos = idVehiculos;
+		this.modelo = modelo;
+		this.marca = marca;
+		this.anyo = anyo;
+		this.color = color;
+		this.precio = precio;
+		this.idFabricante = idFabricante;
+		this.ruta = ruta;
+	}
+
+
 
 	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
 			Integer idFabricante) {
@@ -25,7 +41,14 @@ public class Vehiculo {
 		this.precio = precio;
 		this.idFabricante = idFabricante;
 	}
+	
+	public String getRuta() {
+		return ruta;
+	}
 
+	public void setRuta(String ruta) {
+		this.ruta = ruta;
+	}
 
 	public Integer getIdVehiculos() {
 		return idVehiculos;
@@ -86,7 +109,7 @@ public class Vehiculo {
 	@Override
 	public String toString() {
 		return "Vehiculo [idVehiculos=" + idVehiculos + ", modelo=" + modelo + ", marca=" + marca + ", anyo=" + anyo
-				+ ", color=" + color + ", precio=" + precio + ", idFabricante=" + idFabricante + "]";
+				+ ", color=" + color + ", precio=" + precio + ", idFabricante=" + idFabricante + ", ruta=" + ruta + "]";
 	}
 	
 }
