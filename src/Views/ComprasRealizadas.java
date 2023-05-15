@@ -1,18 +1,20 @@
 package Views;
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JButton;
 
 public class ComprasRealizadas extends JFrame {
 
 	private JPanel contentPane;
-
+	private JButton btnVerAlquileres,btnVerCompras;
 	/**
 	 * Launch the application.
 	 */
@@ -48,13 +50,21 @@ public class ComprasRealizadas extends JFrame {
 		lblLabel1.setBounds(83, 10, 321, 21);
 		contentPane.add(lblLabel1);
 		
-		JButton btnVerAlquileres = new JButton("Ver Alquileres");
+		
+		
+		btnVerAlquileres = new JButton("Ver Alquileres");
 		btnVerAlquileres.setBounds(36, 68, 120, 27);
 		contentPane.add(btnVerAlquileres);
 		
-		JButton btnVerCompras = new JButton("Ver Compras");
+		
+		btnVerCompras = new JButton("Ver Compras");
 		btnVerCompras.setBounds(257, 71, 120, 27);
 		contentPane.add(btnVerCompras);
+	
+		
+	
 	}
+	
+	
 
 }
