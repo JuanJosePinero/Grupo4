@@ -34,18 +34,15 @@ import models.Vehiculo;
 public class VentanaCatalogo extends JFrame {
 
 	private JPanel contentPane;
-	private JButton btnComprar, btnAlquilar, btnSiguiente, btnMostrar;
+	private JButton btnComprar, btnAlquilar, btnVerCompras, btnSalir;
 	private JTextArea textArea;
 	private JScrollPane scrollPane;
 	private JLabel lblCoche;
-	private List<Vehiculo> listaVehiculos = new ArrayList<>();
 	private List<String> listaComentarios = new ArrayList<>();
 	private final String tabla = "vehiculo";
 	private final VehiculoService services = new VehiculoService();
 	private List<Vehiculo> vehiculo;
-	private JButton btnVerCompras;
 	private JTable jtableP;
-	private int contador=0;
 	private JComboBox filtro;
 	private DefaultTableModel dtm;
 	
@@ -100,14 +97,8 @@ public class VentanaCatalogo extends JFrame {
 		btnVerCompras.addActionListener(manejador);
 		contentPane.add(btnVerCompras);
 		
-		btnMostrar = new JButton("Mostrar Vehiculos");
-		btnMostrar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
-		btnMostrar.setBounds(663, 123, 143, 31);
-		btnMostrar.addActionListener(manejador);
-		contentPane.add(btnMostrar);
-		
 		JPanel panel = new JPanel();
-		panel.setBounds(272, 42, 338, 220);
+		panel.setBounds(486, 79, 370, 251);
 		contentPane.add(panel);
 		
 		JLabel imagenLabel = new JLabel();
@@ -115,22 +106,17 @@ public class VentanaCatalogo extends JFrame {
 	    imagenLabel.setIcon(imagen);
 	    panel.add(imagenLabel);
 	     
-	    btnSiguiente = new JButton("->");
-	    btnSiguiente.setFont(new Font("Snap ITC", Font.PLAIN, 10));
-	    btnSiguiente.setBounds(831, 240, 45, 48);
-	    contentPane.add(btnSiguiente);
-	     
-	    lblCoche = new JLabel("COCHE");
-	    lblCoche.setFont(new Font("Arial Black", Font.BOLD, 10));
-	    lblCoche.setBounds(392, 10, 96, 22);
+	    lblCoche = new JLabel("Catalogo de Coches Disponibles");
+	    lblCoche.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 16));
+	    lblCoche.setBounds(300, 16, 334, 32);
 	    contentPane.add(lblCoche);
 	     
 	    JLabel lblComentarios = new JLabel("-----Comentarios y Valoraciones sobre nuestros coches y nuestras Ventas-----");
-	    lblComentarios.setBounds(93, 383, 560, 19);
+	    lblComentarios.setBounds(49, 340, 560, 19);
 	    contentPane.add(lblComentarios);
 	     
 	    scrollPane = new JScrollPane();
-	    scrollPane.setBounds(103, 412, 695, 65);
+	    scrollPane.setBounds(49, 369, 758, 108);
 	    contentPane.add(scrollPane);
 	     
 	    listaComentarios.add("Comentario 1");
@@ -144,13 +130,13 @@ public class VentanaCatalogo extends JFrame {
 	    String[] filtros= {"--","Marca","Modelo","Anyo","Color","Precio","idFabricante"};
 	    
 	    filtro = new JComboBox(filtros);
-	    filtro.setBounds(31, 42, 124, 22);
+	    filtro.setBounds(49, 43, 124, 22);
 	    contentPane.add(filtro);
 	    manejadorcombo mancombo=new manejadorcombo();
 	    filtro.addItemListener(mancombo);
 	    
 	    JLabel lblFiltrosBusqueda = new JLabel("Filtros de Busqueda");
-	    lblFiltrosBusqueda.setBounds(31, 23, 135, 19);
+	    lblFiltrosBusqueda.setBounds(49, 23, 135, 19);
 	    contentPane.add(lblFiltrosBusqueda);
 	    
 	   
@@ -162,7 +148,7 @@ public class VentanaCatalogo extends JFrame {
 			}
 	    
 	    JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(282, 272, 338, 102);
+		scrollPane.setBounds(49, 91, 376, 174);
 		contentPane.add(scrollPane);
 		
 		dtm = new DefaultTableModel(new Object[][] {}, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" });
@@ -173,6 +159,12 @@ public class VentanaCatalogo extends JFrame {
 		    }
 		};
 		scrollPane.setViewportView(jtableP);
+		
+		btnSalir = new JButton("");
+		btnSalir.setIcon(new ImageIcon("images/salir.png"));
+		btnSalir.setBounds(795, 19, 50, 50);
+		btnSalir.addActionListener(manejador);
+		contentPane.add(btnSalir);
 		
 			
 		}
@@ -202,28 +194,41 @@ public class VentanaCatalogo extends JFrame {
 			Object o = e.getSource();
 			
 			if(o == btnComprar) {
-				JOptionPane.showMessageDialog(null, "Seguro quieres comprar este coche?");
-				
+				JOptionPane.showMessageDialog(null, "Seguro quieres comprar este coche?", "Aviso", JOptionPane.QUESTION_MESSAGE);
+				int fila_seleccionada = jtableP.getSelectedRow();
+				if (fila_seleccionada >= 0) {
+					VentanaCatalogo.this.dispose();
+					ComprarVehiculo cv = new ComprarVehiculo(vehiculo.get(fila_seleccionada));
+					cv.setVisible(true);
+					cv.setLocationRelativeTo(null);
+				} else {
+					JOptionPane.showMessageDialog(VentanaCatalogo.this, "Por favor seleccione una fila.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+				}
+						
 				
 			}else if(o == btnAlquilar) {
-				JOptionPane.showMessageDialog(null, "Seguro quieres alquilar este coche?");
+				JOptionPane.showMessageDialog(null, "Seguro quieres alquilar este coche?", "Aviso", JOptionPane.QUESTION_MESSAGE);
 				
+				int fila_seleccionada = jtableP.getSelectedRow();
+				if (fila_seleccionada >= 0) {
+					VentanaCatalogo.this.dispose();
+					AlquilerVehiculo av = new AlquilerVehiculo(vehiculo.get(fila_seleccionada));
+					av.setVisible(true);
+					av.setLocationRelativeTo(null);
+				} else {
+					JOptionPane.showMessageDialog(VentanaCatalogo.this, "Por favor seleccione una fila.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+				}
 				
-			}else if(o == btnSiguiente) {
-				
-			}else if(o == btnMostrar) {
-
-//				textModelo.setText(modelo);
-//				vehiculo.setModelo(modelo);
-//				vehiculo.setMarca(marca);
-//				vehiculo.setAnyo(anyo);
-//				vehiculo.setColor(color);
-//				vehiculo.setPrecio(precioSinIVA);
-//				vehiculo.setPrecio(precioConIVA);
 			}else if(o == btnVerCompras) {
 				ComprasRealizadas cr = new ComprasRealizadas();
 				cr.setVisible(true);
 				dispose();
+			}else if(o == btnSalir) {
+				JOptionPane.showMessageDialog(null, "Cerrando Sesion...", "Cerrar", JOptionPane.ERROR_MESSAGE);
+				dispose();
+				Login l = new Login();
+				l.setVisible(true);
+				l.setLocationRelativeTo(null);
 			}
 			
 		}	
