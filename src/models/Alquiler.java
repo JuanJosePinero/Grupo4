@@ -1,16 +1,17 @@
 package models;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Alquiler {
 	private Integer idVenta,idCliente,idVehiculo;
-	private Date fechaInic,fechFin;
+	private LocalDate fechaInic,fechFin;
 	
 	public Alquiler() {
 		super();
 	}
 
-	public Alquiler(Integer idVenta, Integer idCliente, Integer idVehiculo, Date fechaInic) {
+	public Alquiler(Integer idVenta, Integer idCliente, Integer idVehiculo, LocalDate fechaInic) {
 		super();
 		this.idVenta = idVenta;
 		this.idCliente = idCliente;
@@ -42,19 +43,19 @@ public class Alquiler {
 		this.idVehiculo = idVehiculo;
 	}
 
-	public Date getFechaInic() {
+	public LocalDate getFechaInic() {
 		return fechaInic;
 	}
 
-	public void setFechaInic(Date fechaInic) {
+	public void setFechaInic(LocalDate fechaInic) {
 		this.fechaInic = fechaInic;
 	}
 
-	public Date getFechFin() {
+	public LocalDate getFechFin() {
 		return fechFin;
 	}
 
-	public void setFechFin(Date fechFin) {
+	public void setFechFin(LocalDate fechFin) {
 		this.fechFin = fechFin;
 	}
 
