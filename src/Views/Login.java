@@ -28,7 +28,7 @@ public class Login extends JFrame {
 	private JButton btnIniciarSesion,btnCrearUsuario;
 	private JPasswordField ContraseñaP;
 	private final ClientService services = new ClientService();
-	public static int idClienteLogin;
+	public static Integer idClienteLogin;
 
 	/**
 	 * Launch the application.
@@ -155,6 +155,7 @@ public class Login extends JFrame {
 							System.out.println(activar);
 							if(activar == 1) {
 								System.out.println(datos.activar);
+								setidClienteLogin(datos.getIdClientes());
 								VentanaCatalogo vc = new VentanaCatalogo();
 								vc.setVisible(true);
 								dispose();
@@ -189,6 +190,11 @@ public class Login extends JFrame {
 		}
 		
 	}
-	
+	public static void setidClienteLogin(Integer id) {
+		idClienteLogin=id;
+	}
+	public static Integer getidClienteLogin() {
+		return idClienteLogin;
+	}
 	
 }

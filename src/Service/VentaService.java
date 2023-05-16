@@ -35,11 +35,29 @@ public class VentaService {
 	      }
 	   }
 	   
-	   public Venta getVenta(Connection conexion) throws SQLException {
+	   public Venta getVenta(Connection conexion, Integer idVenta) throws SQLException {
 		   Venta venta = null;
 	      try{
 	         PreparedStatement consulta = conexion.prepareStatement("SELECT idVenta,idCliente,idVehiculo,fechaHora "
 	                 + " FROM " + this.tabla + " WHERE idVenta = ?" );
+	         consulta.setInt(1, idVenta);
+	         ResultSet resultado = consulta.executeQuery();
+	         while(resultado.next()){
+	        	 venta = new Venta(resultado.getInt("idVenta"), resultado.getInt("idCliente"), 
+	            		resultado.getInt("idVehiculo"), resultado.getDate("fechaHora"));
+	         }
+	      }catch(SQLException ex){
+	         throw new SQLException(ex);
+	      }
+	      return venta;
+	   }
+	   public Venta getVentaid(Connection conexion, Integer idCliente,Integer idVehiculo) throws SQLException {
+		   Venta venta = null;
+	      try{
+	         PreparedStatement consulta = conexion.prepareStatement("SELECT idVenta,idCliente,idVehiculo,fechaHora "
+	                 + " FROM " + this.tabla + " WHERE idCliente = ? AND idVehiculo = ?" );
+	         consulta.setInt(1, idCliente);
+	         consulta.setInt(2, idVehiculo);
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
 	        	 venta = new Venta(resultado.getInt("idVenta"), resultado.getInt("idCliente"), 
