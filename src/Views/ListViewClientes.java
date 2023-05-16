@@ -24,7 +24,7 @@ public class ListViewClientes extends JFrame{
 	private JTable jtableP;
 	private final ClientService services = new ClientService();
 	private List<Cliente> Clientes;
-	private JButton ActivarB,BajaB,btnVolver;
+	private JButton ActivarB,CambiarB,btnVolver;
 
 	public ListViewClientes() {
 		setTitle("Clientes");
@@ -60,13 +60,14 @@ public class ListViewClientes extends JFrame{
 		ActivarB.setBounds(26, 12, 144, 23);
 		contentPane.add(ActivarB);
 		
-		BajaB = new JButton("Dar de baja");
-		BajaB.setBounds(180, 12, 124, 23);
-		contentPane.add(BajaB);
+		CambiarB = new JButton("Restablecer Contraseña");
+		CambiarB.setBounds(180, 12, 195, 23);
+		contentPane.add(CambiarB);
 		
 		setVisible(true);
 		ManejadorActionB mab= new ManejadorActionB();
 		ActivarB.addActionListener(mab);
+		CambiarB.addActionListener(mab);
 
 		
 	}
@@ -112,7 +113,34 @@ public class ListViewClientes extends JFrame{
 		
 				
 				}
-				else {
+				else if (b.equals(CambiarB)){
+					String nombre = c.getNombreUsuario();
+					try {
+						Cliente datos = services.getCliente(Conexion.obtener(),nombre);
+						String nom = "Prueba";
+						String dir = datos.getDireccion();
+						String rol = datos.getRol();
+						String user = datos.getNombreUsuario();
+						String cont = datos.getContrasena();
+						Integer id =datos.getIdClientes();
+						int act = 1; 
+				
+						datos.setIdClientes(id);
+						datos.setNombre(nom);
+						datos.setDireccion(dir);
+						datos.setRol(rol);
+						datos.setNombreUsuario(user);
+						datos.setContrasena(cont);
+						datos.setActivar(act);
+						
+						
+						services.save(Conexion.obtener(), datos);
+						
+					} catch (ClassNotFoundException | SQLException e1) {
+					
+						e1.printStackTrace();
+					}
+					
 			
 				}
 			}
