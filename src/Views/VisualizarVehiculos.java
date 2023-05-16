@@ -36,9 +36,6 @@ public class VisualizarVehiculos extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-	
-	
 	
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -53,11 +50,14 @@ public class VisualizarVehiculos extends JFrame {
 		VolverB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login l = new Login();
+				dispose();
 			}
 		});
 		VolverB.setBounds(10, 238, 424, 23);
 		contentPane.add(VolverB);
 		setVisible(true);
+		
+		
 	}
 	
 	public void showVehiculos() {
