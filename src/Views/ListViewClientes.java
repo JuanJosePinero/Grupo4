@@ -25,6 +25,7 @@ public class ListViewClientes extends JFrame {
 	private final ClientService services = new ClientService();
 	private List<Cliente> Clientes;
 	private JButton ActivarB, CambiarB, btnVolver;
+	private static Integer idCliente;
 
 	public ListViewClientes() {
 		setTitle("Clientes");
@@ -147,36 +148,19 @@ public class ListViewClientes extends JFrame {
 					
 				}
 			} else if (b.equals(CambiarB)) {
-			/*	String nombre = c.getNombreUsuario();
+				String nombre = c.getNombreUsuario();
 				try {
 					Cliente datos = services.getCliente(Conexion.obtener(), nombre);
-
-					String nom = datos.getNombre();
-					String dir = datos.getDireccion();
-					String rol = datos.getRol();
-					String user = datos.getNombreUsuario();
-					String cont = datos.getContrasena();
-					Integer id = datos.getIdClientes();
-					int act = 1;
-
-					datos.setIdClientes(id);
-					datos.setNombre(nom);
-					datos.setDireccion(dir);
-					datos.setRol(rol);
-					datos.setNombreUsuario(user);
-					datos.setContrasena(cont);
-					datos.setActivar(act);
-
-					services.save(Conexion.obtener(), datos);
-
+					int id =datos.getIdClientes();
+					setidClienteCrear(id);
+					CambiarContrasena cc = new CambiarContrasena();
+					dispose();
+					
 				} catch (ClassNotFoundException | SQLException e1) {
-
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
-			 */
-				CambiarContrasena cc = new CambiarContrasena();
-				dispose();
 			}
 
 		}
@@ -210,5 +194,11 @@ public class ListViewClientes extends JFrame {
 			System.out.println(ex);
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		}
+	}
+	public static void setidClienteCrear(Integer id) {
+		idCliente=id;
+	}
+	public static Integer getidClienteCrear() {
+		return idCliente;
 	}
 }

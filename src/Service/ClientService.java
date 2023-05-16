@@ -57,15 +57,15 @@ public class ClientService {
 	      return cliente;
 	   }
 	 
-	 public Cliente getClienteId(Connection conexion,int id) throws SQLException {
+	 public Cliente getClienteId(Connection conexion, int id) throws SQLException {
 		   Cliente cliente = null;
 	      try{
-	         PreparedStatement consulta = conexion.prepareStatement("SELECT idCliente, nombre, direccion,rol,usuario,Contasenya,Activar "
+	         PreparedStatement consulta = conexion.prepareStatement("SELECT idCliente,nombre, direccion,rol,usuario,Contasenya,Activar "
 	                 + " FROM " + this.tabla + " WHERE idCliente = ?" );
-	         ResultSet resultado = consulta.executeQuery();
 	         consulta.setInt(1, id);
+	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
-	        	 cliente = new Cliente(resultado.getInt("idCliente"),resultado.getString("nombre"), 
+	        	 cliente = new Cliente(resultado.getInt("idCliente"), resultado.getString("nombre"), 
 	                    resultado.getString("direccion"),resultado.getString("rol"),resultado.getString("usuario"),resultado.getString("Contasenya"),resultado.getInt("Activar"));
 	         }
 	      }catch(SQLException ex){
@@ -73,6 +73,7 @@ public class ClientService {
 	      }
 	      return cliente;
 	   }
+	 
 	 
 	
 	 

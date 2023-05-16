@@ -2,6 +2,7 @@ package Views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,13 +11,20 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Service.ClientService;
+import Service.Conexion;
+import models.Cliente;
+
 public class CambiarContrasena extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField ContT;
 	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField UsuarioT;
 	private JButton ConfirmarB,CancelarB;
+	private final ClientService services = new ClientService();
+	private Cliente cliente;
+	private int id= ListViewClientes.getidClienteCrear();
 
 
 
@@ -35,10 +43,10 @@ public class CambiarContrasena extends JFrame {
 		lblNewLabel.setBounds(105, 124, 110, 14);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(253, 121, 145, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		ContT = new JTextField();
+		ContT.setBounds(253, 121, 145, 20);
+		contentPane.add(ContT);
+		ContT.setColumns(10);
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(253, 149, 145, 20);
@@ -57,10 +65,11 @@ public class CambiarContrasena extends JFrame {
 		CancelarB.setBounds(254, 227, 89, 23);
 		contentPane.add(CancelarB);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(253, 69, 145, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		UsuarioT = new JTextField();
+		UsuarioT.setEditable(false);
+		UsuarioT.setBounds(253, 69, 145, 20);
+		contentPane.add(UsuarioT);
+		UsuarioT.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Usuario");
 		lblNewLabel_2.setBounds(111, 72, 63, 14);
@@ -72,6 +81,15 @@ public class CambiarContrasena extends JFrame {
 		ConfirmarB.addActionListener(ma);
 		CancelarB.addActionListener(ma);
 		
+		try {
+			Cliente datos = services.getClienteId(Conexion.obtener(), id);
+			UsuarioT.setText(datos.getNombreUsuario());
+			System.out.println(datos.getNombreUsuario());
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		
 	}
@@ -82,6 +100,19 @@ public class CambiarContrasena extends JFrame {
 			JButton b = (JButton) e.getSource();
 			
 			if(b.equals(ConfirmarB)) {
+				try {
+					Cliente datos = services.getClienteId(Conexion.obtener(), id);
+					String cont = ContT.getText();
+					datos.setContrasena(cont);
+					services.save(Conexion.obtener(), datos);
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+		
+				
+				
 				
 			}else if(b.equals(CancelarB)) {
 				ListViewClientes lvc = new ListViewClientes();

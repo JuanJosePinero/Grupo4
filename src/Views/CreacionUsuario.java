@@ -37,10 +37,8 @@ public class CreacionUsuario extends JFrame {
 	private JTextField txtModerado;
 	private JButton ConfrimarB,CancelarB;
 	private final ClientService services = new ClientService();
-	private 	List<Cliente> user;
+	private List<Cliente> user;
 
-
-	
 
 	public CreacionUsuario() {
 		
@@ -207,12 +205,13 @@ public class CreacionUsuario extends JFrame {
 					
 						try {
 							services.save(Conexion.obtener(), c);
+							JOptionPane.showMessageDialog(CreacionUsuario.this, "Usuario creado");
+							Login l = new Login();
 						} catch (ClassNotFoundException | SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						JOptionPane.showMessageDialog(CreacionUsuario.this, "Usuario creado");
-						Login l = new Login();
+					
 					
 				}
 				
@@ -292,4 +291,5 @@ public class CreacionUsuario extends JFrame {
 		
 		return true;
 	}
+	
 }
