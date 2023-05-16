@@ -105,6 +105,9 @@ public class ListViewClientes extends JFrame{
 						
 						
 						services.save(Conexion.obtener(), datos);
+
+						dispose();
+						ListViewClientes lvc = new ListViewClientes();
 						
 					} catch (ClassNotFoundException | SQLException e1) {
 					
@@ -112,8 +115,7 @@ public class ListViewClientes extends JFrame{
 					}
 		
 				
-				}
-				else if (b.equals(CambiarB)){
+				}else {
 					String nombre = c.getNombreUsuario();
 					try {
 						Cliente datos = services.getCliente(Conexion.obtener(),nombre);
@@ -136,13 +138,46 @@ public class ListViewClientes extends JFrame{
 						
 						services.save(Conexion.obtener(), datos);
 						
+						dispose();
+						ListViewClientes lvc = new ListViewClientes();
+						
 					} catch (ClassNotFoundException | SQLException e1) {
 					
 						e1.printStackTrace();
 					}
 					
-			
 				}
+					
+			
+			}	else if (b.equals(CambiarB)){
+				String nombre = c.getNombreUsuario();
+				try {
+					Cliente datos = services.getCliente(Conexion.obtener(),nombre);
+					String nom = "Prueba";
+					String dir = datos.getDireccion();
+					String rol = datos.getRol();
+					String user = datos.getNombreUsuario();
+					String cont = datos.getContrasena();
+					Integer id =datos.getIdClientes();
+					int act = 1; 
+			
+					datos.setIdClientes(id);
+					datos.setNombre(nom);
+					datos.setDireccion(dir);
+					datos.setRol(rol);
+					datos.setNombreUsuario(user);
+					datos.setContrasena(cont);
+					datos.setActivar(act);
+					
+					
+					services.save(Conexion.obtener(), datos);
+					
+				} catch (ClassNotFoundException | SQLException e1) {
+				
+					e1.printStackTrace();
+				}
+				
+		
 			}
 			
 		}
@@ -154,15 +189,20 @@ public class ListViewClientes extends JFrame{
 	private void showCliente() {
 		try {
 			this.Clientes = this.services.getAllCliente(Conexion.obtener());
+			
+			
 			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
 			}, new String[] {"id","Nombre", "Direccion","Rol","Usuario","Contasenya","Activar" }));
 			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 			dtm.setRowCount(0);
+			
 			for (int i = 0; i < this.Clientes.size(); i++) {
+				if(Clientes.get(i).getRol().equals("Cliente")) {
 				dtm.addRow(new Object[] {this.Clientes.get(i).getIdClientes(),this.Clientes.get(i).getNombre(),
 						this.Clientes.get(i).getDireccion(),this.Clientes.get(i).getRol(),
 						this.Clientes.get(i).getNombreUsuario(),this.Clientes.get(i).getContrasena(),this.Clientes.get(i).getActivar()});
+				}
 			}
 	
 
