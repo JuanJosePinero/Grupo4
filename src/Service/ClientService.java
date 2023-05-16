@@ -24,7 +24,7 @@ public class ClientService {
 	            consulta.setString(5, cliente.getContrasena());
 	            consulta.setInt(6, cliente.getActivar());
 	         }else{
-	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET nombre = ?, direccion = ?,rol = ?, usuario = ?, Contasenya = ? Activar = ? WHERE idCliente = ?");
+	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET nombre = ?, direccion = ?,rol = ?, usuario = ?, Contasenya = ?, Activar = ? WHERE idCliente = ?");
 	            consulta.setString(1,cliente.getNombre());
 	            consulta.setString(2, cliente.getDireccion());
 	            consulta.setString(3, cliente.getRol());
