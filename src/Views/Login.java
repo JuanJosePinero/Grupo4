@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -131,6 +132,7 @@ public class Login extends JFrame {
 			if(o.equals(btnIniciarSesion)) {
 			try {
 				Cliente datos = services.getCliente(Conexion.obtener(),UsuarioT.getText());
+				
 				if(datos!=null) {
 					
 					int activar = datos.getActivar();
@@ -142,7 +144,6 @@ public class Login extends JFrame {
 					char[] contrasenaC = ContraseñaP.getPassword();
 					String cont = new String(contrasenaC);
 					
-					idClienteLogin = datos.getIdClientes();					
 					
 					if(userB.equals(user) && contB.equals(cont)) {
 						if(datos.getRol().equals("Administrador")) {
