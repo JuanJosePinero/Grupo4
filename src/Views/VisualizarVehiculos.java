@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import Service.Conexion;
 import Service.VehiculoService;
 import models.Vehiculo;
+import javax.swing.JLabel;
 
 public class VisualizarVehiculos extends JFrame {
 
@@ -30,7 +31,7 @@ public class VisualizarVehiculos extends JFrame {
 		setTitle("Vehiculos");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 306);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -39,7 +40,7 @@ public class VisualizarVehiculos extends JFrame {
 	
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 44, 414, 195);
+		scrollPane.setBounds(10, 32, 414, 195);
 		contentPane.add(scrollPane);
 		
 		jtableP = new JTable();
@@ -49,12 +50,15 @@ public class VisualizarVehiculos extends JFrame {
 		JButton VolverB = new JButton("Volver");
 		VolverB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login l = new Login();
 				dispose();
 			}
 		});
-		VolverB.setBounds(10, 238, 424, 23);
+		VolverB.setBounds(10, 238, 414, 25);
 		contentPane.add(VolverB);
+		
+		JLabel lblNewLabel = new JLabel("Visualizacion de los Vehiculos Creados");
+		lblNewLabel.setBounds(105, 10, 242, 13);
+		contentPane.add(lblNewLabel);
 		setVisible(true);
 		
 		

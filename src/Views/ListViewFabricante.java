@@ -116,16 +116,16 @@ public class ListViewFabricante extends JFrame {
 		VolverB.setBounds(181, 238, 89, 23);
 		contentPane.add(VolverB);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon("images/visualizar.png"));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnVer = new JButton("");
+		btnVer.setIcon(new ImageIcon("images/visualizar.png"));
+		btnVer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VisualizarVehiculos vv = new VisualizarVehiculos();
 				
 			}
 		});
-		btnNewButton.setBounds(335, 27, 50, 50);
-		contentPane.add(btnNewButton);
+		btnVer.setBounds(335, 27, 50, 50);
+		contentPane.add(btnVer);
 		
 		JLabel lblNewLabel = new JLabel("Crear");
 		lblNewLabel.setHorizontalAlignment(JLabel.CENTER);

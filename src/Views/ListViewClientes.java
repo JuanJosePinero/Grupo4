@@ -56,11 +56,11 @@ public class ListViewClientes extends JFrame {
 		contentPane.add(btnVolver);
 
 		ActivarB = new JButton("Activar/Desactivar");
-		ActivarB.setBounds(26, 12, 144, 23);
+		ActivarB.setBounds(26, 12, 165, 24);
 		contentPane.add(ActivarB);
 
 		CambiarB = new JButton("Restablecer Contraseña");
-		CambiarB.setBounds(180, 12, 195, 23);
+		CambiarB.setBounds(230, 11, 165, 25);
 		contentPane.add(CambiarB);
 
 		setVisible(true);

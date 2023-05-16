@@ -30,7 +30,7 @@ public class ListViewVehiculos extends JFrame {
 		setTitle("Vehiculos");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 310);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -93,12 +93,22 @@ public class ListViewVehiculos extends JFrame {
 		contentPane.add(btnDelete);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(88, 97, 287, 146);
+		scrollPane.setBounds(33, 74, 392, 152);
 		contentPane.add(scrollPane);
 		
 		jtableP = new JTable();
 		showVehiculos();
 		scrollPane.setViewportView(jtableP);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControlAdmin ca = new ControlAdmin();
+				dispose();
+			}
+		});
+		btnVolver.setBounds(152, 236, 146, 27);
+		contentPane.add(btnVolver);
 		
 	}
 	

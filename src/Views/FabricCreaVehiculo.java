@@ -22,7 +22,7 @@ import Service.Conexion;
 import Service.VehiculoService;
 import models.Vehiculo;
 
-public class SaveViewVehiculos extends JFrame {
+public class FabricCreaVehiculo extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtModelo, txtMarca, txtAnyo, txtColor, txtPrecio, txtIdFabricante;
@@ -36,7 +36,7 @@ public class SaveViewVehiculos extends JFrame {
 	 * Create the frame.
 	 */
 	
-	public SaveViewVehiculos(Vehiculo vehiculo) {
+	public FabricCreaVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 		initComponents();
 		txtModelo.setText(this.vehiculo.getModelo());
@@ -46,7 +46,7 @@ public class SaveViewVehiculos extends JFrame {
 		txtPrecio.setText(String.valueOf(this.vehiculo.getPrecio()));
 		
 	}
-	public SaveViewVehiculos() {
+	public FabricCreaVehiculo() {
 		this.vehiculo=new Vehiculo();
 		initComponents();
 	}
@@ -111,7 +111,7 @@ public class SaveViewVehiculos extends JFrame {
 		contentPane.add(txtPrecio);
 		txtPrecio.setColumns(10);
 		
-		txtIdFabricante = new JTextField();
+		txtIdFabricante = new JTextField("Id febricante iniciado");
 		txtIdFabricante.setBounds(130, 206, 190, 26);
 		contentPane.add(txtIdFabricante);
 		txtIdFabricante.setColumns(10);
@@ -179,16 +179,16 @@ public class SaveViewVehiculos extends JFrame {
 				
 				try {
 					services.save(Conexion.obtener(), vehiculo);
-					SaveViewVehiculos.this.dispose();
+					FabricCreaVehiculo.this.dispose();
 					ListViewVehiculos vista = new ListViewVehiculos();
 					vista.setVisible(true);
 					vista.setLocationRelativeTo(null);
 				} catch (SQLException ex) {
 					System.out.println(ex.getMessage());
-					JOptionPane.showMessageDialog(SaveViewVehiculos.this, "Ha surgido un error y no se ha podido guardar el registro.");
+					JOptionPane.showMessageDialog(FabricCreaVehiculo.this, "Ha surgido un error y no se ha podido guardar el registro.");
 				} catch (ClassNotFoundException ex) {
 					System.out.println(ex);
-					JOptionPane.showMessageDialog(SaveViewVehiculos.this, "Ha surgido un error y no se ha podido guardar el registro.");
+					JOptionPane.showMessageDialog(FabricCreaVehiculo.this, "Ha surgido un error y no se ha podido guardar el registro.");
 				}
 			}else if(o == btnCancelar) {
 				dispose();

@@ -17,6 +17,7 @@ public class ControlAdmin extends JFrame {
 
 
 	public ControlAdmin() {
+		super("Control Admin");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setLocationRelativeTo(null);
@@ -26,24 +27,19 @@ public class ControlAdmin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		 Cliente = new JButton("New button");
+		Cliente = new JButton("New button");
 		Cliente.setIcon(new ImageIcon("images/iconcliente.png"));
-		Cliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		;
 		Cliente.setBounds(37, 76, 100, 100);
 		contentPane.add(Cliente);
 		
-		 Fabricante = new JButton("New button");
+		Fabricante = new JButton("New button");
 		Fabricante.setIcon(new ImageIcon("images/iconllave.png"));
-		Fabricante.setBounds(177, 76, 100, 89);
+		Fabricante.setBounds(177, 76, 100, 100);
 		contentPane.add(Fabricante);
 		
-		 Vehiculos = new JButton("New button");
+		Vehiculos = new JButton("New button");
 		Vehiculos.setIcon(new ImageIcon("images/iconcoche.png"));
-		Vehiculos.setBounds(312, 76, 100, 89);
+		Vehiculos.setBounds(312, 76, 100, 100);
 		contentPane.add(Vehiculos);
 		
 		VolverB = new JButton("Volver");
