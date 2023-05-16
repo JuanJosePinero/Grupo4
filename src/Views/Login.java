@@ -134,6 +134,7 @@ public class Login extends JFrame {
 				if(datos!=null) {
 					
 					int activar = datos.getActivar();
+			
 					
 					String userB = datos.getNombreUsuario();
 					String contB =datos.getContrasena();
@@ -150,8 +151,9 @@ public class Login extends JFrame {
 							dispose();
 						}
 						else if(datos.getRol().equals("Cliente")) {
+							System.out.println(activar);
 							if(activar == 1) {
-								System.out.println("Hola");
+								System.out.println(datos.activar);
 								VentanaCatalogo vc = new VentanaCatalogo();
 								vc.setVisible(true);
 								dispose();

@@ -49,7 +49,7 @@ public class ClientService {
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
 	        	 cliente = new Cliente(resultado.getInt("idCliente"), resultado.getString("nombre"), 
-	                    resultado.getString("direccion"),resultado.getString("rol"),resultado.getString("usuario"),resultado.getString("Contasenya"));
+	                    resultado.getString("direccion"),resultado.getString("rol"),resultado.getString("usuario"),resultado.getString("Contasenya"),resultado.getInt("Activar"));
 	         }
 	      }catch(SQLException ex){
 	         throw new SQLException(ex);
@@ -66,7 +66,7 @@ public class ClientService {
 	         consulta.setInt(1, id);
 	         while(resultado.next()){
 	        	 cliente = new Cliente(resultado.getInt("idCliente"),resultado.getString("nombre"), 
-	                    resultado.getString("direccion"),resultado.getString("rol"),resultado.getString("usuario"),resultado.getString("Contasenya"));
+	                    resultado.getString("direccion"),resultado.getString("rol"),resultado.getString("usuario"),resultado.getString("Contasenya"),resultado.getInt("Activar"));
 	         }
 	      }catch(SQLException ex){
 	         throw new SQLException(ex);
@@ -94,8 +94,8 @@ public class ClientService {
 	                 + " FROM " + this.tabla);
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
-	        	 cliente.add(new Cliente(resultado.getString("nombre"), 
-	                    resultado.getString("direccion"),resultado.getString("rol"),resultado.getString("usuario"),resultado.getString("contasenya")));
+	        	 cliente.add(new Cliente(resultado.getInt("idCliente"),resultado.getString("nombre"), 
+	                    resultado.getString("direccion"),resultado.getString("rol"),resultado.getString("usuario"),resultado.getString("contasenya"),resultado.getInt("Activar")));
 	         }
 	      }catch(SQLException ex){
 	         throw new SQLException(ex);

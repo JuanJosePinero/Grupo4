@@ -90,6 +90,7 @@ public class CreacionUsuario extends JFrame {
 		contentPane.add(ApellidoT);
 		
 		DireccionT = new JTextField();
+		DireccionT.setText("C/");
 		DireccionT.setColumns(10);
 		DireccionT.setBounds(197, 85, 141, 20);
 		contentPane.add(DireccionT);
@@ -188,6 +189,7 @@ public class CreacionUsuario extends JFrame {
 			String contrasenya = new String (contra);
 			char[] ccontra = CContraseñaP.getPassword();
 			String ccontrasenya = new String (ccontra);
+			int act = 1;
 			
 			
 		
@@ -201,7 +203,7 @@ public class CreacionUsuario extends JFrame {
 				else if( !contrasenya.equals(ccontrasenya))
 					JOptionPane.showMessageDialog(CreacionUsuario.this, "Las contraseñas no coinciden");
 				else {
-				Cliente c =new Cliente(nombreC,direccion,rol,usuario,contrasenya);
+				Cliente c =new Cliente(nombreC,direccion,rol,usuario,contrasenya,act);
 					
 						try {
 							services.save(Conexion.obtener(), c);

@@ -17,6 +17,9 @@ import javax.swing.table.DefaultTableModel;
 import Service.Conexion;
 import Service.FabricantesService;
 import models.Fabricante;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class ListViewFabricante extends JFrame {
 
@@ -36,7 +39,8 @@ public class ListViewFabricante extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnCreate = new JButton("Create");
+		JButton btnCreate = new JButton("");
+		btnCreate.setIcon(new ImageIcon("images/crear.png"));
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListViewFabricante.this.dispose();
@@ -45,10 +49,11 @@ public class ListViewFabricante extends JFrame {
 				vista.setLocationRelativeTo(null);
 			}
 		});
-		btnCreate.setBounds(26, 24, 89, 29);
+		btnCreate.setBounds(65, 24, 50, 50);
 		contentPane.add(btnCreate);
 		
-		JButton btnUpdate = new JButton("Update");
+		JButton btnUpdate = new JButton("");
+		btnUpdate.setIcon(new ImageIcon("images/update.png"));
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int fila_seleccionada = jtableP.getSelectedRow();
@@ -62,10 +67,11 @@ public class ListViewFabricante extends JFrame {
 				}
 			}
 		});
-		btnUpdate.setBounds(149, 24, 67, 29);
+		btnUpdate.setBounds(149, 24, 50, 50);
 		contentPane.add(btnUpdate);
 		
-		JButton btnDelete = new JButton("Delete");
+		JButton btnDelete = new JButton("");
+		btnDelete.setIcon(new ImageIcon("images/eliminar.png"));
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int fila_seleccionada = jtableP.getSelectedRow();
@@ -89,7 +95,7 @@ public class ListViewFabricante extends JFrame {
 				}
 			}
 		});
-		btnDelete.setBounds(244, 24, 74, 29);
+		btnDelete.setBounds(244, 24, 50, 50);
 		contentPane.add(btnDelete);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -110,15 +116,36 @@ public class ListViewFabricante extends JFrame {
 		VolverB.setBounds(181, 238, 89, 23);
 		contentPane.add(VolverB);
 		
-		JButton btnNewButton = new JButton("Visualizar");
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon("images/visualizar.png"));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VisualizarVehiculos vv = new VisualizarVehiculos();
 				
 			}
 		});
-		btnNewButton.setBounds(335, 27, 89, 23);
+		btnNewButton.setBounds(335, 27, 50, 50);
 		contentPane.add(btnNewButton);
+		
+		JLabel lblNewLabel = new JLabel("Crear");
+		lblNewLabel.setHorizontalAlignment(JLabel.CENTER);
+		lblNewLabel.setBounds(65, 11, 50, 14);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Actualizar");
+		lblNewLabel_1.setHorizontalAlignment(JLabel.CENTER);
+		lblNewLabel_1.setBounds(138, 11, 69, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Borrar");
+		lblNewLabel_2.setHorizontalAlignment(JLabel.CENTER);
+		lblNewLabel_2.setBounds(244, 11, 50, 14);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Ver");
+		lblNewLabel_3.setHorizontalAlignment(JLabel.CENTER);
+		lblNewLabel_3.setBounds(339, 11, 50, 14);
+		contentPane.add(lblNewLabel_3);
 		
 	}
 	

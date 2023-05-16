@@ -57,7 +57,7 @@ public class Cliente {
 	}
 
 	public Cliente(String nombre, String direccion, String rol, String nombreUsuario,
-			String contrasena) {
+			String contrasena,int activar) {
 		super();
 		this.idClientes = idClientes;
 		this.nombre = nombre;
@@ -65,7 +65,7 @@ public class Cliente {
 		this.rol = rol;
 		this.nombreUsuario = nombreUsuario;
 		this.contrasena = contrasena;
-		activar = 1;
+		this.activar=activar;
 	}
 	
 	
@@ -73,7 +73,7 @@ public class Cliente {
 	
 
 	public Cliente(Integer idClientes, String nombre, String direccion, String rol, String nombreUsuario,
-			String contrasena) {
+			String contrasena,int activar) {
 		super();
 		this.idClientes = idClientes;
 		this.nombre = nombre;
@@ -81,7 +81,8 @@ public class Cliente {
 		this.rol = rol;
 		this.nombreUsuario = nombreUsuario;
 		this.contrasena = contrasena;
-		activar = 1;
+		this.activar=activar;
+		
 	}
 
 	public Cliente() {
