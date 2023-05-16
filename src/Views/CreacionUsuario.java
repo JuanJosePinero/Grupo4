@@ -108,15 +108,13 @@ public class CreacionUsuario extends JFrame {
 		
 		ConfrimarB = new JButton("Guardar");
 		
-		
-		
 		ConfrimarB.setBounds(102, 227, 113, 23);
 		contentPane.add(ConfrimarB);
 		
 		txtDebil = new JTextField();
 		txtDebil.setEditable(false);
 		txtDebil.setVisible(false);
-		txtDebil.setText("   Debil");
+		txtDebil.setText("Debil");
 		txtDebil.setBackground(new Color(128, 255, 255));
 		txtDebil.setBounds(367, 135, 57, 20);
 		contentPane.add(txtDebil);

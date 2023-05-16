@@ -27,7 +27,8 @@ public class ListViewFabricante extends JFrame {
 	private JTable jtableP;
 	private final FabricantesService services = new FabricantesService();
 	private List<Fabricante> fabricante;
-
+	private static int idFabricante;
+	
 	public ListViewFabricante() {
 		setTitle("Fabricante");
 		setResizable(false);
@@ -120,7 +121,13 @@ public class ListViewFabricante extends JFrame {
 		btnVer.setIcon(new ImageIcon("images/visualizar.png"));
 		btnVer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int filas = jtableP.getSelectedRow();
+				String nombreFabric = jtableP.getValueAt(filas, 0).toString();
+				Fabricante f = fabricante.get(filas);
+				int id = f.getIdFabricante();
+				setidFabricanteCrear(id);
 				VisualizarVehiculos vv = new VisualizarVehiculos();
+				
 				
 			}
 		});
@@ -151,7 +158,7 @@ public class ListViewFabricante extends JFrame {
 	
 	private void showFabricante() {
 		try {
-			this.fabricante = this.services.getAllProducts(Conexion.obtener());
+			this.fabricante = this.services.getAllFabricantes(Conexion.obtener());
 			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
 			}, new String[] { "idFabricante","Nombre", "Pais" }));
@@ -177,5 +184,13 @@ public class ListViewFabricante extends JFrame {
 			System.out.println(ex);
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		}
+	}
+	
+	public static void setidFabricanteCrear(Integer id) {
+		idFabricante=id;
+	}
+	
+	public static Integer getidFabricanteCrear() {
+		return idFabricante;
 	}
 }
