@@ -2,33 +2,33 @@ package models;
 
 public class Comentario {
 
-	private int idCliente, idVehiculo;
+	private Integer idCliente, idVehiculo;
 	private String comentario;
 	
 	public Comentario() {
 		super();
 	}
 
-	public Comentario(int idCliente, int idVehiculo, String comentario) {
+	public Comentario(Integer idCliente, Integer idVehiculo, String comentario) {
 		super();
 		this.idCliente = idCliente;
 		this.idVehiculo = idVehiculo;
 		this.comentario = comentario;
 	}
 
-	public int getIdCliente() {
+	public Integer getIdCliente() {
 		return idCliente;
 	}
 
-	public void setIdCliente(int idCliente) {
+	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
 
-	public int getIdVehiculo() {
+	public Integer getIdVehiculo() {
 		return idVehiculo;
 	}
 
-	public void setIdVehiculo(int idVehiculo) {
+	public void setIdVehiculo(Integer idVehiculo) {
 		this.idVehiculo = idVehiculo;
 	}
 

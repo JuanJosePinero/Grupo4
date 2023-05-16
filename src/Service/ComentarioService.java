@@ -17,7 +17,7 @@ public class ComentarioService {
 	  public void save(Connection conexion, Comentario comentario) throws SQLException{
 	      try{
 	         PreparedStatement consulta;
-	         if(comentario.getIdCliente() == null){
+	         if(comentario.getIdCliente()==null){
 	            consulta = conexion.prepareStatement("INSERT INTO " + this.tabla + "(idCliente,idVehiculo,comentario) VALUES(?, ?, ?)");
 	            consulta.setInt(1, comentario.getIdCliente());
 	            consulta.setInt(2, comentario.getIdVehiculo());
