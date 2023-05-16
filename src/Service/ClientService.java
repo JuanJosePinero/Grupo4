@@ -102,5 +102,21 @@ public class ClientService {
 	      }
 	      return cliente;
 	   }
+	 
+	 public List<Cliente> getAllRolCliente(Connection conexion) throws SQLException{
+	      List<Cliente> cliente = new ArrayList<>();
+	      try{
+	         PreparedStatement consulta = conexion.prepareStatement("SELECT idCliente,nombre,direccion,rol,usuario,contasenya,Activar"
+	                 + " FROM " + this.tabla+ " WHERE rol = 'Cliente'");
+	         ResultSet resultado = consulta.executeQuery();
+	         while(resultado.next()){
+	        	 cliente.add(new Cliente(resultado.getInt("idCliente"),resultado.getString("nombre"), 
+	                    resultado.getString("direccion"),resultado.getString("rol"),resultado.getString("usuario"),resultado.getString("contasenya"),resultado.getInt("Activar")));
+	         }
+	      }catch(SQLException ex){
+	         throw new SQLException(ex);
+	      }
+	      return cliente;
+	   }
 	   
 }

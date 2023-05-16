@@ -81,67 +81,71 @@ public class ListViewClientes extends JFrame {
 			Cliente c = Clientes.get(filaS);
 			System.out.println(c.getActivar());
 			if (b.equals(ActivarB)) {
-				if (c.getActivar() == 1) {
-					String nombre = c.getNombreUsuario();
-					try {
-						Cliente datos = services.getCliente(Conexion.obtener(), nombre);
-						String nom = "Prueba";
-						String dir = datos.getDireccion();
-						String rol = datos.getRol();
-						String user = datos.getNombreUsuario();
-						String cont = datos.getContrasena();
-						Integer id = datos.getIdClientes();
-						int act = 0;
-
-						datos.setIdClientes(id);
-						datos.setNombre(nom);
-						datos.setDireccion(dir);
-						datos.setRol(rol);
-						datos.setNombreUsuario(user);
-						datos.setContrasena(cont);
-						datos.setActivar(act);
-
-						services.save(Conexion.obtener(), datos);
-						dispose();
-						ListViewClientes lvc = new ListViewClientes();
-
-					} catch (ClassNotFoundException | SQLException e1) {
-
-						e1.printStackTrace();
+				String nombre = c.getNombreUsuario();
+				if(c.getRol().equals("Cliente")) {
+					if (c.getActivar() == 1) {
+						
+						try {
+							Cliente datos = services.getCliente(Conexion.obtener(), nombre);
+							String nom = "Prueba";
+							String dir = datos.getDireccion();
+							String rol = datos.getRol();
+							String user = datos.getNombreUsuario();
+							String cont = datos.getContrasena();
+							Integer id = datos.getIdClientes();
+							int act = 0;
+	
+							datos.setIdClientes(id);
+							datos.setNombre(nom);
+							datos.setDireccion(dir);
+							datos.setRol(rol);
+							datos.setNombreUsuario(user);
+							datos.setContrasena(cont);
+							datos.setActivar(act);
+	
+							services.save(Conexion.obtener(), datos);
+							dispose();
+							ListViewClientes lvc = new ListViewClientes();
+	
+						} catch (ClassNotFoundException | SQLException e1) {
+	
+							e1.printStackTrace();
+						}
+	
+					} else {
+						nombre = c.getNombreUsuario();
+						try {
+							Cliente datos = services.getCliente(Conexion.obtener(), nombre);
+							String nom = datos.getNombre();
+							String dir = datos.getDireccion();
+							String rol = datos.getRol();
+							String user = datos.getNombreUsuario();
+							String cont = datos.getContrasena();
+							Integer id = datos.getIdClientes();
+							int act = 1;
+	
+							datos.setIdClientes(id);
+							datos.setNombre(nom);
+							datos.setDireccion(dir);
+							datos.setRol(rol);
+							datos.setNombreUsuario(user);
+							datos.setContrasena(cont);
+							datos.setActivar(act);
+	
+							services.save(Conexion.obtener(), datos);
+	
+							dispose();
+							ListViewClientes lvc = new ListViewClientes();
+	
+						} catch (ClassNotFoundException | SQLException e1) {
+	
+							e1.printStackTrace();
+						}
+	
 					}
-
-				} else {
-					String nombre = c.getNombreUsuario();
-					try {
-						Cliente datos = services.getCliente(Conexion.obtener(), nombre);
-						String nom = datos.getNombre();
-						String dir = datos.getDireccion();
-						String rol = datos.getRol();
-						String user = datos.getNombreUsuario();
-						String cont = datos.getContrasena();
-						Integer id = datos.getIdClientes();
-						int act = 1;
-
-						datos.setIdClientes(id);
-						datos.setNombre(nom);
-						datos.setDireccion(dir);
-						datos.setRol(rol);
-						datos.setNombreUsuario(user);
-						datos.setContrasena(cont);
-						datos.setActivar(act);
-
-						services.save(Conexion.obtener(), datos);
-
-						dispose();
-						ListViewClientes lvc = new ListViewClientes();
-
-					} catch (ClassNotFoundException | SQLException e1) {
-
-						e1.printStackTrace();
-					}
-
+				}else if(c.getRol().equals("Fabricante")) {
+					
 				}
-
 			} else if (b.equals(CambiarB)) {
 			/*	String nombre = c.getNombreUsuario();
 				try {
@@ -181,7 +185,7 @@ public class ListViewClientes extends JFrame {
 
 	private void showCliente() {
 		try {
-			this.Clientes = this.services.getAllCliente(Conexion.obtener());
+			this.Clientes = this.services.getAllRolCliente(Conexion.obtener());
 
 			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
