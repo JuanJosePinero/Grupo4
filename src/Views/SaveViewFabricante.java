@@ -12,8 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Service.ClientService;
 import Service.Conexion;
 import Service.FabricantesService;
+import models.Cliente;
 import models.Fabricante;
 
 
@@ -22,8 +24,12 @@ public class SaveViewFabricante extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtNombre;
 	private JTextField txtPais;
-	private final FabricantesService services = new FabricantesService();
+	private final FabricantesService serviceF = new FabricantesService();
 	private final Fabricante fabricante;
+	private final ClientService servicec = new ClientService();
+	private final Cliente cliente;
+	private JTextField UsuarioT;
+	private JTextField ContraseñaT;
 
 	/**
 	 * Create the frame.
@@ -34,9 +40,11 @@ public class SaveViewFabricante extends JFrame {
 		initComponents();
 		txtNombre.setText(this.fabricante.getNombre());
 		txtPais.setText(this.fabricante.getPais());
+		this.cliente = new Cliente();
 	}
 	public SaveViewFabricante() {
 		this.fabricante=new Fabricante();
+		this.cliente = new Cliente();
 		initComponents();
 	}
 	
@@ -44,7 +52,7 @@ public class SaveViewFabricante extends JFrame {
 		setTitle("Fabricante");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 372, 205);
+		setBounds(100, 100, 372, 290);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -73,10 +81,18 @@ public class SaveViewFabricante extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String nombre = txtNombre.getText();
 				String pais = txtPais.getText();
+				String user = UsuarioT.getText();
+				String cont = ContraseñaT.getText();
+				
 				fabricante.setNombre(nombre);
 				fabricante.setPais(pais);
+				cliente.setNombreUsuario(user);
+				cliente.setContrasena(cont);
+				cliente.setActivar(1);
+				cliente.setRol("Fabricante");
 				try {
-					services.save(Conexion.obtener(), fabricante);
+					serviceF.save(Conexion.obtener(), fabricante);
+					servicec.save(Conexion.obtener(), cliente);
 					SaveViewFabricante.this.dispose();
 					ListViewFabricante vista = new ListViewFabricante();
 					vista.setVisible(true);
@@ -90,7 +106,7 @@ public class SaveViewFabricante extends JFrame {
 				}
 			}
 		});
-		btnGuardar.setBounds(46, 123, 117, 29);
+		btnGuardar.setBounds(43, 211, 117, 29);
 		contentPane.add(btnGuardar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -102,7 +118,25 @@ public class SaveViewFabricante extends JFrame {
 				vista.setLocationRelativeTo(null);
 			}
 		});
-		btnCancelar.setBounds(221, 123, 117, 29);
+		btnCancelar.setBounds(209, 211, 117, 29);
 		contentPane.add(btnCancelar);
+		
+		UsuarioT = new JTextField();
+		UsuarioT.setBounds(103, 98, 130, 20);
+		contentPane.add(UsuarioT);
+		UsuarioT.setColumns(10);
+		
+		ContraseñaT = new JTextField();
+		ContraseñaT.setBounds(103, 129, 130, 20);
+		contentPane.add(ContraseñaT);
+		ContraseñaT.setColumns(10);
+		
+		JLabel UsuarioL = new JLabel("Usuario");
+		UsuarioL.setBounds(23, 101, 46, 14);
+		contentPane.add(UsuarioL);
+		
+		JLabel ContraseñaL = new JLabel("Contraseña");
+		ContraseñaL.setBounds(23, 132, 68, 14);
+		contentPane.add(ContraseñaL);
 	}
 }
