@@ -28,7 +28,7 @@ public class AgregarValoracion extends JFrame {
 	private List<JButton> btnEstrellaList = new ArrayList<>();
 	private JButton btnEnviar, btnCancelar;
 	private JButton btnEst;
-	private ImageIcon icono;
+	private ImageIcon icono0, icono1,icono2,icono3,icono4,icono5;
 	private JLabel etiquetaImagen;
 	private ValoracionService service = new ValoracionService();
 	private int valoracion = 0;
@@ -72,6 +72,7 @@ public class AgregarValoracion extends JFrame {
 		contentPane.add(lblTitulo);
 
 		ManejadorJButton manejador = new ManejadorJButton();
+		manejadorestrella estrella=new manejadorestrella();
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(163, 165, 165));
@@ -80,15 +81,16 @@ public class AgregarValoracion extends JFrame {
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		for (int i = 0; i < 6; i++) {
-			btnEst = new JButton(i + "★");
+			btnEst = new JButton(String.valueOf(i));
 			btnEstrellaList.add(btnEst);
 			btnEst.setSize(55, 55);
 			panel.add(btnEst);
-			btnEst.addActionListener(manejador);
+			btnEst.addActionListener(estrella);
 		}
 
-		icono = new ImageIcon("images/estrellas/estrella0.png");
-		etiquetaImagen = new JLabel(icono);
+		icono0 = new ImageIcon("images/estrellas/estrella0.png");
+		
+		etiquetaImagen = new JLabel(icono0);
 		etiquetaImagen.setBounds(50, 101, 350, 100);
 		contentPane.add(etiquetaImagen);
 
@@ -109,23 +111,13 @@ public class AgregarValoracion extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object o = e.getSource();
-
-			if (o == btnEnviar) {
+			JButton boton=(JButton) e.getSource();
+			
 				
-				if (o == btnEst) {
-					for (int i = 1; i < 6; i++) {
-						if(btnEstrellaList.get(i) == btnEst) {
-						valoracion=i;
-						break;
-						}
-					}
-				val = valoracion;
-				}
-				
-
+			 if (o == btnEnviar) {
 				Valoracion v = new Valoracion();
-				v.setIdCliente(5);
-				v.setIdVehiculo(2);
+				v.setIdCliente(Login.getidClienteLogin());
+				v.setIdVehiculo(0);
 				v.setValoracion(val);
 
 				try {
@@ -161,5 +153,16 @@ public class AgregarValoracion extends JFrame {
 
 		}
 
+	}
+	private class manejadorestrella implements ActionListener {
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+	        JButton boton = (JButton) e.getSource();
+	        int valorEstrella = Integer.parseInt(boton.getText()); // Obtiene el valor de la estrella seleccionada
+	        valoracion=valorEstrella;
+
+	        ImageIcon nuevaImagen = new ImageIcon("images/estrellas/estrella" + valorEstrella + ".png");
+	        etiquetaImagen.setIcon(nuevaImagen);
+	    }
 	}
 }
