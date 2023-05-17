@@ -75,7 +75,8 @@ public class AgregarComentario extends JFrame {
 				
 				Comentario c = new Comentario();
 				c.setIdCliente(Login.getidClienteLogin());
-				c.setIdVehiculo(1);
+				System.out.println(Login.getidClienteLogin());
+				c.setIdVehiculo(Login.getidVehiculo());
 				c.setComentario(comentario);
 				
 				try {

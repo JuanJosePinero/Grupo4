@@ -28,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Service.Conexion;
 import Service.VehiculoService;
+import models.Comentario;
 import models.Vehiculo;
 
 public class VentanaCatalogo extends JFrame {
@@ -36,7 +37,7 @@ public class VentanaCatalogo extends JFrame {
 	private JButton btnComprar, btnAlquilar, btnVerCompras, btnSalir, btnVerCyV;
 	private JTextArea textAreaComentarios;
 	private JLabel lblCoche;
-	private List<String> listaComentarios = new ArrayList<>();
+	private List<Comentario> listaComentarios = new ArrayList<>();
 	private final String tabla = "vehiculo";
 	private final VehiculoService services = new VehiculoService();
 	private List<Vehiculo> vehiculo;
@@ -141,7 +142,7 @@ public class VentanaCatalogo extends JFrame {
 	    
 	   
 	    String nombre = "";
-	    for (String s : listaComentarios) {
+	    for (Comentario s : listaComentarios) {
 	    	nombre += s+"\n";
 	    	textAreaComentarios.setText(nombre);
 	    	 
@@ -212,7 +213,10 @@ public class VentanaCatalogo extends JFrame {
 //		btnValoracion.setBounds(253, 496, 143, 31);
 //		contentPane.add(btnValoracion);
 //		
-//			
+//		
+		ManejadorJButton mb = new ManejadorJButton();
+		btnVerCyV.addActionListener(mb);
+		
 		}
 		
 	
@@ -277,14 +281,26 @@ public class VentanaCatalogo extends JFrame {
 				l.setVisible(true);
 				l.setLocationRelativeTo(null);
 			}else if(o == btnVerCyV) {
-				VerComentsYValorac CyV = new VerComentsYValorac();
-				CyV.setVisible(true);
-				dispose();
+				int fila_seleccionada = jtableP.getSelectedRow();
+				String datos = jtableP.getValueAt(fila_seleccionada,0).toString();
+				
+				Vehiculo v = vehiculo.get(fila_seleccionada);
+				int id = v.getIdVehiculos();
+				System.out.println(id);
+					Login.setidVehiculo(id);	
+				
+					VerComentsYValorac CyV = new VerComentsYValorac();
+					
+					CyV.setVisible(true);
+					dispose();
+				
+				}
+				
 			}
 			
 		}	
 		
-	}
+	
 	private void refrescarTabla(String fil){
 		    try {
 		        if (fil.equalsIgnoreCase("--")) {

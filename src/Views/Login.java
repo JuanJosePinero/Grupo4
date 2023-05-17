@@ -27,6 +27,7 @@ public class Login extends JFrame {
 	private final ClientService services = new ClientService();
 	public static Integer idClienteLogin;
 	public static Integer idFabricante;
+	public static Integer idVehiculo;
 
 	/**
 	 * Launch the application.
@@ -204,6 +205,13 @@ public class Login extends JFrame {
 	}
 	public static Integer getidFabricante() {
 		return idFabricante;
+	}
+	
+	public static void setidVehiculo(Integer id) {
+		idVehiculo=id;
+	}
+	public static Integer getidVehiculo() {
+		return idVehiculo;
 	}
 	
 }

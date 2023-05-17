@@ -61,7 +61,8 @@ public class VerComentsYValorac extends JFrame {
 		btnVerValoraciones.setBounds(257, 71, 137, 38);
 		contentPane.add(btnVerValoraciones);
 	
-		
+		ManejadorJButton mb = new ManejadorJButton();
+		btnVerComentarios.addActionListener(mb);
 	
 	}
 	
@@ -72,6 +73,9 @@ public class VerComentsYValorac extends JFrame {
 			Object o = e.getSource();
 			
 			if(o == btnVerComentarios) {
+				VisualizarComents vc = new VisualizarComents();
+				vc.setVisible(true);
+				dispose();
 				
 			}else if(o == btnVerValoraciones) {
 				
