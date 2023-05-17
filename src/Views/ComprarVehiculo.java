@@ -198,14 +198,23 @@ public class ComprarVehiculo extends JFrame {
 						System.out.println(venta.getFechaHora());
 						vehiculo.setComprado(1);
 
-						servicesventa.save(Conexion.obtener(), venta);
-						services.save(Conexion.obtener(), vehiculo);
-						ComprarVehiculo.this.dispose();
-						JOptionPane.showMessageDialog(ComprarVehiculo.this, "Se ha realizado la compra");
-						VentanaCatalogo vc = new VentanaCatalogo();
-						vc.setVisible(true);
-						vc.setLocationRelativeTo(null);
+
+					System.out.println(venta.getIdVehiculo());
+					System.out.println(venta.getIdCliente());
+					System.out.println(venta.getFechaHora());
+					System.out.println(venta.getIdVenta());
+					
+
+					servicesventa.save(Conexion.obtener(), venta);
+
+					services.save(Conexion.obtener(), vehiculo);
+					ComprarVehiculo.this.dispose();
+					JOptionPane.showMessageDialog(ComprarVehiculo.this, "Se ha realizado la compra");
+					VentanaCatalogo vc = new VentanaCatalogo();
+					vc.setVisible(true);
+					vc.setLocationRelativeTo(null);
 					}
+
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
