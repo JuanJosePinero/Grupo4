@@ -14,7 +14,6 @@ import models.Fabricante;
 public class FabricantesService {
 
 	private final String tabla= "fabricante";
-	private int cont=0;
 	
 	  public void save(Connection conexion, Fabricante fabricante) throws SQLException{
 	      try{
@@ -35,7 +34,7 @@ public class FabricantesService {
 	      }
 	   }
 	   
-	   public Fabricante getProduct(Connection conexion, int id) throws SQLException {
+	   public Fabricante getFabricantes(Connection conexion, int id) throws SQLException {
 	      Fabricante fabricante = null;
 	      try{
 	         PreparedStatement consulta = conexion.prepareStatement("SELECT idFabricante,nombre,pais "
@@ -63,20 +62,20 @@ public class FabricantesService {
 	      }
 	   }
 	   
-	   public List<Fabricante> getAllProducts(Connection conexion) throws SQLException{
-	      List<Fabricante> products = new ArrayList<>();
+	   public List<Fabricante> getAllFabricantes(Connection conexion) throws SQLException{
+	      List<Fabricante> fabricante = new ArrayList<>();
 	      try{
 	         PreparedStatement consulta = conexion.prepareStatement("SELECT idFabricante,nombre,pais "
 	                 + " FROM " + this.tabla);
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
-	            products.add(new Fabricante(resultado.getInt("idFabricante"), resultado.getString("nombre"), 
+	        	 fabricante.add(new Fabricante(resultado.getInt("idFabricante"), resultado.getString("nombre"), 
 	                    resultado.getString("pais")));
 	         }
 	      }catch(SQLException ex){
 	         throw new SQLException(ex);
 	      }
-	      return products;
+	      return fabricante;
 	   }
 	
 }
