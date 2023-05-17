@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import Views.Login;
 import models.Alquiler;
 
 public class AlquilerService {
@@ -24,8 +25,8 @@ public class AlquilerService {
 	            consulta.setDate(3, (Date) alquiler.getFechaInic());
 	            consulta.setDate(4, (Date) alquiler.getFechFin());
 	         }else{
-	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET idCliente = ?, idVehiculo = ?, fechaInic  = ?, fechFin  = ? WHERE idAlquiler = ?");
-	            consulta = conexion.prepareStatement("INSERT INTO " + this.tabla + "(idCliente,idVehiculo,fechaInic,fechFin) VALUES(?, ?, ?, ?)");
+	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET idCliente = ?, idVehiculo = ?, fechaInic  = ?, fechaFin  = ? WHERE idAlquiler = ?");
+	            consulta = conexion.prepareStatement("INSERT INTO " + this.tabla + "(idCliente,idVehiculo,fechaInic,fechaFin) VALUES(?, ?, ?, ?)");
 	            consulta.setInt(1, alquiler.getIdCliente());
 	            consulta.setInt(2, alquiler.getIdVehiculo());
 	            consulta.setDate(3, (Date) alquiler.getFechaInic());
@@ -41,7 +42,7 @@ public class AlquilerService {
 	   public Alquiler getAlquiler(Connection conexion, int id) throws SQLException {
 		   Alquiler alquiler = null;
 	      try{
-	         PreparedStatement consulta = conexion.prepareStatement("SELECT idAlquiler,idCliente,idVehiculo,fechaInic,fechFin "
+	         PreparedStatement consulta = conexion.prepareStatement("SELECT idAlquiler,idCliente,idVehiculo,fechaInic,fechaFin "
 	                 + " FROM " + this.tabla + " WHERE idAlquiler = ?" );
 	         consulta.setInt(1, id);
 	         ResultSet resultado = consulta.executeQuery();
@@ -69,8 +70,9 @@ public class AlquilerService {
 	   public List<Alquiler> getAllAlquileres(Connection conexion) throws SQLException{
 	      List<Alquiler> products = new ArrayList<>();
 	      try{
-	         PreparedStatement consulta = conexion.prepareStatement("SELECT idAlquiler,idCliente,idVehiculo,fechaInic,fechFin "
-	                 + " FROM " + this.tabla);
+	    	  PreparedStatement consulta = conexion.prepareStatement("SELECT idAlquiler, idCliente, idVehiculo, fechaInic, fechaFin "
+	    		        + "FROM " + this.tabla + " WHERE idCliente=?");
+	         consulta.setInt(1, Login.getidClienteLogin());
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
 	            products.add(new Alquiler(resultado.getInt("idAlquiler"), resultado.getInt("idCliente"), 

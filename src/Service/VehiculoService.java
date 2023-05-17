@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Views.ListViewFabricante;
+import Views.Login;
 import models.Vehiculo;
 
 public class VehiculoService {
@@ -199,5 +200,25 @@ public class VehiculoService {
 		    }
 		    return listaVehiculos;
 		}
+	   public List<Vehiculo> getAllVehiculosCliente(Connection conexion) throws SQLException {
+		    List<Vehiculo> listaVehiculos = new ArrayList<>();
+		    try {
+		        PreparedStatement consulta = conexion.prepareStatement("SELECT v.idVenta, v.fechaHora, ve.idVehiculos, ve.Modelo, ve.Marca, ve.Anyo, ve.Color, ve.Precio, ve.idFabricante "
+		                + "FROM venta v, vehiculo ve "
+		                + "WHERE v.idVehiculos = ve.idVehiculos "
+		                + "AND v.idCliente = ?;");
+		        consulta.setInt(1, Login.getidClienteLogin());
+		        ResultSet resultado = consulta.executeQuery();
+		        while (resultado.next()) {
+		            listaVehiculos.add(new Vehiculo(resultado.getInt("idVehiculos"), resultado.getString("modelo"), resultado.getString("marca"), 
+		                    resultado.getInt("anyo"), resultado.getString("color"), resultado.getFloat("precio"), resultado.getInt("idFabricante")));
+		        }
+		    } catch (SQLException ex) {
+		        throw new SQLException(ex);
+		    }
+		    return listaVehiculos;
+		}
+
+
 
 	}

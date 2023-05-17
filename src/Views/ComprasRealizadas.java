@@ -60,6 +60,9 @@ public class ComprasRealizadas extends JFrame {
 		btnVerCompras = new JButton("Ver Compras");
 		btnVerCompras.setBounds(262, 56, 120, 27);
 		contentPane.add(btnVerCompras);
+		manejadorboton man=new manejadorboton();
+		btnVerCompras.addActionListener(man);
+		btnVerAlquileres.addActionListener(man);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
@@ -74,6 +77,7 @@ public class ComprasRealizadas extends JFrame {
 		contentPane.add(btnCancelar);
 		
 		
+		
 	
 	}
 	private class manejadorboton implements ActionListener{
@@ -82,9 +86,11 @@ public class ComprasRealizadas extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			JButton boton=(JButton) e.getSource();
 			if(boton.equals(btnVerCompras)) {
-				
+				HistorialComprasCliente hcc=new HistorialComprasCliente();
+				dispose();
 			}else if(boton.equals(btnVerAlquileres)) {
-				
+				HistorialAlquileresCliente hac=new HistorialAlquileresCliente();
+				dispose();
 			}
 		}
 		
