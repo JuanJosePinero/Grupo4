@@ -166,7 +166,6 @@ public class Login extends JFrame {
 							setidClienteLogin(datos.getIdClientes());
 							VisualizarVehiculosCrear vv = new VisualizarVehiculosCrear();
 							datos.getIdClientes();
-							
 							vv.setVisible(true);
 							dispose();
 						}

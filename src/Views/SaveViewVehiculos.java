@@ -213,16 +213,16 @@ public class SaveViewVehiculos extends JFrame {
 
 			    if (result == JFileChooser.APPROVE_OPTION) {
 			      File selectedFile = fileChooser.getSelectedFile();
+			      ruta = selectedFile.toURI().toString();
 			      
-					Image img;
-					try {
-						img = ImageIO.read(selectedFile);
-						btnImagen.setIcon(new ImageIcon(img));
-						ruta = selectedFile.getAbsolutePath();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+			      Image img;
+			      try {
+			          img = ImageIO.read(selectedFile);
+			          btnImagen.setIcon(new ImageIcon(img));
+			          ruta = selectedFile.getAbsolutePath();
+			      } catch (IOException e1) {
+			          e1.printStackTrace();
+			      }
 			     
 			    }
 			}

@@ -63,7 +63,7 @@ public class VerComentsYValorac extends JFrame {
 	
 		ManejadorJButton mb = new ManejadorJButton();
 		btnVerComentarios.addActionListener(mb);
-	
+		btnVerValoraciones.addActionListener(mb);
 	}
 	
 	public class ManejadorJButton implements ActionListener {
@@ -78,6 +78,9 @@ public class VerComentsYValorac extends JFrame {
 				dispose();
 				
 			}else if(o == btnVerValoraciones) {
+				AgregarValoracion av = new AgregarValoracion();
+				av.setVisible(true);
+				dispose();
 				
 			}
 			

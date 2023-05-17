@@ -108,25 +108,7 @@ public class VentanaCatalogo extends JFrame {
 	    lblCoche = new JLabel("Catalogo de Coches Disponibles");
 	    lblCoche.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 16));
 	    lblCoche.setBounds(255, 16, 334, 32);
-	    contentPane.add(lblCoche);
-	     
-//	    JLabel lblComentarios = new JLabel("Comentarios sobre nuestros coches y nuestras Ventas");
-//	    lblComentarios.setBounds(49, 340, 376, 22);
-//	    contentPane.add(lblComentarios);
-//	     
-//	    scrollPane = new JScrollPane();
-//	    scrollPane.setBounds(49, 369, 376, 109);
-//	    contentPane.add(scrollPane);
-//	     
-//	    listaComentarios.add("Comentario 1");
-//	    listaComentarios.add("Comentario 2");
-//	    listaComentarios.add("Comentario 3");
-//	    listaComentarios.add("Comentario 4");
-//	    
-//	    textAreaComentarios = new JTextArea();
-//	    textAreaComentarios.setEditable(false);
-//	    scrollPane.setViewportView(textAreaComentarios);
-	    
+	    contentPane.add(lblCoche);	    
 	    
 	    String[] filtros= {"--","Marca","Modelo","Anyo","Color","Precio","idFabricante"};
 	    filtro = new JComboBox(filtros);
@@ -159,6 +141,7 @@ public class VentanaCatalogo extends JFrame {
 		        return false;
 		    }
 		};
+		
 		scrollPane.setViewportView(jtableP);
 		
 		btnSalir = new JButton("");
@@ -183,7 +166,9 @@ public class VentanaCatalogo extends JFrame {
 		btnVerCyV.setIcon(new ImageIcon("images/comentsYvalorac.png"));
 		btnVerCyV.setBounds(59, 305, 50, 50);
 		contentPane.add(btnVerCyV);
+		btnVerCyV.addActionListener(manejador);
 		
+
 //		JLabel lblValoraciones = new JLabel("Valoraciones sobre nuestros coches y nuestras Ventas");
 //		lblValoraciones.setBounds(486, 340, 376, 22);
 //		contentPane.add(lblValoraciones);
@@ -217,8 +202,10 @@ public class VentanaCatalogo extends JFrame {
 		ManejadorJButton mb = new ManejadorJButton();
 		btnVerCyV.addActionListener(mb);
 		
-		}
-		
+
+		showVehiculos();
+
+	}
 	
 	public Vehiculo getVehiculo(Connection conexion) throws SQLException {
 		   Vehiculo vehiculo = null;
@@ -304,7 +291,7 @@ public class VentanaCatalogo extends JFrame {
 	private void refrescarTabla(String fil){
 		    try {
 		        if (fil.equalsIgnoreCase("--")) {
-		            showVehiculos();  
+		            showVehiculos();
 		        } else if (fil.equalsIgnoreCase("Marca")) {
 		            showVehiculosMarca();  
 		        } else if (fil.equalsIgnoreCase("Modelo")) {

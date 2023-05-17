@@ -2,6 +2,9 @@ package Views;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -50,18 +53,46 @@ public class ComprasRealizadas extends JFrame {
 		
 		
 		btnVerAlquileres = new JButton("Ver Alquileres");
-		btnVerAlquileres.setBounds(36, 68, 120, 27);
+		btnVerAlquileres.setBounds(32, 56, 120, 27);
 		contentPane.add(btnVerAlquileres);
 		
 		
 		btnVerCompras = new JButton("Ver Compras");
-		btnVerCompras.setBounds(257, 71, 120, 27);
+		btnVerCompras.setBounds(262, 56, 120, 27);
 		contentPane.add(btnVerCompras);
-	
+		manejadorboton man=new manejadorboton();
+		btnVerCompras.addActionListener(man);
+		btnVerAlquileres.addActionListener(man);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaCatalogo vc=new VentanaCatalogo();
+				vc.setVisible(true);
+				vc.setLocationRelativeTo(null);
+				dispose();
+			}
+		});
+		btnCancelar.setBounds(159, 98, 97, 25);
+		contentPane.add(btnCancelar);
+		
+		
 		
 	
 	}
-	
-	
+	private class manejadorboton implements ActionListener{
 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton boton=(JButton) e.getSource();
+			if(boton.equals(btnVerCompras)) {
+				HistorialComprasCliente hcc=new HistorialComprasCliente();
+				dispose();
+			}else if(boton.equals(btnVerAlquileres)) {
+				HistorialAlquileresCliente hac=new HistorialAlquileresCliente();
+				dispose();
+			}
+		}
+		
+	}
 }
