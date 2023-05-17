@@ -19,14 +19,16 @@ public class FabricantesService {
 	      try{
 	         PreparedStatement consulta;
 	         if(fabricante.getIdFabricante() == null){
-	            consulta = conexion.prepareStatement("INSERT INTO " + this.tabla + "(nombre, pais) VALUES(?, ?)");
+	            consulta = conexion.prepareStatement("INSERT INTO " + this.tabla + "(nombre, pais, idCliente) VALUES(?, ?, ?)");
 	            consulta.setString(1, fabricante.getNombre());
 	            consulta.setString(2, fabricante.getPais());
+	            consulta.setInt(3, fabricante.getIdCliente());
 	         }else{
-	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET nombre = ?, pais = ? WHERE idFabricante = ?");
+	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET nombre = ?, pais = ?, idCliente = ? WHERE idFabricante = ?");
 	            consulta.setString(1, fabricante.getNombre());
 	            consulta.setString(2, fabricante.getPais());
-	            consulta.setInt(3, fabricante.getIdFabricante());
+	            consulta.setInt(3, fabricante.getIdCliente());
+	            consulta.setInt(4, fabricante.getIdFabricante());
 	         }
 	         consulta.executeUpdate();
 	      }catch(SQLException ex){
@@ -37,13 +39,13 @@ public class FabricantesService {
 	   public Fabricante getFabricantes(Connection conexion, int id) throws SQLException {
 	      Fabricante fabricante = null;
 	      try{
-	         PreparedStatement consulta = conexion.prepareStatement("SELECT idFabricante,nombre,pais "
+	         PreparedStatement consulta = conexion.prepareStatement("SELECT idFabricante,nombre,pais,idCliente "
 	                 + " FROM " + this.tabla + " WHERE idFabricante = ?" );
 	         consulta.setInt(1, id);
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
 	            fabricante = new Fabricante(id, resultado.getString("nombre"), 
-	                    resultado.getString("pais"));
+	                    resultado.getString("pais"),resultado.getInt("idCliente"));
 	         }
 	      }catch(SQLException ex){
 	         throw new SQLException(ex);
@@ -65,12 +67,12 @@ public class FabricantesService {
 	   public List<Fabricante> getAllFabricantes(Connection conexion) throws SQLException{
 	      List<Fabricante> fabricante = new ArrayList<>();
 	      try{
-	         PreparedStatement consulta = conexion.prepareStatement("SELECT idFabricante,nombre,pais "
+	         PreparedStatement consulta = conexion.prepareStatement("SELECT idFabricante,nombre,pais,idCliente "
 	                 + " FROM " + this.tabla);
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
 	        	 fabricante.add(new Fabricante(resultado.getInt("idFabricante"), resultado.getString("nombre"), 
-	                    resultado.getString("pais")));
+	                    resultado.getString("pais"),resultado.getInt("idCliente")));
 	         }
 	      }catch(SQLException ex){
 	         throw new SQLException(ex);

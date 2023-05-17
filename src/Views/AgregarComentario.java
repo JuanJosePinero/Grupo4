@@ -74,7 +74,7 @@ public class AgregarComentario extends JFrame {
 				String comentario = textArea.getText();
 				
 				Comentario c = new Comentario();
-				c.setIdCliente(1);
+				c.setIdCliente(Login.getidClienteLogin());
 				c.setIdVehiculo(1);
 				c.setComentario(comentario);
 				

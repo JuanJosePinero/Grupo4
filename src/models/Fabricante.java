@@ -3,11 +3,15 @@ package models;
 public class Fabricante {
 	private Integer idFabricante;
 	private String nombre,pais;
-	public Fabricante(Integer idFabricante, String nombre, String pais) {
+	private Integer idCliente;
+	
+	
+	public Fabricante(Integer idFabricante, String nombre, String pais, Integer idCliente) {
 		super();
 		this.idFabricante = idFabricante;
 		this.nombre = nombre;
 		this.pais = pais;
+		this.idCliente = idCliente;
 	}
 	public Fabricante() {
 		super();
@@ -29,6 +33,13 @@ public class Fabricante {
 	}
 	public void setPais(String pais) {
 		this.pais = pais;
+	}
+	
+	public Integer getIdCliente() {
+		return idCliente;
+	}
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
 	}
 	@Override
 	public String toString() {

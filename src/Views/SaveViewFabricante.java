@@ -91,8 +91,14 @@ public class SaveViewFabricante extends JFrame {
 				cliente.setActivar(1);
 				cliente.setRol("Fabricante");
 				try {
-					serviceF.save(Conexion.obtener(), fabricante);
+					
 					servicec.save(Conexion.obtener(), cliente);
+					Cliente datos =servicec.getCliente(Conexion.obtener(), user);
+					Integer id = datos.getIdClientes();
+					System.out.println(id);
+					fabricante.setIdCliente(id);
+					System.out.println(fabricante.getIdCliente());
+					serviceF.save(Conexion.obtener(), fabricante);
 					SaveViewFabricante.this.dispose();
 					ListViewFabricante vista = new ListViewFabricante();
 					vista.setVisible(true);

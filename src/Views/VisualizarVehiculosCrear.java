@@ -20,14 +20,14 @@ import Service.VehiculoService;
 import models.Vehiculo;
 import javax.swing.JLabel;
 
-public class VisualizarVehiculos extends JFrame {
+public class VisualizarVehiculosCrear extends JFrame {
 
 	private JPanel contentPane;
 	private JTable jtableP;
 	private final VehiculoService services = new VehiculoService();
 	private List<Vehiculo> vehiculo;
 
-	public VisualizarVehiculos() {
+	public VisualizarVehiculosCrear() {
 		setTitle("Vehiculos");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,6 +59,10 @@ public class VisualizarVehiculos extends JFrame {
 		JLabel lblNewLabel = new JLabel("Visualizacion de los Vehiculos Creados");
 		lblNewLabel.setBounds(145, 53, 242, 13);
 		contentPane.add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("Crear");
+		btnNewButton.setBounds(208, 19, 89, 23);
+		contentPane.add(btnNewButton);
 		setVisible(true);		
 	}
 	

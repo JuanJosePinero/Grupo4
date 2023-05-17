@@ -26,6 +26,7 @@ public class Login extends JFrame {
 	private JPasswordField ContraseñaP;
 	private final ClientService services = new ClientService();
 	public static Integer idClienteLogin;
+	public static Integer idFabricante;
 
 	/**
 	 * Launch the application.
@@ -160,7 +161,8 @@ public class Login extends JFrame {
 							}else
 								JOptionPane.showMessageDialog(Login.this, datos.getNombre()+" ha sido baneado por peruano");
 						}else if(datos.getRol().equals("Fabricante")) {
-							VisualizarVehiculos vv = new VisualizarVehiculos();
+							VisualizarVehiculosCrear vv = new VisualizarVehiculosCrear();
+							
 							vv.setVisible(true);
 							dispose();
 						}
@@ -192,6 +194,13 @@ public class Login extends JFrame {
 	}
 	public static Integer getidClienteLogin() {
 		return idClienteLogin;
+	}
+	
+	public static void setidFabricante(Integer id) {
+		idFabricante=id;
+	}
+	public static Integer getidFabricante() {
+		return idFabricante;
 	}
 	
 }
