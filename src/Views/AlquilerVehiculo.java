@@ -211,7 +211,7 @@ public class AlquilerVehiculo extends JFrame {
 				alquiler.setIdVehiculo(idVehiculo);
 				alquiler.setIdCliente(idCliente);
 				alquiler.setFechaInic(fechaInc);
-				alquiler.setFechFin(fechaFin);
+				
 				
 				
 				
