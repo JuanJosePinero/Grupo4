@@ -2,9 +2,12 @@ package Views;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,12 +18,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import models.Valoracion;
-import java.awt.FlowLayout;
 
 public class AgregarValoracion extends JFrame {
 
 	private JPanel contentPane;
 	private JButton[] btnEstrella = new JButton[6];
+	private List<JButton> btnEstrellaList = new ArrayList<>();
 	private JButton btnEnviar, btnCancelar;
 	private ImageIcon icono;
 	private  JLabel etiquetaImagen;
