@@ -209,15 +209,14 @@ public class AlquilerVehiculo extends JFrame {
 	private void updateComboBoxFin(LocalDate selectedDate) {
 		fechaF.removeAllItems();
 		fechaF.addItem(selectedDate.toString());
-		for (int i = fechainicio.getSelectedIndex() + 1; i < fechainicio.getItemCount(); i++) {
+		for (int i = fechainicio.getSelectedIndex(); i < fechainicio.getItemCount(); i++) {
 			LocalDate date = parseDate(fechainicio.getItemAt(i));
 			fechaF.addItem(date.toString());
 		}
 	}
 
 	private LocalDate parseDate(String dateStr) {
-		LocalDateTime dateTime = LocalDateTime.parse(dateStr + " 12:00", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		return dateTime.toLocalDate();
+		return LocalDate.parse(dateStr);
 	}
 
 	private class ManejadorJButton implements ActionListener {
@@ -300,14 +299,14 @@ public class AlquilerVehiculo extends JFrame {
 			        PreparedStatement statement = connection.prepareStatement(query);
 			        statement.setInt(1, idVehiculo);
 			        statement.setDate(2, fechaInc);
-			        statement.setDate(3, fechaFin);
-			        statement.setDate(4, fechaInc);
+			        statement.setDate(3, fechaInc);
+			        statement.setDate(4, fechaFin);
 			        statement.setDate(5, fechaFin);
 			        ResultSet resultSet = statement.executeQuery();
 			        
 			        if (resultSet.next()) {
 			            int count = resultSet.getInt(1);
-			            return count == 0;
+			            return count ==0;
 			        }
 			    } catch (SQLException ex) {
 			        System.out.println(ex.getMessage());
