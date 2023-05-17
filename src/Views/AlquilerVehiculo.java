@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
@@ -215,7 +216,8 @@ public class AlquilerVehiculo extends JFrame {
 	}
 
 	private LocalDate parseDate(String dateStr) {
-		return LocalDate.parse(dateStr);
+		LocalDateTime dateTime = LocalDateTime.parse(dateStr + " 12:00", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		return dateTime.toLocalDate();
 	}
 
 	private class ManejadorJButton implements ActionListener {
@@ -254,15 +256,16 @@ public class AlquilerVehiculo extends JFrame {
 					
 					if(!VehiculoDisponible(idVehiculo,fechaInc,fechaFin)) {
 						JOptionPane.showMessageDialog(AlquilerVehiculo.this, "No se puede alquilar el vehiculo en esta fecha");
-					}else {
-					services.save(Conexion.obtener(), vehiculo);
-					service.save(Conexion.obtener(), alquiler);
-					AlquilerVehiculo.this.dispose();
-					JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Se ha realizado el alquiler");
-					VentanaCatalogo vc = new VentanaCatalogo();
-					vc.setVisible(true);
-					vc.setLocationRelativeTo(null);
+						return;
 					}
+						services.save(Conexion.obtener(), vehiculo);
+						service.save(Conexion.obtener(), alquiler);
+						AlquilerVehiculo.this.dispose();
+						JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Se ha realizado el alquiler");
+						VentanaCatalogo vc = new VentanaCatalogo();
+						vc.setVisible(true);
+						vc.setLocationRelativeTo(null);
+					
 					
 					
 					
@@ -293,13 +296,13 @@ public class AlquilerVehiculo extends JFrame {
 			 try {
 				 
 			        Connection connection = Conexion.obtener();
-			        String query = "SELECT * FROM alquiler WHERE idVehiculo = ? AND ((fechaInic <= ? AND fechFin >= ?) OR (fechaInic <= ? AND fechFin >= ?))";
+			        String query = "SELECT * FROM alquiler WHERE idVehiculo = ? AND ((fechaInic <= ?  AND fechaFin >= ? ) OR (fechaInic <= ?  AND fechaFin >= ? ))";
 			        PreparedStatement statement = connection.prepareStatement(query);
-			        statement.setInt(1, 0);
-			        statement.setDate(2, (Date) alquiler.getFechaInic());
-			        statement.setDate(3, (Date) alquiler.getFechFin());
-			        statement.setInt(4, alquiler.getIdCliente());
-			        statement.setInt(5, alquiler.getIdVehiculo());
+			        statement.setInt(1, idVehiculo);
+			        statement.setDate(2, fechaInc);
+			        statement.setDate(3, fechaFin);
+			        statement.setDate(4, fechaInc);
+			        statement.setDate(5, fechaFin);
 			        ResultSet resultSet = statement.executeQuery();
 			        
 			        if (resultSet.next()) {
@@ -314,7 +317,7 @@ public class AlquilerVehiculo extends JFrame {
 			        
 			    }
 			    
-			    return false;
+			    return true;
 			}
 		}
 	}
