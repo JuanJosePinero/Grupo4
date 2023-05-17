@@ -3,9 +3,10 @@ package Views;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -250,7 +251,10 @@ public class AlquilerVehiculo extends JFrame {
 					System.out.println(alquiler.getFechaInic());
 					System.out.println(fechaInc);
 					System.out.println(fechaFin);
-
+					
+					if(!VehiculoDisponible(idVehiculo,fechaInc,fechaFin)) {
+						JOptionPane.showMessageDialog(AlquilerVehiculo.this, "No se puede alquilar el vehiculo en esta fecha");
+					}else {
 					services.save(Conexion.obtener(), vehiculo);
 					service.save(Conexion.obtener(), alquiler);
 					AlquilerVehiculo.this.dispose();
@@ -258,6 +262,12 @@ public class AlquilerVehiculo extends JFrame {
 					VentanaCatalogo vc = new VentanaCatalogo();
 					vc.setVisible(true);
 					vc.setLocationRelativeTo(null);
+					}
+					
+					
+					
+						
+					
 				} catch (SQLException ex) {
 					System.out.println(ex.getMessage());
 					JOptionPane.showMessageDialog(AlquilerVehiculo.this,
@@ -278,14 +288,36 @@ public class AlquilerVehiculo extends JFrame {
 				vc.setLocationRelativeTo(null);
 			}
 		}
-	}
-
-	private class ManejadorCombo implements ItemListener {
-
-		@Override
-		public void itemStateChanged(ItemEvent e) {
-
+		
+		private boolean VehiculoDisponible(Integer idVehiculo, Date fechaInc, Date fechaFin) {
+			 try {
+				 
+			        Connection connection = Conexion.obtener();
+			        String query = "SELECT * FROM alquiler WHERE idVehiculo = ? AND ((fechaInic <= ? AND fechFin >= ?) OR (fechaInic <= ? AND fechFin >= ?))";
+			        PreparedStatement statement = connection.prepareStatement(query);
+			        statement.setInt(1, 0);
+			        statement.setDate(2, (Date) alquiler.getFechaInic());
+			        statement.setDate(3, (Date) alquiler.getFechFin());
+			        statement.setInt(4, alquiler.getIdCliente());
+			        statement.setInt(5, alquiler.getIdVehiculo());
+			        ResultSet resultSet = statement.executeQuery();
+			        
+			        if (resultSet.next()) {
+			            int count = resultSet.getInt(1);
+			            return count == 0;
+			        }
+			    } catch (SQLException ex) {
+			        System.out.println(ex.getMessage());
+			        
+			    } catch (ClassNotFoundException ex) {
+			        System.out.println(ex);
+			        
+			    }
+			    
+			    return false;
+			}
 		}
-
 	}
-}
+
+	
+
