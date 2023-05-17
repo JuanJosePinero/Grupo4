@@ -17,8 +17,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import models.Valoracion;
-
 public class AgregarValoracion extends JFrame {
 
 	private JPanel contentPane;
