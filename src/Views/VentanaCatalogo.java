@@ -178,6 +178,13 @@ public class VentanaCatalogo extends JFrame {
 		textAreaValoraciones.setEditable(false);
 		
 		JButton btnComentario = new JButton("Comentario");
+		btnComentario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AgregarComentario ac = new AgregarComentario();
+				ac.setVisible(true);
+				dispose();
+			}
+		});
 		btnComentario.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
 		btnComentario.setBounds(41, 275, 143, 31);
 		contentPane.add(btnComentario);
