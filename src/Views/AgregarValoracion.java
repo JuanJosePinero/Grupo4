@@ -22,9 +22,9 @@ import models.Valoracion;
 public class AgregarValoracion extends JFrame {
 
 	private JPanel contentPane;
-	private JButton[] btnEstrella = new JButton[6];
 	private List<JButton> btnEstrellaList = new ArrayList<>();
 	private JButton btnEnviar, btnCancelar;
+	private JButton btnEst;
 	private ImageIcon icono;
 	private  JLabel etiquetaImagen;
 	/**
@@ -72,11 +72,12 @@ public class AgregarValoracion extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		for (int i=0; i<btnEstrella.length;i++) {
-			btnEstrella[i] = new JButton(i+"★");
-			btnEstrella[i].setSize(55, 55);
-			panel.add(btnEstrella[i]);
-			btnEstrella[i].addActionListener(manejador);
+		for (int i=0; i<6;i++) {
+			JButton btnEst = new JButton(i+"★");
+			btnEstrellaList.add(btnEst);
+			btnEst.setSize(55, 55);
+			panel.add(btnEst);
+			btnEst.addActionListener(manejador);
 			
 			icono = new ImageIcon("images/estrellas/estrella"+i+".png");
 	        etiquetaImagen = new JLabel(icono);
@@ -85,28 +86,7 @@ public class AgregarValoracion extends JFrame {
 		}	       
 		
 		btnEnviar = new JButton("Enviar");
-		btnEnviar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-//				int valoracion = 
-				
-				Valoracion v = new Valoracion();
-				v.setIdCliente(1);
-				v.setIdVehiculo(1);
-//				v.setValoracion(valoracion);
-				
-//				try {
-//					service.save(Conexion.obtener(), c);
-//				} catch (ClassNotFoundException | SQLException e1) {
-//					e1.printStackTrace();
-//				}
-				JOptionPane.showMessageDialog(null, "La valoracion ha sido Enviada con exito!", "Envio completado", JOptionPane.INFORMATION_MESSAGE);
-				VentanaCatalogo vc = new VentanaCatalogo();
-				vc.setVisible(true);
-				dispose();
-			}
-		});
+		btnEnviar.addActionListener(manejador);
 		btnEnviar.setBounds(103, 224, 98, 21);
 		contentPane.add(btnEnviar);
 		
@@ -124,17 +104,35 @@ public class AgregarValoracion extends JFrame {
 			Object o = e.getSource();
 			
 			if(o == btnEnviar) {
-				
+//				int valoracion = 
+						
+//						Valoracion v = new Valoracion();
+//						v.setIdCliente(1);
+//						v.setIdVehiculo(1);
+//						v.setValoracion(valoracion);
+						
+//						try {
+//							service.save(Conexion.obtener(), c);
+//						} catch (ClassNotFoundException | SQLException e1) {
+//							e1.printStackTrace();
+//						}
+						JOptionPane.showMessageDialog(null, "La valoracion ha sido Enviada con exito!", "Envio completado", JOptionPane.INFORMATION_MESSAGE);
+						VentanaCatalogo vc = new VentanaCatalogo();
+						vc.setVisible(true);
+						dispose();
 			}else if(o == btnCancelar) {
 				JOptionPane.showMessageDialog(null, "La valoracion ha sido Cancelado!", "Cancelar valoracion", JOptionPane.ERROR_MESSAGE);
 				VentanaCatalogo vc = new VentanaCatalogo();
 				vc.setVisible(true);
 				dispose();
 				
-			}else if(o == btnEstrella) {
-				for(int i=0; i<btnEstrella.length;i++) {
-				icono = new ImageIcon("images/estrellas/estrella"+i+".png");
-		        etiquetaImagen.setIcon(icono);
+			}else if(o == btnEstrellaList) {
+				for(int i=0; i<6;i++) {
+					 if (btnEstrellaList.contains(i)) {
+			                icono.setImage(new ImageIcon("images/estrellas/estrella1.png").getImage());
+			                etiquetaImagen.setIcon(icono);
+			                break;
+			            }
 				}
 		        
 			}
