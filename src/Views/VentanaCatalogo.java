@@ -177,6 +177,16 @@ public class VentanaCatalogo extends JFrame {
 		scrollPane_1.setViewportView(textAreaValoraciones);
 		textAreaValoraciones.setEditable(false);
 		
+		JButton btnComentario = new JButton("Comentario");
+		btnComentario.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
+		btnComentario.setBounds(41, 275, 143, 31);
+		contentPane.add(btnComentario);
+		
+		JButton btnValoracion = new JButton("Valoracion");
+		btnValoracion.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
+		btnValoracion.setBounds(282, 275, 143, 31);
+		contentPane.add(btnValoracion);
+		
 			
 		}
 	
