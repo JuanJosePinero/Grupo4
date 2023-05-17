@@ -27,14 +27,15 @@ public class VehiculoService {
 	            consulta.setFloat(5, vehiculo.getPrecio());
 	            consulta.setInt(6, vehiculo.getIdFabricante());
 	         }else{
-	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET modelo = ?, marca = ?, anyo = ?, color = ?, precio = ?, idFabricante = ? WHERE idVehiculos = ?");
+	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET modelo = ?, marca = ?, anyo = ?, color = ?, precio = ?, idFabricante = ?, comprado = ? WHERE idVehiculos = ?");
 	            consulta.setString(1, vehiculo.getModelo());
 	            consulta.setString(2, vehiculo.getMarca());
 	            consulta.setInt(3, vehiculo.getAnyo());     
 	            consulta.setString(4, vehiculo.getColor());
 	            consulta.setFloat(5, vehiculo.getPrecio());
 	            consulta.setInt(6, vehiculo.getIdFabricante());
-	            consulta.setInt(7, vehiculo.getIdVehiculos());
+	            consulta.setInt(7, vehiculo.getComprado());
+	            consulta.setInt(8, vehiculo.getIdVehiculos());
 	         }
 	         consulta.executeUpdate();
 	      }catch(SQLException ex){
@@ -42,15 +43,16 @@ public class VehiculoService {
 	      }
 	   }
 	   
-	   public Vehiculo getVehiculo(Connection conexion) throws SQLException {
+	   public Vehiculo getVehiculo(Connection conexion, int id) throws SQLException {
 		   Vehiculo vehiculo = null;
 	      try{
-	         PreparedStatement consulta = conexion.prepareStatement("SELECT idVehiculos, modelo, marca, anyo, color, precio, idFabricante"
+	         PreparedStatement consulta = conexion.prepareStatement("SELECT idVehiculos, modelo, marca, anyo, color, precio, idFabricante, comprado"
 	                 + " FROM " + this.tabla + " WHERE idVehiculos = ?" );
+	         consulta.setInt(1, id);
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
 	        	 vehiculo = new Vehiculo(resultado.getInt("idVehiculos"), resultado.getString("modelo"), resultado.getString("marca"), 
-	                    resultado.getInt("anyo"), resultado.getString("color"), resultado.getFloat("precio"), resultado.getInt("idFabricante"));
+	                    resultado.getInt("anyo"), resultado.getString("color"), resultado.getFloat("precio"), resultado.getInt("idFabricante"),resultado.getInt("comprado"));
 	         }
 	      }catch(SQLException ex){
 	         throw new SQLException(ex);
@@ -72,7 +74,7 @@ public class VehiculoService {
 	   public List<Vehiculo> getAllVehiculos(Connection conexion) throws SQLException {
 		    List<Vehiculo> listaVehiculos = new ArrayList<>();
 		    try {
-		        PreparedStatement consulta = conexion.prepareStatement("SELECT idVehiculos, modelo, marca, anyo, color, precio, idFabricante "
+		        PreparedStatement consulta = conexion.prepareStatement("SELECT idVehiculos, modelo, marca, anyo, color, precio, idFabricante, comprado"
 		                + " FROM " + this.tabla);
 		        ResultSet resultado = consulta.executeQuery();
 		        while (resultado.next()) {

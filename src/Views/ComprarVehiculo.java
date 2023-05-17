@@ -172,29 +172,40 @@ public class ComprarVehiculo extends JFrame {
 
 			if (o == btnComprar) {
 				try {
-					Integer idVehiculo = vehiculo.getIdVehiculos();
-					Integer idCliente = Login.getidClienteLogin();
-					Calendar calendario = Calendar.getInstance();
-					java.util.Date utilDate = new java.util.Date();
-					java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-					Integer idVenta = venta.getIdVenta();
-					venta.setIdVenta(idVenta);
-					venta.setIdVehiculo(idVehiculo);
-					venta.setIdCliente(idCliente);
-					venta.setFechaHora(sqlDate);
+					Vehiculo v=services.getVehiculo(Conexion.obtener(),vehiculo.getIdVehiculos());
+					
+					if(v.getComprado()==1) {
+						JOptionPane.showMessageDialog(ComprarVehiculo.this, "este coche ya ha sido comprado");
+						ComprarVehiculo.this.dispose();
+						VentanaCatalogo vc = new VentanaCatalogo();
+						vc.setVisible(true);
+						vc.setLocationRelativeTo(null);
+					}else if(v.getComprado()==0){
+						Integer idVehiculo = vehiculo.getIdVehiculos();
+						Integer idCliente = Login.getidClienteLogin();
+						Calendar calendario = Calendar.getInstance();
+						java.util.Date utilDate = new java.util.Date();
+						java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+						Integer idVenta = venta.getIdVenta();
+						venta.setIdVenta(idVenta);
+						venta.setIdVehiculo(idVehiculo);
+						venta.setIdCliente(idCliente);
+						venta.setFechaHora(sqlDate);
+						System.out.println(v.getIdVehiculos());
+						System.out.println(vehiculo.getIdVehiculos());
+						System.out.println(venta.getIdVehiculo());
+						System.out.println(venta.getIdCliente());
+						System.out.println(venta.getFechaHora());
+						vehiculo.setComprado(1);
 
-					System.out.println(venta.getIdVehiculo());
-					System.out.println(venta.getIdCliente());
-					System.out.println(venta.getFechaHora());
-
-					servicesventa.save(Conexion.obtener(), venta);
-
-					services.save(Conexion.obtener(), vehiculo);
-					ComprarVehiculo.this.dispose();
-					JOptionPane.showMessageDialog(ComprarVehiculo.this, "Se ha realizado la compra");
-					VentanaCatalogo vc = new VentanaCatalogo();
-					vc.setVisible(true);
-					vc.setLocationRelativeTo(null);
+						servicesventa.save(Conexion.obtener(), venta);
+						services.save(Conexion.obtener(), vehiculo);
+						ComprarVehiculo.this.dispose();
+						JOptionPane.showMessageDialog(ComprarVehiculo.this, "Se ha realizado la compra");
+						VentanaCatalogo vc = new VentanaCatalogo();
+						vc.setVisible(true);
+						vc.setLocationRelativeTo(null);
+					}
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
