@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Service.Conexion;
+import Service.ValoracionService;
+import models.Valoracion;
+
 public class AgregarValoracion extends JFrame {
 
 	private JPanel contentPane;
@@ -25,6 +30,9 @@ public class AgregarValoracion extends JFrame {
 	private JButton btnEst;
 	private ImageIcon icono;
 	private JLabel etiquetaImagen;
+	private ValoracionService service = new ValoracionService();
+	private int valoracion = 0;
+	private int val = 0;
 
 	/**
 	 * Launch the application.
@@ -103,18 +111,29 @@ public class AgregarValoracion extends JFrame {
 			Object o = e.getSource();
 
 			if (o == btnEnviar) {
-//				int valoracion = 
+				
+				if (o == btnEst) {
+					for (int i = 1; i < 6; i++) {
+						if(btnEstrellaList.get(i) == btnEst) {
+						valoracion=i;
+						break;
+						}
+					}
+				val = valoracion;
+				}
+				
 
-//						Valoracion v = new Valoracion();
-//						v.setIdCliente(1);
-//						v.setIdVehiculo(1);
-//						v.setValoracion(valoracion);
+				Valoracion v = new Valoracion();
+				v.setIdCliente(5);
+				v.setIdVehiculo(2);
+				v.setValoracion(val);
 
-//						try {
-//							service.save(Conexion.obtener(), c);
-//						} catch (ClassNotFoundException | SQLException e1) {
-//							e1.printStackTrace();
-//						}
+				try {
+					service.save(Conexion.obtener(), v);
+				} catch (ClassNotFoundException | SQLException e1) {
+					e1.printStackTrace();
+				}
+				
 				JOptionPane.showMessageDialog(null, "La valoracion ha sido Enviada con exito!", "Envio completado",
 						JOptionPane.INFORMATION_MESSAGE);
 				VentanaCatalogo vc = new VentanaCatalogo();
@@ -127,10 +146,16 @@ public class AgregarValoracion extends JFrame {
 				vc.setVisible(true);
 				dispose();
 
-			} else if (btnEstrellaList.contains(o)) {
-				int index = btnEstrellaList.indexOf(o);
-				icono.setImage(new ImageIcon("images/estrellas/estrella" + index + ".png").getImage());
-				etiquetaImagen.setIcon(icono);
+			} else if (o == btnEst) {
+				for (int i = 1; i < 6; i++) {
+					if(btnEstrellaList.get(i) == btnEst) {
+					System.out.println(i);
+					break;
+					}
+				}
+//				int index = btnEstrellaList.indexOf(o);
+//				icono.setImage(new ImageIcon("images/estrellas/estrella" + index + ".png").getImage());
+//				etiquetaImagen.setIcon(icono);
 
 			}
 

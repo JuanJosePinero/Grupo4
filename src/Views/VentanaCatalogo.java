@@ -107,25 +107,7 @@ public class VentanaCatalogo extends JFrame {
 	    lblCoche = new JLabel("Catalogo de Coches Disponibles");
 	    lblCoche.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 16));
 	    lblCoche.setBounds(255, 16, 334, 32);
-	    contentPane.add(lblCoche);
-	     
-//	    JLabel lblComentarios = new JLabel("Comentarios sobre nuestros coches y nuestras Ventas");
-//	    lblComentarios.setBounds(49, 340, 376, 22);
-//	    contentPane.add(lblComentarios);
-//	     
-//	    scrollPane = new JScrollPane();
-//	    scrollPane.setBounds(49, 369, 376, 109);
-//	    contentPane.add(scrollPane);
-//	     
-//	    listaComentarios.add("Comentario 1");
-//	    listaComentarios.add("Comentario 2");
-//	    listaComentarios.add("Comentario 3");
-//	    listaComentarios.add("Comentario 4");
-//	    
-//	    textAreaComentarios = new JTextArea();
-//	    textAreaComentarios.setEditable(false);
-//	    scrollPane.setViewportView(textAreaComentarios);
-	    
+	    contentPane.add(lblCoche);	    
 	    
 	    String[] filtros= {"--","Marca","Modelo","Anyo","Color","Precio","idFabricante"};
 	    filtro = new JComboBox(filtros);
@@ -158,6 +140,7 @@ public class VentanaCatalogo extends JFrame {
 		        return false;
 		    }
 		};
+		
 		scrollPane.setViewportView(jtableP);
 		
 		btnSalir = new JButton("");
@@ -182,37 +165,9 @@ public class VentanaCatalogo extends JFrame {
 		btnVerCyV.setIcon(new ImageIcon("images/comentsYvalorac.png"));
 		btnVerCyV.setBounds(59, 305, 50, 50);
 		contentPane.add(btnVerCyV);
+		btnVerCyV.addActionListener(manejador);
 		
-//		JLabel lblValoraciones = new JLabel("Valoraciones sobre nuestros coches y nuestras Ventas");
-//		lblValoraciones.setBounds(486, 340, 376, 22);
-//		contentPane.add(lblValoraciones);
-//		
-//		JScrollPane scrollPane_1 = new JScrollPane();
-//		scrollPane_1.setBounds(486, 375, 370, 107);
-//		contentPane.add(scrollPane_1);
-//		
-//		JTextArea textAreaValoraciones = new JTextArea();
-//		scrollPane_1.setViewportView(textAreaValoraciones);
-//		textAreaValoraciones.setEditable(false);
-//		
-//		JButton btnComentario = new JButton("Comentario");
-//		btnComentario.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				AgregarComentario ac = new AgregarComentario();
-//				ac.setVisible(true);
-//				dispose();
-//			}
-//		});
-//		btnComentario.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
-//		btnComentario.setBounds(0, 480, 143, 31);
-//		contentPane.add(btnComentario);
-//		
-//		JButton btnValoracion = new JButton("Valoracion");
-//		btnValoracion.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
-//		btnValoracion.setBounds(253, 496, 143, 31);
-//		contentPane.add(btnValoracion);
-//		
-//			
+		 showVehiculos();
 		}
 		
 	
@@ -288,7 +243,7 @@ public class VentanaCatalogo extends JFrame {
 	private void refrescarTabla(String fil){
 		    try {
 		        if (fil.equalsIgnoreCase("--")) {
-		            showVehiculos();  
+		            showVehiculos();
 		        } else if (fil.equalsIgnoreCase("Marca")) {
 		            showVehiculosMarca();  
 		        } else if (fil.equalsIgnoreCase("Modelo")) {
