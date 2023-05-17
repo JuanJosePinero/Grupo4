@@ -32,7 +32,7 @@ public class AlquilerVehiculo extends JFrame {
 	private final Vehiculo vehiculo;
 	private final Alquiler alquiler;
 	private final Cliente cliente;
-	private final Login login;
+	//private final Login login;
 	private JButton btnAlquiler, btnCancelar;
 	private JLabel lblImagen;
 	private String ruta;
@@ -68,7 +68,7 @@ public class AlquilerVehiculo extends JFrame {
 		ruta = this.vehiculo.getRuta();
 		this.alquiler = new Alquiler();
 		this.cliente = new Cliente();
-		this.login = new Login();
+		
 	}
 	
 	/**
@@ -78,7 +78,6 @@ public class AlquilerVehiculo extends JFrame {
 		this.vehiculo=new Vehiculo();
 		this.alquiler = new Alquiler();
 		this.cliente = new Cliente();
-		this.login = new Login();
 		initComponents();
 		
 	}
@@ -201,9 +200,9 @@ public class AlquilerVehiculo extends JFrame {
 			
 			if(o == btnAlquiler) {
 				
-				int idAlquiler = alquiler.getIdAlquiler();
-				int idVehiculo = alquiler.getIdVehiculo();
-				int idCliente = login.idClienteLogin;
+				Integer idAlquiler = alquiler.getIdAlquiler();
+				Integer idVehiculo = alquiler.getIdVehiculo();
+				Integer idCliente = Login.getidClienteLogin();
 				Date fechaInc=(Date) alquiler.getFechaInic();
 				Date fechaFin=(Date) alquiler.getFechFin();
 				
@@ -211,7 +210,7 @@ public class AlquilerVehiculo extends JFrame {
 				alquiler.setIdVehiculo(idVehiculo);
 				alquiler.setIdCliente(idCliente);
 				alquiler.setFechaInic(fechaInc);
-				
+				alquiler.setFechFin(fechaFin);
 				
 				
 				
