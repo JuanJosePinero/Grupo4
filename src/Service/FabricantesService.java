@@ -52,6 +52,23 @@ public class FabricantesService {
 	      }
 	      return fabricante;
 	   }
+	   public Fabricante getFabricantesCliente(Connection conexion, int id) throws SQLException {
+		      Fabricante fabricante = null;
+		      try{
+		         PreparedStatement consulta = conexion.prepareStatement("SELECT idFabricante,nombre,pais,idCliente "
+		                 + " FROM " + this.tabla + " WHERE idCliente = ?" );
+		         consulta.setInt(1, id);
+		         ResultSet resultado = consulta.executeQuery();
+		         while(resultado.next()){
+		            fabricante = new Fabricante(id, resultado.getString("nombre"), 
+		                    resultado.getString("pais"),resultado.getInt("idFabricante"));
+		         }
+		      }catch(SQLException ex){
+		         throw new SQLException(ex);
+		      }
+		      return fabricante;
+		   }
+		   
 	   
 	   public void remove(Connection conexion, Fabricante fabricante) throws SQLException{
 	      try{

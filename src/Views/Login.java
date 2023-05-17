@@ -154,6 +154,7 @@ public class Login extends JFrame {
 							if(activar == 1) {
 								System.out.println(datos.activar);
 								setidClienteLogin(datos.getIdClientes());
+								
 								VentanaCatalogo vc = new VentanaCatalogo();
 								vc.setVisible(true);
 								dispose();
@@ -161,7 +162,9 @@ public class Login extends JFrame {
 							}else
 								JOptionPane.showMessageDialog(Login.this, datos.getNombre()+" ha sido baneado por peruano");
 						}else if(datos.getRol().equals("Fabricante")) {
+							setidClienteLogin(datos.getIdClientes());
 							VisualizarVehiculosCrear vv = new VisualizarVehiculosCrear();
+							datos.getIdClientes();
 							
 							vv.setVisible(true);
 							dispose();

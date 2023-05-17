@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -16,16 +17,19 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Service.Conexion;
+import Service.FabricantesService;
 import Service.VehiculoService;
+import models.Fabricante;
 import models.Vehiculo;
-import javax.swing.JLabel;
 
 public class VisualizarVehiculosCrear extends JFrame {
 
 	private JPanel contentPane;
 	private JTable jtableP;
 	private final VehiculoService services = new VehiculoService();
+	private final FabricantesService servicesF = new FabricantesService();
 	private List<Vehiculo> vehiculo;
+	private List <Fabricante> fabricante;
 
 	public VisualizarVehiculosCrear() {
 		setTitle("Vehiculos");
@@ -43,13 +47,12 @@ public class VisualizarVehiculosCrear extends JFrame {
 		scrollPane.setBounds(52, 77, 408, 225);
 		contentPane.add(scrollPane);
 		
-		jtableP = new JTable();
-		showVehiculosIdFabricante();
-		scrollPane.setViewportView(jtableP);
+		
 		
 		JButton VolverB = new JButton("Volver");
 		VolverB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Login l = new Login();
 				dispose();
 			}
 		});
@@ -61,39 +64,32 @@ public class VisualizarVehiculosCrear extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("Crear");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CrearVehiculos vista = new CrearVehiculos();
+				vista.setVisible(true);
+				vista.setLocationRelativeTo(null);
+				dispose();
+			}
+		});
 		btnNewButton.setBounds(208, 19, 89, 23);
 		contentPane.add(btnNewButton);
-		setVisible(true);		
+		setVisible(true);	
+		try {
+			
+			Fabricante datos = servicesF.getFabricantesCliente(Conexion.obtener(), Login.getidClienteLogin());
+			int id =datos.getIdCliente();
+			ListViewFabricante.setidFabricanteCrear(id);
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		jtableP = new JTable();
+		showVehiculosIdFabricante();
+		scrollPane.setViewportView(jtableP);
 	}
 	
-	public void showVehiculos() {
-	    try {
-	        this.vehiculo = this.services.getAllVehiculos(Conexion.obtener());
-	        jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
-
-	        }, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" }));
-	        DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
-	        dtm.setRowCount(0);
-	        
-	        jtableP = new JTable(dtm) {
-	          @Override
-	          public boolean isCellEditable(int row, int column) {
-	            return false;
-	          }
-	        };
-	        
-	        for (int i = 0; i < this.vehiculo.size(); i++) {
-	            dtm.addRow(new Object[] {this.vehiculo.get(i).getIdVehiculos(), this.vehiculo.get(i).getModelo(), this.vehiculo.get(i).getMarca(), this.vehiculo.get(i).getAnyo(),
-	                    this.vehiculo.get(i).getColor(), this.vehiculo.get(i).getPrecio(), this.vehiculo.get(i).getIdFabricante() });
-	        }
-	    } catch (SQLException ex) {
-	        System.out.println(ex.getMessage());
-	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-	    } catch (ClassNotFoundException ex) {
-	        System.out.println(ex);
-	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-	    }
-	}
+	
 	
 	public void showVehiculosIdFabricante() {
 	    try {
