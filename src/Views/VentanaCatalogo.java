@@ -33,9 +33,8 @@ import models.Vehiculo;
 public class VentanaCatalogo extends JFrame {
 
 	private JPanel contentPane;
-	private JButton btnComprar, btnAlquilar, btnVerCompras, btnSalir;
+	private JButton btnComprar, btnAlquilar, btnVerCompras, btnSalir, btnVerCyV;
 	private JTextArea textAreaComentarios;
-	private JScrollPane scrollPane;
 	private JLabel lblCoche;
 	private List<String> listaComentarios = new ArrayList<>();
 	private final String tabla = "vehiculo";
@@ -67,7 +66,7 @@ public class VentanaCatalogo extends JFrame {
 	public VentanaCatalogo() {
 		super("Catalogo de Coches de nuestra Empresa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(200, 200, 900, 600);
+		setBounds(200, 200, 725, 605);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -79,25 +78,25 @@ public class VentanaCatalogo extends JFrame {
 		
 		btnComprar = new JButton("Comprar Vehiculo");
 		btnComprar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
-		btnComprar.setBounds(100, 510, 143, 31);
+		btnComprar.setBounds(66, 510, 143, 31);
 		btnComprar.addActionListener(manejador);
 		contentPane.add(btnComprar);
 
 		
 		btnAlquilar = new JButton("Alquilar Vehiculo");
 		btnAlquilar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
-		btnAlquilar.setBounds(378, 510, 143, 31);
+		btnAlquilar.setBounds(283, 510, 143, 31);
 		btnAlquilar.addActionListener(manejador);
 		contentPane.add(btnAlquilar);
 		
 		btnVerCompras = new JButton("Ver Compras Realizadas");
 		btnVerCompras.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
-		btnVerCompras.setBounds(624, 510, 183, 31);
+		btnVerCompras.setBounds(489, 510, 183, 31);
 		btnVerCompras.addActionListener(manejador);
 		contentPane.add(btnVerCompras);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(486, 79, 370, 251);
+		panel.setBounds(200, 58, 376, 251);
 		contentPane.add(panel);
 		
 		JLabel imagenLabel = new JLabel();
@@ -107,35 +106,37 @@ public class VentanaCatalogo extends JFrame {
 	     
 	    lblCoche = new JLabel("Catalogo de Coches Disponibles");
 	    lblCoche.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 16));
-	    lblCoche.setBounds(300, 16, 334, 32);
+	    lblCoche.setBounds(255, 16, 334, 32);
 	    contentPane.add(lblCoche);
 	     
-	    JLabel lblComentarios = new JLabel("Comentarios sobre nuestros coches y nuestras Ventas");
-	    lblComentarios.setBounds(49, 340, 376, 22);
-	    contentPane.add(lblComentarios);
-	     
-	    scrollPane = new JScrollPane();
-	    scrollPane.setBounds(49, 369, 376, 109);
-	    contentPane.add(scrollPane);
-	     
-	    listaComentarios.add("Comentario 1");
-	    listaComentarios.add("Comentario 2");
-	    listaComentarios.add("Comentario 3");
-	    listaComentarios.add("Comentario 4");
+//	    JLabel lblComentarios = new JLabel("Comentarios sobre nuestros coches y nuestras Ventas");
+//	    lblComentarios.setBounds(49, 340, 376, 22);
+//	    contentPane.add(lblComentarios);
+//	     
+//	    scrollPane = new JScrollPane();
+//	    scrollPane.setBounds(49, 369, 376, 109);
+//	    contentPane.add(scrollPane);
+//	     
+//	    listaComentarios.add("Comentario 1");
+//	    listaComentarios.add("Comentario 2");
+//	    listaComentarios.add("Comentario 3");
+//	    listaComentarios.add("Comentario 4");
+//	    
+//	    textAreaComentarios = new JTextArea();
+//	    textAreaComentarios.setEditable(false);
+//	    scrollPane.setViewportView(textAreaComentarios);
 	    
-	    textAreaComentarios = new JTextArea();
-	    textAreaComentarios.setEditable(false);
-	    scrollPane.setViewportView(textAreaComentarios);
+	    
 	    String[] filtros= {"--","Marca","Modelo","Anyo","Color","Precio","idFabricante"};
-	    
 	    filtro = new JComboBox(filtros);
-	    filtro.setBounds(49, 43, 124, 22);
+	    filtro.setBounds(31, 84, 124, 22);
 	    contentPane.add(filtro);
 	    manejadorcombo mancombo=new manejadorcombo();
 	    filtro.addItemListener(mancombo);
 	    
 	    JLabel lblFiltrosBusqueda = new JLabel("Filtros de Busqueda");
-	    lblFiltrosBusqueda.setBounds(49, 23, 135, 19);
+	    lblFiltrosBusqueda.setFont(new Font("Tahoma", Font.PLAIN, 14));
+	    lblFiltrosBusqueda.setBounds(31, 55, 135, 19);
 	    contentPane.add(lblFiltrosBusqueda);
 	    
 	   
@@ -147,7 +148,7 @@ public class VentanaCatalogo extends JFrame {
 			}
 	    
 	    JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(49, 91, 376, 174);
+		scrollPane.setBounds(200, 319, 376, 174);
 		contentPane.add(scrollPane);
 		
 		dtm = new DefaultTableModel(new Object[][] {}, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" });
@@ -161,41 +162,59 @@ public class VentanaCatalogo extends JFrame {
 		
 		btnSalir = new JButton("");
 		btnSalir.setIcon(new ImageIcon("images/salir.png"));
-		btnSalir.setBounds(795, 19, 50, 50);
+		btnSalir.setBounds(636, 16, 50, 50);
 		btnSalir.addActionListener(manejador);
 		contentPane.add(btnSalir);
 		
-		JLabel lblValoraciones = new JLabel("Valoraciones sobre nuestros coches y nuestras Ventas");
-		lblValoraciones.setBounds(486, 340, 376, 22);
-		contentPane.add(lblValoraciones);
+		JLabel lblNewLabel = new JLabel("Si quieres ver los comentarios");
+		lblNewLabel.setBounds(10, 232, 180, 22);
+		contentPane.add(lblNewLabel);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(486, 375, 370, 107);
-		contentPane.add(scrollPane_1);
+		JLabel lblNewLabel_1 = new JLabel("y la valoración de los vehiculos");
+		lblNewLabel_1.setBounds(10, 253, 180, 22);
+		contentPane.add(lblNewLabel_1);
 		
-		JTextArea textAreaValoraciones = new JTextArea();
-		scrollPane_1.setViewportView(textAreaValoraciones);
-		textAreaValoraciones.setEditable(false);
+		JLabel lblNewLabel_2 = new JLabel("Por favor, pulse aquí");
+		lblNewLabel_2.setBounds(10, 273, 164, 22);
+		contentPane.add(lblNewLabel_2);
 		
-		JButton btnComentario = new JButton("Comentario");
-		btnComentario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				AgregarComentario ac = new AgregarComentario();
-				ac.setVisible(true);
-				dispose();
-			}
-		});
-		btnComentario.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
-		btnComentario.setBounds(41, 275, 143, 31);
-		contentPane.add(btnComentario);
+		btnVerCyV = new JButton("");
+		btnVerCyV.setIcon(new ImageIcon("images/comentsYvalorac.png"));
+		btnVerCyV.setBounds(59, 305, 50, 50);
+		contentPane.add(btnVerCyV);
 		
-		JButton btnValoracion = new JButton("Valoracion");
-		btnValoracion.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
-		btnValoracion.setBounds(282, 275, 143, 31);
-		contentPane.add(btnValoracion);
-		
-			
+//		JLabel lblValoraciones = new JLabel("Valoraciones sobre nuestros coches y nuestras Ventas");
+//		lblValoraciones.setBounds(486, 340, 376, 22);
+//		contentPane.add(lblValoraciones);
+//		
+//		JScrollPane scrollPane_1 = new JScrollPane();
+//		scrollPane_1.setBounds(486, 375, 370, 107);
+//		contentPane.add(scrollPane_1);
+//		
+//		JTextArea textAreaValoraciones = new JTextArea();
+//		scrollPane_1.setViewportView(textAreaValoraciones);
+//		textAreaValoraciones.setEditable(false);
+//		
+//		JButton btnComentario = new JButton("Comentario");
+//		btnComentario.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				AgregarComentario ac = new AgregarComentario();
+//				ac.setVisible(true);
+//				dispose();
+//			}
+//		});
+//		btnComentario.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
+//		btnComentario.setBounds(0, 480, 143, 31);
+//		contentPane.add(btnComentario);
+//		
+//		JButton btnValoracion = new JButton("Valoracion");
+//		btnValoracion.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
+//		btnValoracion.setBounds(253, 496, 143, 31);
+//		contentPane.add(btnValoracion);
+//		
+//			
 		}
+		
 	
 	public Vehiculo getVehiculo(Connection conexion) throws SQLException {
 		   Vehiculo vehiculo = null;
@@ -257,6 +276,10 @@ public class VentanaCatalogo extends JFrame {
 				Login l = new Login();
 				l.setVisible(true);
 				l.setLocationRelativeTo(null);
+			}else if(o == btnVerCyV) {
+				VerComentsYValorac CyV = new VerComentsYValorac();
+				CyV.setVisible(true);
+				dispose();
 			}
 			
 		}	
