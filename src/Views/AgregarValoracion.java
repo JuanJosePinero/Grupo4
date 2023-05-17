@@ -24,7 +24,8 @@ public class AgregarValoracion extends JFrame {
 	private JButton btnEnviar, btnCancelar;
 	private JButton btnEst;
 	private ImageIcon icono;
-	private  JLabel etiquetaImagen;
+	private JLabel etiquetaImagen;
+
 	/**
 	 * Launch the application.
 	 */
@@ -55,87 +56,85 @@ public class AgregarValoracion extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblTitulo = new JLabel("Agrega una valoracion para el vehículo seleccionado.");
 		lblTitulo.setBounds(28, 5, 390, 21);
 		lblTitulo.setFont(new Font("Impact", Font.PLAIN, 16));
 		lblTitulo.setHorizontalAlignment(JLabel.CENTER);
 		contentPane.add(lblTitulo);
-		
+
 		ManejadorJButton manejador = new ManejadorJButton();
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(163, 165, 165));
 		panel.setBounds(54, 36, 341, 55);
 		contentPane.add(panel);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		for (int i=0; i<6;i++) {
-			JButton btnEst = new JButton(i+"★");
+
+		for (int i = 0; i < 6; i++) {
+			btnEst = new JButton(i + "★");
 			btnEstrellaList.add(btnEst);
 			btnEst.setSize(55, 55);
 			panel.add(btnEst);
 			btnEst.addActionListener(manejador);
-			
-			icono = new ImageIcon("images/estrellas/estrella"+i+".png");
-	        etiquetaImagen = new JLabel(icono);
-	        etiquetaImagen.setBounds(50, 101, 350, 100);
-	        contentPane.add(etiquetaImagen); 
-		}	       
-		
+		}
+
+		icono = new ImageIcon("images/estrellas/estrella0.png");
+		etiquetaImagen = new JLabel(icono);
+		etiquetaImagen.setBounds(50, 101, 350, 100);
+		contentPane.add(etiquetaImagen);
+
 		btnEnviar = new JButton("Enviar");
 		btnEnviar.addActionListener(manejador);
 		btnEnviar.setBounds(103, 224, 98, 21);
 		contentPane.add(btnEnviar);
-		
+
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(manejador);
 		btnCancelar.setBounds(251, 224, 98, 21);
 		contentPane.add(btnCancelar);
-		
+
 	}
-	
+
 	public class ManejadorJButton implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object o = e.getSource();
-			
-			if(o == btnEnviar) {
+
+			if (o == btnEnviar) {
 //				int valoracion = 
-						
+
 //						Valoracion v = new Valoracion();
 //						v.setIdCliente(1);
 //						v.setIdVehiculo(1);
 //						v.setValoracion(valoracion);
-						
+
 //						try {
 //							service.save(Conexion.obtener(), c);
 //						} catch (ClassNotFoundException | SQLException e1) {
 //							e1.printStackTrace();
 //						}
-						JOptionPane.showMessageDialog(null, "La valoracion ha sido Enviada con exito!", "Envio completado", JOptionPane.INFORMATION_MESSAGE);
-						VentanaCatalogo vc = new VentanaCatalogo();
-						vc.setVisible(true);
-						dispose();
-			}else if(o == btnCancelar) {
-				JOptionPane.showMessageDialog(null, "La valoracion ha sido Cancelado!", "Cancelar valoracion", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "La valoracion ha sido Enviada con exito!", "Envio completado",
+						JOptionPane.INFORMATION_MESSAGE);
 				VentanaCatalogo vc = new VentanaCatalogo();
 				vc.setVisible(true);
 				dispose();
-				
-			}else if(o == btnEstrellaList) {
-				for(int i=0; i<6;i++) {
-					 if (btnEstrellaList.contains(i)) {
-			                icono.setImage(new ImageIcon("images/estrellas/estrella1.png").getImage());
-			                etiquetaImagen.setIcon(icono);
-			                break;
-			            }
-				}
-		        
+			} else if (o == btnCancelar) {
+				JOptionPane.showMessageDialog(null, "La valoracion ha sido Cancelado!", "Cancelar valoracion",
+						JOptionPane.ERROR_MESSAGE);
+				VentanaCatalogo vc = new VentanaCatalogo();
+				vc.setVisible(true);
+				dispose();
+
+			} else if (btnEstrellaList.contains(o)) {
+				int index = btnEstrellaList.indexOf(o);
+				icono.setImage(new ImageIcon("images/estrellas/estrella" + index + ".png").getImage());
+				etiquetaImagen.setIcon(icono);
+
 			}
-			
+
 		}
-		
+
 	}
 }
