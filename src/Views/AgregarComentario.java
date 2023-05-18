@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,28 +24,11 @@ import models.Comentario;
 public class AgregarComentario extends JFrame {
 
 	private JPanel contentPane;
-	private JTextArea textArea;
-	private final ComentarioService service = new ComentarioService();
+	private static JTextArea textArea;
+	private final static ComentarioService service = new ComentarioService();
+	private List <Comentario> comentarios = new ArrayList<>();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AgregarComentario frame = new AgregarComentario();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
 	public AgregarComentario() {
 		super("Agregar Comentario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,6 +40,7 @@ public class AgregarComentario extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		System.out.println("El id es" +Login.getidVehiculo());
 		
 		JLabel lblTitulo = new JLabel("Agrega un comentario para el vehículo seleccionado.");
 		lblTitulo.setBounds(5, 5, 390, 21);
@@ -66,18 +52,22 @@ public class AgregarComentario extends JFrame {
 		textArea.setBounds(31, 36, 343, 104);
 		contentPane.add(textArea);
 		
+		
 		JButton btnEnviar = new JButton("Enviar");
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				
 				String comentario = textArea.getText();
+				String nomUser = Login.getnombreUser();
+				System.out.println(nomUser);
+				
 				
 				Comentario c = new Comentario();
 				c.setIdCliente(Login.getidClienteLogin());
 				System.out.println(Login.getidClienteLogin());
 				c.setIdVehiculo(Login.getidVehiculo());
-				c.setComentario(comentario);
+				c.setComentario(nomUser +": "+comentario);
 				
 				try {
 					service.save(Conexion.obtener(), c);
@@ -104,5 +94,7 @@ public class AgregarComentario extends JFrame {
 		});
 		btnCancelar.setBounds(238, 150, 98, 33);
 		contentPane.add(btnCancelar);
+		
 	}
+	
 }

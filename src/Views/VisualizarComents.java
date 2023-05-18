@@ -3,6 +3,9 @@ package Views;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,31 +13,25 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import Service.ComentarioService;
+import Service.Conexion;
+import models.Comentario;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+
 public class VisualizarComents extends JFrame {
 
 	private JPanel contentPane;
 	private JButton ComentarioB;
+	private static JTextArea textArea;
+	private final static ComentarioService service = new ComentarioService();
+	private List <Comentario> comentarios = new ArrayList<>();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VisualizarComents frame = new VisualizarComents();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
 	public VisualizarComents() {
+		super("Bandeja de comentarios");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 235);
 		setLocationRelativeTo(null);
@@ -43,14 +40,37 @@ public class VisualizarComents extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(10, 10, 414, 145);
+
+		 textArea = new JTextArea();
+		 textArea.setFont(new Font("Segoe UI Semibold", Font.BOLD, 11));
+		 textArea.setEditable(false);
+		textArea.setBounds(10, 34, 414, 121);
 		contentPane.add(textArea);
+		Comentario();
 		
 		ComentarioB = new JButton("Agregar Comentario");
-		ComentarioB.setBounds(10, 173, 414, 23);
+		ComentarioB.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
+		ComentarioB.setBounds(40, 166, 175, 23);
 		contentPane.add(ComentarioB);
+		
+		JLabel lblTitulo = new JLabel("Comentarios de los clientes");
+		lblTitulo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 14));
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setBounds(10, 9, 414, 23);
+		contentPane.add(lblTitulo);
+		
+		JButton btnCalcelar = new JButton("Volver Atrás");
+		btnCalcelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Volviendo a la ventana del catalogo", "Aviso", JOptionPane.ERROR_MESSAGE);
+				VentanaCatalogo vc = new VentanaCatalogo();
+				vc.setVisible(true);
+				dispose();
+			}
+		});
+		btnCalcelar.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
+		btnCalcelar.setBounds(233, 166, 175, 23);
+		contentPane.add(btnCalcelar);
 		ManejadorAction ma = new ManejadorAction();
 		ComentarioB.addActionListener(ma);
 	}
@@ -68,5 +88,21 @@ public class VisualizarComents extends JFrame {
 			}
 		}
 		
+	}
+	public static void Comentario() {
+		try {
+			List<Comentario> datos = service.getAllComentarioId(Conexion.obtener());
+			String coment ="";
+	
+			for (Comentario c : datos) {
+				 coment += c.getComentario()+"\n";
+				
+			}
+			textArea.setText(coment);
+		
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

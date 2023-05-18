@@ -30,6 +30,7 @@ public class Login extends JFrame {
 	public static Integer idClienteLogin;
 	public static Integer idFabricante;
 	public static Integer idVehiculo;
+	public static String nomUser;
 
 	/**
 	 * Launch the application.
@@ -162,6 +163,7 @@ public class Login extends JFrame {
 							System.out.println(activar);
 							if(activar == 1) {
 								System.out.println(datos.activar);
+								setnombreUser(datos.getNombreUsuario());
 								setidClienteLogin(datos.getIdClientes());
 								
 								VentanaCatalogo vc = new VentanaCatalogo();
@@ -221,7 +223,10 @@ public class Login extends JFrame {
 		return idVehiculo;
 	}
 	
-	public static void prueba(){
-		
+	public static void setnombreUser(String nom) {
+		nomUser=nom;
+	}
+	public static String getnombreUser() {
+		return nomUser;
 	}
 }

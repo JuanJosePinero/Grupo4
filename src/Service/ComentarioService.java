@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import Views.Login;
 import models.Comentario;
 
 
@@ -51,6 +52,22 @@ public class ComentarioService {
 	      return comentario;
 	   }
 	   
+	   public Comentario getComentarioId(Connection conexion,int id) throws SQLException {
+		   Comentario comentario = null;
+	      try{
+	         PreparedStatement consulta = conexion.prepareStatement("SELECT idCliente,idVehiculo,comentario "
+	                 + " FROM " + this.tabla + " WHERE idVehiculo = ?" );
+	        consulta.setInt(1, id);
+	         ResultSet resultado = consulta.executeQuery();
+	         while(resultado.next()){
+	            comentario = new Comentario( resultado.getInt("idCliente"), resultado.getInt("idVehiculo"), resultado.getString("comentario"));
+	         }
+	      }catch(SQLException ex){
+	         throw new SQLException(ex);
+	      }
+	      return comentario;
+	   }
+	   
 	   public void remove(Connection conexion, Comentario comentario) throws SQLException{
 	      try{
 	         PreparedStatement consulta = conexion.prepareStatement("DELETE FROM " 
@@ -76,5 +93,21 @@ public class ComentarioService {
 	      }
 	      return products;
 	   }
+	   
+	   public List<Comentario> getAllComentarioId(Connection conexion) throws SQLException{
+		      List<Comentario> products = new ArrayList<>();
+		      try{
+		         PreparedStatement consulta = conexion.prepareStatement("SELECT idCliente,idVehiculo,comentario "
+		                 + " FROM " + this.tabla+ " WHERE idVehiculo = ?");
+		         consulta.setInt(1, Login.getidVehiculo());
+		         ResultSet resultado = consulta.executeQuery();
+		         while(resultado.next()){
+		            products.add(new Comentario(resultado.getInt("idCliente"), resultado.getInt("idVehiculo"), resultado.getString("comentario")));
+		         }
+		      }catch(SQLException ex){
+		         throw new SQLException(ex);
+		      }
+		      return products;
+		   }
 	
 }
