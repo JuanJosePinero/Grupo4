@@ -11,14 +11,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import models.Vehiculo;
+import javax.swing.SwingConstants;
 
 public class FiltrarVehiculo extends JFrame {
 
 	private JPanel contentPane;
-	private JFrame frame;
 	private JTable table;
 	private DefaultTableModel tableModel;
     private List<Vehiculo> vehiculos;
@@ -49,19 +50,18 @@ public class FiltrarVehiculo extends JFrame {
 
 	    private void initialize() {
 	    	setTitle("Mejores valoraciones y mas comentarios");
-	        frame = new JFrame();
-	        frame.setBounds(100, 100, 450, 300);
-	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        frame.getContentPane().setLayout(null);
-	        setLocationRelativeTo(null);
-	        JPanel panel = new JPanel();
-	        panel.setBounds(10, 11, 414, 239);
-	        frame.getContentPane().add(panel);
-	        panel.setLayout(null);
-	        
-	        JScrollPane scrollPane = new JScrollPane();
-	        scrollPane.setBounds(10, 11, 394, 184);
-	        panel.add(scrollPane);
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			setBounds(100, 100, 450, 300);
+			setLocationRelativeTo(null);
+			contentPane = new JPanel();
+			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+			setContentPane(contentPane);
+			contentPane.setLayout(null);
+			
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(40, 34, 371, 181);
+			contentPane.add(scrollPane);
 
 	        tableModel = new DefaultTableModel(
 	                new Object[][] {},
@@ -76,10 +76,9 @@ public class FiltrarVehiculo extends JFrame {
 	                filtrarVehiculos();
 	            }
 	        });
-	        btnFiltrar.setBounds(163, 206, 89, 23);
-	        panel.add(btnFiltrar);
-	       
-	        
+	        btnFiltrar.setBounds(162, 230, 89, 23);
+	        contentPane.add(btnFiltrar);
+	      
 	        setVisible(true);
 	    }
 
