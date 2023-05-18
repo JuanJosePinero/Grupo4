@@ -5,6 +5,9 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -21,7 +24,13 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+import com.mysql.cj.xdevapi.Statement;
+
+import Service.Conexion;
+
 public class LineChartEx extends JFrame {
+	
+	private Conexion c = new Conexion();
 
     public LineChartEx() {
 
@@ -45,14 +54,32 @@ public class LineChartEx extends JFrame {
     }
 
     private XYDataset createDataset() {
-
         var series = new XYSeries("2023");
-        series.add(1, 6);
-        series.add(3, 7);
-        series.add(5, 3);
-        series.add(7, 4);
-        series.add(9, 6);
-        series.add(12, 5);
+
+        // Conexión a la base de datos
+        try {
+            Connection conn = c.obtener();
+            java.sql.Statement statement = conn.createStatement();
+
+            // Consulta para obtener el número de ventas por mes
+            String query = "SELECT MONTH(fechaHora) AS mes, COUNT(*) AS sales FROM Venta WHERE YEAR(fechaHora) = 2023 GROUP BY MONTH(fechaHora)";
+            ResultSet resultSet = statement.executeQuery(query);
+
+            // Agregar los datos a la serie
+            while (resultSet.next()) {
+                int month = resultSet.getInt("mes");
+                int sales = resultSet.getInt("sales");
+                series.add(month, sales);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                c.cerrar();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
         var dataset = new XYSeriesCollection();
         dataset.addSeries(series);

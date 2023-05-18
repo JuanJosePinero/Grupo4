@@ -1,17 +1,23 @@
 package Views;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -38,10 +44,12 @@ public class VentanaCatalogo extends JFrame {
 	private List<Comentario> listaComentarios = new ArrayList<>();
 	private final String tabla = "vehiculo";
 	private final VehiculoService services = new VehiculoService();
+	private Vehiculo v = new Vehiculo();
 	private List<Vehiculo> vehiculo;
 	private JTable jtableP;
 	private JComboBox filtro;
 	private DefaultTableModel dtm;
+	private JLabel imagenLabel;
 
 	/**
 	 * Launch the application.
@@ -74,7 +82,7 @@ public class VentanaCatalogo extends JFrame {
 		contentPane.setLayout(null);
 
 		ManejadorJButton manejador = new ManejadorJButton();
-
+		
 		btnComprar = new JButton("Comprar Vehiculo");
 		btnComprar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
 		btnComprar.setBounds(66, 510, 143, 31);
@@ -97,8 +105,9 @@ public class VentanaCatalogo extends JFrame {
 		panel.setBounds(200, 58, 375, 250);
 		contentPane.add(panel);
 
-		JLabel imagenLabel = new JLabel();
-		ImageIcon imagen = new ImageIcon("images/BMW iX3.jpg");
+		imagenLabel = new JLabel();
+		imagenLabel.setPreferredSize(new Dimension(350, 200));
+		ImageIcon imagen = new ImageIcon("images/vehiculos/BMW iX3.jpg");
 		imagenLabel.setIcon(imagen);
 		panel.add(imagenLabel);
 
@@ -168,8 +177,8 @@ public class VentanaCatalogo extends JFrame {
 		contentPane.add(btnVerCyV);
 		btnVerCyV.addActionListener(manejador);
 
-
 		showVehiculos();
+//		RedimensionarImages();
 
 	}
 
@@ -297,6 +306,29 @@ public class VentanaCatalogo extends JFrame {
 		}
 
 	}
+	
+//	public void RedimensionarImages() {
+//		int filas = jtableP.getSelectedRow();
+//		String fila = jtableP.getValueAt(filas, 0).toString();
+//		
+//		Vehiculo v = vehiculo.get(filas);
+//		
+//		String rutaImagen = v.getRuta();
+//		
+//		try {
+//			File selectedFile = new File(rutaImagen);
+//            BufferedImage originalImage = ImageIO.read(selectedFile);
+//            BufferedImage resizedImage = new BufferedImage(375, 250, originalImage.getType());
+//            Graphics2D g2d = resizedImage.createGraphics();
+//            g2d.drawImage(originalImage, 0, 0, 375, 250, null);
+//            g2d.dispose();
+//
+//            imagenLabel.setIcon(new ImageIcon(resizedImage));
+//
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//	}
 
 	private void showVehiculosidFabricante() {
 		try {
