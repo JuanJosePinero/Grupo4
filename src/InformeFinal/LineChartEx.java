@@ -104,7 +104,7 @@ public class LineChartEx extends JFrame {
 
         var renderer = new XYLineAndShapeRenderer();
         renderer.setSeriesPaint(0, Color.RED);
-        renderer.setSeriesStroke(0, new BasicStroke(2.0f));
+        renderer.setSeriesStroke(0, new BasicStroke(1.5f));
 
         plot.setRenderer(renderer);
         plot.setBackgroundPaint(Color.white);
