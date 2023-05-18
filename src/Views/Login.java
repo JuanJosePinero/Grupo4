@@ -221,4 +221,7 @@ public class Login extends JFrame {
 		return idVehiculo;
 	}
 	
+	public static void prueba(){
+		
+	}
 }
