@@ -2,12 +2,14 @@ package Views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class ControlAdmin extends JFrame {
 
@@ -27,17 +29,17 @@ public class ControlAdmin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		Cliente = new JButton("New button");
+		Cliente = new JButton("");
 		Cliente.setIcon(new ImageIcon("images/iconcliente.png"));
 		Cliente.setBounds(37, 76, 100, 100);
 		contentPane.add(Cliente);
 		
-		Fabricante = new JButton("New button");
+		Fabricante = new JButton("");
 		Fabricante.setIcon(new ImageIcon("images/iconllave.png"));
 		Fabricante.setBounds(177, 76, 100, 100);
 		contentPane.add(Fabricante);
 		
-		Vehiculos = new JButton("New button");
+		Vehiculos = new JButton("");
 		Vehiculos.setIcon(new ImageIcon("images/iconcoche.png"));
 		Vehiculos.setBounds(312, 76, 100, 100);
 		contentPane.add(Vehiculos);
@@ -51,6 +53,24 @@ public class ControlAdmin extends JFrame {
 		});
 		VolverB.setBounds(10, 227, 414, 23);
 		contentPane.add(VolverB);
+		
+		JLabel lblTitulo = new JLabel("Clientes");
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
+		lblTitulo.setBounds(37, 31, 100, 13);
+		contentPane.add(lblTitulo);
+		
+		JLabel lblFabricantes = new JLabel("Fabricantes");
+		lblFabricantes.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFabricantes.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
+		lblFabricantes.setBounds(177, 33, 100, 13);
+		contentPane.add(lblFabricantes);
+		
+		JLabel lblTitulo_1_1 = new JLabel("Vehiculos");
+		lblTitulo_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo_1_1.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
+		lblTitulo_1_1.setBounds(312, 33, 100, 13);
+		contentPane.add(lblTitulo_1_1);
 		setVisible(true);
 		manejadorAction ma = new manejadorAction();
 		Cliente.addActionListener(ma);

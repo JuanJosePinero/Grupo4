@@ -2,6 +2,7 @@ package Views;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import Service.ClientService;
 import Service.Conexion;
 import models.Cliente;
+import javax.swing.SwingConstants;
 
 public class Login extends JFrame {
 
@@ -69,9 +71,11 @@ public class Login extends JFrame {
 		contentPane.add(panel_2, BorderLayout.SOUTH);
 		
 		btnIniciarSesion = new JButton("Iniciar Sesion");
+		btnIniciarSesion.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 12));
 		panel_2.add(btnIniciarSesion);
 		
 		btnCrearUsuario = new JButton("Crear Usuario");
+		btnCrearUsuario.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 12));
 		panel_2.add(btnCrearUsuario);
 		
 		JPanel panel_3 = new JPanel();
@@ -82,7 +86,9 @@ public class Login extends JFrame {
 		Center.setLayout(null);
 		
 		JLabel UsuarioL = new JLabel("Usuario");
-		UsuarioL.setBounds(170, 33, 46, 14);
+		UsuarioL.setHorizontalAlignment(SwingConstants.CENTER);
+		UsuarioL.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 12));
+		UsuarioL.setBounds(131, 33, 129, 20);
 		Center.add(UsuarioL);
 		
 		UsuarioT = new JTextField();
@@ -98,7 +104,9 @@ public class Login extends JFrame {
 		
 		
 		JLabel ContraseñaL = new JLabel("Contraseña");
-		ContraseñaL.setBounds(160, 117, 73, 14);
+		ContraseñaL.setHorizontalAlignment(SwingConstants.CENTER);
+		ContraseñaL.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 12));
+		ContraseñaL.setBounds(131, 117, 129, 17);
 		Center.add(ContraseñaL);
 		
 		ContraseñaP = new JPasswordField();
@@ -161,7 +169,7 @@ public class Login extends JFrame {
 								dispose();
 								
 							}else
-								JOptionPane.showMessageDialog(Login.this, datos.getNombre()+" ha sido baneado por peruano");
+								JOptionPane.showMessageDialog(Login.this, datos.getNombre()+", tu cuenta ha sido supendida");
 						}else if(datos.getRol().equals("Fabricante")) {
 							setidClienteLogin(datos.getIdClientes());
 							VisualizarVehiculosCrear vv = new VisualizarVehiculosCrear();
@@ -175,7 +183,7 @@ public class Login extends JFrame {
 				
 				
 				}else
-					JOptionPane.showMessageDialog(Login.this, "Introduce Usuario y Contraseña");
+					JOptionPane.showMessageDialog(Login.this, "Introduce Usuario y Contraseña", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 				
 			} catch (ClassNotFoundException | SQLException e1) {
 				// TODO Auto-generated catch block
