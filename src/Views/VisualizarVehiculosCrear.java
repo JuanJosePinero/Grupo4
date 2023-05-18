@@ -42,11 +42,21 @@ public class VisualizarVehiculosCrear extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 	
-		
+		System.out.println("El id es"+Login.getidClienteLogin());
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(52, 77, 408, 225);
 		contentPane.add(scrollPane);
 		
+		try {
+			
+			Fabricante datos = servicesF.getFabricantesCliente(Conexion.obtener(), Login.getidClienteLogin());
+			int id =datos.getIdCliente();
+			System.out.println("EL id es"+id);
+			ListViewFabricante.setidFabricanteCrear(id);
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		
 		JButton VolverB = new JButton("Volver");
@@ -72,18 +82,10 @@ public class VisualizarVehiculosCrear extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(208, 19, 89, 23);
+		btnNewButton.setBounds(52, 11, 95, 23);
 		contentPane.add(btnNewButton);
 		setVisible(true);	
-		try {
-			
-			Fabricante datos = servicesF.getFabricantesCliente(Conexion.obtener(), Login.getidClienteLogin());
-			int id =datos.getIdCliente();
-			ListViewFabricante.setidFabricanteCrear(id);
-		} catch (ClassNotFoundException | SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 		jtableP = new JTable();
 		showVehiculosIdFabricante();
 		scrollPane.setViewportView(jtableP);

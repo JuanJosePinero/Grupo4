@@ -94,7 +94,7 @@ public class VentanaCatalogo extends JFrame {
 		contentPane.add(btnVerCompras);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(200, 58, 376, 251);
+		panel.setBounds(200, 58, 375, 250);
 		contentPane.add(panel);
 
 		JLabel imagenLabel = new JLabel();
