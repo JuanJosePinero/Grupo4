@@ -80,6 +80,7 @@ public class ListViewClientes extends JFrame {
 			String nombreCliente = jtableP.getValueAt(filaS, 0).toString();
 
 			Cliente c = Clientes.get(filaS);
+			
 			System.out.println(c.getActivar());
 			if (b.equals(ActivarB)) {
 				String nombre = c.getNombreUsuario();
