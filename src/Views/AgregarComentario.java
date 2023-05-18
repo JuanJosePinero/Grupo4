@@ -40,7 +40,7 @@ public class AgregarComentario extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		System.out.println("El id es" +Login.getidVehiculo());
+
 		
 		JLabel lblTitulo = new JLabel("Agrega un comentario para el vehículo seleccionado.");
 		lblTitulo.setBounds(5, 5, 390, 21);

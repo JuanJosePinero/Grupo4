@@ -1,6 +1,6 @@
 package Views;
 
-import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -9,17 +9,16 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import Service.ComentarioService;
 import Service.Conexion;
 import models.Comentario;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import java.awt.Font;
 
 public class VisualizarComents extends JFrame {
 
@@ -27,11 +26,11 @@ public class VisualizarComents extends JFrame {
 	private JButton ComentarioB;
 	private static JTextArea textArea;
 	private final static ComentarioService service = new ComentarioService();
-	private List <Comentario> comentarios = new ArrayList<>();
+	private List <Comentario> comentario = new ArrayList<>();
 
 
 	public VisualizarComents() {
-		super("Bandeja de comentarios");
+		super("Bandeja de valoraciones");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 235);
 		setLocationRelativeTo(null);
@@ -88,8 +87,7 @@ public class VisualizarComents extends JFrame {
 			}
 		}
 		
-	}
-	public static void Comentario() {
+	}public static void Comentario() {
 		try {
 			List<Comentario> datos = service.getAllComentarioId(Conexion.obtener());
 			String coment ="";
@@ -105,4 +103,5 @@ public class VisualizarComents extends JFrame {
 			e.printStackTrace();
 		}
 	}
+	
 }

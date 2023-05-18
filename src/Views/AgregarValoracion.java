@@ -34,25 +34,7 @@ public class AgregarValoracion extends JFrame {
 	private int valoracion = 0;
 	private int val = 0;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AgregarValoracion frame = new AgregarValoracion();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
 	public AgregarValoracion() {
 		super("Agregar Valoracion");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,7 +85,7 @@ public class AgregarValoracion extends JFrame {
 		btnCancelar.addActionListener(manejador);
 		btnCancelar.setBounds(251, 224, 98, 21);
 		contentPane.add(btnCancelar);
-
+		
 	}
 
 	public class ManejadorJButton implements ActionListener {
@@ -112,9 +94,10 @@ public class AgregarValoracion extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			Object o = e.getSource();
 			JButton boton=(JButton) e.getSource();
-			
-				
+		
 			 if (o == btnEnviar) {
+				 
+		
 				Valoracion v = new Valoracion();
 				v.setIdCliente(Login.getidClienteLogin());
 				v.setIdVehiculo(Login.getidVehiculo());

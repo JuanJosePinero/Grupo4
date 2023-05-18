@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import Views.Login;
+import models.Comentario;
 import models.Valoracion;
 
 public class ValoracionService {
@@ -60,6 +62,21 @@ public class ValoracionService {
 	         throw new SQLException(ex);
 	      }
 	   }
+	   public List<Valoracion> getAllValoracionId(Connection conexion) throws SQLException{
+		      List<Valoracion> products = new ArrayList<>();
+		      try{
+		         PreparedStatement consulta = conexion.prepareStatement("SELECT idCliente,idVehiculo,valoracion "
+		                 + " FROM " + this.tabla+ " WHERE idVehiculo = ?");
+		         consulta.setInt(1, Login.getidVehiculo());
+		         ResultSet resultado = consulta.executeQuery();
+		         while(resultado.next()){
+		            products.add(new Valoracion(resultado.getInt("idCliente"), resultado.getInt("idVehiculo"), resultado.getInt("valoracion")));
+		         }
+		      }catch(SQLException ex){
+		         throw new SQLException(ex);
+		      }
+		      return products;
+		   }
 	   
 	   public List<Valoracion> getAllValoracion(Connection conexion) throws SQLException{
 	      List<Valoracion> products = new ArrayList<>();

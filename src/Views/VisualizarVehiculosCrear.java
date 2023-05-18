@@ -101,6 +101,7 @@ public class VisualizarVehiculosCrear extends JFrame {
 		contentPane.add(btnValoraciones);
 		manejadorAction ma = new manejadorAction();
 		btnComentarios.addActionListener(ma);
+		btnValoraciones.addActionListener(ma);
 	}
 	
 	
@@ -151,6 +152,14 @@ public class VisualizarVehiculosCrear extends JFrame {
 			vcf.setVisible(true);
 			dispose();
 
+		}else if(j.equals(btnValoraciones)) {
+			Login.setidVehiculo(id);
+			VisualizarValoranFabri vcf = new VisualizarValoranFabri();
+			vcf.setVisible(true);
+			dispose();
+			
+			
+			
 		}
 		
 			
