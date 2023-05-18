@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import Service.Conexion;
 import Service.FabricantesService;
 import Service.VehiculoService;
+import models.Cliente;
 import models.Fabricante;
 import models.Vehiculo;
 
@@ -30,6 +31,7 @@ public class VisualizarVehiculosCrear extends JFrame {
 	private final FabricantesService servicesF = new FabricantesService();
 	private List<Vehiculo> vehiculo;
 	private List <Fabricante> fabricante;
+	private JButton btnComentarios,btnValoraciones;
 
 	public VisualizarVehiculosCrear() {
 		setTitle("Vehiculos");
@@ -73,8 +75,8 @@ public class VisualizarVehiculosCrear extends JFrame {
 		lblNewLabel.setBounds(145, 53, 242, 13);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Crear");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnCrear = new JButton("Crear");
+		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CrearVehiculos vista = new CrearVehiculos();
 				vista.setVisible(true);
@@ -82,13 +84,23 @@ public class VisualizarVehiculosCrear extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(52, 11, 95, 23);
-		contentPane.add(btnNewButton);
+		btnCrear.setBounds(50, 12, 95, 23);
+		contentPane.add(btnCrear);
 		setVisible(true);	
 		
 		jtableP = new JTable();
 		showVehiculosIdFabricante();
 		scrollPane.setViewportView(jtableP);
+		
+		btnComentarios = new JButton("Comentarios");
+		btnComentarios.setBounds(204, 11, 114, 23);
+		contentPane.add(btnComentarios);
+		
+		btnValoraciones = new JButton("Valoraciones");
+		btnValoraciones.setBounds(350, 12, 114, 23);
+		contentPane.add(btnValoraciones);
+		manejadorAction ma = new manejadorAction();
+		btnComentarios.addActionListener(ma);
 	}
 	
 	
@@ -120,5 +132,29 @@ public class VisualizarVehiculosCrear extends JFrame {
 	        System.out.println(ex);
 	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 	    }
+	}
+	
+	private class manejadorAction implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+		JButton j= (JButton) e.getSource();
+		int filaS = jtableP.getSelectedRow();
+		String nombreCliente = jtableP.getValueAt(filaS, 0).toString();
+
+		Vehiculo v = vehiculo.get(filaS);
+		int id = v.getIdVehiculos();
+		if(j.equals(btnComentarios)) {
+			Login.setidVehiculo(id);
+			
+			VisualizarComentsFabri vcf = new VisualizarComentsFabri();
+			vcf.setVisible(true);
+			dispose();
+
+		}
+		
+			
+		}
+		
 	}
 }
