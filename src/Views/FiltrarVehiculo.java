@@ -70,14 +70,27 @@ public class FiltrarVehiculo extends JFrame {
 	        table = new JTable(tableModel);
 	        scrollPane.setViewportView(table);
 
-	        JButton btnFiltrar = new JButton("Filtrar");
+	        JButton btnFiltrar = new JButton("Filtrar por Valoracion");
 	        btnFiltrar.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
-	                filtrarVehiculos();
+	                MejoresValoraciones mj=new MejoresValoraciones();
+	                mj.setVisible(true);
+	                mj.setLocationRelativeTo(null);
 	            }
 	        });
-	        btnFiltrar.setBounds(162, 230, 89, 23);
+	        btnFiltrar.setBounds(10, 230, 175, 23);
 	        contentPane.add(btnFiltrar);
+	        
+	        JButton btnNewButton = new JButton("Filtrar por comentarios");
+	        btnNewButton.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		ComentariosVehiculos cv=new ComentariosVehiculos();
+	        		cv.setVisible(true);
+	                cv.setLocationRelativeTo(null);
+	        	}
+	        });
+	        btnNewButton.setBounds(256, 231, 170, 21);
+	        contentPane.add(btnNewButton);
 	      
 	        setVisible(true);
 	    }
@@ -107,5 +120,4 @@ public class FiltrarVehiculo extends JFrame {
 
 	        table.setModel(filteredTableModel);
 	    }
-
 }
