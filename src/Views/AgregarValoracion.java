@@ -81,7 +81,7 @@ public class AgregarValoracion extends JFrame {
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		for (int i = 0; i < 6; i++) {
-			btnEst = new JButton(String.valueOf(i));
+			btnEst = new JButton(String.valueOf(i) + "★");
 			btnEstrellaList.add(btnEst);
 			btnEst.setSize(55, 55);
 			panel.add(btnEst);
@@ -147,9 +147,6 @@ public class AgregarValoracion extends JFrame {
 					break;
 					}
 				}
-//				int index = btnEstrellaList.indexOf(o);
-//				icono.setImage(new ImageIcon("images/estrellas/estrella" + index + ".png").getImage());
-//				etiquetaImagen.setIcon(icono);
 
 			}
 
@@ -159,12 +156,16 @@ public class AgregarValoracion extends JFrame {
 	private class manejadorestrella implements ActionListener {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-	        JButton boton = (JButton) e.getSource();
-	        int valorEstrella = Integer.parseInt(boton.getText()); // Obtiene el valor de la estrella seleccionada
-	        valoracion=valorEstrella;
+	    	 JButton boton = (JButton) e.getSource();
+	            String textoBoton = boton.getText();
+	            String[] partes = textoBoton.split("★");
+	            int valorEstrella = Integer.parseInt(partes[0]);
+	            valoracion = valorEstrella;
 
-	        ImageIcon nuevaImagen = new ImageIcon("images/estrellas/estrella" + valorEstrella + ".png");
-	        etiquetaImagen.setIcon(nuevaImagen);
+	            System.out.println("Valor de la estrella: " + valorEstrella);
+
+	            ImageIcon nuevaImagen = new ImageIcon("images/estrellas/estrella" + valorEstrella + ".png");
+	            etiquetaImagen.setIcon(nuevaImagen);
 	    }
 	}
 }
