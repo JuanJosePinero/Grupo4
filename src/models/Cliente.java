@@ -7,7 +7,50 @@ public class Cliente {
     private String nombre,direccion;
     private String rol;
     private String nombreUsuario,contrasena;
-	public int activar;
+	public int activar, numCompras, numAlquileres;
+
+	public Cliente(Integer idClientes, String nombre, String direccion, String rol, String nombreUsuario,
+			String contrasena, int activar, int numCompras) {
+		super();
+		this.idClientes = idClientes;
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.rol = rol;
+		this.nombreUsuario = nombreUsuario;
+		this.contrasena = contrasena;
+		this.activar = activar;
+		this.numCompras = numCompras;
+	}
+
+	public Cliente(Integer idClientes, String nombre, String direccion, String rol, String nombreUsuario,
+			String contrasena, int activar, int numCompras, int numAlquileres) {
+		super();
+		this.idClientes = idClientes;
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.rol = rol;
+		this.nombreUsuario = nombreUsuario;
+		this.contrasena = contrasena;
+		this.activar = activar;
+		this.numCompras = numCompras;
+		this.numAlquileres = numAlquileres;
+	}
+
+	public int getNumCompras() {
+		return numCompras;
+	}
+
+	public void setNumCompras(int numCompras) {
+		this.numCompras = numCompras;
+	}
+
+	public int getNumAlquileres() {
+		return numAlquileres;
+	}
+
+	public void setNumAlquileres(int numAlquileres) {
+		this.numAlquileres = numAlquileres;
+	}
 
 	public Integer getIdClientes() {
 		return idClientes;

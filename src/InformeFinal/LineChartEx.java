@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.block.BlockBorder;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
@@ -23,8 +25,6 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-
-import com.mysql.cj.xdevapi.Statement;
 
 import Service.Conexion;
 
@@ -41,10 +41,15 @@ public class LineChartEx extends JFrame {
 
         XYDataset dataset = createDataset();
         JFreeChart chart = createChart(dataset);
+        XYPlot plot=chart.getXYPlot();
+        NumberAxis xAxis=(NumberAxis)plot.getDomainAxis();
+        xAxis.setTickUnit(new NumberTickUnit(1));
+        
 
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         chartPanel.setBackground(Color.white);
+        
         add(chartPanel);
 
         pack();
@@ -69,21 +74,21 @@ public class LineChartEx extends JFrame {
             while (resultSet.next()) {
                 int month = resultSet.getInt("mes");
                 int sales = resultSet.getInt("sales");
+                System.out.println(month+ " "+sales);
                 series.add(month, sales);
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } finally {
+        }/* finally {
             try {
-                c.cerrar();
+               // c.cerrar();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 
         var dataset = new XYSeriesCollection();
         dataset.addSeries(series);
-
         return dataset;
     }
 

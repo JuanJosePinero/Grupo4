@@ -181,11 +181,11 @@ public class ListViewClientes extends JFrame {
 	private void refrescarTabla(String fil) {
 		try {
 			if (fil.equalsIgnoreCase("--")) {
-
+				showCliente();
 			} else if (fil.equalsIgnoreCase("Compras")) {
-
+				showComprasCliente();
 			} else if (fil.equalsIgnoreCase("Alquileres")) {
-
+				showAlquileresCliente();
 			} else if (fil.equalsIgnoreCase("Comentarios")) {
 
 			} else if (fil.equalsIgnoreCase("Valoraciones")) {
@@ -215,7 +215,7 @@ public class ListViewClientes extends JFrame {
 
 			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar" }));
+			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar", "NºCompras", "NºAlquileres" }));
 			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 			dtm.setRowCount(0);
 
@@ -224,7 +224,7 @@ public class ListViewClientes extends JFrame {
 				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
 						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
 						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
-						this.Clientes.get(i).getActivar() });
+						this.Clientes.get(i).getActivar(), this.Clientes.get(i).getNumCompras(), this.Clientes.get(i).getNumAlquileres() });
 				
 
 			}
@@ -236,123 +236,63 @@ public class ListViewClientes extends JFrame {
 			System.out.println(ex);
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		}
-	}
+	}	
 	
-//	private void showComprasCliente() {
-//		try {
-//			this.Clientes = this.services.getAllRolCliente(Conexion.obtener());
-//
-//			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
-//
-//			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar" }));
-//			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
-//			dtm.setRowCount(0);
-//
-//			for (int i = 0; i < this.Clientes.size(); i++) {
-//			
-//				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
-//						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
-//						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
-//						this.Clientes.get(i).getActivar() });
-//				
-//
-//			}
-//
-//		} catch (SQLException ex) {
-//			System.out.println(ex.getMessage());
-//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-//		} catch (ClassNotFoundException ex) {
-//			System.out.println(ex);
-//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-//		}
-//	}
-//	
-//	private void showAlquileresCliente() {
-//		try {
-//			this.Clientes = this.services.getAllRolCliente(Conexion.obtener());
-//
-//			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
-//
-//			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar" }));
-//			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
-//			dtm.setRowCount(0);
-//
-//			for (int i = 0; i < this.Clientes.size(); i++) {
-//			
-//				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
-//						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
-//						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
-//						this.Clientes.get(i).getActivar() });
-//				
-//
-//			}
-//
-//		} catch (SQLException ex) {
-//			System.out.println(ex.getMessage());
-//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-//		} catch (ClassNotFoundException ex) {
-//			System.out.println(ex);
-//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-//		}
-//	}
-//	
-//	private void showComentariosCliente() {
-//		try {
-//			this.Clientes = this.services.getAllRolCliente(Conexion.obtener());
-//
-//			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
-//
-//			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar" }));
-//			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
-//			dtm.setRowCount(0);
-//
-//			for (int i = 0; i < this.Clientes.size(); i++) {
-//			
-//				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
-//						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
-//						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
-//						this.Clientes.get(i).getActivar() });
-//				
-//
-//			}
-//
-//		} catch (SQLException ex) {
-//			System.out.println(ex.getMessage());
-//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-//		} catch (ClassNotFoundException ex) {
-//			System.out.println(ex);
-//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-//		}
-//	}	
+	private void showComprasCliente() {
+		try {
+			this.Clientes = this.services.getComprasCliente(Conexion.obtener());
+
+			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar", "NºCompras"}));
+			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
+			dtm.setRowCount(0);
+
+			for (int i = 0; i < this.Clientes.size(); i++) {
+			
+				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
+						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
+						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
+						this.Clientes.get(i).getActivar(), this.Clientes.get(i).getNumCompras() });
+				
+
+			}
+
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+		} catch (ClassNotFoundException ex) {
+			System.out.println(ex);
+			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+		}
+	}	
 	
-//	private void showValoracionesCliente() {
-//		try {
-//			this.Clientes = this.services.getAllRolCliente(Conexion.obtener());
-//
-//			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
-//
-//			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar" }));
-//			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
-//			dtm.setRowCount(0);
-//
-//			for (int i = 0; i < this.Clientes.size(); i++) {
-//			
-//				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
-//						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
-//						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
-//						this.Clientes.get(i).getActivar() });
-//				
-//
-//			}
-//
-//		} catch (SQLException ex) {
-//			System.out.println(ex.getMessage());
-//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-//		} catch (ClassNotFoundException ex) {
-//			System.out.println(ex);
-//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-//		}
-//	}	
+	private void showAlquileresCliente() {
+		try {
+			this.Clientes = this.services.getAlquileresCliente(Conexion.obtener());
+
+			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar", "NºAlquileres" }));
+			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
+			dtm.setRowCount(0);
+
+			for (int i = 0; i < this.Clientes.size(); i++) {
+			
+				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
+						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
+						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
+						this.Clientes.get(i).getActivar(), this.Clientes.get(i).getNumAlquileres() });
+			}
+
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+		} catch (ClassNotFoundException ex) {
+			System.out.println(ex);
+			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+		}
+	}	
 	
 	public static void setidClienteCrear(Integer id) {
 		idCliente=id;
