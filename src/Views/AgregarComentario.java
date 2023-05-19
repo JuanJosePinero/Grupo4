@@ -1,7 +1,6 @@
 package Views;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,13 +18,17 @@ import javax.swing.border.EmptyBorder;
 
 import Service.ComentarioService;
 import Service.Conexion;
+import Service.VehiculoService;
 import models.Comentario;
+import models.Vehiculo;
 
 public class AgregarComentario extends JFrame {
 
 	private JPanel contentPane;
 	private static JTextArea textArea;
 	private final static ComentarioService service = new ComentarioService();
+	private final VehiculoService serviceveh=new VehiculoService();
+	private Vehiculo vehiculo;
 	private List <Comentario> comentarios = new ArrayList<>();
 
 
@@ -63,13 +66,18 @@ public class AgregarComentario extends JFrame {
 				System.out.println(nomUser);
 				
 				
+				
 				Comentario c = new Comentario();
 				c.setIdCliente(Login.getidClienteLogin());
 				System.out.println(Login.getidClienteLogin());
 				c.setIdVehiculo(Login.getidVehiculo());
-				c.setComentario(nomUser +": "+comentario);
-				
+				c.setComentario(nomUser +": \n"+comentario);
 				try {
+					vehiculo=serviceveh.getVehiculo(Conexion.obtener(),Login.getidVehiculo());
+					Vehiculo v=new Vehiculo(vehiculo.getIdVehiculos(),vehiculo.getModelo(),vehiculo.getMarca(),
+							vehiculo.getAnyo(),vehiculo.getColor(),vehiculo.getPrecio(),vehiculo.getIdFabricante(),
+							vehiculo.getComprado(),vehiculo.getAlquilado(),vehiculo.getNumcomentarios()+1);
+					serviceveh.save(Conexion.obtener(), v);
 					service.save(Conexion.obtener(), c);
 				} catch (ClassNotFoundException | SQLException e1) {
 					e1.printStackTrace();

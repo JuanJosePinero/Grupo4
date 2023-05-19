@@ -10,10 +10,12 @@ public class Vehiculo {
 	private float precio;
 	private Integer idFabricante;
 	private String ruta;
-	private int comprado=0,alquilado;
+	private int comprado=0,alquilado=0,numcomentarios=0;
 	
 	
 
+
+	
 
 	public Vehiculo() {
 		super();
@@ -30,7 +32,6 @@ public class Vehiculo {
 		this.precio = precio;
 		this.idFabricante = idFabricante;
 		this.ruta = ruta;
-		alquilado=0;
 	}
 
 
@@ -61,6 +62,20 @@ public class Vehiculo {
 		this.color = color;
 		this.precio = precio;
 		this.idFabricante = idFabricante;
+	}
+	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
+			Integer idFabricante, int compra, int alqui,int numcom) {
+		super();
+		this.idVehiculos = idVehiculos;
+		this.modelo = modelo;
+		this.marca = marca;
+		this.anyo = anyo;
+		this.color = color;
+		this.precio = precio;
+		this.idFabricante = idFabricante;
+		this.comprado=compra;
+		this.alquilado = alqui;
+		this.numcomentarios=numcom;
 	}
 	
 	public String getRuta() {
@@ -134,7 +149,13 @@ public class Vehiculo {
 		this.comprado = comprado;
 	}
 	
-	
+	public int getNumcomentarios() {
+		return numcomentarios;
+	}
+
+	public void setNumcomentarios(int numcomentarios) {
+		this.numcomentarios = numcomentarios;
+	}
 
 	public int getAlquilado() {
 		return alquilado;

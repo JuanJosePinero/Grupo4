@@ -50,7 +50,6 @@ public class FiltrarVehiculo extends JFrame {
 	 public FiltrarVehiculo() {
 	        initialize();
 	        vehiculos = new ArrayList<>();
-	        showVehiculos();
 	    }
 
 	    private void initialize() {
@@ -64,18 +63,12 @@ public class FiltrarVehiculo extends JFrame {
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
 
-	        tableModel = new DefaultTableModel(
-	                new Object[][] {},
-	                new String[] { "Vehículo", "Valoración", "Comentarios" }
-	        );
-
 	        JButton btnFiltrar = new JButton("Filtrar por Valoracion");
 	        btnFiltrar.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
 	                MejoresValoraciones mj=new MejoresValoraciones();
 	                mj.setVisible(true);
 	                mj.setLocationRelativeTo(null);
-	                dispose();
 	            }
 	        });
 	        btnFiltrar.setBounds(10, 117, 175, 23);
@@ -87,7 +80,6 @@ public class FiltrarVehiculo extends JFrame {
 	        		ComentariosVehiculos cv=new ComentariosVehiculos();
 	        		cv.setVisible(true);
 	                cv.setLocationRelativeTo(null);
-	                dispose();
 	        	}
 	        });
 	        btnNewButton.setBounds(256, 118, 170, 21);
@@ -108,21 +100,4 @@ public class FiltrarVehiculo extends JFrame {
 	    }
 
 	    
-	    private void showVehiculos() {
-			try {
-				vehiculos = service.getAllVehiculos(Conexion.obtener());
-				tableModel.setRowCount(0);
-
-				for (int i = 0; i < vehiculos.size(); i++) {
-					tableModel.addRow(new Object[] { vehiculos.get(i).getModelo(),
-							 });
-				}
-			} catch (SQLException ex) {
-				System.out.println(ex.getMessage());
-				JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-			} catch (ClassNotFoundException ex) {
-				System.out.println(ex);
-				JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-			}
-		}
 }
