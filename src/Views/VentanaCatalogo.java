@@ -185,7 +185,6 @@ public class VentanaCatalogo extends JFrame {
 	
 
 		showVehiculos();
-//		RedimensionarImages();
 
 	}
 
@@ -328,29 +327,6 @@ public class VentanaCatalogo extends JFrame {
 		}
 
 	}
-	
-//	public void RedimensionarImages() {
-//		int filas = jtableP.getSelectedRow();
-//		String fila = jtableP.getValueAt(filas, 0).toString();
-//		
-//		Vehiculo v = vehiculo.get(filas);
-//		
-//		String rutaImagen = v.getRuta();
-//		
-//		try {
-//			File selectedFile = new File(rutaImagen);
-//            BufferedImage originalImage = ImageIO.read(selectedFile);
-//            BufferedImage resizedImage = new BufferedImage(375, 250, originalImage.getType());
-//            Graphics2D g2d = resizedImage.createGraphics();
-//            g2d.drawImage(originalImage, 0, 0, 375, 250, null);
-//            g2d.dispose();
-//
-//            imagenLabel.setIcon(new ImageIcon(resizedImage));
-//
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-//	}
 
 	private void showVehiculosidFabricante() {
 		try {

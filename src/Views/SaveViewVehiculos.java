@@ -1,8 +1,10 @@
 package Views;
 
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -179,6 +181,7 @@ public class SaveViewVehiculos extends JFrame {
 				vehiculo.setPrecio(precio);
 				vehiculo.setIdFabricante(idFabricante);
 				vehiculo.setRuta(ruta);
+				vehiculo.setNumcomentarios(0);
 
 				try {
 					services.save(Conexion.obtener(), vehiculo);
@@ -225,8 +228,12 @@ public class SaveViewVehiculos extends JFrame {
 						Path destino = Path.of(carpetaDestino);
 						Files.copy(selectedFile.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
 
-						img = ImageIO.read(selectedFile);
-						btnImagen.setIcon(new ImageIcon(img));
+						BufferedImage originalImage = ImageIO.read(selectedFile);
+                        BufferedImage resizedImage = new BufferedImage(350, 250, originalImage.getType());
+                        Graphics2D g2d = resizedImage.createGraphics();
+                        g2d.drawImage(originalImage, 0, 0, 350, 250, null);
+                        g2d.dispose();
+						btnImagen.setIcon(new ImageIcon(resizedImage));
 						ruta = carpetaDestino;
 
 					} catch (IOException e1) {

@@ -17,6 +17,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
+import org.jfree.chart.axis.SymbolAxis;
 import org.jfree.chart.block.BlockBorder;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
@@ -42,9 +43,14 @@ public class LineChartEx extends JFrame {
         XYDataset dataset = createDataset();
         JFreeChart chart = createChart(dataset);
         XYPlot plot=chart.getXYPlot();
-        NumberAxis xAxis=(NumberAxis)plot.getDomainAxis();
-        xAxis.setTickUnit(new NumberTickUnit(1));
         
+        String[] months = new String[]{"", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", ""};
+        SymbolAxis xAxis = new SymbolAxis("Meses", months);
+        xAxis.setTickUnit(new NumberTickUnit(1));
+        plot.setDomainAxis(xAxis);
+        
+        NumberAxis yAxis = (NumberAxis) plot.getRangeAxis();
+        yAxis.setTickUnit(new NumberTickUnit(1));
 
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));

@@ -20,7 +20,7 @@ public class VehiculoService {
 	      try{
 	         PreparedStatement consulta;
 	         if(vehiculo.getIdVehiculos() == null){
-	            consulta = conexion.prepareStatement("INSERT INTO " + this.tabla + "(modelo, marca, anyo, color, precio, idFabricante, ruta,numcompras) VALUES(?, ?, ?, ?, ?, ?, ?,?)");
+	            consulta = conexion.prepareStatement("INSERT INTO " + this.tabla + "(modelo, marca, anyo, color, precio, idFabricante, ruta, numcomentarios) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
 	            consulta.setString(1, vehiculo.getModelo());
 	            consulta.setString(2, vehiculo.getMarca());
 	            consulta.setInt(3, vehiculo.getAnyo());     
