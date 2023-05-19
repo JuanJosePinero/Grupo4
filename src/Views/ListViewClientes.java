@@ -2,10 +2,13 @@ package Views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,7 +20,6 @@ import javax.swing.table.DefaultTableModel;
 import Service.ClientService;
 import Service.Conexion;
 import models.Cliente;
-import models.Fabricante;
 
 public class ListViewClientes extends JFrame {
 	private JPanel contentPane;
@@ -26,6 +28,7 @@ public class ListViewClientes extends JFrame {
 	private List<Cliente> Clientes;
 	private JButton ActivarB, CambiarB, btnVolver;
 	private static Integer idCliente;
+	private JComboBox filtro;
 
 	public ListViewClientes() {
 		setTitle("Clientes");
@@ -57,17 +60,24 @@ public class ListViewClientes extends JFrame {
 		contentPane.add(btnVolver);
 
 		ActivarB = new JButton("Activar/Desactivar");
-		ActivarB.setBounds(26, 12, 165, 24);
+		ActivarB.setBounds(123, 12, 141, 25);
 		contentPane.add(ActivarB);
 
 		CambiarB = new JButton("Restablecer Contraseña");
-		CambiarB.setBounds(230, 11, 165, 25);
+		CambiarB.setBounds(279, 12, 141, 25);
 		contentPane.add(CambiarB);
 
 		setVisible(true);
 		ManejadorActionB mab = new ManejadorActionB();
 		ActivarB.addActionListener(mab);
 		CambiarB.addActionListener(mab);
+		
+		String[] filtros = { "--", "Compras", "Alquileres", "Comentarios", "Valoraciones"};		
+		filtro = new JComboBox(filtros);
+		filtro.setBounds(10, 14, 103, 22);
+		contentPane.add(filtro);
+		manejadorcombo mancombo = new manejadorcombo();
+		filtro.addItemListener(mancombo);
 
 	}
 
@@ -89,7 +99,7 @@ public class ListViewClientes extends JFrame {
 						
 						try {
 							Cliente datos = services.getCliente(Conexion.obtener(), nombre);
-							String nom = "Prueba";
+							String nom = c.getNombreUsuario();
 							String dir = datos.getDireccion();
 							String rol = datos.getRol();
 							String user = datos.getNombreUsuario();
@@ -167,6 +177,37 @@ public class ListViewClientes extends JFrame {
 		}
 
 	}
+	
+	private void refrescarTabla(String fil) {
+		try {
+			if (fil.equalsIgnoreCase("--")) {
+
+			} else if (fil.equalsIgnoreCase("Compras")) {
+
+			} else if (fil.equalsIgnoreCase("Alquileres")) {
+
+			} else if (fil.equalsIgnoreCase("Comentarios")) {
+
+			} else if (fil.equalsIgnoreCase("Valoraciones")) {
+
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Error al actualizar la tabla");
+		}
+
+	}
+	
+	private class manejadorcombo implements ItemListener {
+
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			JComboBox combo = (JComboBox) e.getSource();
+			String filtroSeleccionado = String.valueOf(combo.getSelectedItem());
+			refrescarTabla(filtroSeleccionado);
+		}
+
+	}
 
 	private void showCliente() {
 		try {
@@ -196,6 +237,123 @@ public class ListViewClientes extends JFrame {
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		}
 	}
+	
+//	private void showComprasCliente() {
+//		try {
+//			this.Clientes = this.services.getAllRolCliente(Conexion.obtener());
+//
+//			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+//
+//			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar" }));
+//			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
+//			dtm.setRowCount(0);
+//
+//			for (int i = 0; i < this.Clientes.size(); i++) {
+//			
+//				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
+//						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
+//						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
+//						this.Clientes.get(i).getActivar() });
+//				
+//
+//			}
+//
+//		} catch (SQLException ex) {
+//			System.out.println(ex.getMessage());
+//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+//		} catch (ClassNotFoundException ex) {
+//			System.out.println(ex);
+//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+//		}
+//	}
+//	
+//	private void showAlquileresCliente() {
+//		try {
+//			this.Clientes = this.services.getAllRolCliente(Conexion.obtener());
+//
+//			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+//
+//			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar" }));
+//			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
+//			dtm.setRowCount(0);
+//
+//			for (int i = 0; i < this.Clientes.size(); i++) {
+//			
+//				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
+//						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
+//						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
+//						this.Clientes.get(i).getActivar() });
+//				
+//
+//			}
+//
+//		} catch (SQLException ex) {
+//			System.out.println(ex.getMessage());
+//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+//		} catch (ClassNotFoundException ex) {
+//			System.out.println(ex);
+//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+//		}
+//	}
+//	
+//	private void showComentariosCliente() {
+//		try {
+//			this.Clientes = this.services.getAllRolCliente(Conexion.obtener());
+//
+//			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+//
+//			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar" }));
+//			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
+//			dtm.setRowCount(0);
+//
+//			for (int i = 0; i < this.Clientes.size(); i++) {
+//			
+//				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
+//						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
+//						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
+//						this.Clientes.get(i).getActivar() });
+//				
+//
+//			}
+//
+//		} catch (SQLException ex) {
+//			System.out.println(ex.getMessage());
+//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+//		} catch (ClassNotFoundException ex) {
+//			System.out.println(ex);
+//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+//		}
+//	}	
+	
+//	private void showValoracionesCliente() {
+//		try {
+//			this.Clientes = this.services.getAllRolCliente(Conexion.obtener());
+//
+//			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+//
+//			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar" }));
+//			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
+//			dtm.setRowCount(0);
+//
+//			for (int i = 0; i < this.Clientes.size(); i++) {
+//			
+//				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
+//						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
+//						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
+//						this.Clientes.get(i).getActivar() });
+//				
+//
+//			}
+//
+//		} catch (SQLException ex) {
+//			System.out.println(ex.getMessage());
+//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+//		} catch (ClassNotFoundException ex) {
+//			System.out.println(ex);
+//			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+//		}
+//	}	
+	
 	public static void setidClienteCrear(Integer id) {
 		idCliente=id;
 	}
