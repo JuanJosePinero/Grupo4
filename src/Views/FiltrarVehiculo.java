@@ -75,6 +75,7 @@ public class FiltrarVehiculo extends JFrame {
 	                MejoresValoraciones mj=new MejoresValoraciones();
 	                mj.setVisible(true);
 	                mj.setLocationRelativeTo(null);
+	                dispose();
 	            }
 	        });
 	        btnFiltrar.setBounds(10, 117, 175, 23);
@@ -86,6 +87,7 @@ public class FiltrarVehiculo extends JFrame {
 	        		ComentariosVehiculos cv=new ComentariosVehiculos();
 	        		cv.setVisible(true);
 	                cv.setLocationRelativeTo(null);
+	                dispose();
 	        	}
 	        });
 	        btnNewButton.setBounds(256, 118, 170, 21);

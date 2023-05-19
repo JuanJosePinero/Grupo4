@@ -45,7 +45,7 @@ public class ComentariosVehiculos extends JFrame {
     }
 
     private void initialize() {
-    	setTitle("Comentarios");
+    	setTitle("Coches mas comentados Comentarios");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setLocationRelativeTo(null);
@@ -69,6 +69,7 @@ public class ComentariosVehiculos extends JFrame {
         JButton btnFiltrar = new JButton("Volver");
         btnFiltrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	dispose();
                 FiltrarVehiculo fv=new FiltrarVehiculo();
                 fv.setVisible(true);
                 fv.setLocationRelativeTo(null);
