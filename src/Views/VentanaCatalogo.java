@@ -115,6 +115,12 @@ public class VentanaCatalogo extends JFrame {
 		lblCoche.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 16));
 		lblCoche.setBounds(255, 16, 334, 32);
 		contentPane.add(lblCoche);
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(new ImageIcon("images/lupa.png"));
+		lblNewLabel_3.setBounds(10, 84, 22, 22);
+		contentPane.add(lblNewLabel_3);
+		
 
 		String[] filtros = { "--", "Marca", "Modelo", "Anyo", "Color", "Precio", "idFabricante" };
 		filtro = new JComboBox(filtros);
@@ -176,6 +182,7 @@ public class VentanaCatalogo extends JFrame {
 		btnVerCyV.setBounds(59, 305, 50, 50);
 		contentPane.add(btnVerCyV);
 		btnVerCyV.addActionListener(manejador);
+	
 
 		showVehiculos();
 //		RedimensionarImages();

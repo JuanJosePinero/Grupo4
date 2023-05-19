@@ -73,7 +73,6 @@ public class VisualizarValoranFabri extends JFrame {
 			List<Valoracion> datos = service.getAllValoracionId(Conexion.obtener());
 			String coment ="";
 			String nomUser = Login.getnombreUser();
-			System.out.println(nomUser);
 			for (Valoracion c : datos) {
 				
 					

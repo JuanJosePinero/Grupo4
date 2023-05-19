@@ -22,6 +22,8 @@ import Service.VehiculoService;
 import models.Cliente;
 import models.Fabricante;
 import models.Vehiculo;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 
 public class VisualizarVehiculosCrear extends JFrame {
 
@@ -31,7 +33,7 @@ public class VisualizarVehiculosCrear extends JFrame {
 	private final FabricantesService servicesF = new FabricantesService();
 	private List<Vehiculo> vehiculo;
 	private List <Fabricante> fabricante;
-	private JButton btnComentarios,btnValoraciones;
+	private JButton btnComentarios,btnValoraciones,btnCrear;
 
 	public VisualizarVehiculosCrear() {
 		setTitle("Vehiculos");
@@ -44,16 +46,15 @@ public class VisualizarVehiculosCrear extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 	
-		System.out.println("El id es"+Login.getidClienteLogin());
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(52, 77, 408, 225);
+		scrollPane.setBounds(52, 94, 408, 225);
 		contentPane.add(scrollPane);
 		
 		try {
 			
 			Fabricante datos = servicesF.getFabricantesCliente(Conexion.obtener(), Login.getidClienteLogin());
 			int id =datos.getIdCliente();
-			System.out.println("EL id es"+id);
+			
 			ListViewFabricante.setidFabricanteCrear(id);
 		} catch (ClassNotFoundException | SQLException e1) {
 			// TODO Auto-generated catch block
@@ -61,21 +62,23 @@ public class VisualizarVehiculosCrear extends JFrame {
 		}
 		
 		
-		JButton VolverB = new JButton("Volver");
+		JButton VolverB = new JButton("Cerrar Sesion");
 		VolverB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login l = new Login();
 				dispose();
 			}
 		});
-		VolverB.setBounds(52, 321, 414, 25);
+		VolverB.setBounds(0, 332, 531, 25);
 		contentPane.add(VolverB);
 		
 		JLabel lblNewLabel = new JLabel("Visualizacion de los Vehiculos Creados");
-		lblNewLabel.setBounds(145, 53, 242, 13);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(52, 70, 408, 13);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnCrear = new JButton("Crear");
+		btnCrear  = new JButton("");
+		btnCrear.setIcon(new ImageIcon("images/crear.png"));
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CrearVehiculos vista = new CrearVehiculos();
@@ -84,7 +87,7 @@ public class VisualizarVehiculosCrear extends JFrame {
 				dispose();
 			}
 		});
-		btnCrear.setBounds(50, 12, 95, 23);
+		btnCrear.setBounds(81, 11, 50, 50);
 		contentPane.add(btnCrear);
 		setVisible(true);	
 		
@@ -92,12 +95,14 @@ public class VisualizarVehiculosCrear extends JFrame {
 		showVehiculosIdFabricante();
 		scrollPane.setViewportView(jtableP);
 		
-		btnComentarios = new JButton("Comentarios");
-		btnComentarios.setBounds(204, 11, 114, 23);
+		btnComentarios = new JButton("");
+		btnComentarios.setIcon(new ImageIcon("images/iconoComent.png"));
+		btnComentarios.setBounds(225, 9, 50, 50);
 		contentPane.add(btnComentarios);
 		
-		btnValoraciones = new JButton("Valoraciones");
-		btnValoraciones.setBounds(350, 12, 114, 23);
+		btnValoraciones = new JButton("");
+		btnValoraciones.setIcon(new ImageIcon("images/iconoValo.png"));
+		btnValoraciones.setBounds(348, 9, 50, 50);
 		contentPane.add(btnValoraciones);
 		manejadorAction ma = new manejadorAction();
 		btnComentarios.addActionListener(ma);
@@ -141,6 +146,7 @@ public class VisualizarVehiculosCrear extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 		JButton j= (JButton) e.getSource();
 		int filaS = jtableP.getSelectedRow();
+		
 		String nombreCliente = jtableP.getValueAt(filaS, 0).toString();
 
 		Vehiculo v = vehiculo.get(filaS);

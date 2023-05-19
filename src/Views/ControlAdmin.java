@@ -44,14 +44,14 @@ public class ControlAdmin extends JFrame {
 		Vehiculos.setBounds(312, 76, 100, 100);
 		contentPane.add(Vehiculos);
 		
-		VolverB = new JButton("Volver");
+		VolverB = new JButton("Cerrar Sesion");
 		VolverB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login l = new Login();
 				dispose();
 			}
 		});
-		VolverB.setBounds(10, 227, 414, 23);
+		VolverB.setBounds(0, 238, 434, 23);
 		contentPane.add(VolverB);
 		
 		JLabel lblTitulo = new JLabel("Clientes");

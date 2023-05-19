@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -36,7 +37,8 @@ public class ListViewVehiculos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnCreate = new JButton("Create");
+		JButton btnCreate = new JButton("");
+		btnCreate.setIcon(new ImageIcon("images/crear.png"));
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListViewVehiculos.this.dispose();
@@ -45,10 +47,11 @@ public class ListViewVehiculos extends JFrame {
 				vista.setLocationRelativeTo(null);
 			}
 		});
-		btnCreate.setBounds(33, 24, 117, 29);
+		btnCreate.setBounds(80, 11, 50, 50);
 		contentPane.add(btnCreate);
 		
-		JButton btnUpdate = new JButton("Update");
+		JButton btnUpdate = new JButton("");
+		btnUpdate.setIcon(new ImageIcon("images/update.png"));
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int fila_seleccionada = jtableP.getSelectedRow();
@@ -62,10 +65,11 @@ public class ListViewVehiculos extends JFrame {
 				}
 			}
 		});
-		btnUpdate.setBounds(169, 24, 117, 29);
+		btnUpdate.setBounds(196, 11, 50, 50);
 		contentPane.add(btnUpdate);
 		
-		JButton btnDelete = new JButton("Delete");
+		JButton btnDelete = new JButton("");
+		btnDelete.setIcon(new ImageIcon("images/eliminar.png"));
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int fila_seleccionada = jtableP.getSelectedRow();
@@ -89,7 +93,7 @@ public class ListViewVehiculos extends JFrame {
 				}
 			}
 		});
-		btnDelete.setBounds(308, 24, 117, 29);
+		btnDelete.setBounds(335, 11, 50, 50);
 		contentPane.add(btnDelete);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -107,7 +111,7 @@ public class ListViewVehiculos extends JFrame {
 				dispose();
 			}
 		});
-		btnVolver.setBounds(152, 236, 146, 27);
+		btnVolver.setBounds(0, 244, 434, 27);
 		contentPane.add(btnVolver);
 		
 	}

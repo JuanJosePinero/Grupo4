@@ -114,7 +114,7 @@ public class ListViewFabricante extends JFrame {
 				dispose();
 			}
 		});
-		VolverB.setBounds(181, 238, 89, 23);
+		VolverB.setBounds(0, 238, 434, 23);
 		contentPane.add(VolverB);
 		
 		JButton btnVer = new JButton("");
