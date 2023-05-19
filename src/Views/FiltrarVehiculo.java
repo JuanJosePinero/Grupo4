@@ -3,24 +3,29 @@ package Views;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Service.AlquilerService;
+import Service.Conexion;
+import Service.VehiculoService;
 import models.Vehiculo;
-import javax.swing.SwingConstants;
 
 public class FiltrarVehiculo extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
+	private final VehiculoService service=new VehiculoService();
+	private final AlquilerService servicealq=new AlquilerService();
 	private DefaultTableModel tableModel;
     private List<Vehiculo> vehiculos;
 	/**
@@ -45,7 +50,7 @@ public class FiltrarVehiculo extends JFrame {
 	 public FiltrarVehiculo() {
 	        initialize();
 	        vehiculos = new ArrayList<>();
-	        cargarDatosVehiculos();
+	        showVehiculos();
 	    }
 
 	    private void initialize() {
@@ -58,17 +63,11 @@ public class FiltrarVehiculo extends JFrame {
 
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
-			
-			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(40, 34, 371, 181);
-			contentPane.add(scrollPane);
 
 	        tableModel = new DefaultTableModel(
 	                new Object[][] {},
 	                new String[] { "Vehículo", "Valoración", "Comentarios" }
 	        );
-	        table = new JTable(tableModel);
-	        scrollPane.setViewportView(table);
 
 	        JButton btnFiltrar = new JButton("Filtrar por Valoracion");
 	        btnFiltrar.addActionListener(new ActionListener() {
@@ -78,7 +77,7 @@ public class FiltrarVehiculo extends JFrame {
 	                mj.setLocationRelativeTo(null);
 	            }
 	        });
-	        btnFiltrar.setBounds(10, 230, 175, 23);
+	        btnFiltrar.setBounds(10, 117, 175, 23);
 	        contentPane.add(btnFiltrar);
 	        
 	        JButton btnNewButton = new JButton("Filtrar por comentarios");
@@ -89,35 +88,39 @@ public class FiltrarVehiculo extends JFrame {
 	                cv.setLocationRelativeTo(null);
 	        	}
 	        });
-	        btnNewButton.setBounds(256, 231, 170, 21);
+	        btnNewButton.setBounds(256, 118, 170, 21);
 	        contentPane.add(btnNewButton);
+	        
+	        JButton btnVolver = new JButton("Volver");
+	        btnVolver.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		VentanaCatalogo vc=new VentanaCatalogo();
+	        		vc.setVisible(true);
+	        		vc.setLocationRelativeTo(null);
+	        		dispose();	        	}
+	        });
+	        btnVolver.setBounds(178, 232, 85, 21);
+	        contentPane.add(btnVolver);
 	      
 	        setVisible(true);
 	    }
 
-	    private void cargarDatosVehiculos() {
-	        
+	    
+	    private void showVehiculos() {
+			try {
+				vehiculos = service.getAllVehiculos(Conexion.obtener());
+				tableModel.setRowCount(0);
 
-	        for (Vehiculo vehiculo : vehiculos) {
-	            Object[] rowData = { vehiculo.getMarca(), vehiculo.getModelo(), vehiculo.getColor()};
-	            tableModel.addRow(rowData);
-	        }
-	    }
-
-	    private void filtrarVehiculos() {
-	        DefaultTableModel filteredTableModel = new DefaultTableModel(
-	                new Object[][] {},
-	                new String[] { "Vehículo", "Valoración", "Comentarios" }
-	        );
-	        JTable jtableP = new JTable(filteredTableModel) {
-			    @Override
-			    public boolean isCellEditable(int row, int column) {
-			        return false;
-			    }
-			};
-
-	        
-
-	        table.setModel(filteredTableModel);
-	    }
+				for (int i = 0; i < vehiculos.size(); i++) {
+					tableModel.addRow(new Object[] { vehiculos.get(i).getModelo(),
+							 });
+				}
+			} catch (SQLException ex) {
+				System.out.println(ex.getMessage());
+				JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+			} catch (ClassNotFoundException ex) {
+				System.out.println(ex);
+				JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+			}
+		}
 }
