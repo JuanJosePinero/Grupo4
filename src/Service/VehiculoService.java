@@ -29,7 +29,7 @@ public class VehiculoService {
 	            consulta.setInt(6, vehiculo.getIdFabricante());
 	            consulta.setString(7, vehiculo.getRuta());
 	         }else{
-	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET modelo = ?, marca = ?, anyo = ?, color = ?, precio = ?, idFabricante = ?, ruta = ?, comprado = ? WHERE idVehiculos = ?");
+	            consulta = conexion.prepareStatement("UPDATE " + this.tabla + " SET modelo = ?, marca = ?, anyo = ?, color = ?, precio = ?, idFabricante = ?, ruta = ?, comprado = ?, alquilado = ? WHERE idVehiculos = ?");
 	            consulta.setString(1, vehiculo.getModelo());
 	            consulta.setString(2, vehiculo.getMarca());
 	            consulta.setInt(3, vehiculo.getAnyo());     
@@ -38,7 +38,8 @@ public class VehiculoService {
 	            consulta.setInt(6, vehiculo.getIdFabricante());
 	            consulta.setString(7, vehiculo.getRuta());
 	            consulta.setInt(8, vehiculo.getComprado());
-	            consulta.setInt(9, vehiculo.getIdVehiculos());
+	            consulta.setInt(9, vehiculo.getAlquilado());
+	            consulta.setInt(10, vehiculo.getIdVehiculos());
 	         }
 	         consulta.executeUpdate();
 	      }catch(SQLException ex){
@@ -77,7 +78,7 @@ public class VehiculoService {
 	   public List<Vehiculo> getAllVehiculos(Connection conexion) throws SQLException {
 		    List<Vehiculo> listaVehiculos = new ArrayList<>();
 		    try {
-		        PreparedStatement consulta = conexion.prepareStatement("SELECT idVehiculos, modelo, marca, anyo, color, precio, idFabricante, comprado"
+		        PreparedStatement consulta = conexion.prepareStatement("SELECT idVehiculos, modelo, marca, anyo, color, precio, idFabricante, comprado, alquilado"
 		                + " FROM " + this.tabla);
 		        ResultSet resultado = consulta.executeQuery();
 		        while (resultado.next()) {

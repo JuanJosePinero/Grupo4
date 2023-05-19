@@ -197,6 +197,7 @@ public class ComprarVehiculo extends JFrame {
 						System.out.println(venta.getIdCliente());
 						System.out.println(venta.getFechaHora());
 						vehiculo.setComprado(1);
+						vehiculo.setAlquilado(0);
 
 
 					System.out.println(venta.getIdVehiculo());

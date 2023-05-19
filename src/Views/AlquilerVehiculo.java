@@ -48,21 +48,7 @@ public class AlquilerVehiculo extends JFrame {
 	private JTextField fechafin;
 	private JComboBox<String> fechainicio, fechaF;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AlquilerVehiculo frame = new AlquilerVehiculo(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	public AlquilerVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
@@ -226,61 +212,68 @@ public class AlquilerVehiculo extends JFrame {
 			Object o = e.getSource();
 
 			if (o == btnAlquiler) {
-
 				try {
-					Integer idAlquiler = alquiler.getIdAlquiler();
-					Integer idVehiculo = vehiculo.getIdVehiculos();
-					Integer idCliente = Login.getidClienteLogin();
-					
-					String fechaIncstr = (String) fechainicio.getSelectedItem();
-					String fechaFinstr = (String) fechaF.getSelectedItem();
-					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-					java.util.Date fechaUtil = formatter.parse(fechaIncstr);
-					java.util.Date fechaUtil2 = formatter.parse(fechaFinstr);
-					Date fechaInc = new Date(fechaUtil.getTime());
-					Date fechaFin=new Date(fechaUtil2.getTime());
-
-					alquiler.setIdAlquiler(idAlquiler);
-					alquiler.setIdVehiculo(idVehiculo);
-					alquiler.setIdCliente(idCliente);
-					alquiler.setFechaInic(fechaInc);
-					alquiler.setFechFin(fechaFin);
-					
-					System.out.println(alquiler.getIdAlquiler());
-					System.out.println(alquiler.getIdVehiculo());
-					System.out.println(alquiler.getIdCliente());
-					System.out.println(alquiler.getFechaInic());
-					System.out.println(fechaInc);
-					System.out.println(fechaFin);
-					
-					if(!VehiculoDisponible(idVehiculo,fechaInc,fechaFin)) {
-						JOptionPane.showMessageDialog(AlquilerVehiculo.this, "No se puede alquilar el vehiculo en esta fecha");
-						return;
-					}
-						services.save(Conexion.obtener(), vehiculo);
-						service.save(Conexion.obtener(), alquiler);
+					Vehiculo v=services.getVehiculo(Conexion.obtener(),vehiculo.getIdVehiculos());
+					if(v.getAlquilado()==1) {
+						JOptionPane.showMessageDialog(AlquilerVehiculo.this, "este coche ya ha sido comprado");
 						AlquilerVehiculo.this.dispose();
-						JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Se ha realizado el alquiler");
 						VentanaCatalogo vc = new VentanaCatalogo();
 						vc.setVisible(true);
 						vc.setLocationRelativeTo(null);
-					
-					
-					
-					
+					}else if(v.getAlquilado()==0) {
+						Integer idAlquiler = alquiler.getIdAlquiler();
+						Integer idVehiculo = vehiculo.getIdVehiculos();
+						Integer idCliente = Login.getidClienteLogin();
 						
-					
-				} catch (SQLException ex) {
-					System.out.println(ex.getMessage());
-					JOptionPane.showMessageDialog(AlquilerVehiculo.this,
-							"Ha surgido un error y no se ha podido guardar el registro.");
-				} catch (ClassNotFoundException ex) {
-					System.out.println(ex);
-					JOptionPane.showMessageDialog(AlquilerVehiculo.this,
-							"Ha surgido un error y no se ha podido guardar el registro.");
+						String fechaIncstr = (String) fechainicio.getSelectedItem();
+						String fechaFinstr = (String) fechaF.getSelectedItem();
+						SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+						java.util.Date fechaUtil = formatter.parse(fechaIncstr);
+						java.util.Date fechaUtil2 = formatter.parse(fechaFinstr);
+						Date fechaInc = new Date(fechaUtil.getTime());
+						Date fechaFin=new Date(fechaUtil2.getTime());
+
+						alquiler.setIdAlquiler(idAlquiler);
+						alquiler.setIdVehiculo(idVehiculo);
+						alquiler.setIdCliente(idCliente);
+						alquiler.setFechaInic(fechaInc);
+						alquiler.setFechFin(fechaFin);
+						
+						System.out.println(alquiler.getIdAlquiler());
+						System.out.println(alquiler.getIdVehiculo());
+						System.out.println(alquiler.getIdCliente());
+						System.out.println(alquiler.getFechaInic());
+						System.out.println(fechaInc);
+						System.out.println(fechaFin);
+						vehiculo.setAlquilado(1);
+						vehiculo.setComprado(0);
+						
+						if(!VehiculoDisponible(idVehiculo,fechaInc,fechaFin)) {
+							JOptionPane.showMessageDialog(AlquilerVehiculo.this, "No se puede alquilar el vehiculo en esta fecha");
+							return;
+						}
+							services.save(Conexion.obtener(), vehiculo);
+							service.save(Conexion.obtener(), alquiler);
+							AlquilerVehiculo.this.dispose();
+							JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Se ha realizado el alquiler");
+							VentanaCatalogo vc = new VentanaCatalogo();
+							vc.setVisible(true);
+							vc.setLocationRelativeTo(null);
+						
+						
+						
+						
+							
+						
+					}
+				} catch (ClassNotFoundException | SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
 				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				
 			} else if (o == btnCancelar) {
 				JOptionPane.showMessageDialog(null, "La compra ha sido cancelada.", "Cancelacion",
 						JOptionPane.ERROR_MESSAGE);
