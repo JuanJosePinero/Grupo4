@@ -127,8 +127,7 @@ public class ListViewFabricante extends JFrame {
 				int id = f.getIdFabricante();
 				setidFabricanteCrear(id);
 				VisualizarVehiculos vv = new VisualizarVehiculos();
-				
-				
+				dispose();				
 			}
 		});
 		btnVer.setBounds(335, 27, 50, 50);

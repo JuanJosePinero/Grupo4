@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -30,8 +31,9 @@ public class CambiarContrasena extends JFrame {
 
 	
 	public CambiarContrasena() {
+		super("Cambio de contraseña");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 396, 253);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -40,39 +42,39 @@ public class CambiarContrasena extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Contraseña");
-		lblNewLabel.setBounds(105, 124, 110, 14);
+		lblNewLabel.setBounds(63, 71, 110, 14);
 		contentPane.add(lblNewLabel);
 		
 		ContT = new JTextField();
-		ContT.setBounds(253, 121, 145, 20);
+		ContT.setBounds(200, 69, 145, 20);
 		contentPane.add(ContT);
 		ContT.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(253, 149, 145, 20);
+		textField_1.setBounds(200, 99, 145, 20);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Confirmar Contraseña");
-		lblNewLabel_1.setBounds(79, 149, 127, 14);
+		lblNewLabel_1.setBounds(63, 101, 127, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		ConfirmarB = new JButton("Confirmar");
-		ConfirmarB.setBounds(105, 227, 89, 23);
+		ConfirmarB.setBounds(63, 144, 115, 36);
 		contentPane.add(ConfirmarB);
 		
 		CancelarB = new JButton("Cancelar");
-		CancelarB.setBounds(254, 227, 89, 23);
+		CancelarB.setBounds(200, 144, 115, 36);
 		contentPane.add(CancelarB);
 		
 		UsuarioT = new JTextField();
 		UsuarioT.setEditable(false);
-		UsuarioT.setBounds(253, 69, 145, 20);
+		UsuarioT.setBounds(200, 39, 145, 20);
 		contentPane.add(UsuarioT);
 		UsuarioT.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Usuario");
-		lblNewLabel_2.setBounds(111, 72, 63, 14);
+		lblNewLabel_2.setBounds(63, 41, 63, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		setVisible(true);
@@ -86,8 +88,6 @@ public class CambiarContrasena extends JFrame {
 			UsuarioT.setText(datos.getNombreUsuario());
 			System.out.println(datos.getNombreUsuario());
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		
@@ -106,8 +106,7 @@ public class CambiarContrasena extends JFrame {
 					datos.setContrasena(cont);
 					services.save(Conexion.obtener(), datos);
 				} catch (ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					System.out.println("selecciona una fila");
 				}
 				
 		
@@ -115,6 +114,7 @@ public class CambiarContrasena extends JFrame {
 				
 				
 			}else if(b.equals(CancelarB)) {
+				JOptionPane.showMessageDialog(null, "Ha cancelado el cambio de contraseña", "Cancelar", JOptionPane.ERROR_MESSAGE);
 				ListViewClientes lvc = new ListViewClientes();
 				dispose();
 				

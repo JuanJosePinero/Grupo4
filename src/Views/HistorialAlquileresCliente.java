@@ -40,9 +40,11 @@ public class HistorialAlquileresCliente extends JFrame{
 		JButton BotonVolver = new JButton("Volver");
 		BotonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Volviendo a la ventana del catalogo", "Aviso", JOptionPane.ERROR_MESSAGE);
 				VentanaCatalogo vc=new VentanaCatalogo();
 				vc.setVisible(true);
 				vc.setLocationRelativeTo(null);
+				dispose();
 			}
 		});
 		BotonVolver.setBounds(165, 198, 97, 25);

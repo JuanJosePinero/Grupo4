@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
@@ -47,6 +49,7 @@ public class ControlAdmin extends JFrame {
 		VolverB = new JButton("Cerrar Sesion");
 		VolverB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Cerrando Sesion...", "Cerrado", JOptionPane.ERROR_MESSAGE);
 				Login l = new Login();
 				dispose();
 			}

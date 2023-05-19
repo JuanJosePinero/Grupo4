@@ -36,6 +36,7 @@ public class ComprarVehiculo extends JFrame {
 	private JLabel lblImagen;
 	private String ruta;
 	private JLabel lblFechaHora;
+	private JTextField textFechaHora;
 
 	/**
 	 * Create the frame.
@@ -154,13 +155,9 @@ public class ComprarVehiculo extends JFrame {
 		contentPane.add(panel);
 
 		JLabel imagenLabel = new JLabel();
-		ImageIcon imagen = new ImageIcon(ruta);
+		ImageIcon imagen = new ImageIcon(vehiculo.getRuta());
 		imagenLabel.setIcon(imagen);
 		panel.add(imagenLabel);
-
-		lblFechaHora = new JLabel("Fecha y Hora:");
-		lblFechaHora.setBounds(30, 354, 80, 16);
-		contentPane.add(lblFechaHora);
 
 	}
 

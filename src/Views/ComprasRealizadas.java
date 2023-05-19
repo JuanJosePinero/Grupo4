@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -50,23 +51,22 @@ public class ComprasRealizadas extends JFrame {
 		lblLabel1.setBounds(83, 10, 321, 21);
 		contentPane.add(lblLabel1);
 		
-		
+		manejadorboton man=new manejadorboton();
 		
 		btnVerAlquileres = new JButton("Ver Alquileres");
 		btnVerAlquileres.setBounds(32, 56, 120, 27);
 		contentPane.add(btnVerAlquileres);
-		
+		btnVerAlquileres.addActionListener(man);
 		
 		btnVerCompras = new JButton("Ver Compras");
 		btnVerCompras.setBounds(262, 56, 120, 27);
 		contentPane.add(btnVerCompras);
-		manejadorboton man=new manejadorboton();
 		btnVerCompras.addActionListener(man);
-		btnVerAlquileres.addActionListener(man);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Calcelando...", "Calcel", JOptionPane.ERROR_MESSAGE);
 				VentanaCatalogo vc=new VentanaCatalogo();
 				vc.setVisible(true);
 				vc.setLocationRelativeTo(null);
@@ -74,12 +74,9 @@ public class ComprasRealizadas extends JFrame {
 			}
 		});
 		btnCancelar.setBounds(159, 98, 97, 25);
-		contentPane.add(btnCancelar);
-		
-		
-		
-	
+		contentPane.add(btnCancelar);	
 	}
+	
 	private class manejadorboton implements ActionListener{
 
 		@Override

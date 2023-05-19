@@ -101,7 +101,7 @@ public class Login extends JFrame {
 	     ImageIcon imagen = new ImageIcon("images/Usuario.png");
 	     imagenLabel.setIcon(imagen);
 	     Center.add(imagenLabel);
-	     imagenLabel.setBounds(130, 33, 30, 30);
+	     imagenLabel.setBounds(130, 20, 40, 40);
 		
 		
 		JLabel ContraseñaL = new JLabel("Contraseña");
@@ -118,7 +118,7 @@ public class Login extends JFrame {
 	     ImageIcon imagen1 = new ImageIcon("images/contrasenya.jpg");
 	     imagenLabel1.setIcon(imagen1);
 	     Center.add(imagenLabel1);
-	     imagenLabel1.setBounds(131, 117, 30, 30);
+	     imagenLabel1.setBounds(131, 105, 50, 40);
 		
 		setVisible(true);
 		

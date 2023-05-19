@@ -53,11 +53,10 @@ public class VisualizarVehiculosCrear extends JFrame {
 		try {
 			
 			Fabricante datos = servicesF.getFabricantesCliente(Conexion.obtener(), Login.getidClienteLogin());
-			int id =datos.getIdCliente();
+			int id = datos.getIdCliente();
 			
 			ListViewFabricante.setidFabricanteCrear(id);
 		} catch (ClassNotFoundException | SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		

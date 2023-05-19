@@ -71,8 +71,8 @@ public class ListViewClientes extends JFrame {
 		ManejadorActionB mab = new ManejadorActionB();
 		ActivarB.addActionListener(mab);
 		CambiarB.addActionListener(mab);
-		
-		String[] filtros = { "--", "Compras", "Alquileres", "Comentarios", "Valoraciones"};		
+
+		String[] filtros = { "--", "Compras", "Alquileres", "Comentarios", "Valoraciones" };
 		filtro = new JComboBox(filtros);
 		filtro.setBounds(10, 14, 103, 22);
 		contentPane.add(filtro);
@@ -90,94 +90,97 @@ public class ListViewClientes extends JFrame {
 			String nombreCliente = jtableP.getValueAt(filaS, 0).toString();
 
 			Cliente c = Clientes.get(filaS);
-			
-			System.out.println(c.getActivar());
+
 			if (b.equals(ActivarB)) {
 				String nombre = c.getNombreUsuario();
-				if(c.getRol().equals("Cliente")) {
-					if (c.getActivar() == 1) {
-						
-						try {
-							Cliente datos = services.getCliente(Conexion.obtener(), nombre);
-							String nom = c.getNombreUsuario();
-							String dir = datos.getDireccion();
-							String rol = datos.getRol();
-							String user = datos.getNombreUsuario();
-							String cont = datos.getContrasena();
-							Integer id = datos.getIdClientes();
-							int act = 0;
-	
-							datos.setIdClientes(id);
-							datos.setNombre(nom);
-							datos.setDireccion(dir);
-							datos.setRol(rol);
-							datos.setNombreUsuario(user);
-							datos.setContrasena(cont);
-							datos.setActivar(act);
-	
-							services.save(Conexion.obtener(), datos);
-							dispose();
-							ListViewClientes lvc = new ListViewClientes();
-	
-						} catch (ClassNotFoundException | SQLException e1) {
-	
-							e1.printStackTrace();
+				if (c.getRol().equals("Cliente")) {
+					if (filaS >= 0) {
+						if (c.getActivar() == 1) {
+
+							try {
+								Cliente datos = services.getCliente(Conexion.obtener(), nombre);
+								String nom = c.getNombreUsuario();
+								String dir = datos.getDireccion();
+								String rol = datos.getRol();
+								String user = datos.getNombreUsuario();
+								String cont = datos.getContrasena();
+								Integer id = datos.getIdClientes();
+								int act = 0;
+
+								datos.setIdClientes(id);
+								datos.setNombre(nom);
+								datos.setDireccion(dir);
+								datos.setRol(rol);
+								datos.setNombreUsuario(user);
+								datos.setContrasena(cont);
+								datos.setActivar(act);
+
+								services.save(Conexion.obtener(), datos);
+								dispose();
+								ListViewClientes lvc = new ListViewClientes();
+
+							} catch (ClassNotFoundException | SQLException e1) {
+
+								e1.printStackTrace();
+							}
+
+						} else {
+							nombre = c.getNombreUsuario();
+							try {
+								Cliente datos = services.getCliente(Conexion.obtener(), nombre);
+								String nom = datos.getNombre();
+								String dir = datos.getDireccion();
+								String rol = datos.getRol();
+								String user = datos.getNombreUsuario();
+								String cont = datos.getContrasena();
+								Integer id = datos.getIdClientes();
+								int act = 1;
+
+								datos.setIdClientes(id);
+								datos.setNombre(nom);
+								datos.setDireccion(dir);
+								datos.setRol(rol);
+								datos.setNombreUsuario(user);
+								datos.setContrasena(cont);
+								datos.setActivar(act);
+
+								services.save(Conexion.obtener(), datos);
+
+								dispose();
+								ListViewClientes lvc = new ListViewClientes();
+
+							} catch (ClassNotFoundException | SQLException e1) {
+
+								e1.printStackTrace();
+							}
+
 						}
-	
 					} else {
-						nombre = c.getNombreUsuario();
-						try {
-							Cliente datos = services.getCliente(Conexion.obtener(), nombre);
-							String nom = datos.getNombre();
-							String dir = datos.getDireccion();
-							String rol = datos.getRol();
-							String user = datos.getNombreUsuario();
-							String cont = datos.getContrasena();
-							Integer id = datos.getIdClientes();
-							int act = 1;
-	
-							datos.setIdClientes(id);
-							datos.setNombre(nom);
-							datos.setDireccion(dir);
-							datos.setRol(rol);
-							datos.setNombreUsuario(user);
-							datos.setContrasena(cont);
-							datos.setActivar(act);
-	
-							services.save(Conexion.obtener(), datos);
-	
-							dispose();
-							ListViewClientes lvc = new ListViewClientes();
-	
-						} catch (ClassNotFoundException | SQLException e1) {
-	
-							e1.printStackTrace();
-						}
-	
+						JOptionPane.showMessageDialog(null, "Por favor seleccione una fila.");
 					}
-				}else if(c.getRol().equals("Fabricante")) {
-					
+				} else if (c.getRol().equals("Fabricante")) {
+
 				}
 			} else if (b.equals(CambiarB)) {
 				String nombre = c.getNombreUsuario();
 				try {
 					Cliente datos = services.getCliente(Conexion.obtener(), nombre);
-					int id =datos.getIdClientes();
+					int id = datos.getIdClientes();
 					setidClienteCrear(id);
 					CambiarContrasena cc = new CambiarContrasena();
 					dispose();
-					
+
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 			}
 
 		}
 
 	}
-	
+
 	private void refrescarTabla(String fil) {
 		try {
 			if (fil.equalsIgnoreCase("--")) {
@@ -197,7 +200,7 @@ public class ListViewClientes extends JFrame {
 		}
 
 	}
-	
+
 	private class manejadorcombo implements ItemListener {
 
 		@Override
@@ -215,17 +218,18 @@ public class ListViewClientes extends JFrame {
 
 			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar", "NºCompras", "NºAlquileres" }));
+			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar", "NºCompras",
+					"NºAlquileres" }));
 			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 			dtm.setRowCount(0);
 
 			for (int i = 0; i < this.Clientes.size(); i++) {
-			
+
 				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
 						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
 						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
-						this.Clientes.get(i).getActivar(), this.Clientes.get(i).getNumCompras(), this.Clientes.get(i).getNumAlquileres() });
-				
+						this.Clientes.get(i).getActivar(), this.Clientes.get(i).getNumCompras(),
+						this.Clientes.get(i).getNumAlquileres() });
 
 			}
 
@@ -236,25 +240,24 @@ public class ListViewClientes extends JFrame {
 			System.out.println(ex);
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		}
-	}	
-	
+	}
+
 	private void showComprasCliente() {
 		try {
 			this.Clientes = this.services.getComprasCliente(Conexion.obtener());
 
 			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar", "NºCompras"}));
+			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar", "NºCompras" }));
 			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 			dtm.setRowCount(0);
 
 			for (int i = 0; i < this.Clientes.size(); i++) {
-			
+
 				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
 						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
 						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
 						this.Clientes.get(i).getActivar(), this.Clientes.get(i).getNumCompras() });
-				
 
 			}
 
@@ -265,20 +268,21 @@ public class ListViewClientes extends JFrame {
 			System.out.println(ex);
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		}
-	}	
-	
+	}
+
 	private void showAlquileresCliente() {
 		try {
 			this.Clientes = this.services.getAlquileresCliente(Conexion.obtener());
 
 			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar", "NºAlquileres" }));
+			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar",
+					"NºAlquileres" }));
 			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 			dtm.setRowCount(0);
 
 			for (int i = 0; i < this.Clientes.size(); i++) {
-			
+
 				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
 						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
 						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
@@ -292,11 +296,12 @@ public class ListViewClientes extends JFrame {
 			System.out.println(ex);
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		}
-	}	
-	
-	public static void setidClienteCrear(Integer id) {
-		idCliente=id;
 	}
+
+	public static void setidClienteCrear(Integer id) {
+		idCliente = id;
+	}
+
 	public static Integer getidClienteCrear() {
 		return idCliente;
 	}
