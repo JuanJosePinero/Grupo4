@@ -47,6 +47,7 @@ public class AlquilerVehiculo extends JFrame {
 	private JTextField fechaInicio;
 	private JTextField fechafin;
 	private JComboBox<String> fechainicio, fechaF;
+	private static int estaAlquilado;
 
 
 
@@ -248,6 +249,7 @@ public class AlquilerVehiculo extends JFrame {
 						vehiculo.setAlquilado(1);
 						vehiculo.setComprado(0);
 						
+
 						if(!VehiculoDisponible(idVehiculo,fechaInc,fechaFin)) {
 							JOptionPane.showMessageDialog(AlquilerVehiculo.this, "No se puede alquilar el vehiculo en esta fecha");
 							return;
@@ -312,6 +314,13 @@ public class AlquilerVehiculo extends JFrame {
 			    return true;
 			}
 		}
+	public static void setestaAlquilado(int alquilado) {
+		estaAlquilado=alquilado;
+	}
+	public static Integer getestaAlquilado() {
+		return estaAlquilado;
+	}
+	
 	}
 
 	

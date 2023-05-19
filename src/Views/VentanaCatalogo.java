@@ -44,7 +44,7 @@ public class VentanaCatalogo extends JFrame {
 	private List<Comentario> listaComentarios = new ArrayList<>();
 	private final String tabla = "vehiculo";
 	private final VehiculoService services = new VehiculoService();
-	private Vehiculo v = new Vehiculo();
+	private Vehiculo v;
 	private List<Vehiculo> vehiculo;
 	private JTable jtableP;
 	private JComboBox filtro;
@@ -264,15 +264,30 @@ public class VentanaCatalogo extends JFrame {
 				if (fila_seleccionada >= 0) {
 					String datos = jtableP.getValueAt(fila_seleccionada, 0).toString();
 
-					Vehiculo v = vehiculo.get(fila_seleccionada);
-					int id = v.getIdVehiculos();
-					System.out.println(id);
-					Login.setidVehiculo(id);
+					v = vehiculo.get(fila_seleccionada);
+					try {
+						Vehiculo vs = services.getVehiculo(Conexion.obtener(), v.getIdVehiculos());
+						
+						if(vs.getAlquilado()==1) {
+							int id = v.getIdVehiculos();
+							System.out.println(id);
+							System.out.println(vs.getAlquilado());
+							Login.setidVehiculo(id);
 
-					VerComentsYValorac CyV = new VerComentsYValorac();
+							VerComentsYValorac CyV = new VerComentsYValorac();
 
-					CyV.setVisible(true);
-					dispose();
+							CyV.setVisible(true);
+							dispose();
+						}else {
+							JOptionPane.showMessageDialog(VentanaCatalogo.this, "El vehiculo no esta alquilado");
+							
+						}
+						
+					} catch (ClassNotFoundException | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+						
 				} else {
 					JOptionPane.showMessageDialog(null, "Por favor seleccione una fila.", "Aviso",
 							JOptionPane.INFORMATION_MESSAGE);

@@ -10,7 +10,7 @@ public class Vehiculo {
 	private float precio;
 	private Integer idFabricante;
 	private String ruta;
-	private int comprado=0,alquilado=0;
+	private int comprado=0,alquilado;
 	
 	
 
@@ -30,6 +30,7 @@ public class Vehiculo {
 		this.precio = precio;
 		this.idFabricante = idFabricante;
 		this.ruta = ruta;
+		alquilado=0;
 	}
 
 

@@ -166,6 +166,7 @@ public class Login extends JFrame {
 								setnombreUser(datos.getNombreUsuario());
 								setidClienteLogin(datos.getIdClientes());
 								
+								
 								VentanaCatalogo vc = new VentanaCatalogo();
 								vc.setVisible(true);
 								dispose();
