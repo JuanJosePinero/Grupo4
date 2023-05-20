@@ -104,7 +104,7 @@ public class VentanaCatalogo extends JFrame {
 		contentPane.add(btnVerCompras);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(200, 58, 375, 208);
+		panel.setBounds(200, 58, 375, 250);
 		contentPane.add(panel);
 
 		imagenLabel = new JLabel();
@@ -144,11 +144,11 @@ public class VentanaCatalogo extends JFrame {
 		}
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(200, 276, 376, 217);
+		scrollPane.setBounds(200, 319, 376, 174);
 		contentPane.add(scrollPane);
 
 		dtm = new DefaultTableModel(new Object[][] {},
-				new String[] { "NºVehiculo", "Modelo", "Marca", "Anyo", "Color", "Precio"});
+				new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" });
 		jtableP = new JTable(dtm) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -357,6 +357,11 @@ public class VentanaCatalogo extends JFrame {
 				ComentariosVehiculos cv = new ComentariosVehiculos();
 				cv.setVisible(true);
 				cv.setLocationRelativeTo(null);
+				dispose();
+			}else if (fil.equalsIgnoreCase("Mejores Valoraciones")) {
+				MejoresValoraciones mv=new MejoresValoraciones();
+				mv.setVisible(true);
+				mv.setLocationRelativeTo(null);
 				dispose();
 			}
 		} catch (Exception ex) {

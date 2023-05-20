@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -20,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Service.Conexion;
 import Service.MejoresValoracionesService;
+import Service.VehiculoService;
 import models.Comentario;
 import models.Valoracion;
 import models.Vehiculo;
@@ -30,14 +32,15 @@ public class MejoresValoraciones extends JFrame {
 
 	private JPanel contentPane;
 	private JFrame frame;
-	private JTable table;
 	private DefaultTableModel tableModel;
 	private JTextField textFieldNombre;
 	private JTextField textFieldValoracion;
 	private final MejoresValoracionesService service = new MejoresValoracionesService();
 	private List<VehiculoMejoresValoraciones> vehiculosval;
-
-	private JTextArea txtcoments;
+	private DefaultTableModel dtm;
+	private final VehiculoService services = new VehiculoService();
+	private JTable table;
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -70,10 +73,19 @@ public class MejoresValoraciones extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(40, 34, 371, 181);
 		contentPane.add(scrollPane);
-
-		txtcoments = new JTextArea();
-		txtcoments.setEditable(false);
-		scrollPane.setViewportView(txtcoments);
+		dtm = new DefaultTableModel(new Object[][] {},
+				new String[] { "Marca", "Modelo","media"});
+		table = new JTable(dtm){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
+		scrollPane.setViewportView(table);
+		
+		
+		
 
 		JButton btnFiltrar = new JButton("Volver");
 		btnFiltrar.addActionListener(new ActionListener() {
@@ -90,31 +102,46 @@ public class MejoresValoraciones extends JFrame {
 		JLabel lblNewLabel = new JLabel("LISTA VALORACIONES");
 		lblNewLabel.setBounds(165, 10, 246, 13);
 		contentPane.add(lblNewLabel);
-		showVehiculosrating();
+		showVehiculosmejorvaloracion();
 
 		setVisible(true);
 	}
+	private void showVehiculosmejorvaloracion() {
+	    try {
+	        vehiculosval = service.getVehiculosMejoresValoraciones(Conexion.obtener());
+	        dtm.setRowCount(0);
 
-	private void showVehiculosrating() {
+	        for (int i = 0; i < vehiculosval.size(); i++) {
+	            float suma = 0;
+	            float numvals = 0;
+	            for (Valoracion v : vehiculosval.get(i).getValoraciones()) {
+	                suma += v.getValoracion();
+	                numvals++;
+	            }
 
-		try {
-			vehiculosval = service.getVehiculosMejoresValoraciones(Conexion.obtener());
-			String coments = "";
-			for (VehiculoMejoresValoraciones veh : vehiculosval) {
-				coments += "----------\n \"" + veh.getVehiculo().getMarca() + " " + veh.getVehiculo().getModelo()
-						+ "\" \n " + "valoraciones: \n";
-				List<Valoracion> valoraciones = veh.getValoraciones();
-				if (valoraciones.isEmpty()) {
-					coments += "No hay valoraciones disponibles.\n";
-				} else {
-					for (Valoracion vl : valoraciones) {
-						coments += "\n" + vl.getValoracion() + "\n";
-					}
-				}
-				txtcoments.setText(coments);
-			}
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
+	            double media = 0;
+	            if (numvals > 0) {
+	                media = suma / numvals;
+	            }
+
+	            String formattedMedia;
+	            if (media % 1 == 0) {
+	                formattedMedia = String.format("%.0f", media);
+	            } else {
+	                formattedMedia = String.format("%.2f", media);
+	            }
+
+	            dtm.addRow(new Object[]{vehiculosval.get(i).getVehiculo().getModelo(),
+	                    vehiculosval.get(i).getVehiculo().getMarca(), formattedMedia + " / 5"});
+	        }
+	    } catch (SQLException ex) {
+	        System.out.println(ex.getMessage());
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    } catch (ClassNotFoundException ex) {
+	        System.out.println(ex);
+	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+	    }
 	}
+
+
 }
