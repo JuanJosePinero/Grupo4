@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -74,10 +75,39 @@ public class AgregarComentario extends JFrame {
 				c.setComentario(nomUser +": \n"+comentario);
 				try {
 					vehiculo=serviceveh.getVehiculo(Conexion.obtener(),Login.getidVehiculo());
-					Vehiculo v=new Vehiculo(vehiculo.getIdVehiculos(),vehiculo.getModelo(),vehiculo.getMarca(),
-							vehiculo.getAnyo(),vehiculo.getColor(),vehiculo.getPrecio(),vehiculo.getIdFabricante(),
-							vehiculo.getComprado(),vehiculo.getAlquilado(),vehiculo.getNumcomentarios()+1);
-					serviceveh.save(Conexion.obtener(), v);
+					String mod = vehiculo.getModelo();
+						
+					System.out.println(mod);
+					String mar = vehiculo.getMarca();
+					int anyo = vehiculo.getAnyo();
+					String color = vehiculo.getColor();
+					float precio = vehiculo.getPrecio();
+					int idF= vehiculo.getIdFabricante();
+					String rut = vehiculo.getRuta();
+					int comp = vehiculo.getComprado();
+					int alqui = vehiculo.getAlquilado();
+
+					int numC = (vehiculo.getNumcomentarios()+1);
+					System.out.println(numC);
+					
+					
+					
+//					Vehiculo v=new Vehiculo(vehiculo.getIdVehiculos(),vehiculo.getModelo(),vehiculo.getMarca(),
+//							vehiculo.getAnyo(),vehiculo.getColor(),vehiculo.getPrecio(),vehiculo.getIdFabricante(),
+//							vehiculo.getComprado(),vehiculo.getAlquilado(),numC);
+					vehiculo.setIdVehiculos(Login.getidVehiculo());
+					vehiculo.setModelo(mod);
+					vehiculo.setMarca(mar);
+					vehiculo.setAnyo(anyo);
+					vehiculo.setColor(color);
+					vehiculo.setPrecio(precio);
+					vehiculo.setIdFabricante(idF);
+					vehiculo.setRuta(rut);
+					vehiculo.setComprado(comp);
+					vehiculo.setAlquilado(alqui);
+					vehiculo.setNumcomentarios(numC);
+					System.out.println("Post "+vehiculo.getNumcomentarios());
+					serviceveh.save(Conexion.obtener(), vehiculo);
 					service.save(Conexion.obtener(), c);
 				} catch (ClassNotFoundException | SQLException e1) {
 					e1.printStackTrace();

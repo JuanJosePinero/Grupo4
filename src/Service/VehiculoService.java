@@ -52,13 +52,13 @@ public class VehiculoService {
 	   public Vehiculo getVehiculo(Connection conexion, int id) throws SQLException {
 		   Vehiculo vehiculo = null;
 	      try{
-	         PreparedStatement consulta = conexion.prepareStatement("SELECT idVehiculos, modelo, marca, anyo, color, precio, idFabricante, comprado, alquilado"
+	         PreparedStatement consulta = conexion.prepareStatement("SELECT idVehiculos, modelo, marca, anyo, color, precio, idFabricante, comprado, alquilado,numcomentarios"
 	                 + " FROM " + this.tabla + " WHERE idVehiculos = ?" );
 	         consulta.setInt(1, id);
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
 	        	 vehiculo = new Vehiculo(resultado.getInt("idVehiculos"), resultado.getString("modelo"), resultado.getString("marca"), 
-	                    resultado.getInt("anyo"), resultado.getString("color"), resultado.getFloat("precio"), resultado.getInt("idFabricante"),resultado.getInt("comprado"),resultado.getInt("alquilado"));
+	                    resultado.getInt("anyo"), resultado.getString("color"), resultado.getFloat("precio"), resultado.getInt("idFabricante"),resultado.getInt("comprado"),resultado.getInt("alquilado"),resultado.getInt("numcomentarios"));
 	         }
 	      }catch(SQLException ex){
 	         throw new SQLException(ex);
