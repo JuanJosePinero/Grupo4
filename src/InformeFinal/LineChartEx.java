@@ -80,18 +80,11 @@ public class LineChartEx extends JFrame {
             while (resultSet.next()) {
                 int month = resultSet.getInt("mes");
                 int sales = resultSet.getInt("sales");
-                System.out.println(month+ " "+sales);
                 series.add(month, sales);
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        }/* finally {
-            try {
-               // c.cerrar();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }*/
+        }
 
         var dataset = new XYSeriesCollection();
         dataset.addSeries(series);
