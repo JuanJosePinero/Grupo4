@@ -12,6 +12,15 @@ public class Vehiculo {
 	private String ruta;
 	private int comprado=0,alquilado=0,numcomentarios=0,numvaloraciones=0;
 	
+	public Vehiculo(String modelo, String marca, int anyo, String color, float precio) {
+		super();
+		this.modelo = modelo;
+		this.marca = marca;
+		this.anyo = anyo;
+		this.color = color;
+		this.precio = precio;
+	}
+
 	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
 			Integer idFabricante, String ruta, int comprado, int alquilado, int numcomentarios, int numvaloraciones) {
 		super();

@@ -66,6 +66,7 @@ public class ClientService {
 	      }
 	      return cliente;
 	   }
+	 
 	 public Cliente getClienteId(Connection conexion, int id) throws SQLException {
 		   Cliente cliente = null;
 	      try{
@@ -83,10 +84,7 @@ public class ClientService {
 	      }
 	      return cliente;
 	   }
-	 
-	 
-	
-	 
+
 	 public void remove(Connection conexion, Cliente cliente) throws SQLException{
 	      try{
 	         PreparedStatement consulta = conexion.prepareStatement("DELETE FROM " 
@@ -106,7 +104,7 @@ public class ClientService {
 	         ResultSet resultado = consulta.executeQuery();
 	         while(resultado.next()){
 	        	 cliente.add(new Cliente(resultado.getInt("idCliente"),resultado.getString("nombre"), 
-	                    resultado.getString("direccion"),resultado.getString("rol"),resultado.getString("usuario"),resultado.getString("contasenya"),resultado.getInt("Activar")));
+	                    resultado.getString("direccion"),resultado.getString("rol"),resultado.getString("usuario"),resultado.getString("contasenya"),resultado.getInt("Activar"), resultado.getInt("numCompras"), resultado.getInt("numAlquileres")));
 	         }
 	      }catch(SQLException ex){
 	         throw new SQLException(ex);
@@ -163,10 +161,11 @@ public class ClientService {
 	 public List<Cliente> getAlquileresCliente(Connection conexion) throws SQLException {
 		    List<Cliente> cliente = new ArrayList<>();
 		    try {
-		        PreparedStatement consulta = conexion.prepareStatement("SELECT cliente.idCliente, cliente.nombre, cliente.direccion, cliente.rol, cliente.usuario, cliente.contasenya, cliente.Activar, COUNT(venta.idCliente) AS numCompras, COUNT(alquiler.idCliente) AS numAlquileres " +
-		        		"FROM " + this.tabla +
-		                " LEFT JOIN venta ON cliente.idCliente = venta.idCliente LEFT JOIN alquiler ON cliente.idCliente = alquiler.idCliente" +
-		                "WHERE cliente.rol = 'Cliente' " +
+		        PreparedStatement consulta = conexion.prepareStatement("SELECT cliente.idCliente, cliente.nombre, cliente.direccion, cliente.rol, cliente.usuario, cliente.contasenya, cliente.Activar, " +
+		                "(SELECT COUNT(idVenta) FROM venta WHERE venta.idCliente = cliente.idCliente) AS numCompras, " +
+		                "(SELECT COUNT(idAlquiler) FROM alquiler WHERE alquiler.idCliente = cliente.idCliente) AS numAlquileres " +
+		                "FROM " + this.tabla +
+		                " WHERE cliente.rol = 'Cliente' " +
 		                "GROUP BY cliente.idCliente " +
 		                "ORDER BY numAlquileres DESC");
 		        ResultSet resultado = consulta.executeQuery();
@@ -186,7 +185,5 @@ public class ClientService {
 		        throw new SQLException(ex);
 		    }
 		    return cliente;
-		}
-	 
-	   
+		} 
 }

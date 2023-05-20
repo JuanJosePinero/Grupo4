@@ -24,6 +24,7 @@ public class SaveViewFabricante extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtNombre;
 	private JTextField txtPais;
+	private JButton btnGuardar, btnCancelar;
 	private final FabricantesService serviceF = new FabricantesService();
 	private final Fabricante fabricante;
 	private final ClientService servicec = new ClientService();
@@ -76,7 +77,7 @@ public class SaveViewFabricante extends JFrame {
 		contentPane.add(txtPais);
 		txtPais.setColumns(10);
 		
-		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nombre = txtNombre.getText();
@@ -115,7 +116,7 @@ public class SaveViewFabricante extends JFrame {
 		btnGuardar.setBounds(43, 211, 117, 29);
 		contentPane.add(btnGuardar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();

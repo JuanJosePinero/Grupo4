@@ -66,7 +66,7 @@ public class AlquilerVehiculo extends JFrame {
 		txtPrecio.setText(String.valueOf(this.vehiculo.getPrecio()));
 		txtIdFabricante.setText(String.valueOf(this.vehiculo.getIdFabricante()));
 		id = vehiculo.getIdVehiculos();
-		
+
 		getRuta();
 	}
 
@@ -177,7 +177,7 @@ public class AlquilerVehiculo extends JFrame {
 			}
 		});
 		contentPane.add(fechainicio);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBounds(341, 43, 350, 200);
 		contentPane.add(panel);
@@ -209,7 +209,7 @@ public class AlquilerVehiculo extends JFrame {
 	private void updateComboBoxFin(LocalDate selectedDate) {
 		fechaF.removeAllItems();
 		fechaF.addItem(selectedDate.toString());
-		for (int i = fechainicio.getSelectedIndex()+1; i < fechainicio.getItemCount(); i++) {
+		for (int i = fechainicio.getSelectedIndex() + 1; i < fechainicio.getItemCount(); i++) {
 			LocalDate date = parseDate(fechainicio.getItemAt(i));
 			fechaF.addItem(date.toString());
 		}
@@ -218,7 +218,7 @@ public class AlquilerVehiculo extends JFrame {
 	private LocalDate parseDate(String dateStr) {
 		return LocalDate.parse(dateStr);
 	}
-	
+
 	public void getRuta() {
 		Vehiculo vs;
 		try {
@@ -230,7 +230,6 @@ public class AlquilerVehiculo extends JFrame {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	private class ManejadorJButton implements ActionListener {
@@ -241,25 +240,26 @@ public class AlquilerVehiculo extends JFrame {
 
 			if (o == btnAlquiler) {
 				try {
-					Vehiculo v=services.getVehiculo(Conexion.obtener(),vehiculo.getIdVehiculos());
-					if(v.getAlquilado()==1) {
-						JOptionPane.showMessageDialog(AlquilerVehiculo.this, "este coche ya ha sido comprado");
-						AlquilerVehiculo.this.dispose();
-						VentanaCatalogo vc = new VentanaCatalogo();
-						vc.setVisible(true);
-						vc.setLocationRelativeTo(null);
-					}else if(v.getAlquilado()==0) {
+					Vehiculo v = services.getVehiculo(Conexion.obtener(), vehiculo.getIdVehiculos());
+//					if(v.getAlquilado()==1) {
+//						JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Este coche ya ha sido alquilado", "Aviso", JOptionPane.ERROR_MESSAGE);
+//						AlquilerVehiculo.this.dispose();
+//						VentanaCatalogo vc = new VentanaCatalogo();
+//						vc.setVisible(true);
+//						vc.setLocationRelativeTo(null);
+//					}else 
+					if (v.getAlquilado() >= 0) {
 						Integer idAlquiler = alquiler.getIdAlquiler();
 						Integer idVehiculo = vehiculo.getIdVehiculos();
 						Integer idCliente = Login.getidClienteLogin();
-						
+
 						String fechaIncstr = (String) fechainicio.getSelectedItem();
 						String fechaFinstr = (String) fechaF.getSelectedItem();
 						SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 						java.util.Date fechaUtil = formatter.parse(fechaIncstr);
 						java.util.Date fechaUtil2 = formatter.parse(fechaFinstr);
 						Date fechaInc = new Date(fechaUtil.getTime());
-						Date fechaFin=new Date(fechaUtil2.getTime());
+						Date fechaFin = new Date(fechaUtil2.getTime());
 
 						alquiler.setIdAlquiler(idAlquiler);
 						alquiler.setIdVehiculo(idVehiculo);
@@ -270,10 +270,8 @@ public class AlquilerVehiculo extends JFrame {
 						vehiculo.setAlquilado(1);
 						vehiculo.setComprado(0);
 
-						Cliente datos = serviceCliente.getClienteId(Conexion.obtener(),Login.getidClienteLogin());
-						
-						
-						
+						Cliente datos = serviceCliente.getClienteId(Conexion.obtener(), Login.getidClienteLogin());
+
 						String nom = datos.getNombre();
 						String dir = datos.getDireccion();
 						String rol = datos.getRol();
@@ -281,7 +279,7 @@ public class AlquilerVehiculo extends JFrame {
 						String cont = datos.getContrasena();
 						int act = datos.getActivar();
 						int numC = (datos.getNumCompras());
-						int numA = (datos.getNumAlquileres()+1);
+						int numA = (datos.getNumAlquileres() + 1);
 						int numCO = datos.getNumComentarios();
 						int numV = datos.getNumValoracion();
 						cliente.setIdClientes(Login.getidClienteLogin());
@@ -293,37 +291,31 @@ public class AlquilerVehiculo extends JFrame {
 						cliente.setActivar(act);
 						cliente.setNumCompras(numC);
 						cliente.setNumAlquileres(numA);
-						
 
-						if(!VehiculoDisponible(idVehiculo,fechaInc,fechaFin)) {
-							JOptionPane.showMessageDialog(AlquilerVehiculo.this, "No se puede alquilar el vehiculo en esta fecha");
+						if (!VehiculoDisponible(idVehiculo, fechaInc, fechaFin)) {
+							JOptionPane.showMessageDialog(AlquilerVehiculo.this,
+									"No se puede alquilar el vehiculo en esta fecha", "Aviso",
+									JOptionPane.ERROR_MESSAGE);
 							return;
 						}
-							services.save(Conexion.obtener(), vehiculo);
-							service.save(Conexion.obtener(), alquiler);
-							serviceCliente.save(Conexion.obtener(), cliente);
-							AlquilerVehiculo.this.dispose();
-							JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Se ha realizado el alquiler");
-							VentanaCatalogo vc = new VentanaCatalogo();
-							vc.setVisible(true);
-							vc.setLocationRelativeTo(null);
-						
-						
-						
-						
-							
-						
+						services.save(Conexion.obtener(), vehiculo);
+						service.save(Conexion.obtener(), alquiler);
+						serviceCliente.save(Conexion.obtener(), cliente);
+						AlquilerVehiculo.this.dispose();
+						JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Se ha realizado el alquiler", "Aviso",
+								JOptionPane.INFORMATION_MESSAGE);
+						VentanaCatalogo vc = new VentanaCatalogo();
+						vc.setVisible(true);
+						vc.setLocationRelativeTo(null);
 					}
 				} catch (ClassNotFoundException | SQLException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 			} else if (o == btnCancelar) {
-				JOptionPane.showMessageDialog(null, "La compra ha sido cancelada.", "Cancelacion",
+				JOptionPane.showMessageDialog(null, "El alquiler ha sido cancelada.", "Cancelacion",
 						JOptionPane.ERROR_MESSAGE);
 				dispose();
 				VentanaCatalogo vc = new VentanaCatalogo();
@@ -331,43 +323,37 @@ public class AlquilerVehiculo extends JFrame {
 				vc.setLocationRelativeTo(null);
 			}
 		}
-		
+
 		private boolean VehiculoDisponible(Integer idVehiculo, Date fechaInc, Date fechaFin) {
-			 try {
-				 
-			        Connection connection = Conexion.obtener();
-			        String query = "SELECT * FROM alquiler WHERE idVehiculo = ? AND ((fechaInic <= ?  AND fechaFin >= ? ) OR (fechaInic <= ?  AND fechaFin >= ? ))";
-			        PreparedStatement statement = connection.prepareStatement(query);
-			        statement.setInt(1, idVehiculo);
-			        statement.setDate(2, fechaInc);
-			        statement.setDate(3, fechaInc);
-			        statement.setDate(4, fechaFin);
-			        statement.setDate(5, fechaFin);
-			        ResultSet resultSet = statement.executeQuery();
-			        
-			        if (resultSet.next()) {
-			            int count = resultSet.getInt(1);
-			            return count ==0;
-			        }
-			    } catch (SQLException ex) {
-			        System.out.println(ex.getMessage());
-			        
-			    } catch (ClassNotFoundException ex) {
-			        System.out.println(ex);
-			        
-			    }
-			    
-			    return true;
+			try {
+				Connection connection = Conexion.obtener();
+				String query = "SELECT * FROM alquiler WHERE idVehiculo = ? AND ((fechaInic <= ?  AND fechaFin >= ? ) OR (fechaInic <= ?  AND fechaFin >= ? ))";
+				PreparedStatement statement = connection.prepareStatement(query);
+				statement.setInt(1, idVehiculo);
+				statement.setDate(2, fechaInc);
+				statement.setDate(3, fechaInc);
+				statement.setDate(4, fechaFin);
+				statement.setDate(5, fechaFin);
+				ResultSet resultSet = statement.executeQuery();
+
+				if (resultSet.next()) {
+					int count = resultSet.getInt(1);
+					return count == 0;
+				}
+			} catch (SQLException ex) {
+				System.out.println(ex.getMessage());
+			} catch (ClassNotFoundException ex) {
+				System.out.println(ex);
 			}
+			return true;
 		}
-	public static void setestaAlquilado(int alquilado) {
-		estaAlquilado=alquilado;
 	}
+
+	public static void setestaAlquilado(int alquilado) {
+		estaAlquilado = alquilado;
+	}
+
 	public static Integer getestaAlquilado() {
 		return estaAlquilado;
 	}
-	
-	}
-
-	
-
+}

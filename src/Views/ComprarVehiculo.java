@@ -53,7 +53,7 @@ public class ComprarVehiculo extends JFrame {
 		txtMarca.setText(vehiculo.getMarca());
 		txtAnyo.setText(String.valueOf(vehiculo.getAnyo()));
 		txtColor.setText(vehiculo.getColor());
-		txtPrecio.setText(String.valueOf(vehiculo.getPrecio()));
+		txtPrecio.setText(String.valueOf(vehiculo.getPrecio()+" euros"));
 		txtIdFabricante.setText(String.valueOf(vehiculo.getIdFabricante()));
 		id = vehiculo.getIdVehiculos();
 		

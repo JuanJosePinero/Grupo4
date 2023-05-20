@@ -104,7 +104,7 @@ public class VentanaCatalogo extends JFrame {
 		contentPane.add(btnVerCompras);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(200, 58, 375, 250);
+		panel.setBounds(200, 58, 375, 208);
 		contentPane.add(panel);
 
 		imagenLabel = new JLabel();
@@ -144,11 +144,11 @@ public class VentanaCatalogo extends JFrame {
 		}
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(200, 319, 376, 174);
+		scrollPane.setBounds(200, 276, 376, 217);
 		contentPane.add(scrollPane);
 
 		dtm = new DefaultTableModel(new Object[][] {},
-				new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" });
+				new String[] { "NºVehiculo", "Modelo", "Marca", "Anyo", "Color", "Precio"});
 		jtableP = new JTable(dtm) {
 			@Override
 			public boolean isCellEditable(int row, int column) {

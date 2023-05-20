@@ -80,7 +80,6 @@ public class ControlAdmin extends JFrame {
 		Fabricante.addActionListener(ma);
 		Vehiculos.addActionListener(ma);
 			
-		
 	}
 	
 	private class manejadorAction implements ActionListener {
@@ -90,6 +89,8 @@ public class ControlAdmin extends JFrame {
 			JButton j = (JButton) e.getSource();
 			if(j.equals(Cliente)) {
 				ListViewClientes lvc = new ListViewClientes();
+				lvc.setVisible(true);
+				lvc.setLocationRelativeTo(null);
 				dispose();
 			}else if(j.equals(Fabricante)) {
 				ListViewFabricante lvf = new ListViewFabricante();
@@ -102,11 +103,6 @@ public class ControlAdmin extends JFrame {
 				lvv.setVisible(true);
 				dispose();
 			}
-			
-			
-			
 		}
-		
-		
 	}
 }

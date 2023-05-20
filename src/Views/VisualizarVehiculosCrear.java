@@ -115,7 +115,7 @@ public class VisualizarVehiculosCrear extends JFrame {
 	        this.vehiculo = this.services.getAllVehiculosFabric(Conexion.obtener());
 	        jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-	        }, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" }));
+	        }, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio" }));
 	        DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 	        dtm.setRowCount(0);
 	        

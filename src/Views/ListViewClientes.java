@@ -171,7 +171,6 @@ public class ListViewClientes extends JFrame {
 					dispose();
 
 				} catch (ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -214,7 +213,7 @@ public class ListViewClientes extends JFrame {
 
 	private void showCliente() {
 		try {
-			this.Clientes = this.services.getAllRolCliente(Conexion.obtener());
+			this.Clientes = this.services.getAllCliente(Conexion.obtener());
 
 			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
@@ -230,7 +229,6 @@ public class ListViewClientes extends JFrame {
 						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
 						this.Clientes.get(i).getActivar(), this.Clientes.get(i).getNumCompras(),
 						this.Clientes.get(i).getNumAlquileres() });
-
 			}
 
 		} catch (SQLException ex) {
