@@ -1,7 +1,6 @@
 package Views;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -105,84 +104,15 @@ public class AgregarValoracion extends JFrame {
 		
 			 if (o == btnEnviar) {
 				 
-		
-				Valoracion v = new Valoracion();
-				v.setIdCliente(Login.getidClienteLogin());
-				v.setIdVehiculo(Login.getidVehiculo());
-				System.out.println(valoracion);
-				v.setValoracion(valoracion);
+				 updateValoracion();
+				 updateVehiculo();
+				 updateCliente();
+			
 				
-				try {
-					vehiculo=serviceveh.getVehiculo(Conexion.obtener(),Login.getidVehiculo());
-					String mod = vehiculo.getModelo();		
-					String mar = vehiculo.getMarca();
-					int anyo = vehiculo.getAnyo();
-					String color = vehiculo.getColor();
-					float precio = vehiculo.getPrecio();
-					int idF= vehiculo.getIdFabricante();
-					String rut = vehiculo.getRuta();
-					int comp = vehiculo.getComprado();
-					int alqui = vehiculo.getAlquilado();
-					int numC = (vehiculo.getNumcomentarios());
-					int numVa = (vehiculo.getNumvaloraciones()+1);
-					vehiculo.setIdVehiculos(Login.getidVehiculo());
-					vehiculo.setModelo(mod);
-					vehiculo.setMarca(mar);
-					vehiculo.setAnyo(anyo);
-					vehiculo.setColor(color);
-					vehiculo.setPrecio(precio);
-					vehiculo.setIdFabricante(idF);
-					vehiculo.setRuta(rut);
-					vehiculo.setComprado(comp);
-					vehiculo.setAlquilado(alqui);
-					vehiculo.setNumcomentarios(numC);
-					vehiculo.setNumvaloraciones(numVa);
-					
-					cliente = servicec.getClienteId(Conexion.obtener(),Login.getidClienteLogin());
-					Integer id = Login.getidClienteLogin();
-					String nom = cliente.getNombre();
-					String dir = cliente.getDireccion();
-					String rol = cliente.getRol();
-					String user = cliente.getNombreUsuario();
-					String cont = cliente.getContrasena();
-					int act = cliente.getActivar();
-					int numCP = (cliente.getNumCompras());
-					int numA = cliente.getNumAlquileres();
-					int numCO = (cliente.getNumComentarios());
-					
-					int numV = (cliente.getNumValoracion()+1);
-					cliente.setIdClientes(id);
-					cliente.setNombre(nom);
-					cliente.setDireccion(dir);
-					cliente.setRol(rol);
-					cliente.setNombreUsuario(user);
-					cliente.setContrasena(cont);
-					cliente.setActivar(act);
-					cliente.setNumCompras(numCP);
-					cliente.setNumAlquileres(numA);
-					cliente.setNumComentarios(numCO);
-					cliente.setNumValoracion(numV);
-					
-					servicec.save(Conexion.obtener(), cliente);
-					
-					serviceveh.save(Conexion.obtener(), vehiculo);
-				} catch (ClassNotFoundException | SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
 				
 
-				try {
-					service.save(Conexion.obtener(), v);
-				} catch (ClassNotFoundException | SQLException e1) {
-					e1.printStackTrace();
-				}
 				
-				JOptionPane.showMessageDialog(null, "La valoracion ha sido Enviada con exito!", "Envio completado",
-						JOptionPane.INFORMATION_MESSAGE);
-				VentanaCatalogo vc = new VentanaCatalogo();
-				vc.setVisible(true);
-				dispose();
+				
 			} else if (o == btnCancelar) {
 				JOptionPane.showMessageDialog(null, "La valoracion ha sido Cancelado!", "Cancelar valoracion",
 						JOptionPane.ERROR_MESSAGE);
@@ -218,5 +148,97 @@ public class AgregarValoracion extends JFrame {
 	            ImageIcon nuevaImagen = new ImageIcon("images/estrellas/estrella" + valorEstrella + ".png");
 	            etiquetaImagen.setIcon(nuevaImagen);
 	    }
+	}
+	
+	public void updateValoracion() {
+		Valoracion v = new Valoracion();
+		v.setIdCliente(Login.getidClienteLogin());
+		v.setIdVehiculo(Login.getidVehiculo());
+		System.out.println(valoracion);
+		v.setValoracion(valoracion);
+		
+		try {
+			service.save(Conexion.obtener(), v);
+			JOptionPane.showMessageDialog(null, "La valoracion ha sido Enviada con exito!", "Envio completado",
+			JOptionPane.INFORMATION_MESSAGE);
+			VentanaCatalogo vc = new VentanaCatalogo();
+			vc.setVisible(true);
+			dispose();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void updateVehiculo() {
+		try {
+			vehiculo=serviceveh.getVehiculo(Conexion.obtener(),Login.getidVehiculo());
+			String mod = vehiculo.getModelo();		
+			String mar = vehiculo.getMarca();
+			int anyo = vehiculo.getAnyo();
+			String color = vehiculo.getColor();
+			float precio = vehiculo.getPrecio();
+			int idF= vehiculo.getIdFabricante();
+			String rut = vehiculo.getRuta();
+			int comp = vehiculo.getComprado();
+			int alqui = vehiculo.getAlquilado();
+			int numC = (vehiculo.getNumcomentarios());
+			int numVa = (vehiculo.getNumvaloraciones()+1);
+			vehiculo.setIdVehiculos(Login.getidVehiculo());
+			vehiculo.setModelo(mod);
+			vehiculo.setMarca(mar);
+			vehiculo.setAnyo(anyo);
+			vehiculo.setColor(color);
+			vehiculo.setPrecio(precio);
+			vehiculo.setIdFabricante(idF);
+			vehiculo.setRuta(rut);
+			vehiculo.setComprado(comp);
+			vehiculo.setAlquilado(alqui);
+			vehiculo.setNumcomentarios(numC);
+			vehiculo.setNumvaloraciones(numVa);
+			serviceveh.save(Conexion.obtener(), vehiculo);
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void updateCliente() {
+		try {
+			cliente = servicec.getClienteId(Conexion.obtener(),Login.getidClienteLogin());
+			Integer id = Login.getidClienteLogin();
+			String nom = cliente.getNombre();
+			String dir = cliente.getDireccion();
+			String rol = cliente.getRol();
+			String user = cliente.getNombreUsuario();
+			String cont = cliente.getContrasena();
+			int act = cliente.getActivar();
+			int numCP = (cliente.getNumCompras());
+			int numA = cliente.getNumAlquileres();
+			int numCO = (cliente.getNumComentarios());
+			
+			int numV = (cliente.getNumValoracion()+1);
+			cliente.setIdClientes(id);
+			cliente.setNombre(nom);
+			cliente.setDireccion(dir);
+			cliente.setRol(rol);
+			cliente.setNombreUsuario(user);
+			cliente.setContrasena(cont);
+			cliente.setActivar(act);
+			cliente.setNumCompras(numCP);
+			cliente.setNumAlquileres(numA);
+			cliente.setNumComentarios(numCO);
+			cliente.setNumValoracion(numV);
+			
+			servicec.save(Conexion.obtener(), cliente);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 }
