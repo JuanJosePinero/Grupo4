@@ -1,6 +1,5 @@
 package Views;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -11,7 +10,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.swing.ImageIcon;
@@ -249,58 +247,11 @@ public class AlquilerVehiculo extends JFrame {
 //						vc.setLocationRelativeTo(null);
 //					}else 
 					if (v.getAlquilado() >= 0) {
-						Integer idAlquiler = alquiler.getIdAlquiler();
-						Integer idVehiculo = vehiculo.getIdVehiculos();
-						Integer idCliente = Login.getidClienteLogin();
+						updateAlquiler();
+						updateVehiculo();
+						updateCliente();
+						
 
-						String fechaIncstr = (String) fechainicio.getSelectedItem();
-						String fechaFinstr = (String) fechaF.getSelectedItem();
-						SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-						java.util.Date fechaUtil = formatter.parse(fechaIncstr);
-						java.util.Date fechaUtil2 = formatter.parse(fechaFinstr);
-						Date fechaInc = new Date(fechaUtil.getTime());
-						Date fechaFin = new Date(fechaUtil2.getTime());
-
-						alquiler.setIdAlquiler(idAlquiler);
-						alquiler.setIdVehiculo(idVehiculo);
-						alquiler.setIdCliente(idCliente);
-						alquiler.setFechaInic(fechaInc);
-						alquiler.setFechFin(fechaFin);
-						vehiculo.setRuta(v.getRuta());
-						vehiculo.setAlquilado(1);
-						vehiculo.setComprado(0);
-
-						Cliente datos = serviceCliente.getClienteId(Conexion.obtener(), Login.getidClienteLogin());
-
-						String nom = datos.getNombre();
-						String dir = datos.getDireccion();
-						String rol = datos.getRol();
-						String user = datos.getNombreUsuario();
-						String cont = datos.getContrasena();
-						int act = datos.getActivar();
-						int numC = (datos.getNumCompras());
-						int numA = (datos.getNumAlquileres() + 1);
-						int numCO = datos.getNumComentarios();
-						int numV = datos.getNumValoracion();
-						cliente.setIdClientes(Login.getidClienteLogin());
-						cliente.setNombre(nom);
-						cliente.setDireccion(dir);
-						cliente.setRol(rol);
-						cliente.setNombreUsuario(user);
-						cliente.setContrasena(cont);
-						cliente.setActivar(act);
-						cliente.setNumCompras(numC);
-						cliente.setNumAlquileres(numA);
-
-						if (!VehiculoDisponible(idVehiculo, fechaInc, fechaFin)) {
-							JOptionPane.showMessageDialog(AlquilerVehiculo.this,
-									"No se puede alquilar el vehiculo en esta fecha", "Aviso",
-									JOptionPane.ERROR_MESSAGE);
-							return;
-						}
-						services.save(Conexion.obtener(), vehiculo);
-						service.save(Conexion.obtener(), alquiler);
-						serviceCliente.save(Conexion.obtener(), cliente);
 						AlquilerVehiculo.this.dispose();
 						JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Se ha realizado el alquiler", "Aviso",
 								JOptionPane.INFORMATION_MESSAGE);
@@ -310,8 +261,6 @@ public class AlquilerVehiculo extends JFrame {
 					}
 				} catch (ClassNotFoundException | SQLException e2) {
 					e2.printStackTrace();
-				} catch (ParseException e1) {
-					e1.printStackTrace();
 				}
 
 			} else if (o == btnCancelar) {
@@ -323,6 +272,89 @@ public class AlquilerVehiculo extends JFrame {
 				vc.setLocationRelativeTo(null);
 			}
 		}
+		public void updateAlquiler() {
+			
+			try {
+				Integer idAlquiler = alquiler.getIdAlquiler();
+				Integer idVehiculo = vehiculo.getIdVehiculos();
+				Integer idCliente = Login.getidClienteLogin();
+
+				String fechaIncstr = (String) fechainicio.getSelectedItem();
+				String fechaFinstr = (String) fechaF.getSelectedItem();
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				java.util.Date fechaUtil = formatter.parse(fechaIncstr);
+				java.util.Date fechaUtil2 = formatter.parse(fechaFinstr);
+				Date fechaInc = new Date(fechaUtil.getTime());
+				Date fechaFin = new Date(fechaUtil2.getTime());
+
+				alquiler.setIdAlquiler(idAlquiler);
+				alquiler.setIdVehiculo(idVehiculo);
+				alquiler.setIdCliente(idCliente);
+				alquiler.setFechaInic(fechaInc);
+				alquiler.setFechFin(fechaFin);
+				
+				if (!VehiculoDisponible(idVehiculo, fechaInc, fechaFin)) {
+					JOptionPane.showMessageDialog(AlquilerVehiculo.this,
+							"No se puede alquilar el vehiculo en esta fecha", "Aviso",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				service.save(Conexion.obtener(), alquiler);
+			} catch (ClassNotFoundException | SQLException | ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		public void updateVehiculo() {
+			Vehiculo v;
+			try {
+				v = services.getVehiculo(Conexion.obtener(), vehiculo.getIdVehiculos());
+				vehiculo.setRuta(v.getRuta());
+				vehiculo.setAlquilado(1);
+				vehiculo.setComprado(0);
+				services.save(Conexion.obtener(), vehiculo);
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		}
+		public void updateCliente() {
+
+			Cliente datos;
+			try {
+				datos = serviceCliente.getClienteId(Conexion.obtener(), Login.getidClienteLogin());
+				
+				String nom = datos.getNombre();
+				String dir = datos.getDireccion();
+				String rol = datos.getRol();
+				String user = datos.getNombreUsuario();
+				String cont = datos.getContrasena();
+				int act = datos.getActivar();
+				int numC = (datos.getNumCompras());
+				int numA = (datos.getNumAlquileres() + 1);
+				int numCO = datos.getNumComentarios();
+				int numV = datos.getNumValoracion();
+				cliente.setIdClientes(Login.getidClienteLogin());
+				cliente.setNombre(nom);
+				cliente.setDireccion(dir);
+				cliente.setRol(rol);
+				cliente.setNombreUsuario(user);
+				cliente.setContrasena(cont);
+				cliente.setActivar(act);
+				cliente.setNumCompras(numC);
+				cliente.setNumAlquileres(numA);
+				
+				serviceCliente.save(Conexion.obtener(), cliente);
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			
+		}
+		
 
 		private boolean VehiculoDisponible(Integer idVehiculo, Date fechaInc, Date fechaFin) {
 			try {
@@ -356,4 +388,8 @@ public class AlquilerVehiculo extends JFrame {
 	public static Integer getestaAlquilado() {
 		return estaAlquilado;
 	}
+	
+	
+	
+	
 }

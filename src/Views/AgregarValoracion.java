@@ -107,7 +107,12 @@ public class AgregarValoracion extends JFrame {
 				 updateValoracion();
 				 updateVehiculo();
 				 updateCliente();
-			
+				//Error cuando ya hay un comentario te da un mensaje de que ya existe y este
+				JOptionPane.showMessageDialog(null, "La valoracion ha sido Enviada con exito!", "Envio completado",
+				JOptionPane.INFORMATION_MESSAGE);
+				VentanaCatalogo vc = new VentanaCatalogo();
+				vc.setVisible(true);
+				dispose();
 				
 				
 
@@ -151,19 +156,16 @@ public class AgregarValoracion extends JFrame {
 	}
 	
 	public void updateValoracion() {
-		Valoracion v = new Valoracion();
-		v.setIdCliente(Login.getidClienteLogin());
-		v.setIdVehiculo(Login.getidVehiculo());
-		System.out.println(valoracion);
-		v.setValoracion(valoracion);
+		
 		
 		try {
+			Valoracion v = new Valoracion();
+			v.setIdCliente(Login.getidClienteLogin());
+			v.setIdVehiculo(Login.getidVehiculo());
+			System.out.println(valoracion);
+			v.setValoracion(valoracion);
 			service.save(Conexion.obtener(), v);
-			JOptionPane.showMessageDialog(null, "La valoracion ha sido Enviada con exito!", "Envio completado",
-			JOptionPane.INFORMATION_MESSAGE);
-			VentanaCatalogo vc = new VentanaCatalogo();
-			vc.setVisible(true);
-			dispose();
+		
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

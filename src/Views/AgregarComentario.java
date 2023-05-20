@@ -64,78 +64,11 @@ public class AgregarComentario extends JFrame {
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
-				String comentario = textArea.getText();
-				String nomUser = Login.getnombreUser();
-				System.out.println(nomUser);
-				
-				
-				
-				Comentario c = new Comentario();
-				c.setIdCliente(Login.getidClienteLogin());
-				System.out.println(Login.getidClienteLogin());
-				c.setIdVehiculo(Login.getidVehiculo());
-				c.setComentario(nomUser +": \n"+comentario);
-				try {
-					vehiculo=serviceveh.getVehiculo(Conexion.obtener(),Login.getidVehiculo());
-					String mod = vehiculo.getModelo();		
-					String mar = vehiculo.getMarca();
-					int anyo = vehiculo.getAnyo();
-					String color = vehiculo.getColor();
-					float precio = vehiculo.getPrecio();
-					int idF= vehiculo.getIdFabricante();
-					String rut = vehiculo.getRuta();
-					int comp = vehiculo.getComprado();
-					int alqui = vehiculo.getAlquilado();
-
-					int numC = (vehiculo.getNumcomentarios()+1);
-					int numVa = vehiculo.getNumvaloraciones();
-					vehiculo.setIdVehiculos(Login.getidVehiculo());
-					vehiculo.setModelo(mod);
-					vehiculo.setMarca(mar);
-					vehiculo.setAnyo(anyo);
-					vehiculo.setColor(color);
-					vehiculo.setPrecio(precio);
-					vehiculo.setIdFabricante(idF);
-					vehiculo.setRuta(rut);
-					vehiculo.setComprado(comp);
-					vehiculo.setAlquilado(alqui);
-					vehiculo.setNumcomentarios(numC);
-					vehiculo.setNumvaloraciones(numVa);
-					serviceveh.save(Conexion.obtener(), vehiculo);
-					
-					
-					cliente = servicec.getClienteId(Conexion.obtener(),Login.getidClienteLogin());
-					Integer id = Login.getidClienteLogin();
-					String nom = cliente.getNombre();
-					String dir = cliente.getDireccion();
-					String rol = cliente.getRol();
-					String user = cliente.getNombreUsuario();
-					String cont = cliente.getContrasena();
-					int act = cliente.getActivar();
-					int numCP = (cliente.getNumCompras());
-					int numA = cliente.getNumAlquileres();
-					int numCO = (cliente.getNumComentarios()+1);
-					
-					int numV = cliente.getNumValoracion();
-					cliente.setIdClientes(id);
-					cliente.setNombre(nom);
-					cliente.setDireccion(dir);
-					cliente.setRol(rol);
-					cliente.setNombreUsuario(user);
-					cliente.setContrasena(cont);
-					cliente.setActivar(act);
-					cliente.setNumCompras(numCP);
-					cliente.setNumAlquileres(numA);
-					cliente.setNumComentarios(numCO);
-					cliente.setNumValoracion(numV);
-					
-					
-					service.save(Conexion.obtener(), c);
-					servicec.save(Conexion.obtener(), cliente);
-				} catch (ClassNotFoundException | SQLException e1) {
-					e1.printStackTrace();
-				}
+				updateValoracion();
+				updateVehiculo();
+				updateCliente();
+			
+				//Error cuando ya hay un comentario te da un mensaje de que ya existe y este
 				JOptionPane.showMessageDialog(null, "El comentario ha sido Enviado con exito!", "Envio completado", JOptionPane.INFORMATION_MESSAGE);
 				VentanaCatalogo vc = new VentanaCatalogo();
 				vc.setVisible(true);
@@ -156,6 +89,102 @@ public class AgregarComentario extends JFrame {
 		});
 		btnCancelar.setBounds(238, 150, 98, 33);
 		contentPane.add(btnCancelar);
+		
+	}
+	
+	public void updateValoracion() {
+	
+		try {
+			String comentario = textArea.getText();
+			String nomUser = Login.getnombreUser();
+			System.out.println(nomUser);
+			
+			Comentario c = new Comentario();
+			c.setIdCliente(Login.getidClienteLogin());
+			System.out.println(Login.getidClienteLogin());
+			c.setIdVehiculo(Login.getidVehiculo());
+			c.setComentario(nomUser +": \n"+comentario);
+			
+			service.save(Conexion.obtener(), c);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void updateVehiculo() {
+		try {
+			vehiculo=serviceveh.getVehiculo(Conexion.obtener(),Login.getidVehiculo());
+			
+			String mod = vehiculo.getModelo();		
+			String mar = vehiculo.getMarca();
+			int anyo = vehiculo.getAnyo();
+			String color = vehiculo.getColor();
+			float precio = vehiculo.getPrecio();
+			int idF= vehiculo.getIdFabricante();
+			String rut = vehiculo.getRuta();
+			int comp = vehiculo.getComprado();
+			int alqui = vehiculo.getAlquilado();
+			int numC = (vehiculo.getNumcomentarios()+1);
+			int numVa = vehiculo.getNumvaloraciones();
+			
+			vehiculo.setIdVehiculos(Login.getidVehiculo());
+			vehiculo.setModelo(mod);
+			vehiculo.setMarca(mar);
+			vehiculo.setAnyo(anyo);
+			vehiculo.setColor(color);
+			vehiculo.setPrecio(precio);
+			vehiculo.setIdFabricante(idF);
+			vehiculo.setRuta(rut);
+			vehiculo.setComprado(comp);
+			vehiculo.setAlquilado(alqui);
+			vehiculo.setNumcomentarios(numC);
+			vehiculo.setNumvaloraciones(numVa);
+			serviceveh.save(Conexion.obtener(), vehiculo);
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+	
+	public void updateCliente() {
+		try {
+			cliente = servicec.getClienteId(Conexion.obtener(),Login.getidClienteLogin());
+			Integer id = Login.getidClienteLogin();
+			String nom = cliente.getNombre();
+			String dir = cliente.getDireccion();
+			String rol = cliente.getRol();
+			String user = cliente.getNombreUsuario();
+			String cont = cliente.getContrasena();
+			int act = cliente.getActivar();
+			int numCP = (cliente.getNumCompras());
+			int numA = cliente.getNumAlquileres();
+			int numCO = (cliente.getNumComentarios()+1);
+			
+			int numV = cliente.getNumValoracion();
+			cliente.setIdClientes(id);
+			cliente.setNombre(nom);
+			cliente.setDireccion(dir);
+			cliente.setRol(rol);
+			cliente.setNombreUsuario(user);
+			cliente.setContrasena(cont);
+			cliente.setActivar(act);
+			cliente.setNumCompras(numCP);
+			cliente.setNumAlquileres(numA);
+			cliente.setNumComentarios(numCO);
+			cliente.setNumValoracion(numV);
+			
+			
+			
+			servicec.save(Conexion.obtener(), cliente);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 	
