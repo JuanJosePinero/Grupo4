@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -39,20 +40,21 @@ public class AlquilerVehiculo extends JFrame {
 	private final Vehiculo vehiculo;
 	private final Alquiler alquiler;
 	private final Cliente cliente;
-	// private final Login login;
 	private JButton btnAlquiler, btnCancelar;
-	private JLabel lblImagen;
+	private JLabel imagenLabel;
+	private ImageIcon imagen;
 	private String ruta;
 	private JLabel FechaInicio, FechaFin;
 	private JTextField fechaInicio;
 	private JTextField fechafin;
 	private JComboBox<String> fechainicio, fechaF;
 	private static int estaAlquilado;
-
-
+	private int id;
 
 	public AlquilerVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
+		this.alquiler = new Alquiler();
+		this.cliente = new Cliente();
 		initComponents();
 		txtModelo.setText(this.vehiculo.getModelo());
 		txtMarca.setText(this.vehiculo.getMarca());
@@ -60,10 +62,9 @@ public class AlquilerVehiculo extends JFrame {
 		txtColor.setText(this.vehiculo.getColor());
 		txtPrecio.setText(String.valueOf(this.vehiculo.getPrecio()));
 		txtIdFabricante.setText(String.valueOf(this.vehiculo.getIdFabricante()));
-		ruta = this.vehiculo.getRuta();
-		this.alquiler = new Alquiler();
-		this.cliente = new Cliente();
-
+		id = vehiculo.getIdVehiculos();
+		
+		getRuta();
 	}
 
 	/**
@@ -81,78 +82,78 @@ public class AlquilerVehiculo extends JFrame {
 		setTitle("Coche seleccionado para el alquiler");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(150, 240, 402, 536);
+		setBounds(150, 240, 727, 368);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JLabel lblModelo = new JLabel("Modelo:");
-		lblModelo.setBounds(30, 26, 61, 16);
+		lblModelo.setBounds(30, 18, 61, 16);
 		contentPane.add(lblModelo);
 
 		JLabel lblMarca = new JLabel("Marca:");
-		lblMarca.setBounds(30, 62, 61, 16);
+		lblMarca.setBounds(30, 54, 61, 16);
 		contentPane.add(lblMarca);
 
 		JLabel lbAnyo = new JLabel("Anyo:");
-		lbAnyo.setBounds(30, 98, 61, 16);
+		lbAnyo.setBounds(30, 90, 61, 16);
 		contentPane.add(lbAnyo);
 
 		JLabel lblColor = new JLabel("Color:");
-		lblColor.setBounds(30, 134, 61, 16);
+		lblColor.setBounds(30, 126, 61, 16);
 		contentPane.add(lblColor);
 
 		JLabel lblPrecio = new JLabel("Precio:");
-		lblPrecio.setBounds(30, 170, 61, 16);
+		lblPrecio.setBounds(30, 162, 61, 16);
 		contentPane.add(lblPrecio);
 
 		JLabel lblidFabricante = new JLabel("IdFabricante:");
-		lblidFabricante.setBounds(30, 206, 80, 16);
+		lblidFabricante.setBounds(30, 198, 80, 16);
 		contentPane.add(lblidFabricante);
 
 		txtModelo = new JTextField();
-		txtModelo.setBounds(130, 26, 190, 26);
+		txtModelo.setBounds(130, 14, 190, 26);
 		contentPane.add(txtModelo);
 		txtModelo.setColumns(10);
 		txtModelo.setEditable(false);
 
 		txtMarca = new JTextField();
-		txtMarca.setBounds(130, 62, 190, 26);
+		txtMarca.setBounds(130, 50, 190, 26);
 		contentPane.add(txtMarca);
 		txtMarca.setColumns(10);
 		txtMarca.setEditable(false);
 
 		txtAnyo = new JTextField();
-		txtAnyo.setBounds(130, 98, 190, 26);
+		txtAnyo.setBounds(130, 86, 190, 26);
 		contentPane.add(txtAnyo);
 		txtAnyo.setColumns(10);
 		txtAnyo.setEditable(false);
 
 		txtColor = new JTextField();
-		txtColor.setBounds(130, 134, 190, 26);
+		txtColor.setBounds(130, 122, 190, 26);
 		contentPane.add(txtColor);
 		txtColor.setColumns(10);
 		txtColor.setEditable(false);
 
 		txtPrecio = new JTextField();
-		txtPrecio.setBounds(130, 170, 190, 26);
+		txtPrecio.setBounds(130, 158, 190, 26);
 		contentPane.add(txtPrecio);
 		txtPrecio.setColumns(10);
 		txtPrecio.setEditable(false);
 
 		txtIdFabricante = new JTextField();
-		txtIdFabricante.setBounds(130, 206, 190, 26);
+		txtIdFabricante.setBounds(130, 194, 190, 26);
 		contentPane.add(txtIdFabricante);
 		txtIdFabricante.setColumns(10);
 		txtIdFabricante.setEditable(false);
 
 		JLabel FechaInicio = new JLabel("Fecha Inicio");
-		FechaInicio.setBounds(35, 345, 87, 13);
+		FechaInicio.setBounds(30, 230, 87, 13);
 		contentPane.add(FechaInicio);
 
 		JLabel FechaFin = new JLabel("Fecha Fin");
-		FechaFin.setBounds(262, 345, 58, 13);
+		FechaFin.setBounds(195, 230, 58, 13);
 		contentPane.add(FechaFin);
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -165,7 +166,7 @@ public class AlquilerVehiculo extends JFrame {
 		}
 
 		fechainicio = new JComboBox(dates);
-		fechainicio.setBounds(35, 383, 87, 21);
+		fechainicio.setBounds(30, 243, 87, 21);
 		fechainicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LocalDate selectedDate = parseDate(fechainicio.getSelectedItem().toString());
@@ -173,19 +174,28 @@ public class AlquilerVehiculo extends JFrame {
 			}
 		});
 		contentPane.add(fechainicio);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(341, 43, 350, 200);
+		contentPane.add(panel);
+
+		imagenLabel = new JLabel(ruta);
+		imagen = new ImageIcon(vehiculo.getRuta());
+		imagenLabel.setIcon(imagen);
+		panel.add(imagenLabel);
 
 		ManejadorJButton escuchador = new ManejadorJButton();
 		fechaF = new JComboBox();
-		fechaF.setBounds(262, 383, 95, 21);
+		fechaF.setBounds(195, 243, 95, 21);
 		contentPane.add(fechaF);
 		btnAlquiler = new JButton("Alquilar");
-		btnAlquiler.setSize(87, 21);
-		btnAlquiler.setLocation(50, 454);
+		btnAlquiler.setSize(193, 30);
+		btnAlquiler.setLocation(130, 291);
 		btnAlquiler.addActionListener(escuchador);
 
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setSize(87, 21);
-		btnCancelar.setLocation(233, 454);
+		btnCancelar.setSize(193, 30);
+		btnCancelar.setLocation(398, 291);
 		btnCancelar.addActionListener(escuchador);
 		contentPane.add(btnAlquiler);
 		contentPane.add(btnCancelar);
@@ -204,6 +214,20 @@ public class AlquilerVehiculo extends JFrame {
 
 	private LocalDate parseDate(String dateStr) {
 		return LocalDate.parse(dateStr);
+	}
+	
+	public void getRuta() {
+		Vehiculo vs;
+		try {
+			vs = services.getVehiculo(Conexion.obtener(), id);
+			String ruta = vs.getRuta();
+			imagen = new ImageIcon(ruta);
+			imagenLabel.setIcon(imagen);
+			System.out.println(ruta);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	private class ManejadorJButton implements ActionListener {

@@ -32,14 +32,13 @@ public class ComprarVehiculo extends JFrame {
 	private final ClientService serviceCliente = new ClientService();
 	private final VentaService servicesventa = new VentaService();
 	private final Vehiculo vehiculo;
+	private Vehiculo v = new Vehiculo();
 	private final Venta venta;
 	private final Cliente cliente;
-//	private final Login login;
 	private JButton btnComprar, btnCancelar;
 	private String ruta;
-	private JLabel lblFechaHora;
-	private JTextField textFechaHora;
 	private int numeroCompras = 0;
+	private int id;
 
 	/**
 	 * Create the frame.
@@ -47,6 +46,8 @@ public class ComprarVehiculo extends JFrame {
 
 	public ComprarVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
+		this.venta = new Venta();
+		this.cliente = new Cliente();
 		initComponents();
 		txtModelo.setText(vehiculo.getModelo());
 		txtMarca.setText(vehiculo.getMarca());
@@ -54,12 +55,9 @@ public class ComprarVehiculo extends JFrame {
 		txtColor.setText(vehiculo.getColor());
 		txtPrecio.setText(String.valueOf(vehiculo.getPrecio()));
 		txtIdFabricante.setText(String.valueOf(vehiculo.getIdFabricante()));
-		ruta = vehiculo.getRuta();
-		imagenLabel.setText(ruta);
-
+		id = vehiculo.getIdVehiculos();
 		
-		this.venta = new Venta();
-		this.cliente = new Cliente();
+		getRuta();
 
 	}
 
@@ -156,11 +154,25 @@ public class ComprarVehiculo extends JFrame {
 		panel.setBounds(340, 26, 350, 200);
 		contentPane.add(panel);
 
-		imagenLabel = new JLabel();
+		imagenLabel = new JLabel(ruta);
 		imagen = new ImageIcon(vehiculo.getRuta());
 		imagenLabel.setIcon(imagen);
 		panel.add(imagenLabel);
 
+	}
+	
+	public void getRuta() {
+		Vehiculo vs;
+		try {
+			vs = services.getVehiculo(Conexion.obtener(), id);
+			String ruta = vs.getRuta();
+			imagen = new ImageIcon(ruta);
+			imagenLabel.setIcon(imagen);
+			System.out.println(ruta);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	private class ManejadorJButton implements ActionListener {
