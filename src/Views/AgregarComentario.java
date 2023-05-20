@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -17,9 +16,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import Service.ClientService;
 import Service.ComentarioService;
 import Service.Conexion;
 import Service.VehiculoService;
+import models.Cliente;
 import models.Comentario;
 import models.Vehiculo;
 
@@ -29,7 +30,9 @@ public class AgregarComentario extends JFrame {
 	private static JTextArea textArea;
 	private final static ComentarioService service = new ComentarioService();
 	private final VehiculoService serviceveh=new VehiculoService();
+	private final ClientService servicec= new ClientService();
 	private Vehiculo vehiculo;
+	private Cliente cliente;
 	private List <Comentario> comentarios = new ArrayList<>();
 
 
@@ -44,7 +47,7 @@ public class AgregarComentario extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		System.out.println("LA ID ES "+Login.getidClienteLogin());
 		
 		JLabel lblTitulo = new JLabel("Agrega un comentario para el vehículo seleccionado.");
 		lblTitulo.setBounds(5, 5, 390, 21);
@@ -75,9 +78,7 @@ public class AgregarComentario extends JFrame {
 				c.setComentario(nomUser +": \n"+comentario);
 				try {
 					vehiculo=serviceveh.getVehiculo(Conexion.obtener(),Login.getidVehiculo());
-					String mod = vehiculo.getModelo();
-						
-					System.out.println(mod);
+					String mod = vehiculo.getModelo();		
 					String mar = vehiculo.getMarca();
 					int anyo = vehiculo.getAnyo();
 					String color = vehiculo.getColor();
@@ -88,13 +89,6 @@ public class AgregarComentario extends JFrame {
 					int alqui = vehiculo.getAlquilado();
 
 					int numC = (vehiculo.getNumcomentarios()+1);
-					System.out.println(numC);
-					
-					
-					
-//					Vehiculo v=new Vehiculo(vehiculo.getIdVehiculos(),vehiculo.getModelo(),vehiculo.getMarca(),
-//							vehiculo.getAnyo(),vehiculo.getColor(),vehiculo.getPrecio(),vehiculo.getIdFabricante(),
-//							vehiculo.getComprado(),vehiculo.getAlquilado(),numC);
 					vehiculo.setIdVehiculos(Login.getidVehiculo());
 					vehiculo.setModelo(mod);
 					vehiculo.setMarca(mar);
@@ -106,9 +100,37 @@ public class AgregarComentario extends JFrame {
 					vehiculo.setComprado(comp);
 					vehiculo.setAlquilado(alqui);
 					vehiculo.setNumcomentarios(numC);
-					System.out.println("Post "+vehiculo.getNumcomentarios());
 					serviceveh.save(Conexion.obtener(), vehiculo);
+					
+					
+					cliente = servicec.getClienteId(Conexion.obtener(),Login.getidClienteLogin());
+					Integer id = Login.getidClienteLogin();
+					String nom = cliente.getNombre();
+					String dir = cliente.getDireccion();
+					String rol = cliente.getRol();
+					String user = cliente.getNombreUsuario();
+					String cont = cliente.getContrasena();
+					int act = cliente.getActivar();
+					int numCP = (cliente.getNumCompras());
+					int numA = cliente.getNumAlquileres();
+					int numCO = (cliente.getNumComentarios()+1);
+					System.out.println(numCO);
+					int numV = cliente.getNumValoracion();
+					cliente.setIdClientes(id);
+					cliente.setNombre(nom);
+					cliente.setDireccion(dir);
+					cliente.setRol(rol);
+					cliente.setNombreUsuario(user);
+					cliente.setContrasena(cont);
+					cliente.setActivar(act);
+					cliente.setNumCompras(numCP);
+					cliente.setNumAlquileres(numA);
+					cliente.setNumComentarios(numCO);
+					cliente.setNumValoracion(numV);
+					
+					
 					service.save(Conexion.obtener(), c);
+					servicec.save(Conexion.obtener(), cliente);
 				} catch (ClassNotFoundException | SQLException e1) {
 					e1.printStackTrace();
 				}

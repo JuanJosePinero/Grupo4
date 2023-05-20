@@ -207,8 +207,9 @@ public class ComprarVehiculo extends JFrame {
 						String cont = datos.getContrasena();
 						int act = datos.getActivar();
 						int numC = (datos.getNumCompras()+1);
-						System.out.println(numC);
 						int numA = datos.getNumAlquileres();
+						int numCO = datos.getNumComentarios();
+						int numV = datos.getNumValoracion();
 						cliente.setIdClientes(Login.getidClienteLogin());
 						cliente.setNombre(nom);
 						cliente.setDireccion(dir);
