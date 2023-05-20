@@ -196,7 +196,7 @@ public class AlquilerVehiculo extends JFrame {
 	private void updateComboBoxFin(LocalDate selectedDate) {
 		fechaF.removeAllItems();
 		fechaF.addItem(selectedDate.toString());
-		for (int i = fechainicio.getSelectedIndex(); i < fechainicio.getItemCount(); i++) {
+		for (int i = fechainicio.getSelectedIndex()+1; i < fechainicio.getItemCount(); i++) {
 			LocalDate date = parseDate(fechainicio.getItemAt(i));
 			fechaF.addItem(date.toString());
 		}
