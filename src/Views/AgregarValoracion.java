@@ -20,7 +20,9 @@ import javax.swing.border.EmptyBorder;
 
 import Service.Conexion;
 import Service.ValoracionService;
+import Service.VehiculoService;
 import models.Valoracion;
+import models.Vehiculo;
 
 public class AgregarValoracion extends JFrame {
 
@@ -31,6 +33,8 @@ public class AgregarValoracion extends JFrame {
 	private ImageIcon icono0, icono1,icono2,icono3,icono4,icono5;
 	private JLabel etiquetaImagen;
 	private ValoracionService service = new ValoracionService();
+	private final VehiculoService serviceveh=new VehiculoService();
+	private Vehiculo vehiculo;
 	private int valoracion = 0;
 	private int val = 0;
 
@@ -103,6 +107,38 @@ public class AgregarValoracion extends JFrame {
 				v.setIdVehiculo(Login.getidVehiculo());
 				System.out.println(valoracion);
 				v.setValoracion(valoracion);
+				
+				try {
+					vehiculo=serviceveh.getVehiculo(Conexion.obtener(),Login.getidVehiculo());
+					String mod = vehiculo.getModelo();		
+					String mar = vehiculo.getMarca();
+					int anyo = vehiculo.getAnyo();
+					String color = vehiculo.getColor();
+					float precio = vehiculo.getPrecio();
+					int idF= vehiculo.getIdFabricante();
+					String rut = vehiculo.getRuta();
+					int comp = vehiculo.getComprado();
+					int alqui = vehiculo.getAlquilado();
+					int numC = (vehiculo.getNumcomentarios());
+					int numVa = (vehiculo.getNumvaloraciones()+1);
+					vehiculo.setIdVehiculos(Login.getidVehiculo());
+					vehiculo.setModelo(mod);
+					vehiculo.setMarca(mar);
+					vehiculo.setAnyo(anyo);
+					vehiculo.setColor(color);
+					vehiculo.setPrecio(precio);
+					vehiculo.setIdFabricante(idF);
+					vehiculo.setRuta(rut);
+					vehiculo.setComprado(comp);
+					vehiculo.setAlquilado(alqui);
+					vehiculo.setNumcomentarios(numC);
+					vehiculo.setNumvaloraciones(numVa);
+					serviceveh.save(Conexion.obtener(), vehiculo);
+				} catch (ClassNotFoundException | SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				
 
 				try {
 					service.save(Conexion.obtener(), v);

@@ -10,7 +10,7 @@ public class Vehiculo {
 	private float precio;
 	private Integer idFabricante;
 	private String ruta;
-	private int comprado=0,alquilado=0,numcomentarios=0;
+	private int comprado=0,alquilado=0,numcomentarios=0,numvaloraciones=0;
 	
 	
 
@@ -64,7 +64,7 @@ public class Vehiculo {
 		this.idFabricante = idFabricante;
 	}
 	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
-			Integer idFabricante, int compra, int alqui,int numcom) {
+			Integer idFabricante, int compra, int alqui,int numcom,int numval) {
 		super();
 		this.idVehiculos = idVehiculos;
 		this.modelo = modelo;
@@ -76,6 +76,7 @@ public class Vehiculo {
 		this.comprado=compra;
 		this.alquilado = alqui;
 		this.numcomentarios=numcom;
+		this.numvaloraciones=numval;
 	}
 	
 	public String getRuta() {
@@ -163,6 +164,15 @@ public class Vehiculo {
 
 	public void setAlquilado(int alquilado) {
 		this.alquilado = alquilado;
+	}
+	
+
+	public int getNumvaloraciones() {
+		return numvaloraciones;
+	}
+
+	public void setNumvaloraciones(int numvaloraciones) {
+		this.numvaloraciones = numvaloraciones;
 	}
 
 	@Override

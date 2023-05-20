@@ -89,6 +89,7 @@ public class AgregarComentario extends JFrame {
 					int alqui = vehiculo.getAlquilado();
 
 					int numC = (vehiculo.getNumcomentarios()+1);
+					int numVa = vehiculo.getNumvaloraciones();
 					vehiculo.setIdVehiculos(Login.getidVehiculo());
 					vehiculo.setModelo(mod);
 					vehiculo.setMarca(mar);
@@ -100,6 +101,7 @@ public class AgregarComentario extends JFrame {
 					vehiculo.setComprado(comp);
 					vehiculo.setAlquilado(alqui);
 					vehiculo.setNumcomentarios(numC);
+					vehiculo.setNumvaloraciones(numVa);
 					serviceveh.save(Conexion.obtener(), vehiculo);
 					
 					
