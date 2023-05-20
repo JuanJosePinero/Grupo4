@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Service.ClientService;
 import Service.Conexion;
 import Service.VehiculoService;
 import Service.VentaService;
@@ -27,6 +27,7 @@ public class ComprarVehiculo extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtModelo, txtMarca, txtAnyo, txtColor, txtPrecio, txtIdFabricante;
 	private final VehiculoService services = new VehiculoService();
+	private final ClientService serviceCliente = new ClientService();
 	private final VentaService servicesventa = new VentaService();
 	private final Vehiculo vehiculo;
 	private final Venta venta;
@@ -37,6 +38,7 @@ public class ComprarVehiculo extends JFrame {
 	private String ruta;
 	private JLabel lblFechaHora;
 	private JTextField textFechaHora;
+	private int numeroCompras = 0;;
 
 	/**
 	 * Create the frame.
@@ -171,6 +173,7 @@ public class ComprarVehiculo extends JFrame {
 				try {
 					Vehiculo v=services.getVehiculo(Conexion.obtener(),vehiculo.getIdVehiculos());
 					
+					
 					if(v.getComprado()==1) {
 						JOptionPane.showMessageDialog(ComprarVehiculo.this, "este coche ya ha sido comprado");
 						ComprarVehiculo.this.dispose();
@@ -188,22 +191,38 @@ public class ComprarVehiculo extends JFrame {
 						venta.setIdVehiculo(idVehiculo);
 						venta.setIdCliente(idCliente);
 						venta.setFechaHora(sqlDate);
-						System.out.println(v.getIdVehiculos());
-						System.out.println(vehiculo.getIdVehiculos());
-						System.out.println(venta.getIdVehiculo());
-						System.out.println(venta.getIdCliente());
-						System.out.println(venta.getFechaHora());
+						
 						vehiculo.setComprado(1);
 						vehiculo.setAlquilado(0);
-
-
-					System.out.println(venta.getIdVehiculo());
-					System.out.println(venta.getIdCliente());
-					System.out.println(venta.getFechaHora());
-					System.out.println(venta.getIdVenta());
+						
 					
-
+						Cliente datos = serviceCliente.getClienteId(Conexion.obtener(),Login.getidClienteLogin());
+						
+						
+						
+						String nom = datos.getNombre();
+						String dir = datos.getDireccion();
+						String rol = datos.getRol();
+						String user = datos.getNombreUsuario();
+						String cont = datos.getContrasena();
+						int act = datos.getActivar();
+						int numC = (datos.getNumCompras()+1);
+						System.out.println(numC);
+						int numA = datos.getNumAlquileres();
+						cliente.setIdClientes(Login.getidClienteLogin());
+						cliente.setNombre(nom);
+						cliente.setDireccion(dir);
+						cliente.setRol(rol);
+						cliente.setNombreUsuario(user);
+						cliente.setContrasena(cont);
+						cliente.setActivar(act);
+						cliente.setNumCompras(numC);
+						cliente.setNumAlquileres(numA);
+						
+						
+		
 					servicesventa.save(Conexion.obtener(), venta);
+					serviceCliente.save(Conexion.obtener(), cliente);
 
 					services.save(Conexion.obtener(), vehiculo);
 					ComprarVehiculo.this.dispose();

@@ -67,7 +67,7 @@ public class ClientService {
 	 public Cliente getClienteId(Connection conexion, int id) throws SQLException {
 		   Cliente cliente = null;
 	      try{
-	         PreparedStatement consulta = conexion.prepareStatement("SELECT idCliente,nombre, direccion,rol,usuario,Contasenya,Activar "
+	         PreparedStatement consulta = conexion.prepareStatement("SELECT idCliente,nombre, direccion,rol,usuario,Contasenya,Activar,numCompras,numAlquileres "
 	                 + " FROM " + this.tabla + " WHERE idCliente = ?" );
 	         consulta.setInt(1, id);
 	         ResultSet resultado = consulta.executeQuery();
