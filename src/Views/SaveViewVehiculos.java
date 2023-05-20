@@ -235,7 +235,7 @@ public class SaveViewVehiculos extends JFrame {
 		                ruta = carpetaDestino;
 
 					} catch (IOException e1) {
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "El archivo debe de ser .jpg o .png", "Aviso", JOptionPane.ERROR_MESSAGE);
 					}
 
 				}

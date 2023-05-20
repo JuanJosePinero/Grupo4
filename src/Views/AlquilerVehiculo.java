@@ -263,13 +263,7 @@ public class AlquilerVehiculo extends JFrame {
 						alquiler.setIdCliente(idCliente);
 						alquiler.setFechaInic(fechaInc);
 						alquiler.setFechFin(fechaFin);
-						
-						System.out.println(alquiler.getIdAlquiler());
-						System.out.println(alquiler.getIdVehiculo());
-						System.out.println(alquiler.getIdCliente());
-						System.out.println(alquiler.getFechaInic());
-						System.out.println(fechaInc);
-						System.out.println(fechaFin);
+						vehiculo.setRuta(v.getRuta());
 						vehiculo.setAlquilado(1);
 						vehiculo.setComprado(0);
 						

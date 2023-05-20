@@ -58,7 +58,6 @@ public class ComprarVehiculo extends JFrame {
 		id = vehiculo.getIdVehiculos();
 		
 		getRuta();
-
 	}
 
 	public ComprarVehiculo() {
@@ -203,7 +202,7 @@ public class ComprarVehiculo extends JFrame {
 						venta.setIdVehiculo(idVehiculo);
 						venta.setIdCliente(idCliente);
 						venta.setFechaHora(sqlDate);
-						
+						vehiculo.setRuta(v.getRuta());
 						vehiculo.setComprado(1);
 						vehiculo.setAlquilado(0);
 						
