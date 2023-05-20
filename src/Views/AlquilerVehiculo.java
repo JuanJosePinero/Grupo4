@@ -25,6 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Service.AlquilerService;
+import Service.ClientService;
 import Service.Conexion;
 import Service.VehiculoService;
 import models.Alquiler;
@@ -37,6 +38,7 @@ public class AlquilerVehiculo extends JFrame {
 	private JTextField txtModelo, txtMarca, txtAnyo, txtColor, txtPrecio, txtIdFabricante;
 	private final VehiculoService services = new VehiculoService();
 	private final AlquilerService service = new AlquilerService();
+	private final ClientService serviceCliente = new ClientService();
 	private final Vehiculo vehiculo;
 	private final Alquiler alquiler;
 	private final Cliente cliente;
@@ -49,6 +51,7 @@ public class AlquilerVehiculo extends JFrame {
 	private JTextField fechafin;
 	private JComboBox<String> fechainicio, fechaF;
 	private static int estaAlquilado;
+	private int numeroAlquileres = 0;
 	private int id;
 
 	public AlquilerVehiculo(Vehiculo vehiculo) {
@@ -266,6 +269,30 @@ public class AlquilerVehiculo extends JFrame {
 						vehiculo.setRuta(v.getRuta());
 						vehiculo.setAlquilado(1);
 						vehiculo.setComprado(0);
+
+						Cliente datos = serviceCliente.getClienteId(Conexion.obtener(),Login.getidClienteLogin());
+						
+						
+						
+						String nom = datos.getNombre();
+						String dir = datos.getDireccion();
+						String rol = datos.getRol();
+						String user = datos.getNombreUsuario();
+						String cont = datos.getContrasena();
+						int act = datos.getActivar();
+						int numC = (datos.getNumCompras());
+						int numA = (datos.getNumAlquileres()+1);
+						int numCO = datos.getNumComentarios();
+						int numV = datos.getNumValoracion();
+						cliente.setIdClientes(Login.getidClienteLogin());
+						cliente.setNombre(nom);
+						cliente.setDireccion(dir);
+						cliente.setRol(rol);
+						cliente.setNombreUsuario(user);
+						cliente.setContrasena(cont);
+						cliente.setActivar(act);
+						cliente.setNumCompras(numC);
+						cliente.setNumAlquileres(numA);
 						
 
 						if(!VehiculoDisponible(idVehiculo,fechaInc,fechaFin)) {
@@ -274,6 +301,7 @@ public class AlquilerVehiculo extends JFrame {
 						}
 							services.save(Conexion.obtener(), vehiculo);
 							service.save(Conexion.obtener(), alquiler);
+							serviceCliente.save(Conexion.obtener(), cliente);
 							AlquilerVehiculo.this.dispose();
 							JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Se ha realizado el alquiler");
 							VentanaCatalogo vc = new VentanaCatalogo();

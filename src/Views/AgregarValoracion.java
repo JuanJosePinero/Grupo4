@@ -18,9 +18,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Service.ClientService;
 import Service.Conexion;
 import Service.ValoracionService;
 import Service.VehiculoService;
+import models.Cliente;
 import models.Valoracion;
 import models.Vehiculo;
 
@@ -34,6 +36,8 @@ public class AgregarValoracion extends JFrame {
 	private JLabel etiquetaImagen;
 	private ValoracionService service = new ValoracionService();
 	private final VehiculoService serviceveh=new VehiculoService();
+	private final ClientService servicec= new ClientService();
+	private Cliente cliente;
 	private Vehiculo vehiculo;
 	private int valoracion = 0;
 	private int val = 0;
@@ -133,6 +137,34 @@ public class AgregarValoracion extends JFrame {
 					vehiculo.setAlquilado(alqui);
 					vehiculo.setNumcomentarios(numC);
 					vehiculo.setNumvaloraciones(numVa);
+					
+					cliente = servicec.getClienteId(Conexion.obtener(),Login.getidClienteLogin());
+					Integer id = Login.getidClienteLogin();
+					String nom = cliente.getNombre();
+					String dir = cliente.getDireccion();
+					String rol = cliente.getRol();
+					String user = cliente.getNombreUsuario();
+					String cont = cliente.getContrasena();
+					int act = cliente.getActivar();
+					int numCP = (cliente.getNumCompras());
+					int numA = cliente.getNumAlquileres();
+					int numCO = (cliente.getNumComentarios());
+					
+					int numV = (cliente.getNumValoracion()+1);
+					cliente.setIdClientes(id);
+					cliente.setNombre(nom);
+					cliente.setDireccion(dir);
+					cliente.setRol(rol);
+					cliente.setNombreUsuario(user);
+					cliente.setContrasena(cont);
+					cliente.setActivar(act);
+					cliente.setNumCompras(numCP);
+					cliente.setNumAlquileres(numA);
+					cliente.setNumComentarios(numCO);
+					cliente.setNumValoracion(numV);
+					
+					servicec.save(Conexion.obtener(), cliente);
+					
 					serviceveh.save(Conexion.obtener(), vehiculo);
 				} catch (ClassNotFoundException | SQLException e2) {
 					// TODO Auto-generated catch block
