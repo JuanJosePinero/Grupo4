@@ -64,7 +64,7 @@ public class ListViewFabricante extends JFrame {
 					vista.setVisible(true);
 					vista.setLocationRelativeTo(null);
 				} else {
-					JOptionPane.showMessageDialog(ListViewFabricante.this, "Por favor seleccione una fila.");
+					JOptionPane.showMessageDialog(null, "Por favor seleccione una fila.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -92,7 +92,7 @@ public class ListViewFabricante extends JFrame {
 						}
 					}
 				} else {
-					JOptionPane.showMessageDialog(ListViewFabricante.this, "Por favor seleccione una fila.");
+					JOptionPane.showMessageDialog(null, "Por favor seleccione una fila.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -121,13 +121,17 @@ public class ListViewFabricante extends JFrame {
 		btnVer.setIcon(new ImageIcon("images/visualizar.png"));
 		btnVer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int filas = jtableP.getSelectedRow();
-				String nombreFabric = jtableP.getValueAt(filas, 0).toString();
-				Fabricante f = fabricante.get(filas);
+				int fila_seleccionada = jtableP.getSelectedRow();
+				if (fila_seleccionada >= 0) {
+				String nombreFabric = jtableP.getValueAt(fila_seleccionada, 0).toString();
+				Fabricante f = fabricante.get(fila_seleccionada);
 				int id = f.getIdFabricante();
 				setidFabricanteCrear(id);
 				VisualizarVehiculos vv = new VisualizarVehiculos();
 				dispose();				
+			}else {
+				JOptionPane.showMessageDialog(null, "Por favor seleccione una fila.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+			}
 			}
 		});
 		btnVer.setBounds(335, 27, 50, 50);
