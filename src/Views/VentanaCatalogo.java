@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,10 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import Service.Conexion;
@@ -51,6 +50,8 @@ public class VentanaCatalogo extends JFrame {
 	private DefaultTableModel dtm;
 	private JLabel imagenLabel;
 	private String imagenActual;
+	private String rutaNueva;
+	private ImageIcon imagen;
 
 	/**
 	 * Launch the application.
@@ -83,7 +84,7 @@ public class VentanaCatalogo extends JFrame {
 		contentPane.setLayout(null);
 
 		ManejadorJButton manejador = new ManejadorJButton();
-		
+
 		btnComprar = new JButton("Comprar Vehiculo");
 		btnComprar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
 		btnComprar.setBounds(66, 510, 143, 31);
@@ -108,7 +109,7 @@ public class VentanaCatalogo extends JFrame {
 
 		imagenLabel = new JLabel();
 		imagenLabel.setPreferredSize(new Dimension(350, 200));
-		ImageIcon imagen = new ImageIcon("images/vehiculos/cochePredeterminado.jpg");
+		imagen = new ImageIcon("images/vehiculos/cochePredeterminado.jpg");
 		imagenLabel.setIcon(imagen);
 		panel.add(imagenLabel);
 
@@ -116,14 +117,14 @@ public class VentanaCatalogo extends JFrame {
 		lblCoche.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 16));
 		lblCoche.setBounds(255, 16, 334, 32);
 		contentPane.add(lblCoche);
-		
+
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setIcon(new ImageIcon("images/lupa.png"));
 		lblNewLabel_3.setBounds(8, 58, 22, 22);
 		contentPane.add(lblNewLabel_3);
-		
 
-		String[] filtros = { "--", "Marca", "Modelo", "Anyo", "Color", "Precio", "idFabricante","Mejores Valoraciones","Mºnumero comentarios" };
+		String[] filtros = { "--", "Marca", "Modelo", "Anyo", "Color", "Precio", "idFabricante", "Mejores Valoraciones",
+				"Mºnumero comentarios" };
 		filtro = new JComboBox(filtros);
 		filtro.setBounds(8, 84, 180, 22);
 		contentPane.add(filtro);
@@ -157,55 +158,31 @@ public class VentanaCatalogo extends JFrame {
 
 		imagenActual = "images/vehiculos/cochePredeterminado.jpg";
 
-		ListSelectionModel selectionModel = jtableP.getSelectionModel();
-		selectionModel.addListSelectionListener(new ListSelectionListener() {
-		    public void valueChanged(ListSelectionEvent event) {
-		        if (!event.getValueIsAdjusting() && jtableP.getSelectedRow() != -1) {
-		            int selectedRow = jtableP.getSelectedRow();
-		            
-		            Object idVehiculos = jtableP.getValueAt(selectedRow, 0);
-		            
-		            String nuevaRutaImagen = determinarRutaImagen(idVehiculos);
-		            
-		            if (!nuevaRutaImagen.equals(imagenActual)) {
-		                imagenActual = nuevaRutaImagen;
-		                
-		                ImageIcon nuevaImagen = new ImageIcon(imagenActual);
-		                imagenLabel.setIcon(nuevaImagen);
-		            }
-		        }
-		    }
+		jtableP.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int fila_seleccionada = jtableP.getSelectedRow();
+				if (fila_seleccionada >= 0) {
+					String datos = jtableP.getValueAt(fila_seleccionada, 0).toString();
+
+					v = vehiculo.get(fila_seleccionada);
+
+					try {
+						Vehiculo vs = services.getVehiculo(Conexion.obtener(), v.getIdVehiculos());
+						String ruta = vs.getRuta();
+						imagen = new ImageIcon(ruta);
+						imagenLabel.setIcon(imagen);
+						System.out.println(ruta);
+
+					} catch (ClassNotFoundException | SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else {
+					cambiarImgPorDefecto();
+				}
+			}
 		});
-		
-//		imagenActual = "images/vehiculos/cochePredeterminado.jpg";
-//
-//		// ...
-//
-//		// Crear el escuchador de eventos para la tabla
-//		ListSelectionModel selectionModel = jtableP.getSelectionModel();
-//		selectionModel.addListSelectionListener(new ListSelectionListener() {
-//		    public void valueChanged(ListSelectionEvent event) {
-//		        // Verificar que la selección sea válida y no esté ajustándose
-//		        if (!event.getValueIsAdjusting() && jtableP.getSelectedRow() != -1) {
-//		            // Obtener la fila seleccionada
-//		            int selectedRow = jtableP.getSelectedRow();
-//		            
-//		            // Obtener el valor de la columna "ruta" de la fila seleccionada
-//		            Object ruta = jtableP.getValueAt(selectedRow, 7);
-//		            
-//		            // Utilizar la ruta obtenida para actualizar la imagen solo si es diferente a la actual
-//		            String nuevaRutaImagen = ruta.toString();
-//		            if (!nuevaRutaImagen.equals(imagenActual)) {
-//		                imagenActual = nuevaRutaImagen;
-//		                
-//		                // Actualizar la etiqueta de imagen con la nueva imagen
-//		                ImageIcon nuevaImagen = new ImageIcon(imagenActual);
-//		                imagenLabel.setIcon(nuevaImagen);
-//		            }
-//		        }
-//		    }
-//		});
-		
+
 		scrollPane.setViewportView(jtableP);
 
 		btnSalir = new JButton("");
@@ -234,22 +211,8 @@ public class VentanaCatalogo extends JFrame {
 		btnVerCyV.setBounds(59, 367, 50, 50);
 		contentPane.add(btnVerCyV);
 		btnVerCyV.addActionListener(manejador);
-	
 
 		showVehiculos();
-
-	}
-	
-	private String determinarRutaImagen(Object idVehiculos) {
-	    int id = Integer.parseInt(idVehiculos.toString());
-	    
-	    if (id == 1) {
-	        return "images/vehiculos/BMW iX3.jpg";
-	    } else if (id == 2) {
-	        return "images/vehiculos/junior.jpg";
-	    } else {
-	        return "images/vehiculos/cochePredeterminado.jpg";
-	    }
 	}
 
 	public Vehiculo getVehiculo(Connection conexion) throws SQLException {
@@ -337,8 +300,8 @@ public class VentanaCatalogo extends JFrame {
 					v = vehiculo.get(fila_seleccionada);
 					try {
 						Vehiculo vs = services.getVehiculo(Conexion.obtener(), v.getIdVehiculos());
-						
-						if(vs.getAlquilado()==1) {
+
+						if (vs.getAlquilado() == 1) {
 							int id = v.getIdVehiculos();
 							System.out.println(id);
 							System.out.println(vs.getAlquilado());
@@ -348,50 +311,55 @@ public class VentanaCatalogo extends JFrame {
 
 							CyV.setVisible(true);
 							dispose();
-						}else {
+						} else {
 							JOptionPane.showMessageDialog(VentanaCatalogo.this, "El vehiculo no esta alquilado");
-							
 						}
-						
 					} catch (ClassNotFoundException | SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-						
 				} else {
 					JOptionPane.showMessageDialog(null, "Por favor seleccione una fila.", "Aviso",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
-
 		}
+	}
 
+	public void cambiarImgPorDefecto() {
+		imagen = new ImageIcon(imagenActual);
+		imagenLabel.setIcon(imagen);
 	}
 
 	private void refrescarTabla(String fil) {
 		try {
 			if (fil.equalsIgnoreCase("--")) {
 				showVehiculos();
+				cambiarImgPorDefecto();
 			} else if (fil.equalsIgnoreCase("Marca")) {
 				showVehiculosMarca();
+				cambiarImgPorDefecto();
 			} else if (fil.equalsIgnoreCase("Modelo")) {
 				showVehiculosModelo();
+				cambiarImgPorDefecto();
 			} else if (fil.equalsIgnoreCase("Anyo")) {
 				showVehiculosAnyo();
+				cambiarImgPorDefecto();
 			} else if (fil.equalsIgnoreCase("Color")) {
 				showVehiculosColor();
+				cambiarImgPorDefecto();
 			} else if (fil.equalsIgnoreCase("Precio")) {
 				showVehiculosPrecio();
+				cambiarImgPorDefecto();
 			} else if (fil.equalsIgnoreCase("idFabricante")) {
 				showVehiculosidFabricante();
-			}else if(fil.equalsIgnoreCase("Mºnumero comentarios")) {
-				ComentariosVehiculos cv=new ComentariosVehiculos();
-        		cv.setVisible(true);
-                cv.setLocationRelativeTo(null);
-                dispose();
+				cambiarImgPorDefecto();
+			} else if (fil.equalsIgnoreCase("Mºnumero comentarios")) {
+				ComentariosVehiculos cv = new ComentariosVehiculos();
+				cv.setVisible(true);
+				cv.setLocationRelativeTo(null);
+				dispose();
 			}
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			JOptionPane.showMessageDialog(this, "Error al actualizar la tabla");
 		}
 

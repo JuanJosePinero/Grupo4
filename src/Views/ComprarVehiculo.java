@@ -26,6 +26,8 @@ public class ComprarVehiculo extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtModelo, txtMarca, txtAnyo, txtColor, txtPrecio, txtIdFabricante;
+	private JLabel imagenLabel;
+	private ImageIcon imagen;
 	private final VehiculoService services = new VehiculoService();
 	private final ClientService serviceCliente = new ClientService();
 	private final VentaService servicesventa = new VentaService();
@@ -34,11 +36,10 @@ public class ComprarVehiculo extends JFrame {
 	private final Cliente cliente;
 //	private final Login login;
 	private JButton btnComprar, btnCancelar;
-	private JLabel lblImagen;
 	private String ruta;
 	private JLabel lblFechaHora;
 	private JTextField textFechaHora;
-	private int numeroCompras = 0;;
+	private int numeroCompras = 0;
 
 	/**
 	 * Create the frame.
@@ -47,13 +48,16 @@ public class ComprarVehiculo extends JFrame {
 	public ComprarVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 		initComponents();
-		txtModelo.setText(this.vehiculo.getModelo());
-		txtMarca.setText(this.vehiculo.getMarca());
-		txtAnyo.setText(String.valueOf(this.vehiculo.getAnyo()));
-		txtColor.setText(this.vehiculo.getColor());
-		txtPrecio.setText(String.valueOf(this.vehiculo.getPrecio()));
-		txtIdFabricante.setText(String.valueOf(this.vehiculo.getIdFabricante()));
-		ruta = this.vehiculo.getRuta();
+		txtModelo.setText(vehiculo.getModelo());
+		txtMarca.setText(vehiculo.getMarca());
+		txtAnyo.setText(String.valueOf(vehiculo.getAnyo()));
+		txtColor.setText(vehiculo.getColor());
+		txtPrecio.setText(String.valueOf(vehiculo.getPrecio()));
+		txtIdFabricante.setText(String.valueOf(vehiculo.getIdFabricante()));
+		ruta = vehiculo.getRuta();
+		imagenLabel.setText(ruta);
+
+		
 		this.venta = new Venta();
 		this.cliente = new Cliente();
 
@@ -70,7 +74,7 @@ public class ComprarVehiculo extends JFrame {
 		setTitle("Coche seleccionado Para la Compra");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(150, 240, 402, 480);
+		setBounds(150, 240, 734, 348);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -139,25 +143,21 @@ public class ComprarVehiculo extends JFrame {
 		ManejadorJButton manejador = new ManejadorJButton();
 
 		btnComprar = new JButton("Comprar");
-		btnComprar.setBounds(48, 404, 117, 29);
+		btnComprar.setBounds(96, 253, 193, 26);
 		btnComprar.addActionListener(manejador);
 		contentPane.add(btnComprar);
 
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(240, 404, 117, 29);
+		btnCancelar.setBounds(400, 253, 193, 26);
 		btnCancelar.addActionListener(manejador);
 		contentPane.add(btnCancelar);
 
-		lblImagen = new JLabel("Imagen:");
-		lblImagen.setBounds(30, 247, 80, 16);
-		contentPane.add(lblImagen);
-
 		JPanel panel = new JPanel();
-		panel.setBounds(130, 242, 190, 92);
+		panel.setBounds(340, 26, 350, 200);
 		contentPane.add(panel);
 
-		JLabel imagenLabel = new JLabel();
-		ImageIcon imagen = new ImageIcon(vehiculo.getRuta());
+		imagenLabel = new JLabel();
+		imagen = new ImageIcon(vehiculo.getRuta());
 		imagenLabel.setIcon(imagen);
 		panel.add(imagenLabel);
 
