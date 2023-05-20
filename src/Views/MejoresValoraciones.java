@@ -72,10 +72,10 @@ public class MejoresValoraciones extends JFrame {
 	        JButton btnFiltrar = new JButton("Volver");
 	        btnFiltrar.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
-	            	dispose();
-	                FiltrarVehiculo fv=new FiltrarVehiculo();
-	                fv.setVisible(true);
-	                fv.setLocationRelativeTo(null);
+	            	VentanaCatalogo vc=new VentanaCatalogo();
+	        		vc.setVisible(true);
+	        		vc.setLocationRelativeTo(null);
+	        		dispose();
 	            }
 	        });
 	        btnFiltrar.setBounds(162, 230, 89, 23);

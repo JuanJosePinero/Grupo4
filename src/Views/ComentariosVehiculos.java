@@ -67,9 +67,10 @@ public class ComentariosVehiculos extends JFrame {
         JButton btnFiltrar = new JButton("Volver");
         btnFiltrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                FiltrarVehiculo fv=new FiltrarVehiculo();
-                fv.setVisible(true);
-                fv.setLocationRelativeTo(null);
+            	VentanaCatalogo vc=new VentanaCatalogo();
+        		vc.setVisible(true);
+        		vc.setLocationRelativeTo(null);
+        		dispose();
             }
         });
         btnFiltrar.setBounds(175, 230, 89, 23);

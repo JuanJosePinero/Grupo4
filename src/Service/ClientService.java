@@ -131,12 +131,14 @@ public class ClientService {
 	 public List<Cliente> getComprasCliente(Connection conexion) throws SQLException {
 		    List<Cliente> cliente = new ArrayList<>();
 		    try {
-		        PreparedStatement consulta = conexion.prepareStatement("SELECT cliente.idCliente, cliente.nombre, cliente.direccion, cliente.rol, cliente.usuario, cliente.contasenya, cliente.Activar, COUNT(venta.idCliente) AS numCompras,  COUNT(alquiler.idCliente) AS numAlquileres " +
-		                "FROM " + this.tabla +
-		                " LEFT JOIN venta ON cliente.idCliente = venta.idCliente " +
-		                "WHERE cliente.rol = 'Cliente' " +
-		                "GROUP BY cliente.idCliente " +
-		                "ORDER BY numCompras DESC");
+		    	 PreparedStatement consulta = conexion.prepareStatement(
+		    	            "SELECT cliente.idCliente, cliente.nombre, cliente.direccion, cliente.rol, cliente.usuario, cliente.contasenya, cliente.Activar, " +
+		    	            "(SELECT COUNT(idCliente) FROM venta WHERE venta.idCliente = cliente.idCliente) AS numCompras, " +
+		    	            "(SELECT COUNT(idCliente) FROM alquiler WHERE alquiler.idCliente = cliente.idCliente) AS numAlquileres " +
+		    	            "FROM " + this.tabla +
+		    	            " WHERE cliente.rol = 'Cliente' " +
+		    	            "ORDER BY numCompras DESC"
+		    	        );
 		        ResultSet resultado = consulta.executeQuery();
 		        while (resultado.next()) {
 		            int id = resultado.getInt("idCliente");

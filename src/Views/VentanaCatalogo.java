@@ -119,13 +119,13 @@ public class VentanaCatalogo extends JFrame {
 		
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setIcon(new ImageIcon("images/lupa.png"));
-		lblNewLabel_3.setBounds(10, 84, 22, 22);
+		lblNewLabel_3.setBounds(8, 58, 22, 22);
 		contentPane.add(lblNewLabel_3);
 		
 
-		String[] filtros = { "--", "Marca", "Modelo", "Anyo", "Color", "Precio", "idFabricante" };
+		String[] filtros = { "--", "Marca", "Modelo", "Anyo", "Color", "Precio", "idFabricante","Mejores Valoraciones","Mºnumero comentarios" };
 		filtro = new JComboBox(filtros);
-		filtro.setBounds(31, 84, 135, 22);
+		filtro.setBounds(8, 84, 180, 22);
 		contentPane.add(filtro);
 		manejadorcombo mancombo = new manejadorcombo();
 		filtro.addItemListener(mancombo);
@@ -216,22 +216,22 @@ public class VentanaCatalogo extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("Si quieres ver los comentarios");
 		lblNewLabel.setFont(new Font("Segoe UI Semibold", Font.BOLD, 11));
-		lblNewLabel.setBounds(10, 232, 180, 22);
+		lblNewLabel.setBounds(8, 291, 180, 22);
 		contentPane.add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("y la valoración de los vehiculos");
 		lblNewLabel_1.setFont(new Font("Segoe UI Semibold", Font.BOLD, 11));
-		lblNewLabel_1.setBounds(10, 253, 180, 22);
+		lblNewLabel_1.setBounds(8, 312, 180, 22);
 		contentPane.add(lblNewLabel_1);
 
 		JLabel lblNewLabel_2 = new JLabel("Por favor, pulse aquí");
 		lblNewLabel_2.setFont(new Font("Segoe UI Semibold", Font.BOLD, 11));
-		lblNewLabel_2.setBounds(10, 273, 164, 22);
+		lblNewLabel_2.setBounds(8, 332, 164, 22);
 		contentPane.add(lblNewLabel_2);
 
 		btnVerCyV = new JButton("");
 		btnVerCyV.setIcon(new ImageIcon("images/comentsYvalorac.png"));
-		btnVerCyV.setBounds(59, 305, 50, 50);
+		btnVerCyV.setBounds(59, 367, 50, 50);
 		contentPane.add(btnVerCyV);
 		btnVerCyV.addActionListener(manejador);
 	
@@ -384,6 +384,11 @@ public class VentanaCatalogo extends JFrame {
 				showVehiculosPrecio();
 			} else if (fil.equalsIgnoreCase("idFabricante")) {
 				showVehiculosidFabricante();
+			}else if(fil.equalsIgnoreCase("Mºnumero comentarios")) {
+				ComentariosVehiculos cv=new ComentariosVehiculos();
+        		cv.setVisible(true);
+                cv.setLocationRelativeTo(null);
+                dispose();
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
