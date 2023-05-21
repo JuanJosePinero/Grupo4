@@ -167,7 +167,6 @@ public class ComprarVehiculo extends JFrame {
 			String ruta = vs.getRuta();
 			imagen = new ImageIcon(ruta);
 			imagenLabel.setIcon(imagen);
-			System.out.println(ruta);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}

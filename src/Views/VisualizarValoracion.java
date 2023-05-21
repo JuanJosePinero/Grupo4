@@ -15,26 +15,23 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
-import Service.ComentarioService;
 import Service.Conexion;
 import Service.ValoracionService;
-import models.Comentario;
 import models.Valoracion;
 
-public class VisualizarValoranFabri extends JFrame {
+public class VisualizarValoracion extends JFrame {
 
 	private JPanel contentPane;
 	private static JTextArea textArea;
 	private final static ValoracionService service = new ValoracionService();
 	private List <Valoracion> valoracion = new ArrayList<>();
-	private JButton btnVolver;
+	private JButton btnVolver, btnAgregarV;
 
 
-	public VisualizarValoranFabri() {
+	public VisualizarValoracion() {
 		super("Bandeja de valoraciones");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 276);
+		setBounds(100, 100, 450, 268);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,8 +64,18 @@ public class VisualizarValoranFabri extends JFrame {
 		});
 		btnVolver.setBounds(385, 9, 40, 21);
 		contentPane.add(btnVolver);
+		
+		btnAgregarV = new JButton("Agregar Valoracion");
+		btnAgregarV.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AgregarValoracion av = new AgregarValoracion();
+				av.setVisible(true);
+				dispose();
+			}
+		});
+		btnAgregarV.setBounds(10, 208, 414, 21);
+		contentPane.add(btnAgregarV);
 	}
-	
 	public static void Comentario() {
 		try {
 			List<Valoracion> datos = service.getAllValoracionId(Conexion.obtener());
@@ -83,6 +90,7 @@ public class VisualizarValoranFabri extends JFrame {
 			textArea.setText(coment);
 		
 		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

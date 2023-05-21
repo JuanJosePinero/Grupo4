@@ -8,13 +8,14 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class VerComentsYValorac extends JFrame {
 
 	private JPanel contentPane;
-	private JButton btnVerComentarios,btnVerValoraciones;
+	private JButton btnVerComentarios, btnVerValoraciones, btnCancelar;
 	/**
 	 * Launch the application.
 	 */
@@ -37,7 +38,7 @@ public class VerComentsYValorac extends JFrame {
 	public VerComentsYValorac() {
 		super("Comentarios y Valoraciones de los Vehiculas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 437, 175);
+		setBounds(100, 100, 438, 202);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -56,11 +57,22 @@ public class VerComentsYValorac extends JFrame {
 		btnVerComentarios.setBounds(36, 68, 137, 41);
 		contentPane.add(btnVerComentarios);
 		
-		
 		btnVerValoraciones = new JButton("Ver Valoraciones");
 		btnVerValoraciones.setBounds(257, 71, 137, 38);
 		contentPane.add(btnVerValoraciones);
-	
+		
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Calcelando...", "Aviso", JOptionPane.ERROR_MESSAGE);
+				VentanaCatalogo vc = new VentanaCatalogo();
+				vc.setVisible(true);
+				dispose();
+			}
+		});
+		btnCancelar.setBounds(171, 134, 90, 21);
+		contentPane.add(btnCancelar);
+		
 		ManejadorJButton mb = new ManejadorJButton();
 		btnVerComentarios.addActionListener(mb);
 		btnVerValoraciones.addActionListener(mb);
@@ -78,15 +90,10 @@ public class VerComentsYValorac extends JFrame {
 				dispose();
 				
 			}else if(o == btnVerValoraciones) {
-				AgregarValoracion av = new AgregarValoracion();
-				av.setVisible(true);
+				VisualizarValoracion vv = new VisualizarValoracion();
+				vv.setVisible(true);
 				dispose();
-				
 			}
-			
 		}
-		
 	}
-	
-
 }

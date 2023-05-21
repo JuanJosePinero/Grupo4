@@ -300,8 +300,6 @@ public class VentanaCatalogo extends JFrame {
 
 						if (vs.getAlquilado() == 1) {
 							int id = v.getIdVehiculos();
-							System.out.println(id);
-							System.out.println(vs.getAlquilado());
 							Login.setidVehiculo(id);
 
 							VerComentsYValorac CyV = new VerComentsYValorac();

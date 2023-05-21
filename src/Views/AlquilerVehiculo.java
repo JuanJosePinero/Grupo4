@@ -84,6 +84,7 @@ public class AlquilerVehiculo extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(150, 240, 727, 368);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -224,7 +225,6 @@ public class AlquilerVehiculo extends JFrame {
 			String ruta = vs.getRuta();
 			imagen = new ImageIcon(ruta);
 			imagenLabel.setIcon(imagen);
-			System.out.println(ruta);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
@@ -239,25 +239,25 @@ public class AlquilerVehiculo extends JFrame {
 			if (o == btnAlquiler) {
 				try {
 					Vehiculo v = services.getVehiculo(Conexion.obtener(), vehiculo.getIdVehiculos());
-//					if(v.getAlquilado()==1) {
-//						JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Este coche ya ha sido alquilado", "Aviso", JOptionPane.ERROR_MESSAGE);
-//						AlquilerVehiculo.this.dispose();
-//						VentanaCatalogo vc = new VentanaCatalogo();
-//						vc.setVisible(true);
-//						vc.setLocationRelativeTo(null);
-//					}else 
-					if (v.getAlquilado() >= 0) {
-						updateAlquiler();
-						updateVehiculo();
-						updateCliente();
-						
-
-						AlquilerVehiculo.this.dispose();
-						JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Se ha realizado el alquiler", "Aviso",
-								JOptionPane.INFORMATION_MESSAGE);
+					if (v.getComprado() == 1) {
+						JOptionPane.showMessageDialog(AlquilerVehiculo.this, "No se puede realizar el alquiler",
+								"Aviso", JOptionPane.INFORMATION_MESSAGE);
 						VentanaCatalogo vc = new VentanaCatalogo();
 						vc.setVisible(true);
-						vc.setLocationRelativeTo(null);
+						dispose();
+					} else {
+						if (v.getAlquilado() >= 0) {
+							updateAlquiler();
+							updateVehiculo();
+							updateCliente();
+
+							AlquilerVehiculo.this.dispose();
+							JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Se ha realizado el alquiler", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							VentanaCatalogo vc = new VentanaCatalogo();
+							vc.setVisible(true);
+							vc.setLocationRelativeTo(null);
+						}
 					}
 				} catch (ClassNotFoundException | SQLException e2) {
 					e2.printStackTrace();
@@ -272,60 +272,66 @@ public class AlquilerVehiculo extends JFrame {
 				vc.setLocationRelativeTo(null);
 			}
 		}
+
 		public void updateAlquiler() {
-			
+
 			try {
-				Integer idAlquiler = alquiler.getIdAlquiler();
-				Integer idVehiculo = vehiculo.getIdVehiculos();
-				Integer idCliente = Login.getidClienteLogin();
+			    Integer idAlquiler = alquiler.getIdAlquiler();
+			    Integer idVehiculo = vehiculo.getIdVehiculos();
+			    Integer idCliente = Login.getidClienteLogin();
 
-				String fechaIncstr = (String) fechainicio.getSelectedItem();
-				String fechaFinstr = (String) fechaF.getSelectedItem();
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-				java.util.Date fechaUtil = formatter.parse(fechaIncstr);
-				java.util.Date fechaUtil2 = formatter.parse(fechaFinstr);
-				Date fechaInc = new Date(fechaUtil.getTime());
-				Date fechaFin = new Date(fechaUtil2.getTime());
+			    String fechaIncstr = (String) fechainicio.getSelectedItem();
+			    String fechaFinstr = (String) fechaF.getSelectedItem();
 
-				alquiler.setIdAlquiler(idAlquiler);
-				alquiler.setIdVehiculo(idVehiculo);
-				alquiler.setIdCliente(idCliente);
-				alquiler.setFechaInic(fechaInc);
-				alquiler.setFechFin(fechaFin);
-				
-				if (!VehiculoDisponible(idVehiculo, fechaInc, fechaFin)) {
-					JOptionPane.showMessageDialog(AlquilerVehiculo.this,
-							"No se puede alquilar el vehiculo en esta fecha", "Aviso",
-							JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-				service.save(Conexion.obtener(), alquiler);
+			    if (fechaIncstr == null || fechaIncstr.isEmpty() || fechaFinstr == null || fechaFinstr.isEmpty()) {
+			        JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Seleccione una fecha", "Aviso", JOptionPane.WARNING_MESSAGE);
+			        return;
+			    }else {
+
+			    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			    java.util.Date fechaUtil = formatter.parse(fechaIncstr);
+			    java.util.Date fechaUtil2 = formatter.parse(fechaFinstr);
+			    Date fechaInc = new Date(fechaUtil.getTime());
+			    Date fechaFin = new Date(fechaUtil2.getTime());
+
+			    alquiler.setIdAlquiler(idAlquiler);
+			    alquiler.setIdVehiculo(idVehiculo);
+			    alquiler.setIdCliente(idCliente);
+			    alquiler.setFechaInic(fechaInc);
+			    alquiler.setFechFin(fechaFin);
+
+			    if (!VehiculoDisponible(idVehiculo, fechaInc, fechaFin)) {
+			        JOptionPane.showMessageDialog(AlquilerVehiculo.this, "No se puede alquilar el vehiculo en esta fecha", "Aviso", JOptionPane.ERROR_MESSAGE);
+			        return;
+			    }
+			    service.save(Conexion.obtener(), alquiler);
+			    }
 			} catch (ClassNotFoundException | SQLException | ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
 			}
+
 		}
-		
+
 		public void updateVehiculo() {
 			Vehiculo v;
 			try {
 				v = services.getVehiculo(Conexion.obtener(), vehiculo.getIdVehiculos());
 				vehiculo.setRuta(v.getRuta());
 				vehiculo.setAlquilado(1);
-				vehiculo.setComprado(0);
 				services.save(Conexion.obtener(), vehiculo);
 			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
+
 		}
+
 		public void updateCliente() {
 
 			Cliente datos;
 			try {
 				datos = serviceCliente.getClienteId(Conexion.obtener(), Login.getidClienteLogin());
-				
+
 				String nom = datos.getNombre();
 				String dir = datos.getDireccion();
 				String rol = datos.getRol();
@@ -345,16 +351,14 @@ public class AlquilerVehiculo extends JFrame {
 				cliente.setActivar(act);
 				cliente.setNumCompras(numC);
 				cliente.setNumAlquileres(numA);
-				
+
 				serviceCliente.save(Conexion.obtener(), cliente);
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-			
 		}
-		
 
 		private boolean VehiculoDisponible(Integer idVehiculo, Date fechaInc, Date fechaFin) {
 			try {
@@ -373,9 +377,7 @@ public class AlquilerVehiculo extends JFrame {
 					return count == 0;
 				}
 			} catch (SQLException ex) {
-				System.out.println(ex.getMessage());
 			} catch (ClassNotFoundException ex) {
-				System.out.println(ex);
 			}
 			return true;
 		}
@@ -388,8 +390,5 @@ public class AlquilerVehiculo extends JFrame {
 	public static Integer getestaAlquilado() {
 		return estaAlquilado;
 	}
-	
-	
-	
-	
+
 }
