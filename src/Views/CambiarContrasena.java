@@ -86,9 +86,6 @@ public class CambiarContrasena extends JFrame {
 			CContP = new JPasswordField();
 			CContP.setBounds(200, 98, 145, 20);
 			contentPane.add(CContP);
-			
-			
-			System.out.println(datos.getNombreUsuario());
 		} catch (ClassNotFoundException | SQLException e) {
 		}
 		
