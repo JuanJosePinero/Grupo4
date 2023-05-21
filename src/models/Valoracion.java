@@ -1,19 +1,9 @@
 package models;
 
 public class Valoracion {
-	private Integer idCliente,idVehiculo;
+
+	private Integer idCliente, idVehiculo;
 	private int valoracion;
-
-	public Valoracion() {
-		super();
-	}
-
-	public Valoracion(Integer idCliente, Integer idVehiculo, int valoracion) {
-		super();
-		this.idCliente = idCliente;
-		this.idVehiculo = idVehiculo;
-		this.valoracion = valoracion;
-	}
 
 	public Integer getIdCliente() {
 		return idCliente;
@@ -39,10 +29,20 @@ public class Valoracion {
 		this.valoracion = valoracion;
 	}
 
+	public Valoracion() {
+		super();
+	}
+
+	public Valoracion(Integer idCliente, Integer idVehiculo, int valoracion) {
+		super();
+		this.idCliente = idCliente;
+		this.idVehiculo = idVehiculo;
+		this.valoracion = valoracion;
+	}
+
 	@Override
 	public String toString() {
 		return "Valoracion [idCliente=" + idCliente + ", idVehiculo=" + idVehiculo + ", valoracion=" + valoracion + "]";
 	}
-	
-	
+
 }

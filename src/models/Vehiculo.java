@@ -1,8 +1,7 @@
 package models;
 
-
 public class Vehiculo {
-	
+
 	private Integer idVehiculos;
 	private String modelo, marca;
 	private int anyo;
@@ -10,96 +9,8 @@ public class Vehiculo {
 	private float precio;
 	private Integer idFabricante;
 	private String ruta;
-	private int comprado=0,alquilado=0,numcomentarios=0,numvaloraciones=0;
-	
-	public Vehiculo(String modelo, String marca, int anyo, String color, float precio) {
-		super();
-		this.modelo = modelo;
-		this.marca = marca;
-		this.anyo = anyo;
-		this.color = color;
-		this.precio = precio;
-	}
+	private int comprado = 0, alquilado = 0, numcomentarios = 0, numvaloraciones = 0;
 
-	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
-			Integer idFabricante, String ruta, int comprado, int alquilado, int numcomentarios, int numvaloraciones) {
-		super();
-		this.idVehiculos = idVehiculos;
-		this.modelo = modelo;
-		this.marca = marca;
-		this.anyo = anyo;
-		this.color = color;
-		this.precio = precio;
-		this.idFabricante = idFabricante;
-		this.ruta = ruta;
-		this.comprado = comprado;
-		this.alquilado = alquilado;
-		this.numcomentarios = numcomentarios;
-		this.numvaloraciones = numvaloraciones;
-	}
-
-	public Vehiculo() {
-		super();
-	}
-
-	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
-			Integer idFabricante, String ruta) {
-		super();
-		this.idVehiculos = idVehiculos;
-		this.modelo = modelo;
-		this.marca = marca;
-		this.anyo = anyo;
-		this.color = color;
-		this.precio = precio;
-		this.idFabricante = idFabricante;
-		this.ruta = ruta;
-	}
-
-
-
-	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
-			Integer idFabricante, int compra, int alqui) {
-		super();
-		this.idVehiculos = idVehiculos;
-		this.modelo = modelo;
-		this.marca = marca;
-		this.anyo = anyo;
-		this.color = color;
-		this.precio = precio;
-		this.idFabricante = idFabricante;
-		this.comprado=compra;
-		this.alquilado = alqui;
-	}
-
-
-
-	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
-			Integer idFabricante) {
-		super();
-		this.idVehiculos = idVehiculos;
-		this.modelo = modelo;
-		this.marca = marca;
-		this.anyo = anyo;
-		this.color = color;
-		this.precio = precio;
-		this.idFabricante = idFabricante;
-	}
-	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
-			Integer idFabricante, int compra, int alqui,int numcom,int numval) {
-		super();
-		this.idVehiculos = idVehiculos;
-		this.modelo = modelo;
-		this.marca = marca;
-		this.anyo = anyo;
-		this.color = color;
-		this.precio = precio;
-		this.idFabricante = idFabricante;
-		this.comprado=compra;
-		this.alquilado = alqui;
-		this.numcomentarios=numcom;
-		this.numvaloraciones=numval;
-	}
-	
 	public String getRuta() {
 		return ruta;
 	}
@@ -163,6 +74,7 @@ public class Vehiculo {
 	public void setIdFabricante(Integer idFabricante) {
 		this.idFabricante = idFabricante;
 	}
+
 	public int getComprado() {
 		return comprado;
 	}
@@ -170,7 +82,7 @@ public class Vehiculo {
 	public void setComprado(int comprado) {
 		this.comprado = comprado;
 	}
-	
+
 	public int getNumcomentarios() {
 		return numcomentarios;
 	}
@@ -186,7 +98,6 @@ public class Vehiculo {
 	public void setAlquilado(int alquilado) {
 		this.alquilado = alquilado;
 	}
-	
 
 	public int getNumvaloraciones() {
 		return numvaloraciones;
@@ -196,10 +107,95 @@ public class Vehiculo {
 		this.numvaloraciones = numvaloraciones;
 	}
 
+	public Vehiculo() {
+		super();
+	}
+
+	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
+			Integer idFabricante, String ruta) {
+		super();
+		this.idVehiculos = idVehiculos;
+		this.modelo = modelo;
+		this.marca = marca;
+		this.anyo = anyo;
+		this.color = color;
+		this.precio = precio;
+		this.idFabricante = idFabricante;
+		this.ruta = ruta;
+	}
+
+	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
+			Integer idFabricante, int compra, int alqui) {
+		super();
+		this.idVehiculos = idVehiculos;
+		this.modelo = modelo;
+		this.marca = marca;
+		this.anyo = anyo;
+		this.color = color;
+		this.precio = precio;
+		this.idFabricante = idFabricante;
+		this.comprado = compra;
+		this.alquilado = alqui;
+	}
+
+	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
+			Integer idFabricante) {
+		super();
+		this.idVehiculos = idVehiculos;
+		this.modelo = modelo;
+		this.marca = marca;
+		this.anyo = anyo;
+		this.color = color;
+		this.precio = precio;
+		this.idFabricante = idFabricante;
+	}
+
+	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
+			Integer idFabricante, int compra, int alqui, int numcom, int numval) {
+		super();
+		this.idVehiculos = idVehiculos;
+		this.modelo = modelo;
+		this.marca = marca;
+		this.anyo = anyo;
+		this.color = color;
+		this.precio = precio;
+		this.idFabricante = idFabricante;
+		this.comprado = compra;
+		this.alquilado = alqui;
+		this.numcomentarios = numcom;
+		this.numvaloraciones = numval;
+	}
+
+	public Vehiculo(String modelo, String marca, int anyo, String color, float precio) {
+		super();
+		this.modelo = modelo;
+		this.marca = marca;
+		this.anyo = anyo;
+		this.color = color;
+		this.precio = precio;
+	}
+
+	public Vehiculo(Integer idVehiculos, String modelo, String marca, int anyo, String color, float precio,
+			Integer idFabricante, String ruta, int comprado, int alquilado, int numcomentarios, int numvaloraciones) {
+		super();
+		this.idVehiculos = idVehiculos;
+		this.modelo = modelo;
+		this.marca = marca;
+		this.anyo = anyo;
+		this.color = color;
+		this.precio = precio;
+		this.idFabricante = idFabricante;
+		this.ruta = ruta;
+		this.comprado = comprado;
+		this.alquilado = alquilado;
+		this.numcomentarios = numcomentarios;
+		this.numvaloraciones = numvaloraciones;
+	}
+
 	@Override
 	public String toString() {
 		return "Vehiculo [idVehiculos=" + idVehiculos + ", modelo=" + modelo + ", marca=" + marca + ", anyo=" + anyo
 				+ ", color=" + color + ", precio=" + precio + ", idFabricante=" + idFabricante + ", ruta=" + ruta + "]";
 	}
-	
+
 }

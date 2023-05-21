@@ -3,21 +3,9 @@ package models;
 import java.sql.Date;
 
 public class Venta {
-	
-	private Integer idVenta,idCliente,idVehiculo;
-	private Date fechaHora;
-	
-	public Venta() {
-		super();
-	}
 
-	public Venta(Integer idVenta, Integer idCliente, Integer idVehiculo, Date fechaHora) {
-		super();
-		this.idVenta = idVenta;
-		this.idCliente = idCliente;
-		this.idVehiculo = idVehiculo;
-		this.fechaHora = fechaHora;
-	}
+	private Integer idVenta, idCliente, idVehiculo;
+	private Date fechaHora;
 
 	public Integer getIdVenta() {
 		return idVenta;
@@ -51,15 +39,22 @@ public class Venta {
 		this.fechaHora = fechaHora;
 	}
 
+	public Venta() {
+		super();
+	}
+
+	public Venta(Integer idVenta, Integer idCliente, Integer idVehiculo, Date fechaHora) {
+		super();
+		this.idVenta = idVenta;
+		this.idCliente = idCliente;
+		this.idVehiculo = idVehiculo;
+		this.fechaHora = fechaHora;
+	}
+
 	@Override
 	public String toString() {
 		return "Venta [idVenta=" + idVenta + ", idCliente=" + idCliente + ", idVehiculo=" + idVehiculo + ", fechaHora="
 				+ fechaHora + "]";
 	}
-	
-	
-	
-	
-	
-	
+
 }

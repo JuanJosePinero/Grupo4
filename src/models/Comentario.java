@@ -4,17 +4,6 @@ public class Comentario {
 
 	private Integer idCliente, idVehiculo;
 	private String comentario;
-	
-	public Comentario() {
-		super();
-	}
-
-	public Comentario(Integer idCliente, Integer idVehiculo, String comentario) {
-		super();
-		this.idCliente = idCliente;
-		this.idVehiculo = idVehiculo;
-		this.comentario = comentario;
-	}
 
 	public Integer getIdCliente() {
 		return idCliente;
@@ -37,6 +26,17 @@ public class Comentario {
 	}
 
 	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+	public Comentario() {
+		super();
+	}
+
+	public Comentario(Integer idCliente, Integer idVehiculo, String comentario) {
+		super();
+		this.idCliente = idCliente;
+		this.idVehiculo = idVehiculo;
 		this.comentario = comentario;
 	}
 

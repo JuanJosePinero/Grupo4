@@ -1,24 +1,11 @@
 package models;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 public class Alquiler {
-	private Integer idAlquiler,idCliente,idVehiculo;
-	private Date fechaInic,fechFin;
 	
-	public Alquiler() {
-		super();
-	}
-
-	public Alquiler(Integer idVenta, Integer idCliente, Integer idVehiculo, Date fechaInic, Date fechaFin) {
-		super();
-		this.idAlquiler = idVenta;
-		this.idCliente = idCliente;
-		this.idVehiculo = idVehiculo;
-		this.fechaInic = fechaInic;
-		this.fechFin = fechaFin;
-	}
+	private Integer idAlquiler, idCliente, idVehiculo;
+	private Date fechaInic, fechFin;
 
 	public Integer getIdAlquiler() {
 		return idAlquiler;
@@ -60,14 +47,23 @@ public class Alquiler {
 		this.fechFin = fechFin;
 	}
 
+	public Alquiler() {
+		super();
+	}
+
+	public Alquiler(Integer idVenta, Integer idCliente, Integer idVehiculo, Date fechaInic, Date fechaFin) {
+		super();
+		this.idAlquiler = idVenta;
+		this.idCliente = idCliente;
+		this.idVehiculo = idVehiculo;
+		this.fechaInic = fechaInic;
+		this.fechFin = fechaFin;
+	}
+
 	@Override
 	public String toString() {
 		return "Alquiler [idVenta=" + idAlquiler + ", idCliente=" + idCliente + ", idVehiculo=" + idVehiculo
 				+ ", fechaInic=" + fechaInic + ", fechFin=" + fechFin + "]";
 	}
-	
-	
-	
-	
 
 }
