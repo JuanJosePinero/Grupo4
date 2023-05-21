@@ -40,10 +40,6 @@ public class ComprarVehiculo extends JFrame {
 	private int numeroCompras = 0;
 	private int id;
 
-	/**
-	 * Create the frame.
-	 */
-
 	public ComprarVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 		this.venta = new Venta();

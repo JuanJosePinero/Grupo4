@@ -17,25 +17,6 @@ public class ComprasRealizadas extends JFrame {
 	private JPanel contentPane;
 	private JButton btnVerAlquileres, btnVerCompras, btnCancelar;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ComprasRealizadas frame = new ComprasRealizadas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public ComprasRealizadas() {
 		super("Compras Realizadas por el Cliente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

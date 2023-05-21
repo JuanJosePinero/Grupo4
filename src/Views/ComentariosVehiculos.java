@@ -30,19 +30,6 @@ public class ComentariosVehiculos extends JFrame {
 	private final VehiculoComentarioService service = new VehiculoComentarioService();
 	private List<VehiculoConComentarios> vehiculos;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ComentariosVehiculos window = new ComentariosVehiculos();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	public ComentariosVehiculos() {
 		initialize();
 		vehiculos = new ArrayList<>();

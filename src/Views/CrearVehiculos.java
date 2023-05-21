@@ -32,10 +32,6 @@ public class CrearVehiculos extends JFrame {
 	private JFileChooser fileChooser;
 	private String ruta;
 
-	/**
-	 * Create the frame.
-	 */
-
 	public CrearVehiculos(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 		initComponents();
