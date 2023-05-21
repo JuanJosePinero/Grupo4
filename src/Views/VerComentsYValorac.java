@@ -17,22 +17,6 @@ public class VerComentsYValorac extends JFrame {
 	private JPanel contentPane;
 	private JButton btnVerComentarios, btnVerValoraciones, btnCancelar;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VerComentsYValorac frame = new VerComentsYValorac();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public VerComentsYValorac() {
 		super("Comentarios y Valoraciones de los Vehiculas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

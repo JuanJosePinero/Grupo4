@@ -51,22 +51,9 @@ public class VentanaCatalogo extends JFrame {
 	private String rutaNueva;
 	private ImageIcon imagen;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaCatalogo frame = new VentanaCatalogo();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public VentanaCatalogo() {
 		super("Catalogo de Coches de nuestra Empresa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

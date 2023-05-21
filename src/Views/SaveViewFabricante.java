@@ -31,9 +31,7 @@ public class SaveViewFabricante extends JFrame {
 	private JTextField UsuarioT;
 	private JTextField ContraseñaT;
 
-	/**
-	 * Create the frame.
-	 */
+	
 
 	public SaveViewFabricante(Fabricante fabricante) {
 		this.fabricante = fabricante;

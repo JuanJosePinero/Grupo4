@@ -41,18 +41,6 @@ public class MejoresValoraciones extends JFrame {
 	private final VehiculoService services = new VehiculoService();
 	private JTable table;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MejoresValoraciones window = new MejoresValoraciones();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	public MejoresValoraciones() {
 		initialize();
 		vehiculosval = new ArrayList<>();
