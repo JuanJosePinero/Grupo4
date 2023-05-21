@@ -8,6 +8,41 @@ public class Cliente {
     private String rol;
     private String nombreUsuario,contrasena;
 	public int activar, numCompras, numAlquileres,numComentarios,numValoraciones;
+	
+	public Cliente(String nombre, String direccion, String rol, String nombreUsuario,
+			String contrasena,int activar) {
+		super();
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.rol = rol;
+		this.nombreUsuario = nombreUsuario;
+		this.contrasena = contrasena;
+		this.activar=activar;
+	}
+	
+	public Cliente(Integer idClientes, String nombre, String direccion, String rol, String nombreUsuario,
+			String contrasena,int activar) {
+		super();
+		this.idClientes = idClientes;
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.rol = rol;
+		this.nombreUsuario = nombreUsuario;
+		this.contrasena = contrasena;
+		this.activar=activar;
+	}
+	
+	public Cliente(Integer idClientes, String nombre, String direccion, String nombreUsuario,
+			String contrasena, int numComentarios, int numValoraciones) {
+		super();
+		this.idClientes = idClientes;
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.nombreUsuario = nombreUsuario;
+		this.contrasena = contrasena;
+		this.numComentarios = numComentarios;
+		this.numValoraciones = numValoraciones;
+	}
 
 	public Cliente(Integer idClientes, String nombre, String direccion, String rol, String nombreUsuario,
 			String contrasena, int activar, int numCompras) {
@@ -106,7 +141,6 @@ public class Cliente {
 		this.contrasena = contrasena;
 	}
 	
-	
 	public int getActivar() {
 		return activar;
 	}
@@ -128,37 +162,18 @@ public class Cliente {
 	public void setNumValoracion(int numValoraciones) {
 		this.numValoraciones = numValoraciones;
 	}
-	public Cliente(String nombre, String direccion, String rol, String nombreUsuario,
-			String contrasena,int activar) {
-		super();
-		this.idClientes = idClientes;
-		this.nombre = nombre;
-		this.direccion = direccion;
-		this.rol = rol;
-		this.nombreUsuario = nombreUsuario;
-		this.contrasena = contrasena;
-		this.activar=activar;
-	}
-	
-	public Cliente(Integer idClientes, String nombre, String direccion, String rol, String nombreUsuario,
-			String contrasena,int activar) {
-		super();
-		this.idClientes = idClientes;
-		this.nombre = nombre;
-		this.direccion = direccion;
-		this.rol = rol;
-		this.nombreUsuario = nombreUsuario;
-		this.contrasena = contrasena;
-		this.activar=activar;
-	}
 
 	public Cliente() {
 		super();
 	}
+
 	@Override
 	public String toString() {
 		return "Cliente [idClientes=" + idClientes + ", nombre=" + nombre + ", direccion=" + direccion + ", rol=" + rol
-				+ ", nombreUsuario=" + nombreUsuario + ", contrasena=" + contrasena + "]";
+				+ ", nombreUsuario=" + nombreUsuario + ", contrasena=" + contrasena + ", activar=" + activar
+				+ ", numCompras=" + numCompras + ", numAlquileres=" + numAlquileres + ", numComentarios="
+				+ numComentarios + ", numValoraciones=" + numValoraciones + "]";
 	}
+	
 
 }

@@ -87,6 +87,7 @@ public class ListViewClientes extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
 			int filaS = jtableP.getSelectedRow();
+			try {
 			String nombreCliente = jtableP.getValueAt(filaS, 0).toString();
 
 			Cliente c = Clientes.get(filaS);
@@ -124,8 +125,6 @@ public class ListViewClientes extends JFrame {
 								ListViewClientes lvc = new ListViewClientes();
 
 							} catch (ClassNotFoundException | SQLException e1) {
-
-								e1.printStackTrace();
 							}
 
 						} else {
@@ -160,7 +159,7 @@ public class ListViewClientes extends JFrame {
 
 						}
 					} else {
-						JOptionPane.showMessageDialog(null, "Por favor seleccione una fila.");
+						JOptionPane.showMessageDialog(null, "Por favor seleccione una fila.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 					}
 				} else if (c.getRol().equals("Fabricante")) {
 
@@ -175,11 +174,13 @@ public class ListViewClientes extends JFrame {
 					dispose();
 
 				} catch (ClassNotFoundException | SQLException e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Por favor seleccione una fila.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 				}
 
 			}
-
+			}catch (Exception a) {
+				JOptionPane.showMessageDialog(null, "Por favor seleccione una fila.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 
 	}
@@ -217,7 +218,7 @@ public class ListViewClientes extends JFrame {
 
 	private void showCliente() {
 		try {
-			this.Clientes = this.services.getAllCliente(Conexion.obtener());
+			this.Clientes = this.services.getAllRolCliente(Conexion.obtener());
 
 			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
@@ -306,7 +307,7 @@ public class ListViewClientes extends JFrame {
 
 			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar",
+			}, new String[] { "id", "Nombre", "Direccion", "Usuario", "Contasenya", "Activar",
 					"Valoraciones" }));
 			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 			dtm.setRowCount(0);
@@ -314,7 +315,7 @@ public class ListViewClientes extends JFrame {
 			for (int i = 0; i < this.Clientes.size(); i++) {
 
 				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
-						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
+						this.Clientes.get(i).getDireccion(), 
 						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
 						this.Clientes.get(i).getActivar(), this.Clientes.get(i).getNumValoraciones() });
 			}
@@ -334,17 +335,17 @@ public class ListViewClientes extends JFrame {
 
 			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-			}, new String[] { "id", "Nombre", "Direccion", "Rol", "Usuario", "Contasenya", "Activar",
-					"Comentarios" }));
+			}, new String[] { "id", "Nombre", "Direccion", "Usuario", "Contasenya", "Activar",
+					"Comentarios", "Valoraciones" }));
 			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
 			dtm.setRowCount(0);
 
 			for (int i = 0; i < this.Clientes.size(); i++) {
 
 				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
-						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
+						this.Clientes.get(i).getDireccion(), 
 						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
-						this.Clientes.get(i).getActivar(), this.Clientes.get(i).getNumComentarios() });
+						this.Clientes.get(i).getActivar(), this.Clientes.get(i).getNumComentarios(), this.Clientes.get(i).getNumValoraciones() });
 			}
 
 		} catch (SQLException ex) {

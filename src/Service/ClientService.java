@@ -198,33 +198,34 @@ public class ClientService {
 	}
 
 	public List<Cliente> getComentariosCliente(Connection conexion) throws SQLException {
-		List<Cliente> cliente = new ArrayList<>();
-		try {
-			PreparedStatement consulta = conexion.prepareStatement(
-					"SELECT cliente.idCliente, cliente.nombre, cliente.direccion, cliente.rol, cliente.usuario, cliente.contasenya, cliente.Activar, "
-							+ "(SELECT COUNT(comentario) FROM comentario WHERE comentario.idCliente = cliente.idCliente) AS numcomentarios, "
-							+ "(SELECT COUNT(valoracion) FROM valoracion WHERE valoracion.idCliente = cliente.idCliente) AS numvaloraciones "
-							+ "FROM " + this.tabla + " WHERE cliente.rol = 'Cliente' " + "GROUP BY cliente.idCliente "
-							+ "ORDER BY numcomentarios DESC");
-			ResultSet resultado = consulta.executeQuery();
-			while (resultado.next()) {
-				int id = resultado.getInt("idCliente");
-				String nombre = resultado.getString("nombre");
-				String direccion = resultado.getString("direccion");
-				String rol = resultado.getString("rol");
-				String usuario = resultado.getString("usuario");
-				String contrasenya = resultado.getString("contasenya");
-				int activar = resultado.getInt("Activar");
-				int numcomentarios = resultado.getInt("numcomentarios");
-				int numvaloraciones = resultado.getInt("numvaloraciones");
-				cliente.add(new Cliente(id, nombre, direccion, rol, usuario, contrasenya, activar, numcomentarios,
-						numvaloraciones));
-				System.out.println(numcomentarios);
-			}
-		} catch (SQLException ex) {
-			throw new SQLException(ex);
-		}
-		return cliente;
+	    List<Cliente> cliente = new ArrayList<>();
+	    try {
+	        PreparedStatement consulta = conexion.prepareStatement(
+	                "SELECT cliente.idCliente, cliente.nombre, cliente.direccion, cliente.rol, cliente.usuario, cliente.contasenya,  cliente.numcomentarios, cliente.numvaloraciones,"
+	                        + "(SELECT COUNT(*) FROM comentario WHERE comentario.idCliente = cliente.idCliente) AS numcomentarios, "
+	                        + "(SELECT COUNT(valoracion) FROM valoracion WHERE valoracion.idCliente = cliente.idCliente) AS numvaloraciones "
+	                        + "FROM " + this.tabla + " WHERE cliente.rol = 'Cliente' " + "GROUP BY cliente.idCliente "
+	                        + "ORDER BY numcomentarios DESC");
+	        ResultSet resultado = consulta.executeQuery();
+	        while (resultado.next()) {
+	            int id = resultado.getInt("idCliente");
+	            String nombre = resultado.getString("nombre");
+	            String direccion = resultado.getString("direccion");
+	            String rol = resultado.getString("rol");
+	            String usuario = resultado.getString("usuario");
+	            String contrasenya = resultado.getString("contasenya");
+	            int numcomentarios = resultado.getInt("numcomentarios");
+	            int numvaloraciones = resultado.getInt("numvaloraciones");
+	            cliente.add(new Cliente(id, nombre, direccion, rol, usuario, contrasenya, numcomentarios,
+	                    numvaloraciones));
+	            for (Cliente cliente2 : cliente) {
+					System.out.println(cliente2);
+				}
+	        }
+	    } catch (SQLException ex) {
+	        throw new SQLException(ex);
+	    }
+	    return cliente;
 	}
 
 	public List<Cliente> getValoracionesCliente(Connection conexion) throws SQLException {
@@ -233,7 +234,7 @@ public class ClientService {
 			PreparedStatement consulta = conexion.prepareStatement(
 					"SELECT cliente.idCliente, cliente.nombre, cliente.direccion, cliente.rol, cliente.usuario, cliente.contasenya, cliente.Activar, "
 							+ "(SELECT COUNT(comentario) FROM comentario WHERE comentario.idCliente = cliente.idCliente) AS numcomentarios, "
-							+ "(SELECT COUNT(valoracion) FROM valoracion WHERE valoracion.idCliente = cliente.idCliente) AS numvaloraciones "
+							+ "(SELECT COUNT(*) FROM valoracion WHERE valoracion.idCliente = cliente.idCliente) AS numvaloraciones "
 							+ "FROM " + this.tabla + " WHERE cliente.rol = 'Cliente' " + "GROUP BY cliente.idCliente "
 							+ "ORDER BY numvaloraciones DESC");
 			ResultSet resultado = consulta.executeQuery();
