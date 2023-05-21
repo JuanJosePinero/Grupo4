@@ -12,7 +12,7 @@ import models.Vehiculo;
 
 public class ClientService {
 	private final String tabla = "cliente";
-
+	//Hola
 	public void save(Connection conexion, Cliente cliente) throws SQLException {
 		try {
 			PreparedStatement consulta;
