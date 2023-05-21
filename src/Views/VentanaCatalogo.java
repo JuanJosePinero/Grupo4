@@ -353,8 +353,6 @@ public class VentanaCatalogo extends JFrame {
 			} else if (fil.equalsIgnoreCase("Mºnumero comentarios")) {
 				ComentariosVehiculos cv = new ComentariosVehiculos();
 				cv.setVisible(true);
-				cv.setLocationRelativeTo(null);
-				dispose();
 			}else if(fil.equalsIgnoreCase("Mejores Valoraciones")) {
 				MejoresValoraciones mv=new MejoresValoraciones();
 				mv.setVisible(true);

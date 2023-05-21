@@ -197,11 +197,7 @@ public class CreacionUsuario extends JFrame {
 				dispose();
 			} else if (b.equals(ConfrimarB)) {
 				crearUsuario();
-				Login l = new Login();
-				dispose();
-
-			
-
+				
 			}
 		}
 	}
@@ -241,6 +237,8 @@ public class CreacionUsuario extends JFrame {
 					services.save(Conexion.obtener(), c);
 					JOptionPane.showMessageDialog(CreacionUsuario.this, "Usuario creado", "Aviso",
 							JOptionPane.INFORMATION_MESSAGE);
+					Login l = new Login();
+					dispose();
 					
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
@@ -255,7 +253,6 @@ public class CreacionUsuario extends JFrame {
 	public void Contraseña() {
 		char[] user = ContraseñaP.getPassword();
 		String userS = new String(user);
-		System.out.println(userS);
 		if (userS.matches("[A-Z].*[0-9].*")) {
 			if (userS.length() <= 5) {
 				txtFuerte.setVisible(false);
@@ -306,7 +303,6 @@ public class CreacionUsuario extends JFrame {
 
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

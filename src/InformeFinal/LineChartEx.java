@@ -67,16 +67,13 @@ public class LineChartEx extends JFrame {
     private XYDataset createDataset() {
         var series = new XYSeries("2023");
 
-        // Conexión a la base de datos
         try {
             Connection conn = c.obtener();
             java.sql.Statement statement = conn.createStatement();
 
-            // Consulta para obtener el número de ventas por mes
             String query = "SELECT MONTH(fechaHora) AS mes, COUNT(*) AS sales FROM Venta WHERE YEAR(fechaHora) = 2023 GROUP BY MONTH(fechaHora)";
             ResultSet resultSet = statement.executeQuery(query);
 
-            // Agregar los datos a la serie
             while (resultSet.next()) {
                 int month = resultSet.getInt("mes");
                 int sales = resultSet.getInt("sales");

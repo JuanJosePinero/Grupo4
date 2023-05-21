@@ -154,9 +154,7 @@ public class Login extends JFrame {
 								ca.setVisible(true);
 								dispose();
 							} else if (datos.getRol().equals("Cliente")) {
-								System.out.println(activar);
 								if (activar == 1) {
-									System.out.println(datos.activar);
 									setnombreUser(datos.getNombreUsuario());
 									setidClienteLogin(datos.getIdClientes());
 

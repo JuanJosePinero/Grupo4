@@ -9,21 +9,17 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 
 import Service.Conexion;
 import Service.VehiculoComentarioService;
 import models.Comentario;
-import models.Vehiculo;
 import models.VehiculoConComentarios;
-import javax.swing.JTextArea;
-import javax.swing.JLabel;
 
 public class ComentariosVehiculos extends JFrame {
 
@@ -63,16 +59,10 @@ public class ComentariosVehiculos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
         
-
+		ManejadorJButton manejador = new ManejadorJButton();
+		
         JButton btnFiltrar = new JButton("Volver");
-        btnFiltrar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	VentanaCatalogo vc=new VentanaCatalogo();
-        		vc.setVisible(true);
-        		vc.setLocationRelativeTo(null);
-        		dispose();
-            }
-        });
+        btnFiltrar.addActionListener(manejador);
         btnFiltrar.setBounds(175, 230, 89, 23);
         contentPane.add(btnFiltrar);
         
@@ -91,13 +81,25 @@ public class ComentariosVehiculos extends JFrame {
       
         setVisible(true);
     } 
+    
+    private class ManejadorJButton implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(null, "Volviendo...", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+    		dispose();	
+		}
+    	
+    }
+    
+    
     private void showVehiculoscoment() {
         
             try {
 				vehiculos = service.getVehiculosConComentarios(Conexion.obtener());
 				String coments="";
 				for (VehiculoConComentarios veh : vehiculos) {
-					coments+="----------\n \""+veh.getVehiculo().getMarca()+" "+veh.getVehiculo().getModelo()+"\" \n "+"comentarios: \n";
+					coments+="----------------------------------------------------------------------------\n \""+veh.getVehiculo().getMarca()+" "+veh.getVehiculo().getModelo()+"\" \n "+"comentarios: \n";
 					for (Comentario com : veh.getComentarios()) {
 						coments+="\n"+com.getComentario()+"\n";
 						txtcoments.setText(coments);
