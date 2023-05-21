@@ -355,6 +355,11 @@ public class VentanaCatalogo extends JFrame {
 				cv.setVisible(true);
 				cv.setLocationRelativeTo(null);
 				dispose();
+			}else if(fil.equalsIgnoreCase("Mejores Valoraciones")) {
+				MejoresValoraciones mv=new MejoresValoraciones();
+				mv.setVisible(true);
+				mv.setLocationRelativeTo(null);
+				dispose();
 			}
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(this, "Error al actualizar la tabla", "Aviso", JOptionPane.ERROR_MESSAGE);
