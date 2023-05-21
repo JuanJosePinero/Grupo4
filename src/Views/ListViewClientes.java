@@ -106,6 +106,8 @@ public class ListViewClientes extends JFrame {
 								String cont = datos.getContrasena();
 								Integer id = datos.getIdClientes();
 								int act = 0;
+								int coments = datos.getNumComentarios();
+								int valorac = datos.getNumValoracion();
 
 								datos.setIdClientes(id);
 								datos.setNombre(nom);
@@ -114,6 +116,8 @@ public class ListViewClientes extends JFrame {
 								datos.setNombreUsuario(user);
 								datos.setContrasena(cont);
 								datos.setActivar(act);
+								datos.setNumComentarios(coments);
+								datos.setNumValoracion(valorac);
 
 								services.save(Conexion.obtener(), datos);
 								dispose();

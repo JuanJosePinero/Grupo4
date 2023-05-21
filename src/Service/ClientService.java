@@ -219,6 +219,7 @@ public class ClientService {
 				int numvaloraciones = resultado.getInt("numvaloraciones");
 				cliente.add(new Cliente(id, nombre, direccion, rol, usuario, contrasenya, activar, numcomentarios,
 						numvaloraciones));
+				System.out.println(numcomentarios);
 			}
 		} catch (SQLException ex) {
 			throw new SQLException(ex);
@@ -249,6 +250,7 @@ public class ClientService {
 				cliente.add(new Cliente(id, nombre, direccion, rol, usuario, contrasenya, activar, numcomentarios,
 						numvaloraciones));
 			}
+			
 		} catch (SQLException ex) {
 			throw new SQLException(ex);
 		}

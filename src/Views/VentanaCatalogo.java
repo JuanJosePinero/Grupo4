@@ -15,7 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -28,7 +27,6 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
 import Service.Conexion;
 import Service.VehiculoService;
 import models.Comentario;
@@ -104,7 +102,7 @@ public class VentanaCatalogo extends JFrame {
 		contentPane.add(btnVerCompras);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(200, 58, 375, 250);
+		panel.setBounds(200, 58, 375, 208);
 		contentPane.add(panel);
 
 		imagenLabel = new JLabel();
@@ -144,11 +142,11 @@ public class VentanaCatalogo extends JFrame {
 		}
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(200, 319, 376, 174);
+		scrollPane.setBounds(200, 276, 376, 217);
 		contentPane.add(scrollPane);
 
 		dtm = new DefaultTableModel(new Object[][] {},
-				new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" });
+				new String[] { "NºVehiculo", "Modelo", "Marca", "Anyo", "Color", "Precio"});
 		jtableP = new JTable(dtm) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -172,7 +170,6 @@ public class VentanaCatalogo extends JFrame {
 						String ruta = vs.getRuta();
 						imagen = new ImageIcon(ruta);
 						imagenLabel.setIcon(imagen);
-						System.out.println(ruta);
 
 					} catch (ClassNotFoundException | SQLException e1) {
 						e1.printStackTrace();
@@ -358,14 +355,9 @@ public class VentanaCatalogo extends JFrame {
 				cv.setVisible(true);
 				cv.setLocationRelativeTo(null);
 				dispose();
-			}else if (fil.equalsIgnoreCase("Mejores Valoraciones")) {
-				MejoresValoraciones mv=new MejoresValoraciones();
-				mv.setVisible(true);
-				mv.setLocationRelativeTo(null);
-				dispose();
 			}
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(this, "Error al actualizar la tabla");
+			JOptionPane.showMessageDialog(this, "Error al actualizar la tabla", "Aviso", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -381,10 +373,8 @@ public class VentanaCatalogo extends JFrame {
 						vehiculo.get(i).getPrecio(), vehiculo.get(i).getIdFabricante() });
 			}
 		} catch (SQLException ex) {
-			System.out.println(ex.getMessage());
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		} catch (ClassNotFoundException ex) {
-			System.out.println(ex);
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		}
 
@@ -401,10 +391,8 @@ public class VentanaCatalogo extends JFrame {
 						vehiculo.get(i).getPrecio(), vehiculo.get(i).getIdFabricante() });
 			}
 		} catch (SQLException ex) {
-			System.out.println(ex.getMessage());
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		} catch (ClassNotFoundException ex) {
-			System.out.println(ex);
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		}
 
@@ -421,10 +409,8 @@ public class VentanaCatalogo extends JFrame {
 						vehiculo.get(i).getPrecio(), vehiculo.get(i).getIdFabricante() });
 			}
 		} catch (SQLException ex) {
-			System.out.println(ex.getMessage());
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		} catch (ClassNotFoundException ex) {
-			System.out.println(ex);
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		}
 
@@ -441,10 +427,8 @@ public class VentanaCatalogo extends JFrame {
 						vehiculo.get(i).getPrecio(), vehiculo.get(i).getIdFabricante() });
 			}
 		} catch (SQLException ex) {
-			System.out.println(ex.getMessage());
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		} catch (ClassNotFoundException ex) {
-			System.out.println(ex);
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		}
 
@@ -461,10 +445,8 @@ public class VentanaCatalogo extends JFrame {
 						vehiculo.get(i).getPrecio(), vehiculo.get(i).getIdFabricante() });
 			}
 		} catch (SQLException ex) {
-			System.out.println(ex.getMessage());
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		} catch (ClassNotFoundException ex) {
-			System.out.println(ex);
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		}
 
@@ -481,10 +463,8 @@ public class VentanaCatalogo extends JFrame {
 						vehiculo.get(i).getPrecio(), vehiculo.get(i).getIdFabricante() });
 			}
 		} catch (SQLException ex) {
-			System.out.println(ex.getMessage());
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		} catch (ClassNotFoundException ex) {
-			System.out.println(ex);
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		}
 	}
@@ -500,10 +480,8 @@ public class VentanaCatalogo extends JFrame {
 						vehiculo.get(i).getPrecio(), vehiculo.get(i).getIdFabricante() });
 			}
 		} catch (SQLException ex) {
-			System.out.println(ex.getMessage());
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		} catch (ClassNotFoundException ex) {
-			System.out.println(ex);
 			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 		}
 	}
