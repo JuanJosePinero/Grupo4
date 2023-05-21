@@ -23,6 +23,7 @@ import models.Vehiculo;
 public class HistorialAlquileresCliente extends JFrame{
 	private JPanel contentPane;
 	private JTable jtableP;
+	private JButton BotonVolver;
 	private final AlquilerService servicealq=new AlquilerService();
 	private final VehiculoService services = new VehiculoService();
 	private List<Alquiler> alquiler;
@@ -37,7 +38,7 @@ public class HistorialAlquileresCliente extends JFrame{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		JButton BotonVolver = new JButton("Volver");
+		BotonVolver = new JButton("Volver");
 		BotonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Volviendo a la ventana del catalogo", "Aviso", JOptionPane.ERROR_MESSAGE);
@@ -81,13 +82,9 @@ public class HistorialAlquileresCliente extends JFrame{
 	            		this.alquiler.get(i).getFechFin(), this.alquiler.get(i).getIdVehiculo()});
 	        }
 	    } catch (SQLException ex) {
-	        System.out.println(ex.getMessage());
 	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 	    } catch (ClassNotFoundException ex) {
-	        System.out.println(ex);
 	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 	    }
 	}
 }
-
-

@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 public class ComprasRealizadas extends JFrame {
 
 	private JPanel contentPane;
-	private JButton btnVerAlquileres,btnVerCompras;
+	private JButton btnVerAlquileres,btnVerCompras, btnCancelar;
 	/**
 	 * Launch the application.
 	 */
@@ -63,7 +63,7 @@ public class ComprasRealizadas extends JFrame {
 		contentPane.add(btnVerCompras);
 		btnVerCompras.addActionListener(man);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Calcelando...", "Calcel", JOptionPane.ERROR_MESSAGE);
@@ -90,6 +90,5 @@ public class ComprasRealizadas extends JFrame {
 				dispose();
 			}
 		}
-		
 	}
 }

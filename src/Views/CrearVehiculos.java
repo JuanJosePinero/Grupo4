@@ -44,8 +44,8 @@ public class CrearVehiculos extends JFrame {
 		txtAnyo.setText(String.valueOf(this.vehiculo.getAnyo()));
 		txtColor.setText(this.vehiculo.getColor());
 		txtPrecio.setText(String.valueOf(this.vehiculo.getPrecio()));
-		
 	}
+	
 	public CrearVehiculos() {
 		this.vehiculo=new Vehiculo();
 		initComponents();
@@ -138,12 +138,12 @@ public class CrearVehiculos extends JFrame {
 		btnImagen.setBounds(170, 242, 94, 74);
 		btnImagen.addActionListener(manejador);
 		contentPane.add(btnImagen);
-		
 	}
 	
 	private void seleccionarImagen() {
         JFileChooser fileChooser = new JFileChooser();
         int resultado = fileChooser.showOpenDialog(this);
+        
         if (resultado == JFileChooser.APPROVE_OPTION) {
             File archivo = fileChooser.getSelectedFile();
             String rutaImagen = archivo.getAbsolutePath();
@@ -177,14 +177,12 @@ public class CrearVehiculos extends JFrame {
 				vehiculo.setIdFabricante(idFabricante);
 				vehiculo.setRuta(ruta);
 				
-				
 				try {
 					services.save(Conexion.obtener(), vehiculo);
 					CrearVehiculos.this.dispose();
 					VisualizarVehiculosCrear vista = new VisualizarVehiculosCrear();
 					vista.setVisible(true);
-					vista.setLocationRelativeTo(null);
-					
+					vista.setLocationRelativeTo(null);	
 				} catch (SQLException ex) {
 					System.out.println(ex.getMessage());
 					JOptionPane.showMessageDialog(CrearVehiculos.this, "Ha surgido un error y no se ha podido guardar el registro.");
@@ -196,7 +194,6 @@ public class CrearVehiculos extends JFrame {
 				dispose();
 				VisualizarVehiculosCrear vista = new VisualizarVehiculosCrear();
 				vista.setVisible(true);
-				
 				vista.setLocationRelativeTo(null);
 			}else if(o == btnImagen) {
 				fileChooser = new JFileChooser();
@@ -222,14 +219,10 @@ public class CrearVehiculos extends JFrame {
 						btnImagen.setIcon(new ImageIcon(img));
 						ruta = selectedFile.getAbsolutePath();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
-					}
-			     
+					} 
 			    }
 			}
-			
 		}
-		
 	}
 }

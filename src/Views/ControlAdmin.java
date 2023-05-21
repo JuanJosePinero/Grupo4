@@ -19,7 +19,6 @@ public class ControlAdmin extends JFrame {
 	private JButton Cliente,Fabricante,Vehiculos;
 	private JButton VolverB;
 
-
 	public ControlAdmin() {
 		super("Control Admin");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,8 +77,7 @@ public class ControlAdmin extends JFrame {
 		manejadorAction ma = new manejadorAction();
 		Cliente.addActionListener(ma);
 		Fabricante.addActionListener(ma);
-		Vehiculos.addActionListener(ma);
-			
+		Vehiculos.addActionListener(ma);	
 	}
 	
 	private class manejadorAction implements ActionListener {
@@ -87,6 +85,7 @@ public class ControlAdmin extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton j = (JButton) e.getSource();
+			
 			if(j.equals(Cliente)) {
 				ListViewClientes lvc = new ListViewClientes();
 				lvc.setVisible(true);

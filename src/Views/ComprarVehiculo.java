@@ -157,7 +157,6 @@ public class ComprarVehiculo extends JFrame {
 		imagen = new ImageIcon(vehiculo.getRuta());
 		imagenLabel.setIcon(imagen);
 		panel.add(imagenLabel);
-
 	}
 	
 	public void getRuta() {
@@ -170,7 +169,6 @@ public class ComprarVehiculo extends JFrame {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	private class ManejadorJButton implements ActionListener {
@@ -182,7 +180,6 @@ public class ComprarVehiculo extends JFrame {
 			if (o == btnComprar) {
 				try {
 					Vehiculo v=services.getVehiculo(Conexion.obtener(),vehiculo.getIdVehiculos());
-					
 					
 					if(v.getComprado()==1) {
 						JOptionPane.showMessageDialog(ComprarVehiculo.this, "este coche ya ha sido comprado");
@@ -205,10 +202,7 @@ public class ComprarVehiculo extends JFrame {
 						vehiculo.setComprado(1);
 						vehiculo.setAlquilado(0);
 						
-					
 						Cliente datos = serviceCliente.getClienteId(Conexion.obtener(),Login.getidClienteLogin());
-						
-						
 						
 						String nom = datos.getNombre();
 						String dir = datos.getDireccion();
@@ -230,8 +224,6 @@ public class ComprarVehiculo extends JFrame {
 						cliente.setNumCompras(numC);
 						cliente.setNumAlquileres(numA);
 						
-						
-		
 					servicesventa.save(Conexion.obtener(), venta);
 					serviceCliente.save(Conexion.obtener(), cliente);
 
@@ -242,9 +234,7 @@ public class ComprarVehiculo extends JFrame {
 					vc.setVisible(true);
 					vc.setLocationRelativeTo(null);
 					}
-
 				} catch (ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			} else if (o == btnCancelar) {

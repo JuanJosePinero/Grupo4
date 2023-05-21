@@ -38,7 +38,6 @@ public class CreacionUsuario extends JFrame {
 	private JLabel lblNewLabel;
 
 	public CreacionUsuario() {
-
 		setTitle("Creacion de Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 451, 342);
@@ -197,12 +196,11 @@ public class CreacionUsuario extends JFrame {
 				dispose();
 			} else if (b.equals(ConfrimarB)) {
 				crearUsuario();
-				
 			}
 		}
 	}
+
 	public void crearUsuario() {
-		
 		String nombre = NombreT.getText();
 		String apellido = ApellidoT.getText();
 		String nombreC = nombre + " " + apellido;
@@ -239,26 +237,22 @@ public class CreacionUsuario extends JFrame {
 							JOptionPane.INFORMATION_MESSAGE);
 					Login l = new Login();
 					dispose();
-					
 				} catch (ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
 			}
 		}
-		
 	}
 
 	public void Contraseña() {
 		char[] user = ContraseñaP.getPassword();
 		String userS = new String(user);
+		
 		if (userS.matches("[A-Z].*[0-9].*")) {
 			if (userS.length() <= 5) {
 				txtFuerte.setVisible(false);
 				txtModerado.setVisible(false);
 				txtDebil.setVisible(true);
-
 			} else if (userS.length() > 5 && userS.length() < 8) {
 				txtDebil.setVisible(false);
 				txtFuerte.setVisible(false);
@@ -267,13 +261,10 @@ public class CreacionUsuario extends JFrame {
 				txtDebil.setVisible(false);
 				txtModerado.setVisible(false);
 				txtFuerte.setVisible(true);
-
 			}
-
 		} else
 			JOptionPane.showMessageDialog(CreacionUsuario.this,
-					"La contraseña debe empezar por Mayuscula y contener un numero");
-
+					"La contraseña debe empezar por Mayuscula y contener un numero", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public void confrimarContraseña() {
@@ -284,15 +275,12 @@ public class CreacionUsuario extends JFrame {
 		String contS = new String(cont);
 
 		if (contS.equals(userS)) {
-
 		} else
 			JOptionPane.showMessageDialog(CreacionUsuario.this, "Las contraseñas no coinciden", contS,
 					JOptionPane.ERROR_MESSAGE, null);
-
 	}
 
 	public boolean comprabarCliente() {
-
 		try {
 			user = services.getAllCliente(Conexion.obtener());
 			String usuario = UsuarioT.getText();
@@ -300,12 +288,10 @@ public class CreacionUsuario extends JFrame {
 				if (c.getNombreUsuario().equals(usuario)) {
 					return false;
 				}
-
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-
 		return true;
 	}
 }

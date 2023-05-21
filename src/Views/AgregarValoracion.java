@@ -92,7 +92,6 @@ public class AgregarValoracion extends JFrame {
 		btnCancelar.addActionListener(manejador);
 		btnCancelar.setBounds(251, 224, 98, 21);
 		contentPane.add(btnCancelar);
-		
 	}
 
 	public class ManejadorJButton implements ActionListener {
@@ -103,20 +102,15 @@ public class AgregarValoracion extends JFrame {
 			JButton boton=(JButton) e.getSource();
 		
 			 if (o == btnEnviar) {
-				 
 				 updateValoracion();
 				 updateVehiculo();
 				 updateCliente();
-				//Error cuando ya hay un comentario te da un mensaje de que ya existe y este
+				 
 				JOptionPane.showMessageDialog(null, "La valoracion ha sido Enviada con exito!", "Envio completado",
 				JOptionPane.INFORMATION_MESSAGE);
 				VentanaCatalogo vc = new VentanaCatalogo();
 				vc.setVisible(true);
 				dispose();
-				
-				
-
-				
 				
 			} else if (o == btnCancelar) {
 				JOptionPane.showMessageDialog(null, "La valoracion ha sido Cancelado!", "Cancelar valoracion",
@@ -128,17 +122,13 @@ public class AgregarValoracion extends JFrame {
 			} else if (o == btnEst) {
 				for (int i = 1; i < 6; i++) {
 					if(btnEstrellaList.get(i) == btnEst) {
-					System.out.println(i);
-					
 					break;
 					}
 				}
-
 			}
-
 		}
-
 	}
+	
 	private class manejadorestrella implements ActionListener {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
@@ -148,29 +138,22 @@ public class AgregarValoracion extends JFrame {
 	            int valorEstrella = Integer.parseInt(partes[0]);
 	            valoracion = valorEstrella;
 
-	            System.out.println("Valor de la estrella: " + valorEstrella);
-
 	            ImageIcon nuevaImagen = new ImageIcon("images/estrellas/estrella" + valorEstrella + ".png");
 	            etiquetaImagen.setIcon(nuevaImagen);
 	    }
 	}
 	
 	public void updateValoracion() {
-		
-		
 		try {
 			Valoracion v = new Valoracion();
 			v.setIdCliente(Login.getidClienteLogin());
 			v.setIdVehiculo(Login.getidVehiculo());
-			System.out.println(valoracion);
 			v.setValoracion(valoracion);
 			service.save(Conexion.obtener(), v);
-		
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public void updateVehiculo() {
@@ -187,6 +170,7 @@ public class AgregarValoracion extends JFrame {
 			int alqui = vehiculo.getAlquilado();
 			int numC = (vehiculo.getNumcomentarios());
 			int numVa = (vehiculo.getNumvaloraciones()+1);
+			
 			vehiculo.setIdVehiculos(Login.getidVehiculo());
 			vehiculo.setModelo(mod);
 			vehiculo.setMarca(mar);
@@ -200,12 +184,10 @@ public class AgregarValoracion extends JFrame {
 			vehiculo.setNumcomentarios(numC);
 			vehiculo.setNumvaloraciones(numVa);
 			serviceveh.save(Conexion.obtener(), vehiculo);
-			
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public void updateCliente() {
@@ -240,7 +222,5 @@ public class AgregarValoracion extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
 }

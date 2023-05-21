@@ -28,9 +28,6 @@ public class CambiarContrasena extends JFrame {
 	private JPasswordField ContP;
 	private JPasswordField CContP;
 
-
-
-	
 	public CambiarContrasena() {
 		super("Cambio de contraseña");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,7 +75,6 @@ public class CambiarContrasena extends JFrame {
 		ConfirmarB.addActionListener(ma);
 		CancelarB.addActionListener(ma);
 		
-		
 		try {
 			Cliente datos = services.getClienteId(Conexion.obtener(), id);
 			UsuarioT.setText(datos.getNombreUsuario());
@@ -87,13 +83,11 @@ public class CambiarContrasena extends JFrame {
 			CContP.setBounds(200, 98, 145, 20);
 			contentPane.add(CContP);
 		} catch (ClassNotFoundException | SQLException e) {
-		}
-		
-		
-		
+		}	
 	}
+	
 	private class manejadorAction implements ActionListener{
-
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
@@ -116,27 +110,18 @@ public class CambiarContrasena extends JFrame {
 					services.save(Conexion.obtener(), datos);
 					
 					ListViewClientes lvc = new ListViewClientes();
-					
 					dispose();
 					}
 					
 				} catch (ClassNotFoundException | SQLException e1) {
 					System.out.println("selecciona una fila");
 				}
-				
-		
-				
-				
-				
+					
 			}else if(b.equals(CancelarB)) {
 				JOptionPane.showMessageDialog(null, "Ha cancelado el cambio de contraseña", "Cancelar", JOptionPane.ERROR_MESSAGE);
 				ListViewClientes lvc = new ListViewClientes();
-				dispose();
-				
+				dispose();	
 			}
-			
 		}
-		
 	}
-	
 }

@@ -137,12 +137,12 @@ public class FabricCreaVehiculo extends JFrame {
 		btnImagen.setBounds(170, 242, 94, 74);
 		btnImagen.addActionListener(manejador);
 		contentPane.add(btnImagen);
-		
 	}
 	
 	private void seleccionarImagen() {
         JFileChooser fileChooser = new JFileChooser();
         int resultado = fileChooser.showOpenDialog(this);
+        
         if (resultado == JFileChooser.APPROVE_OPTION) {
             File archivo = fileChooser.getSelectedFile();
             String rutaImagen = archivo.getAbsolutePath();
@@ -175,7 +175,6 @@ public class FabricCreaVehiculo extends JFrame {
 				vehiculo.setPrecio(precio);
 				vehiculo.setIdFabricante(idFabricante);
 				vehiculo.setRuta(ruta);
-				
 				
 				try {
 					services.save(Conexion.obtener(), vehiculo);
@@ -220,14 +219,10 @@ public class FabricCreaVehiculo extends JFrame {
 						btnImagen.setIcon(new ImageIcon(img));
 						ruta = selectedFile.getAbsolutePath();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-			     
 			    }
 			}
-			
 		}
-		
 	}
 }

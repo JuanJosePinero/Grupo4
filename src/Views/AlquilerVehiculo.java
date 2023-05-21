@@ -76,7 +76,6 @@ public class AlquilerVehiculo extends JFrame {
 		this.alquiler = new Alquiler();
 		this.cliente = new Cliente();
 		initComponents();
-
 	}
 
 	public void initComponents() {
@@ -314,7 +313,6 @@ public class AlquilerVehiculo extends JFrame {
 		        e.printStackTrace();
 		        return false;
 		    }
-
 		    return true;
 		}
 
@@ -329,7 +327,6 @@ public class AlquilerVehiculo extends JFrame {
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
 			}
-
 		}
 
 		public void updateCliente() {
@@ -360,10 +357,8 @@ public class AlquilerVehiculo extends JFrame {
 
 				serviceCliente.save(Conexion.obtener(), cliente);
 			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 		}
 
 		private boolean VehiculoDisponible(Integer idVehiculo, Date fechaInc, Date fechaFin) {

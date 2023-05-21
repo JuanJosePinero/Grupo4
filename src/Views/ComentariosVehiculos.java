@@ -26,6 +26,7 @@ public class ComentariosVehiculos extends JFrame {
 	private JPanel contentPane;
 	private JFrame frame;
     private JTextArea txtcoments;
+    private JButton btnFiltrar;
     private final VehiculoComentarioService service=new VehiculoComentarioService();
     private List<VehiculoConComentarios> vehiculos;
     public static void main(String[] args) {
@@ -43,7 +44,6 @@ public class ComentariosVehiculos extends JFrame {
 
     public ComentariosVehiculos() {
         initialize();
-        
         vehiculos = new ArrayList<>();
     }
 
@@ -55,13 +55,12 @@ public class ComentariosVehiculos extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
         
 		ManejadorJButton manejador = new ManejadorJButton();
 		
-        JButton btnFiltrar = new JButton("Volver");
+		btnFiltrar = new JButton("Volver");
         btnFiltrar.addActionListener(manejador);
         btnFiltrar.setBounds(175, 230, 89, 23);
         contentPane.add(btnFiltrar);
@@ -89,12 +88,9 @@ public class ComentariosVehiculos extends JFrame {
 			JOptionPane.showMessageDialog(null, "Volviendo...", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     		dispose();	
 		}
-    	
     }
     
-    
     private void showVehiculoscoment() {
-        
             try {
 				vehiculos = service.getVehiculosConComentarios(Conexion.obtener());
 				String coments="";
@@ -104,11 +100,9 @@ public class ComentariosVehiculos extends JFrame {
 						coments+="\n"+com.getComentario()+"\n";
 						txtcoments.setText(coments);
 					}
-				}
-				
+				}	
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
 			}
-            
     }
 }

@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 public class HistorialComprasCliente extends JFrame{
 	private JPanel contentPane;
 	private JTable jtableP;
+	private JButton BotonVolver;
 	private final VehiculoService services = new VehiculoService();
 	private List<Vehiculo> vehiculo;
 	
@@ -34,7 +35,7 @@ public class HistorialComprasCliente extends JFrame{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		JButton BotonVolver = new JButton("Volver");
+		BotonVolver = new JButton("Volver");
 		BotonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Volviendo a la ventana del catalogo", "Aviso", JOptionPane.ERROR_MESSAGE);
@@ -46,7 +47,6 @@ public class HistorialComprasCliente extends JFrame{
 		});
 		BotonVolver.setBounds(165, 198, 97, 25);
 		getContentPane().add(BotonVolver);
-	
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(50, 42, 332, 143);
@@ -57,6 +57,7 @@ public class HistorialComprasCliente extends JFrame{
 		scrollPane.setViewportView(jtableP);
 		setVisible(true);
 	}
+	
 	public void showVehiculosClientes() {
 	    try {
 	        this.vehiculo = this.services.getAllVehiculosCliente(Conexion.obtener());
@@ -78,12 +79,9 @@ public class HistorialComprasCliente extends JFrame{
 	                    this.vehiculo.get(i).getColor(), this.vehiculo.get(i).getPrecio(), this.vehiculo.get(i).getIdFabricante() });
 	        }
 	    } catch (SQLException ex) {
-	        System.out.println(ex.getMessage());
 	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 	    } catch (ClassNotFoundException ex) {
-	        System.out.println(ex);
 	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
 	    }
 	}
-
 }

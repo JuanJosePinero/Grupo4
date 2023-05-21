@@ -34,7 +34,7 @@ public class AgregarComentario extends JFrame {
 	private Vehiculo vehiculo;
 	private Cliente cliente;
 	private List <Comentario> comentarios = new ArrayList<>();
-
+	private JButton btnCancelar, btnEnviar;
 
 	public AgregarComentario() {
 		super("Agregar Comentario");
@@ -47,7 +47,6 @@ public class AgregarComentario extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		System.out.println("LA ID ES "+Login.getidClienteLogin());
 		
 		JLabel lblTitulo = new JLabel("Agrega un comentario para el vehículo seleccionado.");
 		lblTitulo.setBounds(5, 5, 390, 21);
@@ -60,7 +59,7 @@ public class AgregarComentario extends JFrame {
 		contentPane.add(textArea);
 		
 		
-		JButton btnEnviar = new JButton("Enviar");
+		btnEnviar = new JButton("Enviar");
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -68,7 +67,6 @@ public class AgregarComentario extends JFrame {
 				updateVehiculo();
 				updateCliente();
 			
-				//Error cuando ya hay un comentario te da un mensaje de que ya existe y este
 				JOptionPane.showMessageDialog(null, "El comentario ha sido Enviado con exito!", "Envio completado", JOptionPane.INFORMATION_MESSAGE);
 				VentanaCatalogo vc = new VentanaCatalogo();
 				vc.setVisible(true);
@@ -78,7 +76,7 @@ public class AgregarComentario extends JFrame {
 		btnEnviar.setBounds(61, 150, 98, 33);
 		contentPane.add(btnEnviar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "El comentario ha sido Cancelado!", "Cancelar comentario", JOptionPane.ERROR_MESSAGE);
@@ -89,19 +87,15 @@ public class AgregarComentario extends JFrame {
 		});
 		btnCancelar.setBounds(238, 150, 98, 33);
 		contentPane.add(btnCancelar);
-		
 	}
 	
 	public void updateValoracion() {
-	
 		try {
 			String comentario = textArea.getText();
 			String nomUser = Login.getnombreUser();
-			System.out.println(nomUser);
 			
 			Comentario c = new Comentario();
 			c.setIdCliente(Login.getidClienteLogin());
-			System.out.println(Login.getidClienteLogin());
 			c.setIdVehiculo(Login.getidVehiculo());
 			c.setComentario(nomUser +": \n"+comentario);
 			
@@ -110,7 +104,6 @@ public class AgregarComentario extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public void updateVehiculo() {
@@ -142,12 +135,10 @@ public class AgregarComentario extends JFrame {
 			vehiculo.setNumcomentarios(numC);
 			vehiculo.setNumvaloraciones(numVa);
 			serviceveh.save(Conexion.obtener(), vehiculo);
-			
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
 	}
 	
 	public void updateCliente() {
@@ -177,15 +168,10 @@ public class AgregarComentario extends JFrame {
 			cliente.setNumComentarios(numCO);
 			cliente.setNumValoracion(numV);
 			
-			
-			
 			servicec.save(Conexion.obtener(), cliente);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
-	
 }
