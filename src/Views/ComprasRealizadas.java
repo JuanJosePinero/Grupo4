@@ -12,11 +12,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ComprasRealizadas.
+ */
 public class ComprasRealizadas extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The btn cancelar. */
 	private JButton btnVerAlquileres, btnVerCompras, btnCancelar;
 
+	/**
+	 * Instantiates a new compras realizadas.
+	 */
 	public ComprasRealizadas() {
 		super("Compras Realizadas por el Cliente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,8 +69,16 @@ public class ComprasRealizadas extends JFrame {
 		contentPane.add(btnCancelar);
 	}
 
+	/**
+	 * The Class manejadorboton.
+	 */
 	private class manejadorboton implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton boton = (JButton) e.getSource();

@@ -30,28 +30,74 @@ import models.Alquiler;
 import models.Cliente;
 import models.Vehiculo;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AlquilerVehiculo.
+ */
 public class AlquilerVehiculo extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The txt id fabricante. */
 	private JTextField txtModelo, txtMarca, txtAnyo, txtColor, txtPrecio, txtIdFabricante;
+
+	/** The services. */
 	private final VehiculoService services = new VehiculoService();
+
+	/** The service. */
 	private final AlquilerService service = new AlquilerService();
+
+	/** The service cliente. */
 	private final ClientService serviceCliente = new ClientService();
+
+	/** The vehiculo. */
 	private final Vehiculo vehiculo;
+
+	/** The alquiler. */
 	private final Alquiler alquiler;
+
+	/** The cliente. */
 	private final Cliente cliente;
+
+	/** The btn cancelar. */
 	private JButton btnAlquiler, btnCancelar;
+
+	/** The imagen label. */
 	private JLabel imagenLabel;
+
+	/** The imagen. */
 	private ImageIcon imagen;
+
+	/** The ruta. */
 	private String ruta;
+
+	/** The Fecha fin. */
 	private JLabel FechaInicio, FechaFin;
+
+	/** The fecha inicio. */
 	private JTextField fechaInicio;
+
+	/** The fechafin. */
 	private JTextField fechafin;
+
+	/** The fecha F. */
 	private JComboBox<String> fechainicio, fechaF;
+
+	/** The esta alquilado. */
 	private static int estaAlquilado;
+
+	/** The numero alquileres. */
 	private int numeroAlquileres = 0;
+
+	/** The id. */
 	private int id;
 
+	/**
+	 * Instantiates a new alquiler vehiculo.
+	 *
+	 * @param vehiculo the vehiculo
+	 */
 	public AlquilerVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 		this.alquiler = new Alquiler();
@@ -78,6 +124,9 @@ public class AlquilerVehiculo extends JFrame {
 		initComponents();
 	}
 
+	/**
+	 * Inits the components.
+	 */
 	public void initComponents() {
 		setTitle("Coche seleccionado para el alquiler");
 		setResizable(false);
@@ -204,6 +253,11 @@ public class AlquilerVehiculo extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Update combo box fin.
+	 *
+	 * @param selectedDate the selected date
+	 */
 	private void updateComboBoxFin(LocalDate selectedDate) {
 		fechaF.removeAllItems();
 		fechaF.addItem(selectedDate.toString());
@@ -213,10 +267,21 @@ public class AlquilerVehiculo extends JFrame {
 		}
 	}
 
+	/**
+	 * Parses the date.
+	 *
+	 * @param dateStr the date str
+	 * @return the local date
+	 */
 	private LocalDate parseDate(String dateStr) {
 		return LocalDate.parse(dateStr);
 	}
 
+	/**
+	 * Gets the ruta.
+	 *
+	 * @return the ruta
+	 */
 	public void getRuta() {
 		Vehiculo vs;
 		try {
@@ -229,8 +294,16 @@ public class AlquilerVehiculo extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class ManejadorJButton.
+	 */
 	private class ManejadorJButton implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object o = e.getSource();
@@ -276,6 +349,11 @@ public class AlquilerVehiculo extends JFrame {
 			}
 		}
 
+		/**
+		 * Update alquiler.
+		 *
+		 * @return true, if successful
+		 */
 		public boolean updateAlquiler() {
 
 			try {
@@ -316,6 +394,9 @@ public class AlquilerVehiculo extends JFrame {
 			return true;
 		}
 
+		/**
+		 * Update vehiculo.
+		 */
 		public void updateVehiculo() {
 			Vehiculo v;
 			try {
@@ -328,6 +409,9 @@ public class AlquilerVehiculo extends JFrame {
 			}
 		}
 
+		/**
+		 * Update cliente.
+		 */
 		public void updateCliente() {
 
 			Cliente datos;
@@ -360,6 +444,14 @@ public class AlquilerVehiculo extends JFrame {
 			}
 		}
 
+		/**
+		 * Vehiculo disponible.
+		 *
+		 * @param idVehiculo the id vehiculo
+		 * @param fechaInc   the fecha inc
+		 * @param fechaFin   the fecha fin
+		 * @return true, if successful
+		 */
 		private boolean VehiculoDisponible(Integer idVehiculo, Date fechaInc, Date fechaFin) {
 			try {
 				Connection connection = Conexion.obtener();
@@ -383,10 +475,20 @@ public class AlquilerVehiculo extends JFrame {
 		}
 	}
 
+	/**
+	 * Sets the esta alquilado.
+	 *
+	 * @param alquilado the new esta alquilado
+	 */
 	public static void setestaAlquilado(int alquilado) {
 		estaAlquilado = alquilado;
 	}
 
+	/**
+	 * Gets the esta alquilado.
+	 *
+	 * @return the esta alquilado
+	 */
 	public static Integer getestaAlquilado() {
 		return estaAlquilado;
 	}

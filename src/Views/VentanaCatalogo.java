@@ -32,25 +32,63 @@ import Service.VehiculoService;
 import models.Comentario;
 import models.Vehiculo;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VentanaCatalogo.
+ */
 public class VentanaCatalogo extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
-	private JButton btnComprar, btnAlquilar, btnVerCompras, btnSalir, btnVerCyV;
+
+	/** The btn valoracion. */
+	private JButton btnComprar, btnAlquilar, btnVerCompras, btnSalir, btnVerCyV, btnComentario, btnValoracion;
+
+	/** The text area comentarios. */
 	private JTextArea textAreaComentarios;
+
+	/** The lbl coche. */
 	private JLabel lblCoche;
+
+	/** The lista comentarios. */
 	private List<Comentario> listaComentarios = new ArrayList<>();
+
+	/** The tabla. */
 	private final String tabla = "vehiculo";
+
+	/** The services. */
 	private final VehiculoService services = new VehiculoService();
+
+	/** The v. */
 	private Vehiculo v = new Vehiculo();
+
+	/** The vehiculo. */
 	private List<Vehiculo> vehiculo;
+
+	/** The jtable P. */
 	private JTable jtableP;
+
+	/** The filtro. */
 	private JComboBox filtro;
+
+	/** The dtm. */
 	private DefaultTableModel dtm;
+
+	/** The imagen label. */
 	private JLabel imagenLabel;
+
+	/** The imagen actual. */
 	private String imagenActual;
+
+	/** The ruta nueva. */
 	private String rutaNueva;
+
+	/** The imagen. */
 	private ImageIcon imagen;
 
+	/**
+	 * Instantiates a new ventana catalogo.
+	 */
 	public VentanaCatalogo() {
 		super("Catalogo de Coches de nuestra Empresa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -102,8 +140,7 @@ public class VentanaCatalogo extends JFrame {
 		lblNewLabel_3.setBounds(8, 58, 22, 22);
 		contentPane.add(lblNewLabel_3);
 
-		String[] filtros = { "--", "Marca", "Modelo", "Anyo", "Color", "Precio", "idFabricante", "Mejores Valoraciones",
-				"Mºnumero comentarios" };
+		String[] filtros = { "--", "Marca", "Modelo", "Anyo", "Color", "Precio", "idFabricante" };
 		filtro = new JComboBox(filtros);
 		filtro.setBounds(8, 84, 180, 22);
 		contentPane.add(filtro);
@@ -190,9 +227,26 @@ public class VentanaCatalogo extends JFrame {
 		contentPane.add(btnVerCyV);
 		btnVerCyV.addActionListener(manejador);
 
+		btnComentario = new JButton("Mº numero comentarios");
+		btnComentario.setBounds(8, 116, 182, 22);
+		contentPane.add(btnComentario);
+		btnComentario.addActionListener(manejador);
+
+		btnValoracion = new JButton("Mejores Valoraciones");
+		btnValoracion.setBounds(8, 148, 182, 21);
+		contentPane.add(btnValoracion);
+		btnValoracion.addActionListener(manejador);
+
 		showVehiculos();
 	}
 
+	/**
+	 * Gets the vehiculo.
+	 *
+	 * @param conexion the conexion
+	 * @return the vehiculo
+	 * @throws SQLException the SQL exception
+	 */
 	public Vehiculo getVehiculo(Connection conexion) throws SQLException {
 		Vehiculo vehiculo = null;
 		try {
@@ -211,8 +265,16 @@ public class VentanaCatalogo extends JFrame {
 		return vehiculo;
 	}
 
+	/**
+	 * The Class ManejadorJButton.
+	 */
 	public class ManejadorJButton implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object o = e.getSource();
@@ -297,15 +359,32 @@ public class VentanaCatalogo extends JFrame {
 					JOptionPane.showMessageDialog(null, "Por favor seleccione una fila.", "Aviso",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
+			} else if (o == btnComentario) {
+				ComentariosVehiculos cv = new ComentariosVehiculos();
+				cv.setVisible(true);
+				dispose();
+			} else if (o == btnValoracion) {
+				MejoresValoraciones mv = new MejoresValoraciones();
+				mv.setVisible(true);
+				mv.setLocationRelativeTo(null);
+				dispose();
 			}
 		}
 	}
 
+	/**
+	 * Cambiar img por defecto.
+	 */
 	public void cambiarImgPorDefecto() {
 		imagen = new ImageIcon(imagenActual);
 		imagenLabel.setIcon(imagen);
 	}
 
+	/**
+	 * Refrescar tabla.
+	 *
+	 * @param fil the fil
+	 */
 	private void refrescarTabla(String fil) {
 		try {
 			if (fil.equalsIgnoreCase("--")) {
@@ -329,14 +408,6 @@ public class VentanaCatalogo extends JFrame {
 			} else if (fil.equalsIgnoreCase("idFabricante")) {
 				showVehiculosidFabricante();
 				cambiarImgPorDefecto();
-			} else if (fil.equalsIgnoreCase("Mºnumero comentarios")) {
-				ComentariosVehiculos cv = new ComentariosVehiculos();
-				cv.setVisible(true);
-			} else if (fil.equalsIgnoreCase("Mejores Valoraciones")) {
-				MejoresValoraciones mv = new MejoresValoraciones();
-				mv.setVisible(true);
-				mv.setLocationRelativeTo(null);
-				dispose();
 			}
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(this, "Error al actualizar la tabla", "Aviso", JOptionPane.ERROR_MESSAGE);
@@ -344,6 +415,9 @@ public class VentanaCatalogo extends JFrame {
 
 	}
 
+	/**
+	 * Show vehiculosid fabricante.
+	 */
 	private void showVehiculosidFabricante() {
 		try {
 			vehiculo = services.getAllVehiculosidFabricante(Conexion.obtener());
@@ -362,6 +436,9 @@ public class VentanaCatalogo extends JFrame {
 
 	}
 
+	/**
+	 * Show vehiculos precio.
+	 */
 	private void showVehiculosPrecio() {
 		try {
 			vehiculo = services.getAllVehiculosPrecio(Conexion.obtener());
@@ -380,6 +457,9 @@ public class VentanaCatalogo extends JFrame {
 
 	}
 
+	/**
+	 * Show vehiculos color.
+	 */
 	private void showVehiculosColor() {
 		try {
 			vehiculo = services.getAllVehiculosColor(Conexion.obtener());
@@ -398,6 +478,9 @@ public class VentanaCatalogo extends JFrame {
 
 	}
 
+	/**
+	 * Show vehiculos anyo.
+	 */
 	private void showVehiculosAnyo() {
 		try {
 			vehiculo = services.getAllVehiculosAnyo(Conexion.obtener());
@@ -416,6 +499,9 @@ public class VentanaCatalogo extends JFrame {
 
 	}
 
+	/**
+	 * Show vehiculos modelo.
+	 */
 	private void showVehiculosModelo() {
 		try {
 			vehiculo = services.getAllVehiculosModelo(Conexion.obtener());
@@ -434,6 +520,9 @@ public class VentanaCatalogo extends JFrame {
 
 	}
 
+	/**
+	 * Show vehiculos.
+	 */
 	private void showVehiculos() {
 		try {
 			vehiculo = services.getAllVehiculos(Conexion.obtener());
@@ -451,6 +540,9 @@ public class VentanaCatalogo extends JFrame {
 		}
 	}
 
+	/**
+	 * Show vehiculos marca.
+	 */
 	private void showVehiculosMarca() {
 		try {
 			vehiculo = services.getAllVehiculosMarca(Conexion.obtener());
@@ -468,8 +560,16 @@ public class VentanaCatalogo extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class manejadorcombo.
+	 */
 	private class manejadorcombo implements ItemListener {
 
+		/**
+		 * Item state changed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void itemStateChanged(ItemEvent e) {
 			JComboBox combo = (JComboBox) e.getSource();

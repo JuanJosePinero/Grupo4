@@ -25,22 +25,54 @@ import models.Cliente;
 import models.Valoracion;
 import models.Vehiculo;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AgregarValoracion.
+ */
 public class AgregarValoracion extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The btn estrella list. */
 	private List<JButton> btnEstrellaList = new ArrayList<>();
+
+	/** The btn cancelar. */
 	private JButton btnEnviar, btnCancelar;
+
+	/** The btn est. */
 	private JButton btnEst;
+
+	/** The icono 5. */
 	private ImageIcon icono0, icono1, icono2, icono3, icono4, icono5;
+
+	/** The etiqueta imagen. */
 	private JLabel etiquetaImagen;
+
+	/** The service. */
 	private ValoracionService service = new ValoracionService();
+
+	/** The serviceveh. */
 	private final VehiculoService serviceveh = new VehiculoService();
+
+	/** The servicec. */
 	private final ClientService servicec = new ClientService();
+
+	/** The cliente. */
 	private Cliente cliente;
+
+	/** The vehiculo. */
 	private Vehiculo vehiculo;
+
+	/** The valoracion. */
 	private int valoracion = 0;
+
+	/** The val. */
 	private int val = 0;
 
+	/**
+	 * Instantiates a new agregar valoracion.
+	 */
 	public AgregarValoracion() {
 		super("Agregar Valoracion");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,8 +125,16 @@ public class AgregarValoracion extends JFrame {
 		contentPane.add(btnCancelar);
 	}
 
+	/**
+	 * The Class ManejadorJButton.
+	 */
 	public class ManejadorJButton implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object o = e.getSource();
@@ -128,7 +168,16 @@ public class AgregarValoracion extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class manejadorestrella.
+	 */
 	private class manejadorestrella implements ActionListener {
+
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton boton = (JButton) e.getSource();
@@ -142,6 +191,9 @@ public class AgregarValoracion extends JFrame {
 		}
 	}
 
+	/**
+	 * Update valoracion.
+	 */
 	public void updateValoracion() {
 		try {
 			Valoracion v = new Valoracion();
@@ -155,6 +207,9 @@ public class AgregarValoracion extends JFrame {
 		}
 	}
 
+	/**
+	 * Update vehiculo.
+	 */
 	public void updateVehiculo() {
 		try {
 			vehiculo = serviceveh.getVehiculo(Conexion.obtener(), Login.getidVehiculo());
@@ -189,6 +244,9 @@ public class AgregarValoracion extends JFrame {
 		}
 	}
 
+	/**
+	 * Update cliente.
+	 */
 	public void updateCliente() {
 		try {
 			cliente = servicec.getClienteId(Conexion.obtener(), Login.getidClienteLogin());

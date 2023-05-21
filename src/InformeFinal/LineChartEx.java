@@ -28,15 +28,26 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import Service.Conexion;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LineChartEx.
+ */
 public class LineChartEx extends JFrame {
 
+	/** The c. */
 	private Conexion c = new Conexion();
 
+	/**
+	 * Instantiates a new line chart ex.
+	 */
 	public LineChartEx() {
 
 		initUI();
 	}
 
+	/**
+	 * Inits the UI.
+	 */
 	private void initUI() {
 
 		XYDataset dataset = createDataset();
@@ -64,6 +75,11 @@ public class LineChartEx extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	/**
+	 * Creates the dataset.
+	 *
+	 * @return the XY dataset
+	 */
 	private XYDataset createDataset() {
 		var series = new XYSeries("2023");
 
@@ -88,6 +104,12 @@ public class LineChartEx extends JFrame {
 		return dataset;
 	}
 
+	/**
+	 * Creates the chart.
+	 *
+	 * @param dataset the dataset
+	 * @return the j free chart
+	 */
 	private JFreeChart createChart(XYDataset dataset) {
 
 		JFreeChart chart = ChartFactory.createXYLineChart("Compras de Vehiculos 2023", "Meses", "Nº Compras", dataset,
@@ -115,6 +137,11 @@ public class LineChartEx extends JFrame {
 		return chart;
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 
 		EventQueue.invokeLater(() -> {

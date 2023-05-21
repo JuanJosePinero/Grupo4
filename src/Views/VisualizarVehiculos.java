@@ -19,13 +19,27 @@ import Service.VehiculoService;
 import models.Vehiculo;
 import javax.swing.JLabel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VisualizarVehiculos.
+ */
 public class VisualizarVehiculos extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The jtable P. */
 	private JTable jtableP;
+
+	/** The services. */
 	private final VehiculoService services = new VehiculoService();
+
+	/** The vehiculo. */
 	private List<Vehiculo> vehiculo;
 
+	/**
+	 * Instantiates a new visualizar vehiculos.
+	 */
 	public VisualizarVehiculos() {
 		setTitle("Vehiculos");
 		setResizable(false);
@@ -60,6 +74,9 @@ public class VisualizarVehiculos extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Show vehiculos.
+	 */
 	public void showVehiculos() {
 		try {
 			this.vehiculo = this.services.getAllVehiculos(Conexion.obtener());
@@ -91,6 +108,9 @@ public class VisualizarVehiculos extends JFrame {
 		}
 	}
 
+	/**
+	 * Show vehiculos id fabricante.
+	 */
 	public void showVehiculosIdFabricante() {
 		try {
 			this.vehiculo = this.services.getAllVehiculosFabric(Conexion.obtener());

@@ -13,10 +13,22 @@ import Views.Login;
 import models.Comentario;
 import models.Valoracion;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ValoracionService.
+ */
 public class ValoracionService {
 
+	/** The tabla. */
 	private final String tabla = "valoracion";
 
+	/**
+	 * Save.
+	 *
+	 * @param conexion   the conexion
+	 * @param valoracion the valoracion
+	 * @throws SQLException the SQL exception
+	 */
 	public void save(Connection conexion, Valoracion valoracion) throws SQLException {
 		try {
 			PreparedStatement consulta;
@@ -42,6 +54,13 @@ public class ValoracionService {
 		}
 	}
 
+	/**
+	 * Gets the valoracion.
+	 *
+	 * @param conexion the conexion
+	 * @return the valoracion
+	 * @throws SQLException the SQL exception
+	 */
 	public Valoracion getValoracion(Connection conexion) throws SQLException {
 		Valoracion valoracion = null;
 		try {
@@ -58,6 +77,13 @@ public class ValoracionService {
 		return valoracion;
 	}
 
+	/**
+	 * Removes the.
+	 *
+	 * @param conexion   the conexion
+	 * @param valoracion the valoracion
+	 * @throws SQLException the SQL exception
+	 */
 	public void remove(Connection conexion, Valoracion valoracion) throws SQLException {
 		try {
 			PreparedStatement consulta = conexion
@@ -69,6 +95,13 @@ public class ValoracionService {
 		}
 	}
 
+	/**
+	 * Gets the all valoracion id.
+	 *
+	 * @param conexion the conexion
+	 * @return the all valoracion id
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Valoracion> getAllValoracionId(Connection conexion) throws SQLException {
 		List<Valoracion> products = new ArrayList<>();
 		try {
@@ -86,6 +119,13 @@ public class ValoracionService {
 		return products;
 	}
 
+	/**
+	 * Gets the all valoracion.
+	 *
+	 * @param conexion the conexion
+	 * @return the all valoracion
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Valoracion> getAllValoracion(Connection conexion) throws SQLException {
 		List<Valoracion> products = new ArrayList<>();
 		try {

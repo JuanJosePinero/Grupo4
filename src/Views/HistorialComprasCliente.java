@@ -18,13 +18,30 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HistorialComprasCliente.
+ */
 public class HistorialComprasCliente extends JFrame {
+
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The jtable P. */
 	private JTable jtableP;
+
+	/** The Boton volver. */
 	private JButton BotonVolver;
+
+	/** The services. */
 	private final VehiculoService services = new VehiculoService();
+
+	/** The vehiculo. */
 	private List<Vehiculo> vehiculo;
 
+	/**
+	 * Instantiates a new historial compras cliente.
+	 */
 	HistorialComprasCliente() {
 		super("Historial de compras");
 		setResizable(false);
@@ -59,6 +76,9 @@ public class HistorialComprasCliente extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Show vehiculos clientes.
+	 */
 	public void showVehiculosClientes() {
 		try {
 			this.vehiculo = this.services.getAllVehiculosCliente(Conexion.obtener());

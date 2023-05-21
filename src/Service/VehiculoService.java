@@ -11,10 +11,22 @@ import Views.ListViewFabricante;
 import Views.Login;
 import models.Vehiculo;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VehiculoService.
+ */
 public class VehiculoService {
 
+	/** The tabla. */
 	private final String tabla = "vehiculo";
 
+	/**
+	 * Save.
+	 *
+	 * @param conexion the conexion
+	 * @param vehiculo the vehiculo
+	 * @throws SQLException the SQL exception
+	 */
 	public void save(Connection conexion, Vehiculo vehiculo) throws SQLException {
 		try {
 			PreparedStatement consulta;
@@ -52,6 +64,14 @@ public class VehiculoService {
 		}
 	}
 
+	/**
+	 * Gets the vehiculo.
+	 *
+	 * @param conexion the conexion
+	 * @param id       the id
+	 * @return the vehiculo
+	 * @throws SQLException the SQL exception
+	 */
 	public Vehiculo getVehiculo(Connection conexion, int id) throws SQLException {
 		Vehiculo vehiculo = null;
 		try {
@@ -73,6 +93,13 @@ public class VehiculoService {
 		return vehiculo;
 	}
 
+	/**
+	 * Removes the.
+	 *
+	 * @param conexion the conexion
+	 * @param vehiculo the vehiculo
+	 * @throws SQLException the SQL exception
+	 */
 	public void remove(Connection conexion, Vehiculo vehiculo) throws SQLException {
 		try {
 			PreparedStatement consulta = conexion
@@ -84,6 +111,13 @@ public class VehiculoService {
 		}
 	}
 
+	/**
+	 * Gets the all vehiculos.
+	 *
+	 * @param conexion the conexion
+	 * @return the all vehiculos
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Vehiculo> getAllVehiculos(Connection conexion) throws SQLException {
 		List<Vehiculo> listaVehiculos = new ArrayList<>();
 		try {
@@ -102,6 +136,13 @@ public class VehiculoService {
 		return listaVehiculos;
 	}
 
+	/**
+	 * Gets the all vehiculos marca.
+	 *
+	 * @param conexion the conexion
+	 * @return the all vehiculos marca
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Vehiculo> getAllVehiculosMarca(Connection conexion) throws SQLException {
 		List<Vehiculo> listaVehiculos = new ArrayList<>();
 		try {
@@ -120,6 +161,13 @@ public class VehiculoService {
 		return listaVehiculos;
 	}
 
+	/**
+	 * Gets the all vehiculos modelo.
+	 *
+	 * @param conexion the conexion
+	 * @return the all vehiculos modelo
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Vehiculo> getAllVehiculosModelo(Connection conexion) throws SQLException {
 		List<Vehiculo> listaVehiculos = new ArrayList<>();
 		try {
@@ -138,6 +186,13 @@ public class VehiculoService {
 		return listaVehiculos;
 	}
 
+	/**
+	 * Gets the all vehiculos anyo.
+	 *
+	 * @param conexion the conexion
+	 * @return the all vehiculos anyo
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Vehiculo> getAllVehiculosAnyo(Connection conexion) throws SQLException {
 		List<Vehiculo> listaVehiculos = new ArrayList<>();
 		try {
@@ -156,6 +211,13 @@ public class VehiculoService {
 		return listaVehiculos;
 	}
 
+	/**
+	 * Gets the all vehiculos color.
+	 *
+	 * @param conexion the conexion
+	 * @return the all vehiculos color
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Vehiculo> getAllVehiculosColor(Connection conexion) throws SQLException {
 		List<Vehiculo> listaVehiculos = new ArrayList<>();
 		try {
@@ -174,6 +236,13 @@ public class VehiculoService {
 		return listaVehiculos;
 	}
 
+	/**
+	 * Gets the all vehiculos precio.
+	 *
+	 * @param conexion the conexion
+	 * @return the all vehiculos precio
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Vehiculo> getAllVehiculosPrecio(Connection conexion) throws SQLException {
 		List<Vehiculo> listaVehiculos = new ArrayList<>();
 		try {
@@ -192,6 +261,13 @@ public class VehiculoService {
 		return listaVehiculos;
 	}
 
+	/**
+	 * Gets the all vehiculosid fabricante.
+	 *
+	 * @param conexion the conexion
+	 * @return the all vehiculosid fabricante
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Vehiculo> getAllVehiculosidFabricante(Connection conexion) throws SQLException {
 		List<Vehiculo> listaVehiculos = new ArrayList<>();
 		try {
@@ -210,6 +286,13 @@ public class VehiculoService {
 		return listaVehiculos;
 	}
 
+	/**
+	 * Gets the all vehiculos fabric.
+	 *
+	 * @param conexion the conexion
+	 * @return the all vehiculos fabric
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Vehiculo> getAllVehiculosFabric(Connection conexion) throws SQLException {
 		List<Vehiculo> listaVehiculos = new ArrayList<>();
 		try {
@@ -229,6 +312,13 @@ public class VehiculoService {
 		return listaVehiculos;
 	}
 
+	/**
+	 * Gets the all vehiculos cliente.
+	 *
+	 * @param conexion the conexion
+	 * @return the all vehiculos cliente
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Vehiculo> getAllVehiculosCliente(Connection conexion) throws SQLException {
 		List<Vehiculo> listaVehiculos = new ArrayList<>();
 		try {

@@ -21,17 +21,40 @@ import javax.swing.border.EmptyBorder;
 import Service.Conexion;
 import Service.VehiculoService;
 import models.Vehiculo;
+import javax.swing.SwingConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CrearVehiculos.
+ */
 public class CrearVehiculos extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The txt id fabricante. */
 	private JTextField txtModelo, txtMarca, txtAnyo, txtColor, txtPrecio, txtIdFabricante;
+
+	/** The services. */
 	private final VehiculoService services = new VehiculoService();
+
+	/** The vehiculo. */
 	private final Vehiculo vehiculo;
+
+	/** The btn imagen. */
 	private JButton btnGuardar, btnCancelar, btnImagen;
+
+	/** The file chooser. */
 	private JFileChooser fileChooser;
+
+	/** The ruta. */
 	private String ruta;
 
+	/**
+	 * Instantiates a new crear vehiculos.
+	 *
+	 * @param vehiculo the vehiculo
+	 */
 	public CrearVehiculos(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 		initComponents();
@@ -42,16 +65,22 @@ public class CrearVehiculos extends JFrame {
 		txtPrecio.setText(String.valueOf(this.vehiculo.getPrecio()));
 	}
 
+	/**
+	 * Instantiates a new crear vehiculos.
+	 */
 	public CrearVehiculos() {
 		this.vehiculo = new Vehiculo();
 		initComponents();
 	}
 
+	/**
+	 * Inits the components.
+	 */
 	public void initComponents() {
 		setTitle("Vehiculos");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 130, 374, 415);
+		setBounds(100, 130, 706, 389);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -116,26 +145,30 @@ public class CrearVehiculos extends JFrame {
 		ManejadorJButton manejador = new ManejadorJButton();
 
 		btnGuardar = new JButton("Guardar");
-		btnGuardar.setBounds(48, 339, 117, 29);
+		btnGuardar.setBounds(140, 256, 144, 29);
 		btnGuardar.addActionListener(manejador);
 		contentPane.add(btnGuardar);
 
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(203, 339, 117, 29);
+		btnCancelar.setBounds(381, 256, 144, 29);
 		btnCancelar.addActionListener(manejador);
 		contentPane.add(btnCancelar);
 
 		JLabel lblImagen = new JLabel("Establecer Imagen");
-		lblImagen.setBounds(30, 272, 117, 16);
+		lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
+		lblImagen.setBounds(330, 10, 350, 16);
 		contentPane.add(lblImagen);
 
 		btnImagen = new JButton("");
 		btnImagen.setIcon(new ImageIcon("images/AgregarImagen.png"));
-		btnImagen.setBounds(170, 242, 94, 74);
+		btnImagen.setBounds(330, 32, 350, 200);
 		btnImagen.addActionListener(manejador);
 		contentPane.add(btnImagen);
 	}
 
+	/**
+	 * Seleccionar imagen.
+	 */
 	private void seleccionarImagen() {
 		JFileChooser fileChooser = new JFileChooser();
 		int resultado = fileChooser.showOpenDialog(this);
@@ -151,8 +184,16 @@ public class CrearVehiculos extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class ManejadorJButton.
+	 */
 	private class ManejadorJButton implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object o = e.getSource();

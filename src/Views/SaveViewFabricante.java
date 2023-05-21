@@ -18,19 +18,47 @@ import Service.FabricantesService;
 import models.Cliente;
 import models.Fabricante;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SaveViewFabricante.
+ */
 public class SaveViewFabricante extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The txt nombre. */
 	private JTextField txtNombre;
+
+	/** The txt pais. */
 	private JTextField txtPais;
+
+	/** The btn cancelar. */
 	private JButton btnGuardar, btnCancelar;
+
+	/** The service F. */
 	private final FabricantesService serviceF = new FabricantesService();
+
+	/** The fabricante. */
 	private final Fabricante fabricante;
+
+	/** The servicec. */
 	private final ClientService servicec = new ClientService();
+
+	/** The cliente. */
 	private final Cliente cliente;
+
+	/** The Usuario T. */
 	private JTextField UsuarioT;
+
+	/** The Contraseña T. */
 	private JTextField ContraseñaT;
 
+	/**
+	 * Instantiates a new save view fabricante.
+	 *
+	 * @param fabricante the fabricante
+	 */
 	public SaveViewFabricante(Fabricante fabricante) {
 		this.fabricante = fabricante;
 		initComponents();
@@ -39,12 +67,18 @@ public class SaveViewFabricante extends JFrame {
 		this.cliente = new Cliente();
 	}
 
+	/**
+	 * Instantiates a new save view fabricante.
+	 */
 	public SaveViewFabricante() {
 		this.fabricante = new Fabricante();
 		this.cliente = new Cliente();
 		initComponents();
 	}
 
+	/**
+	 * Inits the components.
+	 */
 	public void initComponents() {
 		setTitle("Fabricante");
 		setResizable(false);

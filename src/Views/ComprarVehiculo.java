@@ -22,24 +22,62 @@ import models.Cliente;
 import models.Vehiculo;
 import models.Venta;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ComprarVehiculo.
+ */
 public class ComprarVehiculo extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The txt id fabricante. */
 	private JTextField txtModelo, txtMarca, txtAnyo, txtColor, txtPrecio, txtIdFabricante;
+
+	/** The imagen label. */
 	private JLabel imagenLabel;
+
+	/** The imagen. */
 	private ImageIcon imagen;
+
+	/** The services. */
 	private final VehiculoService services = new VehiculoService();
+
+	/** The service cliente. */
 	private final ClientService serviceCliente = new ClientService();
+
+	/** The servicesventa. */
 	private final VentaService servicesventa = new VentaService();
+
+	/** The vehiculo. */
 	private final Vehiculo vehiculo;
+
+	/** The v. */
 	private Vehiculo v = new Vehiculo();
+
+	/** The venta. */
 	private final Venta venta;
+
+	/** The cliente. */
 	private final Cliente cliente;
+
+	/** The btn cancelar. */
 	private JButton btnComprar, btnCancelar;
+
+	/** The ruta. */
 	private String ruta;
+
+	/** The numero compras. */
 	private int numeroCompras = 0;
+
+	/** The id. */
 	private int id;
 
+	/**
+	 * Instantiates a new comprar vehiculo.
+	 *
+	 * @param vehiculo the vehiculo
+	 */
 	public ComprarVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 		this.venta = new Venta();
@@ -56,6 +94,9 @@ public class ComprarVehiculo extends JFrame {
 		getRuta();
 	}
 
+	/**
+	 * Instantiates a new comprar vehiculo.
+	 */
 	public ComprarVehiculo() {
 		this.vehiculo = new Vehiculo();
 		this.venta = new Venta();
@@ -63,6 +104,9 @@ public class ComprarVehiculo extends JFrame {
 		initComponents();
 	}
 
+	/**
+	 * Inits the components.
+	 */
 	public void initComponents() {
 		setTitle("Coche seleccionado Para la Compra");
 		setResizable(false);
@@ -155,6 +199,11 @@ public class ComprarVehiculo extends JFrame {
 		panel.add(imagenLabel);
 	}
 
+	/**
+	 * Gets the ruta.
+	 *
+	 * @return the ruta
+	 */
 	public void getRuta() {
 		Vehiculo vs;
 		try {
@@ -167,8 +216,16 @@ public class ComprarVehiculo extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class ManejadorJButton.
+	 */
 	private class ManejadorJButton implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object o = e.getSource();
@@ -176,59 +233,66 @@ public class ComprarVehiculo extends JFrame {
 			if (o == btnComprar) {
 				try {
 					Vehiculo v = services.getVehiculo(Conexion.obtener(), vehiculo.getIdVehiculos());
-
-					if (v.getComprado() == 1) {
-						JOptionPane.showMessageDialog(ComprarVehiculo.this, "este coche ya ha sido comprado");
-						ComprarVehiculo.this.dispose();
+					if (v.getAlquilado() == 1) {
+						JOptionPane.showMessageDialog(null, "No se puede realizar la compra", "Aviso",
+								JOptionPane.INFORMATION_MESSAGE);
 						VentanaCatalogo vc = new VentanaCatalogo();
 						vc.setVisible(true);
-						vc.setLocationRelativeTo(null);
-					} else if (v.getComprado() == 0) {
-						Integer idVehiculo = vehiculo.getIdVehiculos();
-						Integer idCliente = Login.getidClienteLogin();
-						Calendar calendario = Calendar.getInstance();
-						java.util.Date utilDate = new java.util.Date();
-						java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-						Integer idVenta = venta.getIdVenta();
-						venta.setIdVenta(idVenta);
-						venta.setIdVehiculo(idVehiculo);
-						venta.setIdCliente(idCliente);
-						venta.setFechaHora(sqlDate);
-						vehiculo.setRuta(v.getRuta());
-						vehiculo.setComprado(1);
-						vehiculo.setAlquilado(0);
+						dispose();
+					} else {
+						if (v.getComprado() == 1) {
+							JOptionPane.showMessageDialog(ComprarVehiculo.this, "este coche ya ha sido comprado");
+							ComprarVehiculo.this.dispose();
+							VentanaCatalogo vc = new VentanaCatalogo();
+							vc.setVisible(true);
+							vc.setLocationRelativeTo(null);
+						} else if (v.getComprado() == 0) {
+							Integer idVehiculo = vehiculo.getIdVehiculos();
+							Integer idCliente = Login.getidClienteLogin();
+							Calendar calendario = Calendar.getInstance();
+							java.util.Date utilDate = new java.util.Date();
+							java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+							Integer idVenta = venta.getIdVenta();
+							venta.setIdVenta(idVenta);
+							venta.setIdVehiculo(idVehiculo);
+							venta.setIdCliente(idCliente);
+							venta.setFechaHora(sqlDate);
+							vehiculo.setRuta(v.getRuta());
+							vehiculo.setComprado(1);
+							vehiculo.setAlquilado(0);
 
-						Cliente datos = serviceCliente.getClienteId(Conexion.obtener(), Login.getidClienteLogin());
+							Cliente datos = serviceCliente.getClienteId(Conexion.obtener(), Login.getidClienteLogin());
 
-						String nom = datos.getNombre();
-						String dir = datos.getDireccion();
-						String rol = datos.getRol();
-						String user = datos.getNombreUsuario();
-						String cont = datos.getContrasena();
-						int act = datos.getActivar();
-						int numC = (datos.getNumCompras() + 1);
-						int numA = datos.getNumAlquileres();
-						int numCO = datos.getNumComentarios();
-						int numV = datos.getNumValoraciones();
-						cliente.setIdClientes(Login.getidClienteLogin());
-						cliente.setNombre(nom);
-						cliente.setDireccion(dir);
-						cliente.setRol(rol);
-						cliente.setNombreUsuario(user);
-						cliente.setContrasena(cont);
-						cliente.setActivar(act);
-						cliente.setNumCompras(numC);
-						cliente.setNumAlquileres(numA);
+							String nom = datos.getNombre();
+							String dir = datos.getDireccion();
+							String rol = datos.getRol();
+							String user = datos.getNombreUsuario();
+							String cont = datos.getContrasena();
+							int act = datos.getActivar();
+							int numC = (datos.getNumCompras() + 1);
+							int numA = datos.getNumAlquileres();
+							int numCO = datos.getNumComentarios();
+							int numV = datos.getNumValoraciones();
+							cliente.setIdClientes(Login.getidClienteLogin());
+							cliente.setNombre(nom);
+							cliente.setDireccion(dir);
+							cliente.setRol(rol);
+							cliente.setNombreUsuario(user);
+							cliente.setContrasena(cont);
+							cliente.setActivar(act);
+							cliente.setNumCompras(numC);
+							cliente.setNumAlquileres(numA);
 
-						servicesventa.save(Conexion.obtener(), venta);
-						serviceCliente.save(Conexion.obtener(), cliente);
+							servicesventa.save(Conexion.obtener(), venta);
+							serviceCliente.save(Conexion.obtener(), cliente);
 
-						services.save(Conexion.obtener(), vehiculo);
-						ComprarVehiculo.this.dispose();
-						JOptionPane.showMessageDialog(ComprarVehiculo.this, "Se ha realizado la compra");
-						VentanaCatalogo vc = new VentanaCatalogo();
-						vc.setVisible(true);
-						vc.setLocationRelativeTo(null);
+							services.save(Conexion.obtener(), vehiculo);
+							ComprarVehiculo.this.dispose();
+							JOptionPane.showMessageDialog(ComprarVehiculo.this, "Se ha realizado la compra");
+							VentanaCatalogo vc = new VentanaCatalogo();
+							vc.setVisible(true);
+							vc.setLocationRelativeTo(null);
+						}
 					}
 				} catch (ClassNotFoundException | SQLException e1) {
 					e1.printStackTrace();

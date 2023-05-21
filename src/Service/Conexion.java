@@ -4,10 +4,22 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Conexion.
+ */
 public class Conexion {
 
+	/** The cnx. */
 	private static Connection cnx = null;
 
+	/**
+	 * Obtener.
+	 *
+	 * @return the connection
+	 * @throws SQLException           the SQL exception
+	 * @throws ClassNotFoundException the class not found exception
+	 */
 	public static Connection obtener() throws SQLException, ClassNotFoundException {
 		if (cnx == null) {
 			try {
@@ -25,6 +37,11 @@ public class Conexion {
 		return cnx;
 	}
 
+	/**
+	 * Cerrar.
+	 *
+	 * @throws SQLException the SQL exception
+	 */
 	public static void cerrar() throws SQLException {
 		if (cnx != null) {
 			cnx.close();

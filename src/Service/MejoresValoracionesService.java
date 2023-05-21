@@ -11,8 +11,19 @@ import models.Valoracion;
 import models.Vehiculo;
 import models.VehiculoMejoresValoraciones;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MejoresValoracionesService.
+ */
 public class MejoresValoracionesService {
 
+	/**
+	 * Gets the vehiculos mejores valoraciones.
+	 *
+	 * @param conexion the conexion
+	 * @return the vehiculos mejores valoraciones
+	 * @throws SQLException the SQL exception
+	 */
 	public List<VehiculoMejoresValoraciones> getVehiculosMejoresValoraciones(Connection conexion) throws SQLException {
 		List<VehiculoMejoresValoraciones> vehiculosMejoresValoraciones = new ArrayList<>();
 		try {
@@ -44,6 +55,14 @@ public class MejoresValoracionesService {
 		return vehiculosMejoresValoraciones;
 	}
 
+	/**
+	 * Gets the valoraciones vehiculo.
+	 *
+	 * @param conexion   the conexion
+	 * @param idVehiculo the id vehiculo
+	 * @return the valoraciones vehiculo
+	 * @throws SQLException the SQL exception
+	 */
 	private List<Valoracion> getValoracionesVehiculo(Connection conexion, int idVehiculo) throws SQLException {
 		List<Valoracion> valoraciones = new ArrayList<>();
 		try {

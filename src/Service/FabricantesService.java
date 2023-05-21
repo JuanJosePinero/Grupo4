@@ -9,10 +9,22 @@ import java.util.List;
 
 import models.Fabricante;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FabricantesService.
+ */
 public class FabricantesService {
 
+	/** The tabla. */
 	private final String tabla = "fabricante";
 
+	/**
+	 * Save.
+	 *
+	 * @param conexion   the conexion
+	 * @param fabricante the fabricante
+	 * @throws SQLException the SQL exception
+	 */
 	public void save(Connection conexion, Fabricante fabricante) throws SQLException {
 		try {
 			PreparedStatement consulta;
@@ -36,6 +48,14 @@ public class FabricantesService {
 		}
 	}
 
+	/**
+	 * Gets the fabricantes.
+	 *
+	 * @param conexion the conexion
+	 * @param id       the id
+	 * @return the fabricantes
+	 * @throws SQLException the SQL exception
+	 */
 	public Fabricante getFabricantes(Connection conexion, int id) throws SQLException {
 		Fabricante fabricante = null;
 		try {
@@ -53,6 +73,14 @@ public class FabricantesService {
 		return fabricante;
 	}
 
+	/**
+	 * Gets the fabricantes cliente.
+	 *
+	 * @param conexion the conexion
+	 * @param id       the id
+	 * @return the fabricantes cliente
+	 * @throws SQLException the SQL exception
+	 */
 	public Fabricante getFabricantesCliente(Connection conexion, int id) throws SQLException {
 		Fabricante fabricante = null;
 		try {
@@ -70,6 +98,13 @@ public class FabricantesService {
 		return fabricante;
 	}
 
+	/**
+	 * Removes the.
+	 *
+	 * @param conexion   the conexion
+	 * @param fabricante the fabricante
+	 * @throws SQLException the SQL exception
+	 */
 	public void remove(Connection conexion, Fabricante fabricante) throws SQLException {
 		try {
 			PreparedStatement consulta = conexion
@@ -81,6 +116,13 @@ public class FabricantesService {
 		}
 	}
 
+	/**
+	 * Gets the all fabricantes.
+	 *
+	 * @param conexion the conexion
+	 * @return the all fabricantes
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Fabricante> getAllFabricantes(Connection conexion) throws SQLException {
 		List<Fabricante> fabricante = new ArrayList<>();
 		try {

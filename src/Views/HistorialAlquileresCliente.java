@@ -20,14 +20,33 @@ import Service.VehiculoService;
 import models.Alquiler;
 import models.Vehiculo;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HistorialAlquileresCliente.
+ */
 public class HistorialAlquileresCliente extends JFrame {
+
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The jtable P. */
 	private JTable jtableP;
+
+	/** The Boton volver. */
 	private JButton BotonVolver;
+
+	/** The servicealq. */
 	private final AlquilerService servicealq = new AlquilerService();
+
+	/** The services. */
 	private final VehiculoService services = new VehiculoService();
+
+	/** The alquiler. */
 	private List<Alquiler> alquiler;
 
+	/**
+	 * Instantiates a new historial alquileres cliente.
+	 */
 	public HistorialAlquileresCliente() {
 		super("Historial de alquileres");
 		setResizable(false);
@@ -62,6 +81,9 @@ public class HistorialAlquileresCliente extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Show alquileres.
+	 */
 	public void showAlquileres() {
 		try {
 			this.alquiler = this.servicealq.getAllAlquileres(Conexion.obtener());

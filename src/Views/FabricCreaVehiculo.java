@@ -22,16 +22,38 @@ import Service.Conexion;
 import Service.VehiculoService;
 import models.Vehiculo;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FabricCreaVehiculo.
+ */
 public class FabricCreaVehiculo extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The txt id fabricante. */
 	private JTextField txtModelo, txtMarca, txtAnyo, txtColor, txtPrecio, txtIdFabricante;
+
+	/** The services. */
 	private final VehiculoService services = new VehiculoService();
+
+	/** The vehiculo. */
 	private final Vehiculo vehiculo;
+
+	/** The btn imagen. */
 	private JButton btnGuardar, btnCancelar, btnImagen;
+
+	/** The file chooser. */
 	private JFileChooser fileChooser;
+
+	/** The ruta. */
 	private String ruta;
 
+	/**
+	 * Instantiates a new fabric crea vehiculo.
+	 *
+	 * @param vehiculo the vehiculo
+	 */
 	public FabricCreaVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 		initComponents();
@@ -43,11 +65,17 @@ public class FabricCreaVehiculo extends JFrame {
 
 	}
 
+	/**
+	 * Instantiates a new fabric crea vehiculo.
+	 */
 	public FabricCreaVehiculo() {
 		this.vehiculo = new Vehiculo();
 		initComponents();
 	}
 
+	/**
+	 * Inits the components.
+	 */
 	public void initComponents() {
 		setTitle("Vehiculos");
 		setResizable(false);
@@ -136,6 +164,9 @@ public class FabricCreaVehiculo extends JFrame {
 		contentPane.add(btnImagen);
 	}
 
+	/**
+	 * Seleccionar imagen.
+	 */
 	private void seleccionarImagen() {
 		JFileChooser fileChooser = new JFileChooser();
 		int resultado = fileChooser.showOpenDialog(this);
@@ -151,8 +182,16 @@ public class FabricCreaVehiculo extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class ManejadorJButton.
+	 */
 	private class ManejadorJButton implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object o = e.getSource();

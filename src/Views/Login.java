@@ -20,18 +20,42 @@ import Service.Conexion;
 import models.Cliente;
 import javax.swing.SwingConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Login.
+ */
 public class Login extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The Usuario T. */
 	private JTextField UsuarioT;
+
+	/** The btn crear usuario. */
 	private JButton btnIniciarSesion, btnCrearUsuario;
+
+	/** The Contraseña P. */
 	private JPasswordField ContraseñaP;
+
+	/** The services. */
 	private final ClientService services = new ClientService();
+
+	/** The id cliente login. */
 	public static Integer idClienteLogin;
+
+	/** The id fabricante. */
 	public static Integer idFabricante;
+
+	/** The id vehiculo. */
 	public static Integer idVehiculo;
+
+	/** The nom user. */
 	public static String nomUser;
 
+	/**
+	 * Instantiates a new login.
+	 */
 	public Login() {
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -108,8 +132,16 @@ public class Login extends JFrame {
 		btnCrearUsuario.addActionListener(ma);
 	}
 
+	/**
+	 * The Class manejadorAction.
+	 */
 	private class manejadorAction implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
@@ -171,34 +203,74 @@ public class Login extends JFrame {
 		}
 	}
 
+	/**
+	 * Sets the id cliente login.
+	 *
+	 * @param id the new id cliente login
+	 */
 	public static void setidClienteLogin(Integer id) {
 		idClienteLogin = id;
 	}
 
+	/**
+	 * Gets the id cliente login.
+	 *
+	 * @return the id cliente login
+	 */
 	public static Integer getidClienteLogin() {
 		return idClienteLogin;
 	}
 
+	/**
+	 * Sets the id fabricante.
+	 *
+	 * @param id the new id fabricante
+	 */
 	public static void setidFabricante(Integer id) {
 		idFabricante = id;
 	}
 
+	/**
+	 * Gets the id fabricante.
+	 *
+	 * @return the id fabricante
+	 */
 	public static Integer getidFabricante() {
 		return idFabricante;
 	}
 
+	/**
+	 * Sets the id vehiculo.
+	 *
+	 * @param id the new id vehiculo
+	 */
 	public static void setidVehiculo(Integer id) {
 		idVehiculo = id;
 	}
 
+	/**
+	 * Gets the id vehiculo.
+	 *
+	 * @return the id vehiculo
+	 */
 	public static Integer getidVehiculo() {
 		return idVehiculo;
 	}
 
+	/**
+	 * Sets the nombre user.
+	 *
+	 * @param nom the new nombre user
+	 */
 	public static void setnombreUser(String nom) {
 		nomUser = nom;
 	}
 
+	/**
+	 * Gets the nombre user.
+	 *
+	 * @return the nombre user
+	 */
 	public static String getnombreUser() {
 		return nomUser;
 	}

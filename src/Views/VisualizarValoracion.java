@@ -19,14 +19,30 @@ import Service.Conexion;
 import Service.ValoracionService;
 import models.Valoracion;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VisualizarValoracion.
+ */
 public class VisualizarValoracion extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The text area. */
 	private static JTextArea textArea;
+
+	/** The Constant service. */
 	private final static ValoracionService service = new ValoracionService();
+
+	/** The valoracion. */
 	private List<Valoracion> valoracion = new ArrayList<>();
+
+	/** The btn agregar V. */
 	private JButton btnVolver, btnAgregarV;
 
+	/**
+	 * Instantiates a new visualizar valoracion.
+	 */
 	public VisualizarValoracion() {
 		super("Bandeja de valoraciones");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,6 +91,9 @@ public class VisualizarValoracion extends JFrame {
 		contentPane.add(btnAgregarV);
 	}
 
+	/**
+	 * Comentario.
+	 */
 	public static void Comentario() {
 		try {
 			List<Valoracion> datos = service.getAllValoracionId(Conexion.obtener());

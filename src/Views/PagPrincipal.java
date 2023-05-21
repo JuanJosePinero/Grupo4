@@ -12,16 +12,31 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PagPrincipal.
+ */
 public class PagPrincipal extends JFrame {
 
+	/** The frame. */
 	private JFrame frame;
+
+	/** The txt concesionarios felix. */
 	private JTextField txtConcesionariosFelix;
+
+	/** The btn entrar. */
 	private JButton btnEntrar;
 
+	/**
+	 * Instantiates a new pag principal.
+	 */
 	public PagPrincipal() {
 		initialize();
 	}
 
+	/**
+	 * Initialize.
+	 */
 	private void initialize() {
 		frame = new JFrame("Pagina Principal");
 		frame.setBounds(200, 200, 900, 600);

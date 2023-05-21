@@ -12,10 +12,22 @@ import javax.swing.JOptionPane;
 import Views.Login;
 import models.Comentario;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ComentarioService.
+ */
 public class ComentarioService {
 
+	/** The tabla. */
 	private final String tabla = "comentario";
 
+	/**
+	 * Save.
+	 *
+	 * @param conexion   the conexion
+	 * @param comentario the comentario
+	 * @throws SQLException the SQL exception
+	 */
 	public void save(Connection conexion, Comentario comentario) throws SQLException {
 		try {
 			PreparedStatement consulta;
@@ -41,6 +53,13 @@ public class ComentarioService {
 		}
 	}
 
+	/**
+	 * Gets the comentario.
+	 *
+	 * @param conexion the conexion
+	 * @return the comentario
+	 * @throws SQLException the SQL exception
+	 */
 	public Comentario getComentario(Connection conexion) throws SQLException {
 		Comentario comentario = null;
 		try {
@@ -57,6 +76,14 @@ public class ComentarioService {
 		return comentario;
 	}
 
+	/**
+	 * Gets the comentario id.
+	 *
+	 * @param conexion the conexion
+	 * @param id       the id
+	 * @return the comentario id
+	 * @throws SQLException the SQL exception
+	 */
 	public Comentario getComentarioId(Connection conexion, int id) throws SQLException {
 		Comentario comentario = null;
 		try {
@@ -74,6 +101,13 @@ public class ComentarioService {
 		return comentario;
 	}
 
+	/**
+	 * Removes the.
+	 *
+	 * @param conexion   the conexion
+	 * @param comentario the comentario
+	 * @throws SQLException the SQL exception
+	 */
 	public void remove(Connection conexion, Comentario comentario) throws SQLException {
 		try {
 			PreparedStatement consulta = conexion
@@ -85,6 +119,13 @@ public class ComentarioService {
 		}
 	}
 
+	/**
+	 * Gets the all comentario.
+	 *
+	 * @param conexion the conexion
+	 * @return the all comentario
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Comentario> getAllComentario(Connection conexion) throws SQLException {
 		List<Comentario> products = new ArrayList<>();
 		try {
@@ -101,6 +142,13 @@ public class ComentarioService {
 		return products;
 	}
 
+	/**
+	 * Gets the all comentario id.
+	 *
+	 * @param conexion the conexion
+	 * @return the all comentario id
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Comentario> getAllComentarioId(Connection conexion) throws SQLException {
 		List<Comentario> products = new ArrayList<>();
 		try {

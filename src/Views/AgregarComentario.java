@@ -24,18 +24,42 @@ import models.Cliente;
 import models.Comentario;
 import models.Vehiculo;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AgregarComentario.
+ */
 public class AgregarComentario extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The text area. */
 	private static JTextArea textArea;
+
+	/** The Constant service. */
 	private final static ComentarioService service = new ComentarioService();
+
+	/** The serviceveh. */
 	private final VehiculoService serviceveh = new VehiculoService();
+
+	/** The servicec. */
 	private final ClientService servicec = new ClientService();
+
+	/** The vehiculo. */
 	private Vehiculo vehiculo;
+
+	/** The cliente. */
 	private Cliente cliente;
+
+	/** The comentarios. */
 	private List<Comentario> comentarios = new ArrayList<>();
+
+	/** The btn enviar. */
 	private JButton btnCancelar, btnEnviar;
 
+	/**
+	 * Instantiates a new agregar comentario.
+	 */
 	public AgregarComentario() {
 		super("Agregar Comentario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,6 +114,9 @@ public class AgregarComentario extends JFrame {
 		contentPane.add(btnCancelar);
 	}
 
+	/**
+	 * Update valoracion.
+	 */
 	public void updateValoracion() {
 		try {
 			String comentario = textArea.getText();
@@ -107,6 +134,9 @@ public class AgregarComentario extends JFrame {
 		}
 	}
 
+	/**
+	 * Update vehiculo.
+	 */
 	public void updateVehiculo() {
 		try {
 			vehiculo = serviceveh.getVehiculo(Conexion.obtener(), Login.getidVehiculo());
@@ -142,6 +172,9 @@ public class AgregarComentario extends JFrame {
 		}
 	}
 
+	/**
+	 * Update cliente.
+	 */
 	public void updateCliente() {
 		try {
 			cliente = servicec.getClienteId(Conexion.obtener(), Login.getidClienteLogin());

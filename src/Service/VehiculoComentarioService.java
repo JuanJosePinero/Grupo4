@@ -11,8 +11,19 @@ import models.Comentario;
 import models.Vehiculo;
 import models.VehiculoConComentarios;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VehiculoComentarioService.
+ */
 public class VehiculoComentarioService {
 
+	/**
+	 * Gets the vehiculos con comentarios.
+	 *
+	 * @param conexion the conexion
+	 * @return the vehiculos con comentarios
+	 * @throws SQLException the SQL exception
+	 */
 	public List<VehiculoConComentarios> getVehiculosConComentarios(Connection conexion) throws SQLException {
 		List<VehiculoConComentarios> vehiculosConComentarios = new ArrayList<>();
 		try {

@@ -20,14 +20,30 @@ import Service.ComentarioService;
 import Service.Conexion;
 import models.Comentario;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VisualizarComents.
+ */
 public class VisualizarComents extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The Comentario B. */
 	private JButton ComentarioB;
+
+	/** The text area. */
 	private static JTextArea textArea;
+
+	/** The Constant service. */
 	private final static ComentarioService service = new ComentarioService();
+
+	/** The comentario. */
 	private List<Comentario> comentario = new ArrayList<>();
 
+	/**
+	 * Instantiates a new visualizar coments.
+	 */
 	public VisualizarComents() {
 		super("Bandeja de valoraciones");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,8 +90,16 @@ public class VisualizarComents extends JFrame {
 		ComentarioB.addActionListener(ma);
 	}
 
+	/**
+	 * The Class ManejadorAction.
+	 */
 	private class ManejadorAction implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton j = (JButton) e.getSource();
@@ -88,6 +112,9 @@ public class VisualizarComents extends JFrame {
 
 	}
 
+	/**
+	 * Comentario.
+	 */
 	public static void Comentario() {
 		try {
 			List<Comentario> datos = service.getAllComentarioId(Conexion.obtener());

@@ -10,9 +10,22 @@ import java.util.List;
 import models.Cliente;
 import models.Vehiculo;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClientService.
+ */
 public class ClientService {
+
+	/** The tabla. */
 	private final String tabla = "cliente";
 
+	/**
+	 * Save.
+	 *
+	 * @param conexion the conexion
+	 * @param cliente  the cliente
+	 * @throws SQLException the SQL exception
+	 */
 	public void save(Connection conexion, Cliente cliente) throws SQLException {
 		try {
 			PreparedStatement consulta;
@@ -51,6 +64,14 @@ public class ClientService {
 		}
 	}
 
+	/**
+	 * Gets the cliente.
+	 *
+	 * @param conexion      the conexion
+	 * @param nombreUsuario the nombre usuario
+	 * @return the cliente
+	 * @throws SQLException the SQL exception
+	 */
 	public Cliente getCliente(Connection conexion, String nombreUsuario) throws SQLException {
 		Cliente cliente = null;
 		try {
@@ -72,6 +93,14 @@ public class ClientService {
 		return cliente;
 	}
 
+	/**
+	 * Gets the cliente id.
+	 *
+	 * @param conexion the conexion
+	 * @param id       the id
+	 * @return the cliente id
+	 * @throws SQLException the SQL exception
+	 */
 	public Cliente getClienteId(Connection conexion, int id) throws SQLException {
 		Cliente cliente = null;
 		try {
@@ -93,6 +122,13 @@ public class ClientService {
 		return cliente;
 	}
 
+	/**
+	 * Removes the.
+	 *
+	 * @param conexion the conexion
+	 * @param cliente  the cliente
+	 * @throws SQLException the SQL exception
+	 */
 	public void remove(Connection conexion, Cliente cliente) throws SQLException {
 		try {
 			PreparedStatement consulta = conexion.prepareStatement("DELETE FROM " + this.tabla + " WHERE id = ?");
@@ -103,6 +139,13 @@ public class ClientService {
 		}
 	}
 
+	/**
+	 * Gets the all cliente.
+	 *
+	 * @param conexion the conexion
+	 * @return the all cliente
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Cliente> getAllCliente(Connection conexion) throws SQLException {
 		List<Cliente> cliente = new ArrayList<>();
 		try {
@@ -122,6 +165,13 @@ public class ClientService {
 		return cliente;
 	}
 
+	/**
+	 * Gets the all rol cliente.
+	 *
+	 * @param conexion the conexion
+	 * @return the all rol cliente
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Cliente> getAllRolCliente(Connection conexion) throws SQLException {
 		List<Cliente> cliente = new ArrayList<>();
 		try {
@@ -140,6 +190,13 @@ public class ClientService {
 		return cliente;
 	}
 
+	/**
+	 * Gets the compras cliente.
+	 *
+	 * @param conexion the conexion
+	 * @return the compras cliente
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Cliente> getComprasCliente(Connection conexion) throws SQLException {
 		List<Cliente> cliente = new ArrayList<>();
 		try {
@@ -168,6 +225,13 @@ public class ClientService {
 		return cliente;
 	}
 
+	/**
+	 * Gets the alquileres cliente.
+	 *
+	 * @param conexion the conexion
+	 * @return the alquileres cliente
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Cliente> getAlquileresCliente(Connection conexion) throws SQLException {
 		List<Cliente> cliente = new ArrayList<>();
 		try {
@@ -197,6 +261,13 @@ public class ClientService {
 		return cliente;
 	}
 
+	/**
+	 * Gets the comentarios cliente.
+	 *
+	 * @param conexion the conexion
+	 * @return the comentarios cliente
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Cliente> getComentariosCliente(Connection conexion) throws SQLException {
 		List<Cliente> cliente = new ArrayList<>();
 		try {
@@ -218,9 +289,6 @@ public class ClientService {
 				int numvaloraciones = resultado.getInt("numvaloraciones");
 				cliente.add(
 						new Cliente(id, nombre, direccion, rol, usuario, contrasenya, numcomentarios, numvaloraciones));
-				for (Cliente cliente2 : cliente) {
-					System.out.println(cliente2);
-				}
 			}
 		} catch (SQLException ex) {
 			throw new SQLException(ex);
@@ -228,6 +296,13 @@ public class ClientService {
 		return cliente;
 	}
 
+	/**
+	 * Gets the valoraciones cliente.
+	 *
+	 * @param conexion the conexion
+	 * @return the valoraciones cliente
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Cliente> getValoracionesCliente(Connection conexion) throws SQLException {
 		List<Cliente> cliente = new ArrayList<>();
 		try {

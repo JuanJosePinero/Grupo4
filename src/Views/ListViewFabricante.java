@@ -21,14 +21,30 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListViewFabricante.
+ */
 public class ListViewFabricante extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The jtable P. */
 	private JTable jtableP;
+
+	/** The services. */
 	private final FabricantesService services = new FabricantesService();
+
+	/** The fabricante. */
 	private List<Fabricante> fabricante;
+
+	/** The id fabricante. */
 	private static int idFabricante;
 
+	/**
+	 * Instantiates a new list view fabricante.
+	 */
 	public ListViewFabricante() {
 		setTitle("Fabricante");
 		setResizable(false);
@@ -165,6 +181,9 @@ public class ListViewFabricante extends JFrame {
 
 	}
 
+	/**
+	 * Show fabricante.
+	 */
 	private void showFabricante() {
 		try {
 			this.fabricante = this.services.getAllFabricantes(Conexion.obtener());
@@ -195,10 +214,20 @@ public class ListViewFabricante extends JFrame {
 		}
 	}
 
+	/**
+	 * Sets the id fabricante crear.
+	 *
+	 * @param id the new id fabricante crear
+	 */
 	public static void setidFabricanteCrear(Integer id) {
 		idFabricante = id;
 	}
 
+	/**
+	 * Gets the id fabricante crear.
+	 *
+	 * @return the id fabricante crear
+	 */
 	public static Integer getidFabricanteCrear() {
 		return idFabricante;
 	}

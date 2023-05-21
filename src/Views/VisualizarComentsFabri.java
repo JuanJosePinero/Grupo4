@@ -22,14 +22,30 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VisualizarComentsFabri.
+ */
 public class VisualizarComentsFabri extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The text area. */
 	private static JTextArea textArea;
+
+	/** The Constant service. */
 	private final static ComentarioService service = new ComentarioService();
+
+	/** The comentarios. */
 	private List<Comentario> comentarios = new ArrayList<>();
+
+	/** The btn volver. */
 	private JButton btnVolver;
 
+	/**
+	 * Instantiates a new visualizar coments fabri.
+	 */
 	public VisualizarComentsFabri() {
 		super("Bandeja de comentarios");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,6 +83,9 @@ public class VisualizarComentsFabri extends JFrame {
 		contentPane.add(btnVolver);
 	}
 
+	/**
+	 * Comentario.
+	 */
 	public static void Comentario() {
 		try {
 			List<Comentario> datos = service.getAllComentarioId(Conexion.obtener());

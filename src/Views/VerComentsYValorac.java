@@ -12,11 +12,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VerComentsYValorac.
+ */
 public class VerComentsYValorac extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The btn cancelar. */
 	private JButton btnVerComentarios, btnVerValoraciones, btnCancelar;
 
+	/**
+	 * Instantiates a new ver coments Y valorac.
+	 */
 	public VerComentsYValorac() {
 		super("Comentarios y Valoraciones de los Vehiculas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,8 +70,16 @@ public class VerComentsYValorac extends JFrame {
 		btnVerValoraciones.addActionListener(mb);
 	}
 
+	/**
+	 * The Class ManejadorJButton.
+	 */
 	public class ManejadorJButton implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object o = e.getSource();

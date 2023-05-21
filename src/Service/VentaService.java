@@ -8,10 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 import models.Venta;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VentaService.
+ */
 public class VentaService {
 
+	/** The tabla. */
 	private final String tabla = "venta";
 
+	/**
+	 * Save.
+	 *
+	 * @param conexion the conexion
+	 * @param venta    the venta
+	 * @throws SQLException the SQL exception
+	 */
 	public void save(Connection conexion, Venta venta) throws SQLException {
 		try {
 			PreparedStatement consulta;
@@ -38,6 +50,14 @@ public class VentaService {
 		}
 	}
 
+	/**
+	 * Gets the venta.
+	 *
+	 * @param conexion the conexion
+	 * @param idVenta  the id venta
+	 * @return the venta
+	 * @throws SQLException the SQL exception
+	 */
 	public Venta getVenta(Connection conexion, Integer idVenta) throws SQLException {
 		Venta venta = null;
 		try {
@@ -55,6 +75,15 @@ public class VentaService {
 		return venta;
 	}
 
+	/**
+	 * Gets the ventaid.
+	 *
+	 * @param conexion   the conexion
+	 * @param idCliente  the id cliente
+	 * @param idVehiculo the id vehiculo
+	 * @return the ventaid
+	 * @throws SQLException the SQL exception
+	 */
 	public Venta getVentaid(Connection conexion, Integer idCliente, Integer idVehiculo) throws SQLException {
 		Venta venta = null;
 		try {
@@ -73,6 +102,13 @@ public class VentaService {
 		return venta;
 	}
 
+	/**
+	 * Removes the.
+	 *
+	 * @param conexion the conexion
+	 * @param venta    the venta
+	 * @throws SQLException the SQL exception
+	 */
 	public void remove(Connection conexion, Venta venta) throws SQLException {
 		try {
 			PreparedStatement consulta = conexion.prepareStatement("DELETE FROM " + this.tabla + " WHERE idVenta = ?");
@@ -83,6 +119,13 @@ public class VentaService {
 		}
 	}
 
+	/**
+	 * Gets the all ventas.
+	 *
+	 * @param conexion the conexion
+	 * @return the all ventas
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Venta> getAllVentas(Connection conexion) throws SQLException {
 		List<Venta> products = new ArrayList<>();
 		try {

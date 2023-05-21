@@ -24,16 +24,36 @@ import models.Vehiculo;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VisualizarVehiculosCrear.
+ */
 public class VisualizarVehiculosCrear extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The jtable P. */
 	private JTable jtableP;
+
+	/** The services. */
 	private final VehiculoService services = new VehiculoService();
+
+	/** The services F. */
 	private final FabricantesService servicesF = new FabricantesService();
+
+	/** The vehiculo. */
 	private List<Vehiculo> vehiculo;
+
+	/** The fabricante. */
 	private List<Fabricante> fabricante;
+
+	/** The btn crear. */
 	private JButton btnComentarios, btnValoraciones, btnCrear;
 
+	/**
+	 * Instantiates a new visualizar vehiculos crear.
+	 */
 	public VisualizarVehiculosCrear() {
 		setTitle("Vehiculos");
 		setResizable(false);
@@ -106,6 +126,9 @@ public class VisualizarVehiculosCrear extends JFrame {
 		btnValoraciones.addActionListener(ma);
 	}
 
+	/**
+	 * Show vehiculos id fabricante.
+	 */
 	public void showVehiculosIdFabricante() {
 		try {
 			this.vehiculo = this.services.getAllVehiculosFabric(Conexion.obtener());
@@ -137,29 +160,41 @@ public class VisualizarVehiculosCrear extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class manejadorAction.
+	 */
 	private class manejadorAction implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton j = (JButton) e.getSource();
 			int filaS = jtableP.getSelectedRow();
 
-			String nombreCliente = jtableP.getValueAt(filaS, 0).toString();
+			try {
+				String nombreCliente = jtableP.getValueAt(filaS, 0).toString();
 
-			Vehiculo v = vehiculo.get(filaS);
-			int id = v.getIdVehiculos();
-			if (j.equals(btnComentarios)) {
-				Login.setidVehiculo(id);
+				Vehiculo v = vehiculo.get(filaS);
+				int id = v.getIdVehiculos();
+				if (j.equals(btnComentarios)) {
+					Login.setidVehiculo(id);
 
-				VisualizarComentsFabri vcf = new VisualizarComentsFabri();
-				vcf.setVisible(true);
-				dispose();
+					VisualizarComentsFabri vcf = new VisualizarComentsFabri();
+					vcf.setVisible(true);
+					dispose();
 
-			} else if (j.equals(btnValoraciones)) {
-				Login.setidVehiculo(id);
-				VisualizarValoranFabri vcf = new VisualizarValoranFabri();
-				vcf.setVisible(true);
-				dispose();
+				} else if (j.equals(btnValoraciones)) {
+					Login.setidVehiculo(id);
+					VisualizarValoranFabri vcf = new VisualizarValoranFabri();
+					vcf.setVisible(true);
+					dispose();
+				}
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(null, "Seleccione una fila", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 			}
 
 		}

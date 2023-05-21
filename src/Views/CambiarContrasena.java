@@ -17,17 +17,39 @@ import Service.ClientService;
 import Service.Conexion;
 import models.Cliente;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CambiarContrasena.
+ */
 public class CambiarContrasena extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The Usuario T. */
 	private JTextField UsuarioT;
+
+	/** The Cancelar B. */
 	private JButton ConfirmarB, CancelarB;
+
+	/** The services. */
 	private final ClientService services = new ClientService();
+
+	/** The cliente. */
 	private Cliente cliente;
+
+	/** The id. */
 	private int id = ListViewClientes.getidClienteCrear();
+
+	/** The Cont P. */
 	private JPasswordField ContP;
+
+	/** The C cont P. */
 	private JPasswordField CContP;
 
+	/**
+	 * Instantiates a new cambiar contrasena.
+	 */
 	public CambiarContrasena() {
 		super("Cambio de contraseña");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,8 +108,16 @@ public class CambiarContrasena extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class manejadorAction.
+	 */
 	private class manejadorAction implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
@@ -102,7 +132,9 @@ public class CambiarContrasena extends JFrame {
 					datos.setContrasena(cont);
 
 					if (!cont.matches("[A-Z].*[0-9].*")) {
-						JOptionPane.showMessageDialog(null, "Error");
+						JOptionPane.showMessageDialog(null,
+								"La contraseña tiene que empezar por Mayuscula y Contener un numero", "Aviso",
+								JOptionPane.ERROR_MESSAGE);
 					} else if (!cont.equals(ccont))
 						JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Aviso",
 								JOptionPane.ERROR_MESSAGE);

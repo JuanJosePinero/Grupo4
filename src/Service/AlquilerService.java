@@ -11,10 +11,22 @@ import java.util.List;
 import Views.Login;
 import models.Alquiler;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AlquilerService.
+ */
 public class AlquilerService {
 
+	/** The tabla. */
 	private final String tabla = "alquiler";
 
+	/**
+	 * Save.
+	 *
+	 * @param conexion the conexion
+	 * @param alquiler the alquiler
+	 * @throws SQLException the SQL exception
+	 */
 	public void save(Connection conexion, Alquiler alquiler) throws SQLException {
 		try {
 			PreparedStatement consulta;
@@ -42,6 +54,14 @@ public class AlquilerService {
 		}
 	}
 
+	/**
+	 * Gets the alquiler.
+	 *
+	 * @param conexion the conexion
+	 * @param id       the id
+	 * @return the alquiler
+	 * @throws SQLException the SQL exception
+	 */
 	public Alquiler getAlquiler(Connection conexion, int id) throws SQLException {
 		Alquiler alquiler = null;
 		try {
@@ -60,6 +80,13 @@ public class AlquilerService {
 		return alquiler;
 	}
 
+	/**
+	 * Removes the.
+	 *
+	 * @param conexion the conexion
+	 * @param alquiler the alquiler
+	 * @throws SQLException the SQL exception
+	 */
 	public void remove(Connection conexion, Alquiler alquiler) throws SQLException {
 		try {
 			PreparedStatement consulta = conexion.prepareStatement("DELETE FROM " + this.tabla + " WHERE idVenta = ?");
@@ -70,6 +97,13 @@ public class AlquilerService {
 		}
 	}
 
+	/**
+	 * Gets the all alquileres.
+	 *
+	 * @param conexion the conexion
+	 * @return the all alquileres
+	 * @throws SQLException the SQL exception
+	 */
 	public List<Alquiler> getAllAlquileres(Connection conexion) throws SQLException {
 		List<Alquiler> alquiler = new ArrayList<>();
 		try {

@@ -13,12 +13,24 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ControlAdmin.
+ */
 public class ControlAdmin extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The Vehiculos. */
 	private JButton Cliente, Fabricante, Vehiculos;
+
+	/** The Volver B. */
 	private JButton VolverB;
 
+	/**
+	 * Instantiates a new control admin.
+	 */
 	public ControlAdmin() {
 		super("Control Admin");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,8 +92,16 @@ public class ControlAdmin extends JFrame {
 		Vehiculos.addActionListener(ma);
 	}
 
+	/**
+	 * The Class manejadorAction.
+	 */
 	private class manejadorAction implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton j = (JButton) e.getSource();

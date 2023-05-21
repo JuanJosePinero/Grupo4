@@ -21,20 +21,41 @@ import Service.VehiculoComentarioService;
 import models.Comentario;
 import models.VehiculoConComentarios;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ComentariosVehiculos.
+ */
 public class ComentariosVehiculos extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The frame. */
 	private JFrame frame;
+
+	/** The txtcoments. */
 	private JTextArea txtcoments;
+
+	/** The btn filtrar. */
 	private JButton btnFiltrar;
+
+	/** The service. */
 	private final VehiculoComentarioService service = new VehiculoComentarioService();
+
+	/** The vehiculos. */
 	private List<VehiculoConComentarios> vehiculos;
 
+	/**
+	 * Instantiates a new comentarios vehiculos.
+	 */
 	public ComentariosVehiculos() {
 		initialize();
 		vehiculos = new ArrayList<>();
 	}
 
+	/**
+	 * Initialize.
+	 */
 	private void initialize() {
 		setTitle("Comentarios");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,15 +90,28 @@ public class ComentariosVehiculos extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * The Class ManejadorJButton.
+	 */
 	private class ManejadorJButton implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane.showMessageDialog(null, "Volviendo...", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+			VentanaCatalogo vc = new VentanaCatalogo();
+			vc.setVisible(true);
 			dispose();
 		}
 	}
 
+	/**
+	 * Show vehiculoscoment.
+	 */
 	private void showVehiculoscoment() {
 		try {
 			vehiculos = service.getVehiculosConComentarios(Conexion.obtener());

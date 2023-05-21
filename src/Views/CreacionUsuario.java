@@ -20,23 +20,57 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CreacionUsuario.
+ */
 public class CreacionUsuario extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The Nombre T. */
 	private JTextField NombreT;
+
+	/** The Apellido T. */
 	private JTextField ApellidoT;
+
+	/** The Direccion T. */
 	private JTextField DireccionT;
+
+	/** The Usuario T. */
 	private JTextField UsuarioT;
+
+	/** The Contraseña P. */
 	private JPasswordField ContraseñaP;
+
+	/** The C contraseña P. */
 	private JPasswordField CContraseñaP;
+
+	/** The txt debil. */
 	private JTextField txtDebil;
+
+	/** The txt fuerte. */
 	private JTextField txtFuerte;
+
+	/** The txt moderado. */
 	private JTextField txtModerado;
+
+	/** The Cancelar B. */
 	private JButton ConfrimarB, CancelarB;
+
+	/** The services. */
 	private final ClientService services = new ClientService();
+
+	/** The user. */
 	private List<Cliente> user;
+
+	/** The lbl new label. */
 	private JLabel lblNewLabel;
 
+	/**
+	 * Instantiates a new creacion usuario.
+	 */
 	public CreacionUsuario() {
 		setTitle("Creacion de Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -173,8 +207,16 @@ public class CreacionUsuario extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * The Class manejadorAction.
+	 */
 	private class manejadorAction implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JTextField j = (JTextField) e.getSource();
@@ -186,8 +228,16 @@ public class CreacionUsuario extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class manejadorActionBoton.
+	 */
 	private class manejadorActionBoton implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
@@ -200,6 +250,9 @@ public class CreacionUsuario extends JFrame {
 		}
 	}
 
+	/**
+	 * Crear usuario.
+	 */
 	public void crearUsuario() {
 		String nombre = NombreT.getText();
 		String apellido = ApellidoT.getText();
@@ -244,6 +297,9 @@ public class CreacionUsuario extends JFrame {
 		}
 	}
 
+	/**
+	 * Contraseña.
+	 */
 	public void Contraseña() {
 		char[] user = ContraseñaP.getPassword();
 		String userS = new String(user);
@@ -268,6 +324,9 @@ public class CreacionUsuario extends JFrame {
 					JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	/**
+	 * Confrimar contraseña.
+	 */
 	public void confrimarContraseña() {
 		char[] user = ContraseñaP.getPassword();
 		String userS = new String(user);
@@ -281,6 +340,11 @@ public class CreacionUsuario extends JFrame {
 					JOptionPane.ERROR_MESSAGE, null);
 	}
 
+	/**
+	 * Comprabar cliente.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean comprabarCliente() {
 		try {
 			user = services.getAllCliente(Conexion.obtener());

@@ -27,16 +27,38 @@ import Service.Conexion;
 import Service.VehiculoService;
 import models.Vehiculo;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SaveViewVehiculos.
+ */
 public class SaveViewVehiculos extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The txt id fabricante. */
 	private JTextField txtModelo, txtMarca, txtAnyo, txtColor, txtPrecio, txtIdFabricante;
+
+	/** The services. */
 	private final VehiculoService services = new VehiculoService();
+
+	/** The vehiculo. */
 	private final Vehiculo vehiculo;
+
+	/** The btn imagen. */
 	private JButton btnGuardar, btnCancelar, btnImagen;
+
+	/** The file chooser. */
 	private JFileChooser fileChooser;
+
+	/** The ruta. */
 	private static String ruta;
 
+	/**
+	 * Instantiates a new save view vehiculos.
+	 *
+	 * @param vehiculo the vehiculo
+	 */
 	public SaveViewVehiculos(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 		initComponents();
@@ -48,11 +70,17 @@ public class SaveViewVehiculos extends JFrame {
 
 	}
 
+	/**
+	 * Instantiates a new save view vehiculos.
+	 */
 	public SaveViewVehiculos() {
 		this.vehiculo = new Vehiculo();
 		initComponents();
 	}
 
+	/**
+	 * Inits the components.
+	 */
 	public void initComponents() {
 		setTitle("Vehiculos");
 		setResizable(false);
@@ -142,6 +170,9 @@ public class SaveViewVehiculos extends JFrame {
 
 	}
 
+	/**
+	 * Seleccionar imagen.
+	 */
 	private void seleccionarImagen() {
 		JFileChooser fileChooser = new JFileChooser();
 		int resultado = fileChooser.showOpenDialog(this);
@@ -156,8 +187,16 @@ public class SaveViewVehiculos extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class ManejadorJButton.
+	 */
 	private class ManejadorJButton implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object o = e.getSource();
@@ -248,6 +287,12 @@ public class SaveViewVehiculos extends JFrame {
 
 	}
 
+	/**
+	 * Gets the file extension.
+	 *
+	 * @param fileName the file name
+	 * @return the file extension
+	 */
 	private static String getFileExtension(String fileName) {
 		int dotIndex = fileName.lastIndexOf('.');
 		if (dotIndex > 0 && dotIndex < fileName.length() - 1) {
@@ -256,6 +301,14 @@ public class SaveViewVehiculos extends JFrame {
 		return "";
 	}
 
+	/**
+	 * Resize image.
+	 *
+	 * @param originalImage the original image
+	 * @param width         the width
+	 * @param height        the height
+	 * @return the buffered image
+	 */
 	static BufferedImage resizeImage(BufferedImage originalImage, int width, int height) {
 		BufferedImage resizedImage = new BufferedImage(width, height, originalImage.getType());
 		Graphics2D g2d = resizedImage.createGraphics();

@@ -22,14 +22,30 @@ import Service.ValoracionService;
 import models.Comentario;
 import models.Valoracion;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VisualizarValoranFabri.
+ */
 public class VisualizarValoranFabri extends JFrame {
 
+	/** The content pane. */
 	private JPanel contentPane;
+
+	/** The text area. */
 	private static JTextArea textArea;
+
+	/** The Constant service. */
 	private final static ValoracionService service = new ValoracionService();
+
+	/** The valoracion. */
 	private List<Valoracion> valoracion = new ArrayList<>();
+
+	/** The btn volver. */
 	private JButton btnVolver;
 
+	/**
+	 * Instantiates a new visualizar valoran fabri.
+	 */
 	public VisualizarValoranFabri() {
 		super("Bandeja de valoraciones");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,8 +74,8 @@ public class VisualizarValoranFabri extends JFrame {
 		btnVolver.setIcon(new ImageIcon("images/felcha.png"));
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaCatalogo vc = new VentanaCatalogo();
-				vc.setVisible(true);
+				VisualizarVehiculosCrear vvc = new VisualizarVehiculosCrear();
+				vvc.setVisible(true);
 				dispose();
 			}
 		});
@@ -67,6 +83,9 @@ public class VisualizarValoranFabri extends JFrame {
 		contentPane.add(btnVolver);
 	}
 
+	/**
+	 * Comentario.
+	 */
 	public static void Comentario() {
 		try {
 			List<Valoracion> datos = service.getAllValoracionId(Conexion.obtener());
