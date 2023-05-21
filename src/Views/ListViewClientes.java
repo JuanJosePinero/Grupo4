@@ -107,7 +107,7 @@ public class ListViewClientes extends JFrame {
 								Integer id = datos.getIdClientes();
 								int act = 0;
 								int coments = datos.getNumComentarios();
-								int valorac = datos.getNumValoracion();
+								int valorac = datos.getNumValoraciones();
 
 								datos.setIdClientes(id);
 								datos.setNombre(nom);
@@ -316,7 +316,7 @@ public class ListViewClientes extends JFrame {
 				dtm.addRow(new Object[] { this.Clientes.get(i).getIdClientes(), this.Clientes.get(i).getNombre(),
 						this.Clientes.get(i).getDireccion(), this.Clientes.get(i).getRol(),
 						this.Clientes.get(i).getNombreUsuario(), this.Clientes.get(i).getContrasena(),
-						this.Clientes.get(i).getActivar(), this.Clientes.get(i).getNumValoracion() });
+						this.Clientes.get(i).getActivar(), this.Clientes.get(i).getNumValoraciones() });
 			}
 
 		} catch (SQLException ex) {

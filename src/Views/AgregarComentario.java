@@ -164,7 +164,7 @@ public class AgregarComentario extends JFrame {
 			int numA = cliente.getNumAlquileres();
 			int numCO = (cliente.getNumComentarios()+1);
 			
-			int numV = cliente.getNumValoracion();
+			int numV = cliente.getNumValoraciones();
 			cliente.setIdClientes(id);
 			cliente.setNombre(nom);
 			cliente.setDireccion(dir);

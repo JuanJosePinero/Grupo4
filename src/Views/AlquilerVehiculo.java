@@ -335,7 +335,7 @@ public class AlquilerVehiculo extends JFrame {
 				int numC = (datos.getNumCompras());
 				int numA = (datos.getNumAlquileres() + 1);
 				int numCO = datos.getNumComentarios();
-				int numV = datos.getNumValoracion();
+				int numV = datos.getNumValoraciones();
 				cliente.setIdClientes(Login.getidClienteLogin());
 				cliente.setNombre(nom);
 				cliente.setDireccion(dir);

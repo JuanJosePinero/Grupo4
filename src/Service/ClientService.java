@@ -28,7 +28,7 @@ public class ClientService {
 				consulta.setInt(7, cliente.getNumCompras());
 				consulta.setInt(8, cliente.getNumAlquileres());
 				consulta.setInt(9, cliente.getNumComentarios());
-				consulta.setInt(10, cliente.getNumValoracion());
+				consulta.setInt(10, cliente.getNumValoraciones());
 
 			} else {
 				consulta = conexion.prepareStatement("UPDATE " + this.tabla
@@ -42,7 +42,7 @@ public class ClientService {
 				consulta.setInt(7, cliente.getNumCompras());
 				consulta.setInt(8, cliente.getNumAlquileres());
 				consulta.setInt(9, cliente.getNumComentarios());
-				consulta.setInt(10, cliente.getNumValoracion());
+				consulta.setInt(10, cliente.getNumValoraciones());
 				consulta.setInt(11, cliente.getIdClientes());
 			}
 			consulta.executeUpdate();

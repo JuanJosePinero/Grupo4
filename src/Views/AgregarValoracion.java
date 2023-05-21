@@ -222,7 +222,7 @@ public class AgregarValoracion extends JFrame {
 			int numA = cliente.getNumAlquileres();
 			int numCO = (cliente.getNumComentarios());
 			
-			int numV = (cliente.getNumValoracion()+1);
+			int numV = (cliente.getNumValoraciones()+1);
 			cliente.setIdClientes(id);
 			cliente.setNombre(nom);
 			cliente.setDireccion(dir);

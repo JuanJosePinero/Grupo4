@@ -7,7 +7,7 @@ public class Cliente {
     private String nombre,direccion;
     private String rol;
     private String nombreUsuario,contrasena;
-	public int activar, numCompras, numAlquileres,numComentarios,numValoracion;
+	public int activar, numCompras, numAlquileres,numComentarios,numValoraciones;
 
 	public Cliente(Integer idClientes, String nombre, String direccion, String rol, String nombreUsuario,
 			String contrasena, int activar, int numCompras) {
@@ -37,7 +37,7 @@ public class Cliente {
 	}
 
 	public Cliente(Integer idClientes, String nombre, String direccion, String rol, String nombreUsuario,
-			String contrasena, int activar, int numCompras, int numAlquileres, int numComentarios,int numValoracion) {
+			String contrasena, int activar, int numCompras, int numAlquileres, int numComentarios,int numValoraciones) {
 		super();
 		this.idClientes = idClientes;
 		this.nombre = nombre;
@@ -49,7 +49,7 @@ public class Cliente {
 		this.numCompras = numCompras;
 		this.numAlquileres = numAlquileres;
 		this.numComentarios = numComentarios;
-		this.numValoracion = numValoracion;
+		this.numValoraciones = numValoraciones;
 	}
 
 	public int getNumCompras() {
@@ -122,11 +122,11 @@ public class Cliente {
 	public void setNumComentarios(int numComentarios) {
 		this.numComentarios = numComentarios;
 	}
-	public int getNumValoracion() {
-		return numValoracion;
+	public int getNumValoraciones() {
+		return numValoraciones;
 	}
-	public void setNumValoracion(int numValoracion) {
-		this.numValoracion = numValoracion;
+	public void setNumValoracion(int numValoraciones) {
+		this.numValoraciones = numValoraciones;
 	}
 	public Cliente(String nombre, String direccion, String rol, String nombreUsuario,
 			String contrasena,int activar) {
@@ -140,10 +140,6 @@ public class Cliente {
 		this.activar=activar;
 	}
 	
-	
-	
-	
-
 	public Cliente(Integer idClientes, String nombre, String direccion, String rol, String nombreUsuario,
 			String contrasena,int activar) {
 		super();
@@ -154,7 +150,6 @@ public class Cliente {
 		this.nombreUsuario = nombreUsuario;
 		this.contrasena = contrasena;
 		this.activar=activar;
-		
 	}
 
 	public Cliente() {
@@ -165,8 +160,5 @@ public class Cliente {
 		return "Cliente [idClientes=" + idClientes + ", nombre=" + nombre + ", direccion=" + direccion + ", rol=" + rol
 				+ ", nombreUsuario=" + nombreUsuario + ", contrasena=" + contrasena + "]";
 	}
-    
-	
 
-    
 }

@@ -220,7 +220,7 @@ public class ComprarVehiculo extends JFrame {
 						int numC = (datos.getNumCompras()+1);
 						int numA = datos.getNumAlquileres();
 						int numCO = datos.getNumComentarios();
-						int numV = datos.getNumValoracion();
+						int numV = datos.getNumValoraciones();
 						cliente.setIdClientes(Login.getidClienteLogin());
 						cliente.setNombre(nom);
 						cliente.setDireccion(dir);
