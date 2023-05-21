@@ -51,9 +51,6 @@ public class VentanaCatalogo extends JFrame {
 	private String rutaNueva;
 	private ImageIcon imagen;
 
-	
-
-	
 	public VentanaCatalogo() {
 		super("Catalogo de Coches de nuestra Empresa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

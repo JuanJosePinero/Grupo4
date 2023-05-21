@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class PagPrincipal extends JFrame{
+public class PagPrincipal extends JFrame {
 
 	private JFrame frame;
 	private JTextField txtConcesionariosFelix;
@@ -22,7 +22,6 @@ public class PagPrincipal extends JFrame{
 		initialize();
 	}
 
-	
 	private void initialize() {
 		frame = new JFrame("Pagina Principal");
 		frame.setBounds(200, 200, 900, 600);

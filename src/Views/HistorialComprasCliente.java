@@ -18,14 +18,14 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
-public class HistorialComprasCliente extends JFrame{
+public class HistorialComprasCliente extends JFrame {
 	private JPanel contentPane;
 	private JTable jtableP;
 	private JButton BotonVolver;
 	private final VehiculoService services = new VehiculoService();
 	private List<Vehiculo> vehiculo;
-	
-	HistorialComprasCliente(){
+
+	HistorialComprasCliente() {
 		super("Historial de compras");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,8 +38,9 @@ public class HistorialComprasCliente extends JFrame{
 		BotonVolver = new JButton("Volver");
 		BotonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Volviendo a la ventana del catalogo", "Aviso", JOptionPane.ERROR_MESSAGE);
-				VentanaCatalogo vc=new VentanaCatalogo();
+				JOptionPane.showMessageDialog(null, "Volviendo a la ventana del catalogo", "Aviso",
+						JOptionPane.ERROR_MESSAGE);
+				VentanaCatalogo vc = new VentanaCatalogo();
 				vc.setVisible(true);
 				vc.setLocationRelativeTo(null);
 				dispose();
@@ -47,41 +48,43 @@ public class HistorialComprasCliente extends JFrame{
 		});
 		BotonVolver.setBounds(165, 198, 97, 25);
 		getContentPane().add(BotonVolver);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(50, 42, 332, 143);
 		contentPane.add(scrollPane);
-		
+
 		jtableP = new JTable();
 		showVehiculosClientes();
 		scrollPane.setViewportView(jtableP);
 		setVisible(true);
 	}
-	
-	public void showVehiculosClientes() {
-	    try {
-	        this.vehiculo = this.services.getAllVehiculosCliente(Conexion.obtener());
-	        jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-	        }, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" }));
-	        DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
-	        dtm.setRowCount(0);
-	        
-	        jtableP = new JTable(dtm) {
-	          @Override
-	          public boolean isCellEditable(int row, int column) {
-	            return false;
-	          }
-	        };
-	        
-	        for (int i = 0; i < this.vehiculo.size(); i++) {
-	            dtm.addRow(new Object[] {this.vehiculo.get(i).getIdVehiculos(), this.vehiculo.get(i).getModelo(), this.vehiculo.get(i).getMarca(), this.vehiculo.get(i).getAnyo(),
-	                    this.vehiculo.get(i).getColor(), this.vehiculo.get(i).getPrecio(), this.vehiculo.get(i).getIdFabricante() });
-	        }
-	    } catch (SQLException ex) {
-	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-	    } catch (ClassNotFoundException ex) {
-	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-	    }
+	public void showVehiculosClientes() {
+		try {
+			this.vehiculo = this.services.getAllVehiculosCliente(Conexion.obtener());
+			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+			}, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" }));
+			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
+			dtm.setRowCount(0);
+
+			jtableP = new JTable(dtm) {
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					return false;
+				}
+			};
+
+			for (int i = 0; i < this.vehiculo.size(); i++) {
+				dtm.addRow(new Object[] { this.vehiculo.get(i).getIdVehiculos(), this.vehiculo.get(i).getModelo(),
+						this.vehiculo.get(i).getMarca(), this.vehiculo.get(i).getAnyo(),
+						this.vehiculo.get(i).getColor(), this.vehiculo.get(i).getPrecio(),
+						this.vehiculo.get(i).getIdFabricante() });
+			}
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+		} catch (ClassNotFoundException ex) {
+			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+		}
 	}
 }

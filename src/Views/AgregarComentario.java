@@ -29,11 +29,11 @@ public class AgregarComentario extends JFrame {
 	private JPanel contentPane;
 	private static JTextArea textArea;
 	private final static ComentarioService service = new ComentarioService();
-	private final VehiculoService serviceveh=new VehiculoService();
-	private final ClientService servicec= new ClientService();
+	private final VehiculoService serviceveh = new VehiculoService();
+	private final ClientService servicec = new ClientService();
 	private Vehiculo vehiculo;
 	private Cliente cliente;
-	private List <Comentario> comentarios = new ArrayList<>();
+	private List<Comentario> comentarios = new ArrayList<>();
 	private JButton btnCancelar, btnEnviar;
 
 	public AgregarComentario() {
@@ -47,27 +47,27 @@ public class AgregarComentario extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblTitulo = new JLabel("Agrega un comentario para el vehículo seleccionado.");
 		lblTitulo.setBounds(5, 5, 390, 21);
 		lblTitulo.setFont(new Font("Impact", Font.PLAIN, 16));
 		lblTitulo.setHorizontalAlignment(JLabel.CENTER);
 		contentPane.add(lblTitulo);
-		
+
 		textArea = new JTextArea();
 		textArea.setBounds(31, 36, 343, 104);
 		contentPane.add(textArea);
-		
-		
+
 		btnEnviar = new JButton("Enviar");
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				updateValoracion();
 				updateVehiculo();
 				updateCliente();
-			
-				JOptionPane.showMessageDialog(null, "El comentario ha sido Enviado con exito!", "Envio completado", JOptionPane.INFORMATION_MESSAGE);
+
+				JOptionPane.showMessageDialog(null, "El comentario ha sido Enviado con exito!", "Envio completado",
+						JOptionPane.INFORMATION_MESSAGE);
 				VentanaCatalogo vc = new VentanaCatalogo();
 				vc.setVisible(true);
 				dispose();
@@ -75,11 +75,12 @@ public class AgregarComentario extends JFrame {
 		});
 		btnEnviar.setBounds(61, 150, 98, 33);
 		contentPane.add(btnEnviar);
-		
+
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "El comentario ha sido Cancelado!", "Cancelar comentario", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "El comentario ha sido Cancelado!", "Cancelar comentario",
+						JOptionPane.ERROR_MESSAGE);
 				VentanaCatalogo vc = new VentanaCatalogo();
 				vc.setVisible(true);
 				dispose();
@@ -88,40 +89,40 @@ public class AgregarComentario extends JFrame {
 		btnCancelar.setBounds(238, 150, 98, 33);
 		contentPane.add(btnCancelar);
 	}
-	
+
 	public void updateValoracion() {
 		try {
 			String comentario = textArea.getText();
 			String nomUser = Login.getnombreUser();
-			
+
 			Comentario c = new Comentario();
 			c.setIdCliente(Login.getidClienteLogin());
 			c.setIdVehiculo(Login.getidVehiculo());
-			c.setComentario(nomUser +": \n"+comentario);
-			
+			c.setComentario(nomUser + ": \n" + comentario);
+
 			service.save(Conexion.obtener(), c);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void updateVehiculo() {
 		try {
-			vehiculo=serviceveh.getVehiculo(Conexion.obtener(),Login.getidVehiculo());
-			
-			String mod = vehiculo.getModelo();		
+			vehiculo = serviceveh.getVehiculo(Conexion.obtener(), Login.getidVehiculo());
+
+			String mod = vehiculo.getModelo();
 			String mar = vehiculo.getMarca();
 			int anyo = vehiculo.getAnyo();
 			String color = vehiculo.getColor();
 			float precio = vehiculo.getPrecio();
-			int idF= vehiculo.getIdFabricante();
+			int idF = vehiculo.getIdFabricante();
 			String rut = vehiculo.getRuta();
 			int comp = vehiculo.getComprado();
 			int alqui = vehiculo.getAlquilado();
-			int numC = (vehiculo.getNumcomentarios()+1);
+			int numC = (vehiculo.getNumcomentarios() + 1);
 			int numVa = vehiculo.getNumvaloraciones();
-			
+
 			vehiculo.setIdVehiculos(Login.getidVehiculo());
 			vehiculo.setModelo(mod);
 			vehiculo.setMarca(mar);
@@ -140,10 +141,10 @@ public class AgregarComentario extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void updateCliente() {
 		try {
-			cliente = servicec.getClienteId(Conexion.obtener(),Login.getidClienteLogin());
+			cliente = servicec.getClienteId(Conexion.obtener(), Login.getidClienteLogin());
 			Integer id = Login.getidClienteLogin();
 			String nom = cliente.getNombre();
 			String dir = cliente.getDireccion();
@@ -153,8 +154,8 @@ public class AgregarComentario extends JFrame {
 			int act = cliente.getActivar();
 			int numCP = (cliente.getNumCompras());
 			int numA = cliente.getNumAlquileres();
-			int numCO = (cliente.getNumComentarios()+1);
-			
+			int numCO = (cliente.getNumComentarios() + 1);
+
 			int numV = cliente.getNumValoraciones();
 			cliente.setIdClientes(id);
 			cliente.setNombre(nom);
@@ -167,7 +168,7 @@ public class AgregarComentario extends JFrame {
 			cliente.setNumAlquileres(numA);
 			cliente.setNumComentarios(numCO);
 			cliente.setNumValoracion(numV);
-			
+
 			servicec.save(Conexion.obtener(), cliente);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

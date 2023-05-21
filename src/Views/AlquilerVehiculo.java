@@ -233,89 +233,88 @@ public class AlquilerVehiculo extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-		    Object o = e.getSource();
+			Object o = e.getSource();
 
-		    if (o == btnAlquiler) {
-		        try {
-		            Vehiculo v = services.getVehiculo(Conexion.obtener(), vehiculo.getIdVehiculos());
-		            if (v.getComprado() == 1) {
-		                JOptionPane.showMessageDialog(AlquilerVehiculo.this, "No se puede realizar el alquiler",
-		                        "Aviso", JOptionPane.INFORMATION_MESSAGE);
-		                VentanaCatalogo vc = new VentanaCatalogo();
-		                vc.setVisible(true);
-		                dispose();
-		            } else {
-		                if (v.getAlquilado() >= 0) {
-		                    if (updateAlquiler()) {
-		                        updateVehiculo();
-		                        updateCliente();
+			if (o == btnAlquiler) {
+				try {
+					Vehiculo v = services.getVehiculo(Conexion.obtener(), vehiculo.getIdVehiculos());
+					if (v.getComprado() == 1) {
+						JOptionPane.showMessageDialog(AlquilerVehiculo.this, "No se puede realizar el alquiler",
+								"Aviso", JOptionPane.INFORMATION_MESSAGE);
+						VentanaCatalogo vc = new VentanaCatalogo();
+						vc.setVisible(true);
+						dispose();
+					} else {
+						if (v.getAlquilado() >= 0) {
+							if (updateAlquiler()) {
+								updateVehiculo();
+								updateCliente();
 
-		                        AlquilerVehiculo.this.dispose();
-		                        JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Se ha realizado el alquiler",
-		                                "Aviso", JOptionPane.INFORMATION_MESSAGE);
-		                        VentanaCatalogo vc = new VentanaCatalogo();
-		                        vc.setVisible(true);
-		                        vc.setLocationRelativeTo(null);
-		                    } else {
-		                        JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Seleccione una fecha",
-		                                "Aviso", JOptionPane.WARNING_MESSAGE);
-		                    }
-		                }
-		            }
-		        } catch (ClassNotFoundException | SQLException e2) {
-		            e2.printStackTrace();
-		        }
+								AlquilerVehiculo.this.dispose();
+								JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Se ha realizado el alquiler",
+										"Aviso", JOptionPane.INFORMATION_MESSAGE);
+								VentanaCatalogo vc = new VentanaCatalogo();
+								vc.setVisible(true);
+								vc.setLocationRelativeTo(null);
+							} else {
+								JOptionPane.showMessageDialog(AlquilerVehiculo.this, "Seleccione una fecha", "Aviso",
+										JOptionPane.WARNING_MESSAGE);
+							}
+						}
+					}
+				} catch (ClassNotFoundException | SQLException e2) {
+					e2.printStackTrace();
+				}
 
-		    } else if (o == btnCancelar) {
-		        JOptionPane.showMessageDialog(null, "El alquiler ha sido cancelada.", "Cancelacion",
-		                JOptionPane.ERROR_MESSAGE);
-		        dispose();
-		        VentanaCatalogo vc = new VentanaCatalogo();
-		        vc.setVisible(true);
-		        vc.setLocationRelativeTo(null);
-		    }
+			} else if (o == btnCancelar) {
+				JOptionPane.showMessageDialog(null, "El alquiler ha sido cancelada.", "Cancelacion",
+						JOptionPane.ERROR_MESSAGE);
+				dispose();
+				VentanaCatalogo vc = new VentanaCatalogo();
+				vc.setVisible(true);
+				vc.setLocationRelativeTo(null);
+			}
 		}
 
 		public boolean updateAlquiler() {
 
-		    try {
-		        Integer idAlquiler = alquiler.getIdAlquiler();
-		        Integer idVehiculo = vehiculo.getIdVehiculos();
-		        Integer idCliente = Login.getidClienteLogin();
+			try {
+				Integer idAlquiler = alquiler.getIdAlquiler();
+				Integer idVehiculo = vehiculo.getIdVehiculos();
+				Integer idCliente = Login.getidClienteLogin();
 
-		        String fechaIncstr = (String) fechainicio.getSelectedItem();
-		        String fechaFinstr = (String) fechaF.getSelectedItem();
+				String fechaIncstr = (String) fechainicio.getSelectedItem();
+				String fechaFinstr = (String) fechaF.getSelectedItem();
 
-		        if (fechaIncstr == null || fechaIncstr.isEmpty() || fechaFinstr == null || fechaFinstr.isEmpty()) {
-		            return false;
-		        } else {
+				if (fechaIncstr == null || fechaIncstr.isEmpty() || fechaFinstr == null || fechaFinstr.isEmpty()) {
+					return false;
+				} else {
 
-		            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		            java.util.Date fechaUtil = formatter.parse(fechaIncstr);
-		            java.util.Date fechaUtil2 = formatter.parse(fechaFinstr);
-		            Date fechaInc = new Date(fechaUtil.getTime());
-		            Date fechaFin = new Date(fechaUtil2.getTime());
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+					java.util.Date fechaUtil = formatter.parse(fechaIncstr);
+					java.util.Date fechaUtil2 = formatter.parse(fechaFinstr);
+					Date fechaInc = new Date(fechaUtil.getTime());
+					Date fechaFin = new Date(fechaUtil2.getTime());
 
-		            alquiler.setIdAlquiler(idAlquiler);
-		            alquiler.setIdVehiculo(idVehiculo);
-		            alquiler.setIdCliente(idCliente);
-		            alquiler.setFechaInic(fechaInc);
-		            alquiler.setFechFin(fechaFin);
+					alquiler.setIdAlquiler(idAlquiler);
+					alquiler.setIdVehiculo(idVehiculo);
+					alquiler.setIdCliente(idCliente);
+					alquiler.setFechaInic(fechaInc);
+					alquiler.setFechFin(fechaFin);
 
-		            if (!VehiculoDisponible(idVehiculo, fechaInc, fechaFin)) {
-		                JOptionPane.showMessageDialog(AlquilerVehiculo.this, "No se puede alquilar el vehiculo en esta fecha",
-		                        "Aviso", JOptionPane.ERROR_MESSAGE);
-		                return false;
-		            }
-		            service.save(Conexion.obtener(), alquiler);
-		        }
-		    } catch (ClassNotFoundException | SQLException | ParseException e) {
-		        e.printStackTrace();
-		        return false;
-		    }
-		    return true;
+					if (!VehiculoDisponible(idVehiculo, fechaInc, fechaFin)) {
+						JOptionPane.showMessageDialog(AlquilerVehiculo.this,
+								"No se puede alquilar el vehiculo en esta fecha", "Aviso", JOptionPane.ERROR_MESSAGE);
+						return false;
+					}
+					service.save(Conexion.obtener(), alquiler);
+				}
+			} catch (ClassNotFoundException | SQLException | ParseException e) {
+				e.printStackTrace();
+				return false;
+			}
+			return true;
 		}
-
 
 		public void updateVehiculo() {
 			Vehiculo v;

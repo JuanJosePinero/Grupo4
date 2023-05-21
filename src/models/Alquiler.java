@@ -3,7 +3,7 @@ package models;
 import java.util.Date;
 
 public class Alquiler {
-	
+
 	private Integer idAlquiler, idCliente, idVehiculo;
 	private Date fechaInic, fechFin;
 

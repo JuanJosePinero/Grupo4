@@ -53,10 +53,10 @@ public class ComprarVehiculo extends JFrame {
 		txtMarca.setText(vehiculo.getMarca());
 		txtAnyo.setText(String.valueOf(vehiculo.getAnyo()));
 		txtColor.setText(vehiculo.getColor());
-		txtPrecio.setText(String.valueOf(vehiculo.getPrecio()+" euros"));
+		txtPrecio.setText(String.valueOf(vehiculo.getPrecio() + " euros"));
 		txtIdFabricante.setText(String.valueOf(vehiculo.getIdFabricante()));
 		id = vehiculo.getIdVehiculos();
-		
+
 		getRuta();
 	}
 
@@ -158,7 +158,7 @@ public class ComprarVehiculo extends JFrame {
 		imagenLabel.setIcon(imagen);
 		panel.add(imagenLabel);
 	}
-	
+
 	public void getRuta() {
 		Vehiculo vs;
 		try {
@@ -179,15 +179,15 @@ public class ComprarVehiculo extends JFrame {
 
 			if (o == btnComprar) {
 				try {
-					Vehiculo v=services.getVehiculo(Conexion.obtener(),vehiculo.getIdVehiculos());
-					
-					if(v.getComprado()==1) {
+					Vehiculo v = services.getVehiculo(Conexion.obtener(), vehiculo.getIdVehiculos());
+
+					if (v.getComprado() == 1) {
 						JOptionPane.showMessageDialog(ComprarVehiculo.this, "este coche ya ha sido comprado");
 						ComprarVehiculo.this.dispose();
 						VentanaCatalogo vc = new VentanaCatalogo();
 						vc.setVisible(true);
 						vc.setLocationRelativeTo(null);
-					}else if(v.getComprado()==0){
+					} else if (v.getComprado() == 0) {
 						Integer idVehiculo = vehiculo.getIdVehiculos();
 						Integer idCliente = Login.getidClienteLogin();
 						Calendar calendario = Calendar.getInstance();
@@ -201,16 +201,16 @@ public class ComprarVehiculo extends JFrame {
 						vehiculo.setRuta(v.getRuta());
 						vehiculo.setComprado(1);
 						vehiculo.setAlquilado(0);
-						
-						Cliente datos = serviceCliente.getClienteId(Conexion.obtener(),Login.getidClienteLogin());
-						
+
+						Cliente datos = serviceCliente.getClienteId(Conexion.obtener(), Login.getidClienteLogin());
+
 						String nom = datos.getNombre();
 						String dir = datos.getDireccion();
 						String rol = datos.getRol();
 						String user = datos.getNombreUsuario();
 						String cont = datos.getContrasena();
 						int act = datos.getActivar();
-						int numC = (datos.getNumCompras()+1);
+						int numC = (datos.getNumCompras() + 1);
 						int numA = datos.getNumAlquileres();
 						int numCO = datos.getNumComentarios();
 						int numV = datos.getNumValoraciones();
@@ -223,16 +223,16 @@ public class ComprarVehiculo extends JFrame {
 						cliente.setActivar(act);
 						cliente.setNumCompras(numC);
 						cliente.setNumAlquileres(numA);
-						
-					servicesventa.save(Conexion.obtener(), venta);
-					serviceCliente.save(Conexion.obtener(), cliente);
 
-					services.save(Conexion.obtener(), vehiculo);
-					ComprarVehiculo.this.dispose();
-					JOptionPane.showMessageDialog(ComprarVehiculo.this, "Se ha realizado la compra");
-					VentanaCatalogo vc = new VentanaCatalogo();
-					vc.setVisible(true);
-					vc.setLocationRelativeTo(null);
+						servicesventa.save(Conexion.obtener(), venta);
+						serviceCliente.save(Conexion.obtener(), cliente);
+
+						services.save(Conexion.obtener(), vehiculo);
+						ComprarVehiculo.this.dispose();
+						JOptionPane.showMessageDialog(ComprarVehiculo.this, "Se ha realizado la compra");
+						VentanaCatalogo vc = new VentanaCatalogo();
+						vc.setVisible(true);
+						vc.setLocationRelativeTo(null);
 					}
 				} catch (ClassNotFoundException | SQLException e1) {
 					e1.printStackTrace();

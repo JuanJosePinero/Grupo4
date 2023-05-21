@@ -1,6 +1,5 @@
 package InformeFinal;
 
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -30,108 +29,98 @@ import org.jfree.data.xy.XYSeriesCollection;
 import Service.Conexion;
 
 public class LineChartEx extends JFrame {
-	
+
 	private Conexion c = new Conexion();
 
-    public LineChartEx() {
+	public LineChartEx() {
 
-        initUI();
-    }
+		initUI();
+	}
 
-    private void initUI() {
+	private void initUI() {
 
-        XYDataset dataset = createDataset();
-        JFreeChart chart = createChart(dataset);
-        XYPlot plot=chart.getXYPlot();
-        
-        String[] months = new String[]{"", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", ""};
-        SymbolAxis xAxis = new SymbolAxis("Meses", months);
-        xAxis.setTickUnit(new NumberTickUnit(1));
-        plot.setDomainAxis(xAxis);
-        
-        NumberAxis yAxis = (NumberAxis) plot.getRangeAxis();
-        yAxis.setTickUnit(new NumberTickUnit(1));
+		XYDataset dataset = createDataset();
+		JFreeChart chart = createChart(dataset);
+		XYPlot plot = chart.getXYPlot();
 
-        ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        chartPanel.setBackground(Color.white);
-        
-        add(chartPanel);
+		String[] months = new String[] { "", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
+				"Septiembre", "Octubre", "Noviembre", "Diciembre", "" };
+		SymbolAxis xAxis = new SymbolAxis("Meses", months);
+		xAxis.setTickUnit(new NumberTickUnit(1));
+		plot.setDomainAxis(xAxis);
 
-        pack();
-        setTitle("Informe Final");
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
+		NumberAxis yAxis = (NumberAxis) plot.getRangeAxis();
+		yAxis.setTickUnit(new NumberTickUnit(1));
 
-    private XYDataset createDataset() {
-        var series = new XYSeries("2023");
+		ChartPanel chartPanel = new ChartPanel(chart);
+		chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+		chartPanel.setBackground(Color.white);
 
-        try {
-            Connection conn = c.obtener();
-            java.sql.Statement statement = conn.createStatement();
+		add(chartPanel);
 
-            String query = "SELECT MONTH(fechaHora) AS mes, COUNT(*) AS sales FROM Venta WHERE YEAR(fechaHora) = 2023 GROUP BY MONTH(fechaHora)";
-            ResultSet resultSet = statement.executeQuery(query);
+		pack();
+		setTitle("Informe Final");
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
 
-            while (resultSet.next()) {
-                int month = resultSet.getInt("mes");
-                int sales = resultSet.getInt("sales");
-                series.add(month, sales);
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+	private XYDataset createDataset() {
+		var series = new XYSeries("2023");
 
-        var dataset = new XYSeriesCollection();
-        dataset.addSeries(series);
-        return dataset;
-    }
+		try {
+			Connection conn = c.obtener();
+			java.sql.Statement statement = conn.createStatement();
 
-    private JFreeChart createChart(XYDataset dataset) {
+			String query = "SELECT MONTH(fechaHora) AS mes, COUNT(*) AS sales FROM Venta WHERE YEAR(fechaHora) = 2023 GROUP BY MONTH(fechaHora)";
+			ResultSet resultSet = statement.executeQuery(query);
 
-        JFreeChart chart = ChartFactory.createXYLineChart(
-                "Compras de Vehiculos 2023",
-                "Meses",
-                "Nº Compras",
-                dataset,
-                PlotOrientation.VERTICAL,
-                true,
-                true,
-                false
-        );
+			while (resultSet.next()) {
+				int month = resultSet.getInt("mes");
+				int sales = resultSet.getInt("sales");
+				series.add(month, sales);
+			}
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 
-        XYPlot plot = chart.getXYPlot();
+		var dataset = new XYSeriesCollection();
+		dataset.addSeries(series);
+		return dataset;
+	}
 
-        var renderer = new XYLineAndShapeRenderer();
-        renderer.setSeriesPaint(0, Color.RED);
-        renderer.setSeriesStroke(0, new BasicStroke(1.5f));
+	private JFreeChart createChart(XYDataset dataset) {
 
-        plot.setRenderer(renderer);
-        plot.setBackgroundPaint(Color.white);
+		JFreeChart chart = ChartFactory.createXYLineChart("Compras de Vehiculos 2023", "Meses", "Nº Compras", dataset,
+				PlotOrientation.VERTICAL, true, true, false);
 
-        plot.setRangeGridlinesVisible(true);
-        plot.setRangeGridlinePaint(Color.BLACK);
+		XYPlot plot = chart.getXYPlot();
 
-        plot.setDomainGridlinesVisible(true);
-        plot.setDomainGridlinePaint(Color.BLACK);
+		var renderer = new XYLineAndShapeRenderer();
+		renderer.setSeriesPaint(0, Color.RED);
+		renderer.setSeriesStroke(0, new BasicStroke(1.5f));
 
-        chart.getLegend().setFrame(BlockBorder.NONE);
+		plot.setRenderer(renderer);
+		plot.setBackgroundPaint(Color.white);
 
-        chart.setTitle(new TextTitle("Compras de Vehiculos 2023",
-                        new Font("Serif", java.awt.Font.BOLD, 18)
-                )
-        );
+		plot.setRangeGridlinesVisible(true);
+		plot.setRangeGridlinePaint(Color.BLACK);
 
-        return chart;
-    }
+		plot.setDomainGridlinesVisible(true);
+		plot.setDomainGridlinePaint(Color.BLACK);
 
-    public static void main(String[] args) {
+		chart.getLegend().setFrame(BlockBorder.NONE);
 
-        EventQueue.invokeLater(() -> {
+		chart.setTitle(new TextTitle("Compras de Vehiculos 2023", new Font("Serif", java.awt.Font.BOLD, 18)));
 
-            var ex = new LineChartEx();
-            ex.setVisible(true);
-        });
-    }
+		return chart;
+	}
+
+	public static void main(String[] args) {
+
+		EventQueue.invokeLater(() -> {
+
+			var ex = new LineChartEx();
+			ex.setVisible(true);
+		});
+	}
 }

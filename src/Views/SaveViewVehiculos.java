@@ -37,8 +37,6 @@ public class SaveViewVehiculos extends JFrame {
 	private JFileChooser fileChooser;
 	private static String ruta;
 
-	
-
 	public SaveViewVehiculos(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 		initComponents();

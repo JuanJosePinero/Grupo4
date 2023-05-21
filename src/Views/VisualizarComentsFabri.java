@@ -27,9 +27,8 @@ public class VisualizarComentsFabri extends JFrame {
 	private JPanel contentPane;
 	private static JTextArea textArea;
 	private final static ComentarioService service = new ComentarioService();
-	private List <Comentario> comentarios = new ArrayList<>();
+	private List<Comentario> comentarios = new ArrayList<>();
 	private JButton btnVolver;
-
 
 	public VisualizarComentsFabri() {
 		super("Bandeja de comentarios");
@@ -42,20 +41,19 @@ public class VisualizarComentsFabri extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		 textArea = new JTextArea();
-		 textArea.setFont(new Font("Segoe UI Semibold", Font.BOLD, 11));
-		 textArea.setEditable(false);
+		textArea = new JTextArea();
+		textArea.setFont(new Font("Segoe UI Semibold", Font.BOLD, 11));
+		textArea.setEditable(false);
 		textArea.setBounds(10, 34, 414, 162);
 		contentPane.add(textArea);
 		Comentario();
-		
+
 		JLabel lblTitulo = new JLabel("Comentarios de los clientes");
 		lblTitulo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 14));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setBounds(10, 9, 414, 23);
 		contentPane.add(lblTitulo);
-		
-		
+
 		btnVolver = new JButton("");
 		btnVolver.setIcon(new ImageIcon("images/felcha.png"));
 		btnVolver.addActionListener(new ActionListener() {
@@ -68,18 +66,18 @@ public class VisualizarComentsFabri extends JFrame {
 		btnVolver.setBounds(385, 9, 40, 21);
 		contentPane.add(btnVolver);
 	}
-	
+
 	public static void Comentario() {
 		try {
 			List<Comentario> datos = service.getAllComentarioId(Conexion.obtener());
-			String coment ="";
-	
+			String coment = "";
+
 			for (Comentario c : datos) {
-				 coment += c.getComentario()+"\n";
-				
+				coment += c.getComentario() + "\n";
+
 			}
 			textArea.setText(coment);
-		
+
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

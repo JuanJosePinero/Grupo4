@@ -31,16 +31,15 @@ public class AgregarValoracion extends JFrame {
 	private List<JButton> btnEstrellaList = new ArrayList<>();
 	private JButton btnEnviar, btnCancelar;
 	private JButton btnEst;
-	private ImageIcon icono0, icono1,icono2,icono3,icono4,icono5;
+	private ImageIcon icono0, icono1, icono2, icono3, icono4, icono5;
 	private JLabel etiquetaImagen;
 	private ValoracionService service = new ValoracionService();
-	private final VehiculoService serviceveh=new VehiculoService();
-	private final ClientService servicec= new ClientService();
+	private final VehiculoService serviceveh = new VehiculoService();
+	private final ClientService servicec = new ClientService();
 	private Cliente cliente;
 	private Vehiculo vehiculo;
 	private int valoracion = 0;
 	private int val = 0;
-
 
 	public AgregarValoracion() {
 		super("Agregar Valoracion");
@@ -61,7 +60,7 @@ public class AgregarValoracion extends JFrame {
 		contentPane.add(lblTitulo);
 
 		ManejadorJButton manejador = new ManejadorJButton();
-		manejadorestrella estrella=new manejadorestrella();
+		manejadorestrella estrella = new manejadorestrella();
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(163, 165, 165));
@@ -78,7 +77,7 @@ public class AgregarValoracion extends JFrame {
 		}
 
 		icono0 = new ImageIcon("images/estrellas/estrella0.png");
-		
+
 		etiquetaImagen = new JLabel(icono0);
 		etiquetaImagen.setBounds(50, 101, 350, 100);
 		contentPane.add(etiquetaImagen);
@@ -99,19 +98,19 @@ public class AgregarValoracion extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object o = e.getSource();
-			JButton boton=(JButton) e.getSource();
-		
-			 if (o == btnEnviar) {
-				 updateValoracion();
-				 updateVehiculo();
-				 updateCliente();
-				 
+			JButton boton = (JButton) e.getSource();
+
+			if (o == btnEnviar) {
+				updateValoracion();
+				updateVehiculo();
+				updateCliente();
+
 				JOptionPane.showMessageDialog(null, "La valoracion ha sido Enviada con exito!", "Envio completado",
-				JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.INFORMATION_MESSAGE);
 				VentanaCatalogo vc = new VentanaCatalogo();
 				vc.setVisible(true);
 				dispose();
-				
+
 			} else if (o == btnCancelar) {
 				JOptionPane.showMessageDialog(null, "La valoracion ha sido Cancelado!", "Cancelar valoracion",
 						JOptionPane.ERROR_MESSAGE);
@@ -121,28 +120,28 @@ public class AgregarValoracion extends JFrame {
 
 			} else if (o == btnEst) {
 				for (int i = 1; i < 6; i++) {
-					if(btnEstrellaList.get(i) == btnEst) {
-					break;
+					if (btnEstrellaList.get(i) == btnEst) {
+						break;
 					}
 				}
 			}
 		}
 	}
-	
-	private class manejadorestrella implements ActionListener {
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-	    	 JButton boton = (JButton) e.getSource();
-	            String textoBoton = boton.getText();
-	            String[] partes = textoBoton.split("★");
-	            int valorEstrella = Integer.parseInt(partes[0]);
-	            valoracion = valorEstrella;
 
-	            ImageIcon nuevaImagen = new ImageIcon("images/estrellas/estrella" + valorEstrella + ".png");
-	            etiquetaImagen.setIcon(nuevaImagen);
-	    }
+	private class manejadorestrella implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton boton = (JButton) e.getSource();
+			String textoBoton = boton.getText();
+			String[] partes = textoBoton.split("★");
+			int valorEstrella = Integer.parseInt(partes[0]);
+			valoracion = valorEstrella;
+
+			ImageIcon nuevaImagen = new ImageIcon("images/estrellas/estrella" + valorEstrella + ".png");
+			etiquetaImagen.setIcon(nuevaImagen);
+		}
 	}
-	
+
 	public void updateValoracion() {
 		try {
 			Valoracion v = new Valoracion();
@@ -155,22 +154,22 @@ public class AgregarValoracion extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void updateVehiculo() {
 		try {
-			vehiculo=serviceveh.getVehiculo(Conexion.obtener(),Login.getidVehiculo());
-			String mod = vehiculo.getModelo();		
+			vehiculo = serviceveh.getVehiculo(Conexion.obtener(), Login.getidVehiculo());
+			String mod = vehiculo.getModelo();
 			String mar = vehiculo.getMarca();
 			int anyo = vehiculo.getAnyo();
 			String color = vehiculo.getColor();
 			float precio = vehiculo.getPrecio();
-			int idF= vehiculo.getIdFabricante();
+			int idF = vehiculo.getIdFabricante();
 			String rut = vehiculo.getRuta();
 			int comp = vehiculo.getComprado();
 			int alqui = vehiculo.getAlquilado();
 			int numC = (vehiculo.getNumcomentarios());
-			int numVa = (vehiculo.getNumvaloraciones()+1);
-			
+			int numVa = (vehiculo.getNumvaloraciones() + 1);
+
 			vehiculo.setIdVehiculos(Login.getidVehiculo());
 			vehiculo.setModelo(mod);
 			vehiculo.setMarca(mar);
@@ -189,10 +188,10 @@ public class AgregarValoracion extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void updateCliente() {
 		try {
-			cliente = servicec.getClienteId(Conexion.obtener(),Login.getidClienteLogin());
+			cliente = servicec.getClienteId(Conexion.obtener(), Login.getidClienteLogin());
 			Integer id = Login.getidClienteLogin();
 			String nom = cliente.getNombre();
 			String dir = cliente.getDireccion();
@@ -203,8 +202,8 @@ public class AgregarValoracion extends JFrame {
 			int numCP = (cliente.getNumCompras());
 			int numA = cliente.getNumAlquileres();
 			int numCO = (cliente.getNumComentarios());
-			
-			int numV = (cliente.getNumValoraciones()+1);
+
+			int numV = (cliente.getNumValoraciones() + 1);
 			cliente.setIdClientes(id);
 			cliente.setNombre(nom);
 			cliente.setDireccion(dir);
@@ -216,7 +215,7 @@ public class AgregarValoracion extends JFrame {
 			cliente.setNumAlquileres(numA);
 			cliente.setNumComentarios(numCO);
 			cliente.setNumValoracion(numV);
-			
+
 			servicec.save(Conexion.obtener(), cliente);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

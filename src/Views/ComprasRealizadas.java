@@ -15,7 +15,8 @@ import javax.swing.border.EmptyBorder;
 public class ComprasRealizadas extends JFrame {
 
 	private JPanel contentPane;
-	private JButton btnVerAlquileres,btnVerCompras, btnCancelar;
+	private JButton btnVerAlquileres, btnVerCompras, btnCancelar;
+
 	/**
 	 * Launch the application.
 	 */
@@ -45,48 +46,48 @@ public class ComprasRealizadas extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblLabel1 = new JLabel("Elija la opción que desea realizar");
 		lblLabel1.setFont(new Font("Arial Black", Font.BOLD, 14));
 		lblLabel1.setBounds(83, 10, 321, 21);
 		contentPane.add(lblLabel1);
-		
-		manejadorboton man=new manejadorboton();
-		
+
+		manejadorboton man = new manejadorboton();
+
 		btnVerAlquileres = new JButton("Ver Alquileres");
 		btnVerAlquileres.setBounds(32, 56, 120, 27);
 		contentPane.add(btnVerAlquileres);
 		btnVerAlquileres.addActionListener(man);
-		
+
 		btnVerCompras = new JButton("Ver Compras");
 		btnVerCompras.setBounds(262, 56, 120, 27);
 		contentPane.add(btnVerCompras);
 		btnVerCompras.addActionListener(man);
-		
+
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Calcelando...", "Calcel", JOptionPane.ERROR_MESSAGE);
-				VentanaCatalogo vc=new VentanaCatalogo();
+				VentanaCatalogo vc = new VentanaCatalogo();
 				vc.setVisible(true);
 				vc.setLocationRelativeTo(null);
 				dispose();
 			}
 		});
 		btnCancelar.setBounds(159, 98, 97, 25);
-		contentPane.add(btnCancelar);	
+		contentPane.add(btnCancelar);
 	}
-	
-	private class manejadorboton implements ActionListener{
+
+	private class manejadorboton implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JButton boton=(JButton) e.getSource();
-			if(boton.equals(btnVerCompras)) {
-				HistorialComprasCliente hcc=new HistorialComprasCliente();
+			JButton boton = (JButton) e.getSource();
+			if (boton.equals(btnVerCompras)) {
+				HistorialComprasCliente hcc = new HistorialComprasCliente();
 				dispose();
-			}else if(boton.equals(btnVerAlquileres)) {
-				HistorialAlquileresCliente hac=new HistorialAlquileresCliente();
+			} else if (boton.equals(btnVerAlquileres)) {
+				HistorialAlquileresCliente hac = new HistorialAlquileresCliente();
 				dispose();
 			}
 		}

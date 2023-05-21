@@ -20,14 +20,14 @@ import Service.VehiculoService;
 import models.Alquiler;
 import models.Vehiculo;
 
-public class HistorialAlquileresCliente extends JFrame{
+public class HistorialAlquileresCliente extends JFrame {
 	private JPanel contentPane;
 	private JTable jtableP;
 	private JButton BotonVolver;
-	private final AlquilerService servicealq=new AlquilerService();
+	private final AlquilerService servicealq = new AlquilerService();
 	private final VehiculoService services = new VehiculoService();
 	private List<Alquiler> alquiler;
-	
+
 	public HistorialAlquileresCliente() {
 		super("Historial de alquileres");
 		setResizable(false);
@@ -41,8 +41,9 @@ public class HistorialAlquileresCliente extends JFrame{
 		BotonVolver = new JButton("Volver");
 		BotonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Volviendo a la ventana del catalogo", "Aviso", JOptionPane.ERROR_MESSAGE);
-				VentanaCatalogo vc=new VentanaCatalogo();
+				JOptionPane.showMessageDialog(null, "Volviendo a la ventana del catalogo", "Aviso",
+						JOptionPane.ERROR_MESSAGE);
+				VentanaCatalogo vc = new VentanaCatalogo();
 				vc.setVisible(true);
 				vc.setLocationRelativeTo(null);
 				dispose();
@@ -50,41 +51,41 @@ public class HistorialAlquileresCliente extends JFrame{
 		});
 		BotonVolver.setBounds(165, 198, 97, 25);
 		getContentPane().add(BotonVolver);
-	
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(38, 42, 369, 143);
 		contentPane.add(scrollPane);
-		
+
 		jtableP = new JTable();
 		showAlquileres();
 		scrollPane.setViewportView(jtableP);
 		setVisible(true);
 	}
-	public void showAlquileres() {
-	    try {
-	        this.alquiler = this.servicealq.getAllAlquileres(Conexion.obtener());
-	        jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-	        }, new String[] { "idAlquiler", "Fechainicio", "FechaFin", "idVehiculo"}));
-	        DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
-	        dtm.setRowCount(0);
-	        
-	        jtableP = new JTable(dtm) {
-	          @Override
-	          public boolean isCellEditable(int row, int column) {
-	            return false;
-	          }
-	        };
-	        
-	        for (int i = 0; i < this.alquiler.size(); i++) {
-	            dtm.addRow(new Object[] {this.alquiler.get(i).getIdAlquiler(), this.alquiler.get(i).getFechaInic(),
-	            		this.alquiler.get(i).getFechFin(), this.alquiler.get(i).getIdVehiculo()});
-	        }
-	    } catch (SQLException ex) {
-	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-	    } catch (ClassNotFoundException ex) {
-	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-	    }
+	public void showAlquileres() {
+		try {
+			this.alquiler = this.servicealq.getAllAlquileres(Conexion.obtener());
+			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+			}, new String[] { "idAlquiler", "Fechainicio", "FechaFin", "idVehiculo" }));
+			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
+			dtm.setRowCount(0);
+
+			jtableP = new JTable(dtm) {
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					return false;
+				}
+			};
+
+			for (int i = 0; i < this.alquiler.size(); i++) {
+				dtm.addRow(new Object[] { this.alquiler.get(i).getIdAlquiler(), this.alquiler.get(i).getFechaInic(),
+						this.alquiler.get(i).getFechFin(), this.alquiler.get(i).getIdVehiculo() });
+			}
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+		} catch (ClassNotFoundException ex) {
+			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+		}
 	}
 }

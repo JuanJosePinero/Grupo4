@@ -150,13 +150,13 @@ public class CreacionUsuario extends JFrame {
 		CancelarB.setFont(new Font("Segoe UI Semibold", Font.BOLD, 13));
 		CancelarB.setBounds(251, 261, 113, 34);
 		contentPane.add(CancelarB);
-		
+
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setIcon(new ImageIcon("images/iconoUser.png"));
 		lblNewLabel.setBounds(45, 10, 60, 60);
 		contentPane.add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Ingrese aquí los datos del usuario");
 		lblNewLabel_1.setFont(new Font("Segoe UI Semibold", Font.BOLD, 14));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -212,7 +212,7 @@ public class CreacionUsuario extends JFrame {
 		char[] ccontra = CContraseñaP.getPassword();
 		String ccontrasenya = new String(ccontra);
 		int act = 1;
-		
+
 		if (NombreT.getText().isEmpty() || ApellidoT.getText().isEmpty() || DireccionT.getText().isEmpty()
 				|| UsuarioT.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(CreacionUsuario.this, "Formulario erroneo", "Aviso",
@@ -247,7 +247,7 @@ public class CreacionUsuario extends JFrame {
 	public void Contraseña() {
 		char[] user = ContraseñaP.getPassword();
 		String userS = new String(user);
-		
+
 		if (userS.matches("[A-Z].*[0-9].*")) {
 			if (userS.length() <= 5) {
 				txtFuerte.setVisible(false);
@@ -264,7 +264,8 @@ public class CreacionUsuario extends JFrame {
 			}
 		} else
 			JOptionPane.showMessageDialog(CreacionUsuario.this,
-					"La contraseña debe empezar por Mayuscula y contener un numero", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+					"La contraseña debe empezar por Mayuscula y contener un numero", "Aviso",
+					JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public void confrimarContraseña() {

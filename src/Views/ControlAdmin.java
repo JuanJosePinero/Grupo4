@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 public class ControlAdmin extends JFrame {
 
 	private JPanel contentPane;
-	private JButton Cliente,Fabricante,Vehiculos;
+	private JButton Cliente, Fabricante, Vehiculos;
 	private JButton VolverB;
 
 	public ControlAdmin() {
@@ -29,22 +29,22 @@ public class ControlAdmin extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		Cliente = new JButton("");
 		Cliente.setIcon(new ImageIcon("images/iconcliente.png"));
 		Cliente.setBounds(37, 76, 100, 100);
 		contentPane.add(Cliente);
-		
+
 		Fabricante = new JButton("");
 		Fabricante.setIcon(new ImageIcon("images/iconllave.png"));
 		Fabricante.setBounds(177, 76, 100, 100);
 		contentPane.add(Fabricante);
-		
+
 		Vehiculos = new JButton("");
 		Vehiculos.setIcon(new ImageIcon("images/iconcoche.png"));
 		Vehiculos.setBounds(312, 76, 100, 100);
 		contentPane.add(Vehiculos);
-		
+
 		VolverB = new JButton("Cerrar Sesion");
 		VolverB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -55,19 +55,19 @@ public class ControlAdmin extends JFrame {
 		});
 		VolverB.setBounds(0, 238, 434, 23);
 		contentPane.add(VolverB);
-		
+
 		JLabel lblTitulo = new JLabel("Clientes");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
 		lblTitulo.setBounds(37, 31, 100, 13);
 		contentPane.add(lblTitulo);
-		
+
 		JLabel lblFabricantes = new JLabel("Fabricantes");
 		lblFabricantes.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFabricantes.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
 		lblFabricantes.setBounds(177, 33, 100, 13);
 		contentPane.add(lblFabricantes);
-		
+
 		JLabel lblTitulo_1_1 = new JLabel("Vehiculos");
 		lblTitulo_1_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo_1_1.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
@@ -77,26 +77,26 @@ public class ControlAdmin extends JFrame {
 		manejadorAction ma = new manejadorAction();
 		Cliente.addActionListener(ma);
 		Fabricante.addActionListener(ma);
-		Vehiculos.addActionListener(ma);	
+		Vehiculos.addActionListener(ma);
 	}
-	
+
 	private class manejadorAction implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton j = (JButton) e.getSource();
-			
-			if(j.equals(Cliente)) {
+
+			if (j.equals(Cliente)) {
 				ListViewClientes lvc = new ListViewClientes();
 				lvc.setVisible(true);
 				lvc.setLocationRelativeTo(null);
 				dispose();
-			}else if(j.equals(Fabricante)) {
+			} else if (j.equals(Fabricante)) {
 				ListViewFabricante lvf = new ListViewFabricante();
 				lvf.setVisible(true);
 				lvf.setLocationRelativeTo(null);
 				dispose();
-			}else if(j.equals(Vehiculos)) {
+			} else if (j.equals(Vehiculos)) {
 				ListViewVehiculos lvv = new ListViewVehiculos();
 				lvv.setLocationRelativeTo(null);
 				lvv.setVisible(true);
