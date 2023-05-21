@@ -24,9 +24,8 @@ public class VisualizarValoracion extends JFrame {
 	private JPanel contentPane;
 	private static JTextArea textArea;
 	private final static ValoracionService service = new ValoracionService();
-	private List <Valoracion> valoracion = new ArrayList<>();
+	private List<Valoracion> valoracion = new ArrayList<>();
 	private JButton btnVolver, btnAgregarV;
-
 
 	public VisualizarValoracion() {
 		super("Bandeja de valoraciones");
@@ -39,20 +38,19 @@ public class VisualizarValoracion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		 textArea = new JTextArea();
-		 textArea.setFont(new Font("Segoe UI Semibold", Font.BOLD, 11));
-		 textArea.setEditable(false);
+		textArea = new JTextArea();
+		textArea.setFont(new Font("Segoe UI Semibold", Font.BOLD, 11));
+		textArea.setEditable(false);
 		textArea.setBounds(10, 34, 414, 162);
 		contentPane.add(textArea);
 		Comentario();
-		
+
 		JLabel lblTitulo = new JLabel("Valoraciones de los clientes");
 		lblTitulo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 14));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setBounds(10, 9, 414, 23);
 		contentPane.add(lblTitulo);
-		
-		
+
 		btnVolver = new JButton("");
 		btnVolver.setIcon(new ImageIcon("images/felcha.png"));
 		btnVolver.addActionListener(new ActionListener() {
@@ -64,7 +62,7 @@ public class VisualizarValoracion extends JFrame {
 		});
 		btnVolver.setBounds(385, 9, 40, 21);
 		contentPane.add(btnVolver);
-		
+
 		btnAgregarV = new JButton("Agregar Valoracion");
 		btnAgregarV.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -76,21 +74,17 @@ public class VisualizarValoracion extends JFrame {
 		btnAgregarV.setBounds(10, 208, 414, 21);
 		contentPane.add(btnAgregarV);
 	}
+
 	public static void Comentario() {
 		try {
 			List<Valoracion> datos = service.getAllValoracionId(Conexion.obtener());
-			String coment ="";
+			String coment = "";
 			String nomUser = Login.getnombreUser();
 			for (Valoracion c : datos) {
-				
-					
-				 coment += nomUser+ ": Ha valorado el coche con "+c.getValoracion()+" estrellas\n";
-				
+				coment += nomUser + ": Ha valorado el coche con " + c.getValoracion() + " estrellas\n";
 			}
 			textArea.setText(coment);
-		
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -205,7 +205,9 @@ public class SaveViewVehiculos extends JFrame {
 
 				vista.setLocationRelativeTo(null);
 			} else if (o == btnImagen) {
-				JOptionPane.showInternalMessageDialog(null, "Importante! \nLa imagen debe tener un tamaño de 350x200 para que se vea bien!", "Aviso importante", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showInternalMessageDialog(null,
+						"Importante! \nLa imagen debe tener un tamaño de 350x200 para que se vea bien!",
+						"Aviso importante", JOptionPane.WARNING_MESSAGE);
 				fileChooser = new JFileChooser();
 				fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
 					public boolean accept(File f) {
@@ -221,46 +223,48 @@ public class SaveViewVehiculos extends JFrame {
 				int result = fileChooser.showOpenDialog(contentPane);
 
 				if (result == JFileChooser.APPROVE_OPTION) {
-				    File selectedFile = fileChooser.getSelectedFile();
+					File selectedFile = fileChooser.getSelectedFile();
 
-				    String extension = getFileExtension(selectedFile.getName());
-				    if (extension.equalsIgnoreCase("jpg") || extension.equalsIgnoreCase("png")) {
-				        try {
-				            String carpetaDestino = "images/vehiculos/" + selectedFile.getName();
-				            Path destino = Path.of(carpetaDestino);
-				            Files.copy(selectedFile.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
+					String extension = getFileExtension(selectedFile.getName());
+					if (extension.equalsIgnoreCase("jpg") || extension.equalsIgnoreCase("png")) {
+						try {
+							String carpetaDestino = "images/vehiculos/" + selectedFile.getName();
+							Path destino = Path.of(carpetaDestino);
+							Files.copy(selectedFile.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
 
-				            BufferedImage originalImage = ImageIO.read(selectedFile);
-				            BufferedImage resizedImage = resizeImage(originalImage, 350, 200);
-				            btnImagen.setIcon(new ImageIcon(resizedImage));
-				            ruta = carpetaDestino;
+							BufferedImage originalImage = ImageIO.read(selectedFile);
+							BufferedImage resizedImage = resizeImage(originalImage, 350, 200);
+							btnImagen.setIcon(new ImageIcon(resizedImage));
+							ruta = carpetaDestino;
 
-				        } catch (IOException e1) {
-				            JOptionPane.showMessageDialog(null, "Error al guardar la imagen", "Aviso", JOptionPane.ERROR_MESSAGE);
-				        }
-				    } else {
-				        JOptionPane.showMessageDialog(null, "El archivo debe ser .jpg o .png", "Aviso", JOptionPane.ERROR_MESSAGE);
-				    }
+						} catch (IOException e1) {
+							JOptionPane.showMessageDialog(null, "Error al guardar la imagen", "Aviso",
+									JOptionPane.ERROR_MESSAGE);
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "El archivo debe ser .jpg o .png", "Aviso",
+								JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			}
 
 		}
 
 	}
-	
+
 	private static String getFileExtension(String fileName) {
-	    int dotIndex = fileName.lastIndexOf('.');
-	    if (dotIndex > 0 && dotIndex < fileName.length() - 1) {
-	        return fileName.substring(dotIndex + 1).toLowerCase();
-	    }
-	    return "";
+		int dotIndex = fileName.lastIndexOf('.');
+		if (dotIndex > 0 && dotIndex < fileName.length() - 1) {
+			return fileName.substring(dotIndex + 1).toLowerCase();
+		}
+		return "";
 	}
-	
-	 static BufferedImage resizeImage(BufferedImage originalImage, int width, int height) {
-	        BufferedImage resizedImage = new BufferedImage(width, height, originalImage.getType());
-	        Graphics2D g2d = resizedImage.createGraphics();
-	        g2d.drawImage(originalImage, 0, 0, width, height, null);
-	        g2d.dispose();
-	        return resizedImage;
-	    }
+
+	static BufferedImage resizeImage(BufferedImage originalImage, int width, int height) {
+		BufferedImage resizedImage = new BufferedImage(width, height, originalImage.getType());
+		Graphics2D g2d = resizedImage.createGraphics();
+		g2d.drawImage(originalImage, 0, 0, width, height, null);
+		g2d.dispose();
+		return resizedImage;
+	}
 }

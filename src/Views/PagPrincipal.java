@@ -23,9 +23,6 @@ public class PagPrincipal {
 	private JTextField txtConcesionariosFelix;
 	private JButton btnEntrar;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -55,36 +52,37 @@ public class PagPrincipal {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-		
+
 		txtConcesionariosFelix = new JTextField();
 		txtConcesionariosFelix.setEditable(false);
 		txtConcesionariosFelix.setFont(new Font("Poor Richard", Font.BOLD, 24));
 		txtConcesionariosFelix.setHorizontalAlignment(JTextField.CENTER);
 		txtConcesionariosFelix.setText("CONCESIONARIOS FELIX");
 		frame.getContentPane().add(txtConcesionariosFelix, BorderLayout.NORTH);
-		txtConcesionariosFelix.setColumns(10);	    
-	    
-	    JLabel imagenLabel = new JLabel();
-        ImageIcon imagen = new ImageIcon("images/fotoPagPrincipal.jpg"); 
-        imagenLabel.setIcon(imagen);
+		txtConcesionariosFelix.setColumns(10);
 
-        frame.getContentPane().add(imagenLabel, BorderLayout.CENTER);
-        
-        btnEntrar = new JButton("Entrar");
-        frame.getContentPane().add(btnEntrar, BorderLayout.SOUTH);
-        btnEntrar.addActionListener(new ActionListener() {
+		JLabel imagenLabel = new JLabel();
+		ImageIcon imagen = new ImageIcon("images/fotoPagPrincipal.jpg");
+		imagenLabel.setIcon(imagen);
+
+		frame.getContentPane().add(imagenLabel, BorderLayout.CENTER);
+
+		btnEntrar = new JButton("Entrar");
+		frame.getContentPane().add(btnEntrar, BorderLayout.SOUTH);
+		btnEntrar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Entrando a la página login...", "Cambio pagina", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Entrando a la página login...", "Cambio pagina",
+						JOptionPane.INFORMATION_MESSAGE);
 				Login login = new Login();
 				login.setVisible(true);
-				
-				frame.dispose();			
+
+				frame.dispose();
 			}
-        	
-        });
-	
+
+		});
+
 	}
 
 }

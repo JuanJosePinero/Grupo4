@@ -1,6 +1,5 @@
 package Views;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -37,16 +36,15 @@ public class VisualizarVehiculos extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-	
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(52, 77, 408, 225);
 		contentPane.add(scrollPane);
-		
+
 		jtableP = new JTable();
 		showVehiculosIdFabricante();
 		scrollPane.setViewportView(jtableP);
-		
+
 		JButton VolverB = new JButton("Volver");
 		VolverB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -55,68 +53,72 @@ public class VisualizarVehiculos extends JFrame {
 		});
 		VolverB.setBounds(52, 321, 414, 25);
 		contentPane.add(VolverB);
-		
+
 		JLabel lblNewLabel = new JLabel("Visualizacion de los Vehiculos Creados");
 		lblNewLabel.setBounds(145, 53, 242, 13);
 		contentPane.add(lblNewLabel);
-		setVisible(true);		
+		setVisible(true);
 	}
-	
+
 	public void showVehiculos() {
-	    try {
-	        this.vehiculo = this.services.getAllVehiculos(Conexion.obtener());
-	        jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+		try {
+			this.vehiculo = this.services.getAllVehiculos(Conexion.obtener());
+			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-	        }, new String[] { "idVenta", "Fecha","Modelo", "Marca", "Anyo", "Color", "Precio" }));
-	        DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
-	        dtm.setRowCount(0);
-	        
-	        jtableP = new JTable(dtm) {
-	          @Override
-	          public boolean isCellEditable(int row, int column) {
-	            return false;
-	          }
-	        };
-	        
-	        for (int i = 0; i < this.vehiculo.size(); i++) {
-	            dtm.addRow(new Object[] {this.vehiculo.get(i).getIdVehiculos(), this.vehiculo.get(i).getModelo(), this.vehiculo.get(i).getMarca(), this.vehiculo.get(i).getAnyo(),
-	                    this.vehiculo.get(i).getColor(), this.vehiculo.get(i).getPrecio(), this.vehiculo.get(i).getIdFabricante() });
-	        }
-	    } catch (SQLException ex) {
-	        System.out.println(ex.getMessage());
-	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-	    } catch (ClassNotFoundException ex) {
-	        System.out.println(ex);
-	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-	    }
+			}, new String[] { "idVenta", "Fecha", "Modelo", "Marca", "Anyo", "Color", "Precio" }));
+			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
+			dtm.setRowCount(0);
+
+			jtableP = new JTable(dtm) {
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					return false;
+				}
+			};
+
+			for (int i = 0; i < this.vehiculo.size(); i++) {
+				dtm.addRow(new Object[] { this.vehiculo.get(i).getIdVehiculos(), this.vehiculo.get(i).getModelo(),
+						this.vehiculo.get(i).getMarca(), this.vehiculo.get(i).getAnyo(),
+						this.vehiculo.get(i).getColor(), this.vehiculo.get(i).getPrecio(),
+						this.vehiculo.get(i).getIdFabricante() });
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+		} catch (ClassNotFoundException ex) {
+			System.out.println(ex);
+			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+		}
 	}
-	
-	public void showVehiculosIdFabricante() {
-	    try {
-	        this.vehiculo = this.services.getAllVehiculosFabric(Conexion.obtener());
-	        jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-	        }, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" }));
-	        DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
-	        dtm.setRowCount(0);
-	        
-	        jtableP = new JTable(dtm) {
-	          @Override
-	          public boolean isCellEditable(int row, int column) {
-	            return false;
-	          }
-	        };
-	        
-	        for (int i = 0; i < this.vehiculo.size(); i++) {
-	            dtm.addRow(new Object[] {this.vehiculo.get(i).getIdVehiculos(), this.vehiculo.get(i).getModelo(), this.vehiculo.get(i).getMarca(), this.vehiculo.get(i).getAnyo(),
-	                    this.vehiculo.get(i).getColor(), this.vehiculo.get(i).getPrecio(), this.vehiculo.get(i).getIdFabricante() });
-	        }
-	    } catch (SQLException ex) {
-	        System.out.println(ex.getMessage());
-	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-	    } catch (ClassNotFoundException ex) {
-	        System.out.println(ex);
-	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-	    }
+	public void showVehiculosIdFabricante() {
+		try {
+			this.vehiculo = this.services.getAllVehiculosFabric(Conexion.obtener());
+			jtableP.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+			}, new String[] { "idVehiculos", "Modelo", "Marca", "Anyo", "Color", "Precio", "idFabricante" }));
+			DefaultTableModel dtm = (DefaultTableModel) jtableP.getModel();
+			dtm.setRowCount(0);
+
+			jtableP = new JTable(dtm) {
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					return false;
+				}
+			};
+
+			for (int i = 0; i < this.vehiculo.size(); i++) {
+				dtm.addRow(new Object[] { this.vehiculo.get(i).getIdVehiculos(), this.vehiculo.get(i).getModelo(),
+						this.vehiculo.get(i).getMarca(), this.vehiculo.get(i).getAnyo(),
+						this.vehiculo.get(i).getColor(), this.vehiculo.get(i).getPrecio(),
+						this.vehiculo.get(i).getIdFabricante() });
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+		} catch (ClassNotFoundException ex) {
+			System.out.println(ex);
+			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+		}
 	}
 }

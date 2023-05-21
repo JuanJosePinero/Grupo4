@@ -51,9 +51,6 @@ public class VentanaCatalogo extends JFrame {
 	private String rutaNueva;
 	private ImageIcon imagen;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -146,7 +143,7 @@ public class VentanaCatalogo extends JFrame {
 		contentPane.add(scrollPane);
 
 		dtm = new DefaultTableModel(new Object[][] {},
-				new String[] { "NºVehiculo", "Modelo", "Marca", "Anyo", "Color", "Precio"});
+				new String[] { "NºVehiculo", "Modelo", "Marca", "Anyo", "Color", "Precio" });
 		jtableP = new JTable(dtm) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -351,8 +348,8 @@ public class VentanaCatalogo extends JFrame {
 			} else if (fil.equalsIgnoreCase("Mºnumero comentarios")) {
 				ComentariosVehiculos cv = new ComentariosVehiculos();
 				cv.setVisible(true);
-			}else if(fil.equalsIgnoreCase("Mejores Valoraciones")) {
-				MejoresValoraciones mv=new MejoresValoraciones();
+			} else if (fil.equalsIgnoreCase("Mejores Valoraciones")) {
+				MejoresValoraciones mv = new MejoresValoraciones();
 				mv.setVisible(true);
 				mv.setLocationRelativeTo(null);
 				dispose();

@@ -16,9 +16,7 @@ public class VerComentsYValorac extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnVerComentarios, btnVerValoraciones, btnCancelar;
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -45,22 +43,22 @@ public class VerComentsYValorac extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblLabel1 = new JLabel("Elija la opción que desea realizar");
 		lblLabel1.setFont(new Font("Arial Black", Font.BOLD, 14));
 		lblLabel1.setBounds(83, 10, 321, 21);
 		contentPane.add(lblLabel1);
-		
+
 		ManejadorJButton manejador = new ManejadorJButton();
-		
+
 		btnVerComentarios = new JButton("Ver Comentarios");
 		btnVerComentarios.setBounds(36, 68, 137, 41);
 		contentPane.add(btnVerComentarios);
-		
+
 		btnVerValoraciones = new JButton("Ver Valoraciones");
 		btnVerValoraciones.setBounds(257, 71, 137, 38);
 		contentPane.add(btnVerValoraciones);
-		
+
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -72,24 +70,24 @@ public class VerComentsYValorac extends JFrame {
 		});
 		btnCancelar.setBounds(171, 134, 90, 21);
 		contentPane.add(btnCancelar);
-		
+
 		ManejadorJButton mb = new ManejadorJButton();
 		btnVerComentarios.addActionListener(mb);
 		btnVerValoraciones.addActionListener(mb);
 	}
-	
+
 	public class ManejadorJButton implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object o = e.getSource();
-			
-			if(o == btnVerComentarios) {
+
+			if (o == btnVerComentarios) {
 				VisualizarComents vc = new VisualizarComents();
 				vc.setVisible(true);
 				dispose();
-				
-			}else if(o == btnVerValoraciones) {
+
+			} else if (o == btnVerValoraciones) {
 				VisualizarValoracion vv = new VisualizarValoracion();
 				vv.setVisible(true);
 				dispose();

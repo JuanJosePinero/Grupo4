@@ -40,7 +40,6 @@ public class MejoresValoraciones extends JFrame {
 	private DefaultTableModel dtm;
 	private final VehiculoService services = new VehiculoService();
 	private JTable table;
-	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -73,19 +72,15 @@ public class MejoresValoraciones extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(40, 34, 371, 181);
 		contentPane.add(scrollPane);
-		dtm = new DefaultTableModel(new Object[][] {},
-				new String[] { "Marca", "Modelo","media"});
-		table = new JTable(dtm){
+		dtm = new DefaultTableModel(new Object[][] {}, new String[] { "Marca", "Modelo", "media" });
+		table = new JTable(dtm) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		
+
 		scrollPane.setViewportView(table);
-		
-		
-		
 
 		JButton btnFiltrar = new JButton("Volver");
 		btnFiltrar.addActionListener(new ActionListener() {
@@ -106,42 +101,42 @@ public class MejoresValoraciones extends JFrame {
 
 		setVisible(true);
 	}
+
 	private void showVehiculosmejorvaloracion() {
-	    try {
-	        vehiculosval = service.getVehiculosMejoresValoraciones(Conexion.obtener());
-	        dtm.setRowCount(0);
+		try {
+			vehiculosval = service.getVehiculosMejoresValoraciones(Conexion.obtener());
+			dtm.setRowCount(0);
 
-	        for (int i = 0; i < vehiculosval.size(); i++) {
-	            float suma = 0;
-	            float numvals = 0;
-	            for (Valoracion v : vehiculosval.get(i).getValoraciones()) {
-	                suma += v.getValoracion();
-	                numvals++;
-	            }
+			for (int i = 0; i < vehiculosval.size(); i++) {
+				float suma = 0;
+				float numvals = 0;
+				for (Valoracion v : vehiculosval.get(i).getValoraciones()) {
+					suma += v.getValoracion();
+					numvals++;
+				}
 
-	            double media = 0;
-	            if (numvals > 0) {
-	                media = suma / numvals;
-	            }
+				double media = 0;
+				if (numvals > 0) {
+					media = suma / numvals;
+				}
 
-	            String formattedMedia;
-	            if (media % 1 == 0) {
-	                formattedMedia = String.format("%.0f", media);
-	            } else {
-	                formattedMedia = String.format("%.2f", media);
-	            }
+				String formattedMedia;
+				if (media % 1 == 0) {
+					formattedMedia = String.format("%.0f", media);
+				} else {
+					formattedMedia = String.format("%.2f", media);
+				}
 
-	            dtm.addRow(new Object[]{vehiculosval.get(i).getVehiculo().getModelo(),
-	                    vehiculosval.get(i).getVehiculo().getMarca(), formattedMedia + " / 5"});
-	        }
-	    } catch (SQLException ex) {
-	        System.out.println(ex.getMessage());
-	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-	    } catch (ClassNotFoundException ex) {
-	        System.out.println(ex);
-	        JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-	    }
+				dtm.addRow(new Object[] { vehiculosval.get(i).getVehiculo().getModelo(),
+						vehiculosval.get(i).getVehiculo().getMarca(), formattedMedia + " / 5" });
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+		} catch (ClassNotFoundException ex) {
+			System.out.println(ex);
+			JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+		}
 	}
-
 
 }

@@ -68,6 +68,7 @@ public class VisualizarComentsFabri extends JFrame {
 		btnVolver.setBounds(385, 9, 40, 21);
 		contentPane.add(btnVolver);
 	}
+	
 	public static void Comentario() {
 		try {
 			List<Comentario> datos = service.getAllComentarioId(Conexion.obtener());

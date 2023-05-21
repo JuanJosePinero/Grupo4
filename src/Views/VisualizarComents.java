@@ -26,8 +26,7 @@ public class VisualizarComents extends JFrame {
 	private JButton ComentarioB;
 	private static JTextArea textArea;
 	private final static ComentarioService service = new ComentarioService();
-	private List <Comentario> comentario = new ArrayList<>();
-
+	private List<Comentario> comentario = new ArrayList<>();
 
 	public VisualizarComents() {
 		super("Bandeja de valoraciones");
@@ -40,28 +39,29 @@ public class VisualizarComents extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		 textArea = new JTextArea();
-		 textArea.setFont(new Font("Segoe UI Semibold", Font.BOLD, 11));
-		 textArea.setEditable(false);
+		textArea = new JTextArea();
+		textArea.setFont(new Font("Segoe UI Semibold", Font.BOLD, 11));
+		textArea.setEditable(false);
 		textArea.setBounds(10, 34, 414, 121);
 		contentPane.add(textArea);
 		Comentario();
-		
+
 		ComentarioB = new JButton("Agregar Comentario");
 		ComentarioB.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
 		ComentarioB.setBounds(40, 166, 175, 23);
 		contentPane.add(ComentarioB);
-		
+
 		JLabel lblTitulo = new JLabel("Comentarios de los clientes");
 		lblTitulo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 14));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setBounds(10, 9, 414, 23);
 		contentPane.add(lblTitulo);
-		
+
 		JButton btnCalcelar = new JButton("Volver Atrás");
 		btnCalcelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Volviendo a la ventana del catalogo", "Aviso", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Volviendo a la ventana del catalogo", "Aviso",
+						JOptionPane.ERROR_MESSAGE);
 				VentanaCatalogo vc = new VentanaCatalogo();
 				vc.setVisible(true);
 				dispose();
@@ -73,35 +73,34 @@ public class VisualizarComents extends JFrame {
 		ManejadorAction ma = new ManejadorAction();
 		ComentarioB.addActionListener(ma);
 	}
-	
-	private class ManejadorAction implements ActionListener{
+
+	private class ManejadorAction implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton j = (JButton) e.getSource();
-			if(j.equals(ComentarioB)) {
+			if (j.equals(ComentarioB)) {
 				AgregarComentario ac = new AgregarComentario();
 				ac.setVisible(true);
 				dispose();
-				
 			}
 		}
-		
-	}public static void Comentario() {
+
+	}
+
+	public static void Comentario() {
 		try {
 			List<Comentario> datos = service.getAllComentarioId(Conexion.obtener());
-			String coment ="";
-	
+			String coment = "";
+
 			for (Comentario c : datos) {
-				 coment += c.getComentario()+"\n";
-				
+				coment += c.getComentario() + "\n";
 			}
 			textArea.setText(coment);
-		
+
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
 }
